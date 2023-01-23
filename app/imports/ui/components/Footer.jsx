@@ -5,7 +5,7 @@ import { Container, Col } from 'react-bootstrap';
 const Footer = () => {
   const divStyle = { paddingTop: '15px' };
   return (
-    <footer className="mt-auto bg-light">
+    <footer className="mt-auto" style={{ backgroundColor: '#75ABCF' }}>
       <Container style={divStyle}>
         <Col className="text-center">
           Department of Information and Computer Sciences <br />
