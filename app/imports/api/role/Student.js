@@ -27,4 +27,4 @@ class StudentCollection {
   }
 }
 
-export const Faculty = new StudentCollection();
+export const Student = new StudentCollection();
