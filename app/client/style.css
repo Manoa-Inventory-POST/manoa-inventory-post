@@ -26,3 +26,27 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+.landing-page-background {
+  background: url('images/postBuilding.jpeg') no-repeat center;
+  opacity: 85%;
+  background-size: cover;
+  height: 500px;
+  padding-top: 100px;
+  text-align: center;
+  text-shadow: 4px 4px 8px black;
+  color: white;
+}
+
+#sign-up-button {
+  padding-top: 100px;
+  width: 300px;
+  height: 40px;
+  display: inline-block;
+}
+
+#log-in-button {
+  width: 300px;
+  height: 40px;
+  display: inline-block;
+}
