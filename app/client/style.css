@@ -29,8 +29,8 @@ body {
 
 .landing-page-background {
   background: url('images/postBuilding.jpeg') no-repeat center;
-  opacity: 85%;
   background-size: cover;
+  opacity: 85%;
   height: 500px;
   padding-top: 100px;
   text-align: center;
@@ -38,15 +38,27 @@ body {
   color: white;
 }
 
+#landing-page {
+  padding-bottom: 50px;
+}
+
+#about-summary {
+  padding-top: 50px;
+}
+
 #sign-up-button {
-  padding-top: 100px;
-  width: 300px;
+  padding-top: 50px;
+  width: 500px;
   height: 40px;
   display: inline-block;
 }
 
 #log-in-button {
-  width: 300px;
+  width: 500px;
   height: 40px;
   display: inline-block;
+}
+
+.summary-card {
+  padding-top: 50px;
 }
