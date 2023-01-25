@@ -8,6 +8,8 @@ import { Users } from './UserCollection';
 const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
 rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
+rolesToCollectionNames[ROLE.STUDENT] = 'StudentProfileCollection';
+rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
