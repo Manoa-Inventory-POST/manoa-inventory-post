@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import InfoBar from '../components/InfoBar';
-import SearchBox from "../components/SearchBox";
+import SearchBox from '../components/SearchBox';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListStuffAdmin = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { stuffs, ready } = useTracker(() => {
+  const { ready } = useTracker(() => {
     // Get access to Stuff documents.
     const subscription = Stuffs.subscribeStuffAdmin();
     // Determine if the subscription is ready

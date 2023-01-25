@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 
-const user = [{ firstName: 'Philip', lastName: 'Johnson', address: 'POST 307, University of Hawaii', role: 'Administrator',
+/** const user = [{ firstName: 'Philip', lastName: 'Johnson', address: 'POST 307, University of Hawaii', role: 'Administrator',
   description: 'I am a Professor of Information and Computer Sciences at the University of Hawaii, Director ' +
   'of the Collaborative Software Development Laboratory, and the CEO of OpenPowerQuality.com.',
-}];
+}]; */
 const InfoBar = () => (
   <Card className="rounded-0">
     <Card.Header className="rounded-0 dashboard-header">
