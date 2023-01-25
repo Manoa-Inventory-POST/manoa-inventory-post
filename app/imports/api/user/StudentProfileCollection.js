@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
-import { ROLE } from './Role';
-import { Students } from './StudentCollection';
+import { ROLE } from '../role/Role';
+import { Users } from './UserCollection';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -25,7 +25,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
     if (!user) {
       const role = ROLE.STUDENT;
-      const userID = Students.define({ username, role, password });
+      const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
