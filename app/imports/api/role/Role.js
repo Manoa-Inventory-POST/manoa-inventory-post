@@ -7,6 +7,7 @@ export const ROLE = {
   USER: 'USER',
   STUDENT: 'STUDENT',
   FACULTY: 'FACULTY',
+  OFFICE: 'OFFICE',
 };
 
 export const ROLES = _.values(ROLE);
