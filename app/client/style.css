@@ -5,10 +5,6 @@
 :root {
   --matr-navbar-bg: #ECECEC;
   --matr-navbar-bg-rgb: 236, 236, 236;
-  --bs-card-border-width: 1px;
-  --bs-card-border-color: rgba(0, 0, 0, 0.175);
-  --dashboard-title-text: #FFFFFF;
-  --manoa-green: #007A4E;
 }
 
 /* Change bootstrap variable values.
@@ -31,19 +27,45 @@ body {
   padding-bottom: 20px;
 }
 
-.dashboard-header, .accordion-button {
-  border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
-  background-color: #75abcf !important;
-  color: white !important;
-}
-.card-body, .list-group-item, .accordion-body {
-  background-color: #e1edf4 !important;
-}
-
-.accordion-button:after {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+.landing-page-background {
+  background: url('images/postBuilding.jpeg') no-repeat center;
+  background-size: cover;
+  opacity: 85%;
+  height: 500px;
+  padding-top: 100px;
+  text-align: center;
+  text-shadow: 4px 4px 8px black;
+  color: white;
 }
 
-.btn-dashboard {
-  background-color: var(--manoa-green) !important;
+#landing-page {
+  padding-bottom: 50px;
 }
+
+#about-summary {
+  padding-top: 50px;
+}
+
+#sign-up-button {
+  padding-top: 50px;
+  width: 500px;
+  height: 40px;
+  display: inline-block;
+}
+
+#log-in-button {
+  width: 500px;
+  height: 40px;
+  display: inline-block;
+}
+
+.summary-card {
+  padding-top: 50px;
+  text-align: left;
+}
+
+#about-landing {
+  padding-top: 50px;
+}
+
+
