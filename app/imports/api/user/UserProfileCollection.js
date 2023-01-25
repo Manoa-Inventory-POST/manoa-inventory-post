@@ -81,7 +81,7 @@ class UserProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.User) {
+      if (doc.role !== ROLE.USER) {
         problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
       }
     });
