@@ -3,9 +3,9 @@ import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 
-class UserProfileCollection extends BaseProfileCollection {
+class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('UserProfile', new SimpleSchema({}));
+    super('StudentProfile', new SimpleSchema({}));
   }
 
   /**
@@ -14,15 +14,19 @@ class UserProfileCollection extends BaseProfileCollection {
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
+   * @param TA True if student is a TA, default is false.
+   * @param RA True if student is an RA, default is false.
+   * @param graduate True if graduate student, default is false.
+   * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, password }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName });
+    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
     if (!user) {
-      const role = ROLE.USER;
+      const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
@@ -81,7 +85,7 @@ class UserProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.USER) {
+      if (doc.role !== ROLE.STUDENT) {
         problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
       }
     });
@@ -106,4 +110,4 @@ class UserProfileCollection extends BaseProfileCollection {
  * Profides the singleton instance of this class to all other entities.
  * @type {UserProfileCollection}
  */
-export const UserProfiles = new UserProfileCollection();
+export const StudentProfiles = new StudentProfileCollection();

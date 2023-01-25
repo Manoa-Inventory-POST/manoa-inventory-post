@@ -20,7 +20,7 @@ const Landing = () => (
     </div>
     <Container id="landing-page">
       {/* eslint-disable-next-line max-len */}
-      <h6 id="about-landing">Manoa Inventory: POST is a web application tool to allow many users and roles to find what they are looking for on the third floor of POST building at UH Manoa. With the various spaces and inventory it has to offer, we strive to make the reservation and management process an easy one. Features include but are not limited to:
+      <h6 id="about-landing">Mānoa Inventory: POST is a web application tool to allow many users and roles to find what they are looking for on the third floor of POST building at UH Manoa. With the various spaces and inventory it has to offer, we strive to make the reservation and management process an easy one. Features include but are not limited to:
       </h6>
       <Row className="align-middle text-center">
         <Col className="d-flex flex-column justify-content-center">
