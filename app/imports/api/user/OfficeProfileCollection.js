@@ -3,9 +3,9 @@ import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 
-class FacultyProfileCollection extends BaseProfileCollection {
+class OfficeProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('FacultyProfile', new SimpleSchema({}));
+    super('OfficeProfile', new SimpleSchema({}));
   }
 
   /**
@@ -20,7 +20,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
-      const role = ROLE.FACULTY;
+      const role = ROLE.OFFICE;
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
@@ -81,7 +81,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.FACULTY) {
+      if (doc.role !== ROLE.OFFICE) {
         problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
       }
     });
@@ -104,6 +104,6 @@ class FacultyProfileCollection extends BaseProfileCollection {
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {FacultyProfileCollection}
+ * @type {OfficeProfileCollection}
  */
-export const FacultyProfiles = new FacultyProfileCollection();
+export const OfficeProfiles = new OfficeProfileCollection();
