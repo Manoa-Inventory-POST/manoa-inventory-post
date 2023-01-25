@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container, Row, Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { Calendar, CalendarFill, Map, MapFill, Person, PersonFill, PhoneFill, Telephone } from "react-bootstrap-icons";
 
 /* A simple static component to render some text for the landing page. */
 /*const Landing = () => (
@@ -24,7 +25,7 @@ const Landing = () => (
       <div className="landing-page-background">
         <h1> MĀNOA INVENTORY: POST</h1>
         <div id="about-summary">
-          <h4>Manage and View Office Space/Inventory with Ease</h4>
+          <h4>Manage and View Office Space/Inventory with ease</h4>
         </div>
         <div id="sign-up-button">
           <h3>New User?</h3>
@@ -36,7 +37,7 @@ const Landing = () => (
         </div>
       </div>
       <Container id='landing-page'>
-        <h6 id="about-landing">Mānoa Inventory: POST is a web application tool to allow many users and roles to find what they are looking for on the third floor of POST building at UH Manoa. With the various spaces and inventory it has to offer, we strive to make the reservation and management process an easy one. Features include but are not limited to:
+        <h6 id="about-landing">Manoa Inventory: POST is a web application tool to allow many users and roles to find what they are looking for on the third floor of POST building at UH Manoa. With the various spaces and inventory it has to offer, we strive to make the reservation and management process an easy one. Features include but are not limited to:
         </h6>
         <Row className="align-middle text-center">
           <Col className="d-flex flex-column justify-content-center">
