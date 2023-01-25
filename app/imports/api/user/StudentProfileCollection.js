@@ -17,7 +17,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param TA True if student is a TA, default is false.
    * @param RA True if student is an RA, default is false.
    * @param graduate True if graduate student, default is false.
-   * @param undergraduate True if undergraaduate student, default is false.
+   * @param undergraduate True if undergraduate student, default is false.
    */
   define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password }) {
     // if (Meteor.isServer) {
@@ -85,7 +85,7 @@ class StudentProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.User) {
+      if (doc.role !== ROLE.STUDENT) {
         problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
       }
     });
