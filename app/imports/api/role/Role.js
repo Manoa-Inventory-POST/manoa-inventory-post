@@ -8,6 +8,7 @@ export const ROLE = {
   STUDENT: 'STUDENT',
   FACULTY: 'FACULTY',
   OFFICE: 'OFFICE',
+  ITSUPPORT: 'ITSUPPORT',
 };
 
 export const ROLES = _.values(ROLE);

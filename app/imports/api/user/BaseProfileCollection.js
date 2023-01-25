@@ -11,6 +11,7 @@ rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
 rolesToCollectionNames[ROLE.STUDENT] = 'StudentProfileCollection';
 rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
 rolesToCollectionNames[ROLE.OFFICE] = 'OfficeProfileCollection';
+rolesToCollectionNames[ROLE.ITSUPPORT] = 'ITSupportProfileCollection';
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
