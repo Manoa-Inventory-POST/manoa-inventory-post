@@ -1,18 +1,54 @@
 import React from 'react';
-import { Container, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { Github, Instagram, Facebook, GeoAltFill } from 'react-bootstrap-icons';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => {
-  const divStyle = { paddingTop: '15px' };
+  const divStyle = { paddingTop: '15px', color: 'white' };
+  const linkStyle = { color: 'white', textDecoration: 'none' };
   return (
     <footer className="mt-auto" style={{ backgroundColor: '#75ABCF' }}>
-      <Container style={divStyle}>
-        <Col className="text-center">
-          Department of Information and Computer Sciences <br />
-          University of Hawaii<br />
-          Honolulu, HI 96822 <br />
-          <a href="http://ics-software-engineering.github.io/meteor-application-template-production">Template Home Page</a>
-        </Col>
+      <Container style={divStyle} align="center">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-4">
+              <h4>About Us</h4>
+              <hr />
+              <p>
+                Manoa Inventory: POST is a web application allowing users to find what they are looking for on the third floor of POST building.
+              </p>
+            </div>
+            <div className="col-sm-4">
+              <h4>Services</h4>
+              <hr />
+              <a style={linkStyle} href="https://bowfolios.github.io"><GeoAltFill />Map</a>
+              <br />
+              <a style={linkStyle} href="https://bowfolios.github.io">Professors</a>
+              <br />
+              <a style={linkStyle} href="https://bowfolios.github.io">Room Availability</a>
+              <br />
+              <a style={linkStyle} href="https://bowfolios.github.io">Reserve Room</a>
+              <br />
+              <a style={linkStyle} href="https://bowfolios.github.io">Service Request</a>
+            </div>
+            <div className="col-sm-4">
+              <h4>Resources</h4>
+              <hr />
+              <a style={linkStyle} href="https://bowfolios.github.io">Office hour spreedsheet</a>
+              <br />
+              <a style={linkStyle} href="https://bowfolios.github.io">Port number spreedsheet</a>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <h1> Contact Us</h1>
+          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Github /></a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Instagram /></a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Facebook /></a>
+        </div>
       </Container>
     </footer>
   );
