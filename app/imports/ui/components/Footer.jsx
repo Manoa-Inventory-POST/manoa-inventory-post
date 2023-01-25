@@ -21,7 +21,7 @@ const Footer = () => {
             <div className="col-sm-4">
               <h4>Services</h4>
               <hr />
-              <a style={linkStyle} href="https://bowfolios.github.io"><GeoAltFill />Map</a>
+              <a style={linkStyle} href="https://bowfolios.github.io"><GeoAltFill /> Map</a>
               <br />
               <a style={linkStyle} href="https://bowfolios.github.io">Professors</a>
               <br />
@@ -34,20 +34,20 @@ const Footer = () => {
             <div className="col-sm-4">
               <h4>Resources</h4>
               <hr />
-              <a style={linkStyle} href="https://bowfolios.github.io">Office hour spreedsheet</a>
+              <a style={linkStyle} href="https://bowfolios.github.io">Office Hours Spreedsheet</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Port number spreedsheet</a>
+              <a style={linkStyle} href="https://bowfolios.github.io">Port Number Spreedsheet</a>
             </div>
           </div>
         </div>
         <hr />
-        <div>
-          <h1> Contact Us</h1>
-          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Github /></a>
+        <div className="pb-3 col-sm-4">
+          <h4>Contact Us</h4>
+          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Github /></a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Instagram /></a>
+          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Instagram /></a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a style={{ color: 'white', fontSize: '40px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Facebook /></a>
+          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Facebook /></a>
         </div>
       </Container>
     </footer>
