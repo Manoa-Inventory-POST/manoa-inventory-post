@@ -61,4 +61,11 @@ body {
 
 .summary-card {
   padding-top: 50px;
+  text-align: left;
 }
+
+#about-landing {
+  padding-top: 50px;
+}
+
+

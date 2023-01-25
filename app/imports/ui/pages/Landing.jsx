@@ -25,8 +25,7 @@ const Landing = () => (
     <div className="landing-page-background">
     <h1> MĀNOA INVENTORY: POST</h1>
     <div id="about-summary">
-    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-     <h4> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
+    <h4>Manage and View Office Space/Inventory with ease</h4>
     </div>
     <div id="sign-up-button">
       <h3>New User?</h3>
@@ -38,6 +37,8 @@ const Landing = () => (
     </div>
     </div>
     <Container id='landing-page'>
+      <h6 id="about-landing">Manoa Inventory: POST is a web application tool to allow many users and roles to find what they are looking for on the third floor of POST building at UH Manoa. With the various spaces and inventory it has to offer, we strive to make the reservation and management process an easy one. Features include but are not limited to:
+      </h6>
       <Row className="align-middle text-center">
         <Col className="d-flex flex-column justify-content-center">
           <Row xs={1} md={2}>
@@ -46,10 +47,14 @@ const Landing = () => (
                 <Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
-                      <Card.Title><Person/>Lorem ipsum</Card.Title>
+                      <Card.Title>For Students</Card.Title>
                     </ListGroupItem>
-                    <Card.Text>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    <Card.Text className="role- list">
+                      <ul>
+                        <li>Request room reservations based upon availability and approval</li>
+                        <li>View the offices your professors are located in</li>
+                        <li>Request a cubicle (TA/RA)</li>
+                      </ul>
                     </Card.Text>
                   </ListGroup>
                 </Card.Body>
@@ -60,10 +65,14 @@ const Landing = () => (
                 <Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
-                      <Card.Title><Map/>Lorem ipsum</Card.Title>
+                      <Card.Title>For Office Staff</Card.Title>
                     </ListGroupItem>
-                    <Card.Text>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    <Card.Text className="role- list">
+                      <ul>
+                        <li>Find out which rooms has what tools and materials</li>
+                        <li>Assign and move occupants to a different room</li>
+                        <li>Responsible for space management</li>
+                      </ul>
                     </Card.Text>
                   </ListGroup>
                 </Card.Body>
@@ -74,10 +83,14 @@ const Landing = () => (
                 <Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
-                      <Card.Title><Telephone/>Lorem ipsum</Card.Title>
+                      <Card.Title>For IT Support</Card.Title>
                     </ListGroupItem>
-                    <Card.Text>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    <Card.Text className="role- list">
+                      <ul>
+                        <li>View which rooms has functional ports</li>
+                        <li>Update the functionality status of equipment and materials</li>
+                        <li>Check up on network jacks and phone jacks</li>
+                      </ul>
                     </Card.Text>
                   </ListGroup>
                 </Card.Body>
@@ -88,10 +101,14 @@ const Landing = () => (
                 <Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
-                      <Card.Title><Calendar/>Lorem ipsum</Card.Title>
+                      <Card.Title>For Faculty</Card.Title>
                     </ListGroupItem>
                     <Card.Text>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                      <ul>
+                        <li>View what rooms are available by date and time</li>
+                        <li>View which rooms have which equipment</li>
+                        <li>Reserve rooms</li>
+                      </ul>
                     </Card.Text>
                   </ListGroup>
                 </Card.Body>
