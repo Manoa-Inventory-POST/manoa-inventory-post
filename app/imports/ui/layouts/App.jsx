@@ -81,7 +81,7 @@ AdminProtectedRoute.propTypes = {
 };
 
 AdminProtectedRoute.defaultProps = {
-  children: <AdminLanding />,
+  children: <Landing />,
 };
 
 export default App;
