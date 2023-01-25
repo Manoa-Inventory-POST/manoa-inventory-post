@@ -1,17 +1,18 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useTracker } from 'meteor/react-meteor-data';
+// import { useTracker } from 'meteor/react-meteor-data';
 // import { StudentInfoItem } from '../components/StudentProfilePageItem';
-import LoadingSpinner from '../components/LoadingSpinner';
+// import LoadingSpinner from '../components/LoadingSpinner';
+import { Link } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { Users } from '../../api/user/UserCollection';
+// import { Users } from '../../api/user/UserCollection';
 // import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Link } from 'react-router-dom';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const StudentProfile = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+const StudentProfile = () => (
+  /**
   const { ready } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
@@ -27,18 +28,19 @@ const StudentProfile = () => {
       ready: rdy,
     };
   }, []);
-  // const owner = Meteor.user().username;
-  // const filteredStudents = students.filter(stu => stu.owner === owner);
-
-  return (ready ? (
-    <Container className="py-3" id={PAGE_IDS.STUDENT_PROFILE}>
-      <Row className="justify-content-center">
-        <Col md={7} className="justify-content-center">
-          John Doe
-        </Col>
-      </Row>
-    </Container>
-  ) : <LoadingSpinner />);
-};
+   const owner = Meteor.user().username;
+   const filteredStudents = students.filter(stu => stu.owner === owner);
+*/
+  <Container className="py-3" id={PAGE_IDS.STUDENT_PROFILE}>
+    <Row className="text-center">
+      <Col className="text-center">
+        <h1>John Doe</h1>
+        <h3>Graduate</h3>
+        <h4>TA</h4>
+        <Link to="/">Edit</Link>
+      </Col>
+    </Row>
+  </Container>
+);
 
 export default StudentProfile;
