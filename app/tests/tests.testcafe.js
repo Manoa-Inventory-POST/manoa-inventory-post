@@ -4,6 +4,7 @@ import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
+import { studentProfilePage } from './studentprofile.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -16,9 +17,9 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-/*test('Test that landing page shows up', async () => {
+test('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
-});*/
+});
 
 test('Test that signin and signout work', async () => {
   await navBar.gotoSignInPage();
@@ -69,4 +70,12 @@ test('Test that admin pages show up', async () => {
   // await listStuffAdminPage.isDisplayed();
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
+});
+
+test('Test that student profile page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.isLoggedIn(credentials.username);
+  await navBar.gotoStudentProfilePage();
+  await studentProfilePage.isDisplayed();
 });
