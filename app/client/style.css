@@ -47,3 +47,45 @@ body {
 .btn-dashboard {
   background-color: var(--manoa-green) !important;
 }
+.landing-page-background {
+  background: url('images/postBuilding.jpeg') no-repeat center;
+  background-size: cover;
+  opacity: 85%;
+  height: 500px;
+  padding-top: 100px;
+  text-align: center;
+  text-shadow: 4px 4px 8px black;
+  color: white;
+}
+
+#landing-page {
+  padding-bottom: 50px;
+}
+
+#about-summary {
+  padding-top: 50px;
+}
+
+#sign-up-button {
+  padding-top: 50px;
+  width: 500px;
+  height: 40px;
+  display: inline-block;
+}
+
+#log-in-button {
+  width: 500px;
+  height: 40px;
+  display: inline-block;
+}
+
+.summary-card {
+  padding-top: 50px;
+  text-align: left;
+}
+
+#about-landing {
+  padding-top: 50px;
+}
+
+
