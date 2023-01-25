@@ -2,9 +2,10 @@ import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { Stuffs } from '../../api/stuff/StuffCollection';
-import StuffItemAdmin from '../components/StuffItemAdmin';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import InfoBar from '../components/InfoBar';
+import SearchBox from "../components/SearchBox";
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListStuffAdmin = () => {
@@ -23,22 +24,15 @@ const ListStuffAdmin = () => {
   }, []);
   return (ready ? (
     <Container id={PAGE_IDS.LIST_STUFF_ADMIN} className="py-3">
+      <Row>
+        <Col className="ms-5 my-3"><h2>Welcome, Lydia Sollis</h2></Col>
+      </Row>
       <Row className="justify-content-center">
-        <Col md={7}>
-          <Col className="text-center"><h2>List Stuff (Admin)</h2></Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Condition</th>
-                <th>Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
-            </tbody>
-          </Table>
+        <Col md={8}>
+          <SearchBox />
+        </Col>
+        <Col md={4}>
+          <InfoBar />
         </Col>
       </Row>
     </Container>
