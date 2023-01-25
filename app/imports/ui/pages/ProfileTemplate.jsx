@@ -6,13 +6,13 @@ import { Col, Container, Row } from 'react-bootstrap';
 // import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { StudentInfoItem } from '../components/StudentProfilePageItem';
+import StudentInfoItem from '../components/StudentProfilePageItem';
 // import { Users } from '../../api/user/UserCollection';
 // import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Link } from 'react-router-dom';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const StudentProfile = () => (
+const ProfileTemplate = () => (
   /**
   const { ready } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -57,14 +57,14 @@ const StudentProfile = () => (
               <h4 className="text-right">Profile Settings</h4>
             </div>
             <div className="row mt-2">
-              <div className="col-md-6"><label className="labels">Name</label><input type="text" className="form-control" placeholder="first name" value="" /></div>
-              <div className="col-md-6"><label className="labels">Surname</label><input type="text" className="form-control" value="" placeholder="surname" /></div>
+              <div className="col-md-6"><label className="labels">First</label><input type="text" className="form-control" placeholder="first name" value="" /></div>
+              <div className="col-md-6"><label className="labels">Last</label><input type="text" className="form-control" value="" placeholder="surname" /></div>
             </div>
             <div className="row mt-2">
-              <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" className="form-control" placeholder="enter phone number" value="" /></div>
+              <div className="col-md-12"><label className="labels">Email Address</label><input type="text" className="form-control disabled" value="[Insert Email]" disabled /></div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-6"><label className="labels">Country</label><input type="text" className="form-control" placeholder="country" value="" /></div>
+              <div className="col-md-6"><label className="labels">Phone Number</label><input type="text" className="form-control" placeholder="country" value="" /></div>
               <div className="col-md-6"><label className="labels">State/Region</label><input type="text" className="form-control" value="" placeholder="state" /></div>
             </div>
             <div className="mt-5 text-center">
@@ -73,10 +73,10 @@ const StudentProfile = () => (
           </div>
         </div>
         {/* insert component per role */}
-        <StudentInfoItem />
+
       </div>
     </div>
   </Container>
 );
 
-export default StudentProfile;
+export default ProfileTemplate;

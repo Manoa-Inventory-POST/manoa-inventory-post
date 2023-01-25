@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+/*
+import InfoBar from './InfoBar';
+*/
+/* import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; */
 
-const displayRole = (student) => {
+/* const displayRole = (student) => {
   const results = [];
   if (student.undergraduate) { results.push('Undergraduate'); }
   if (student.graduate) { results.push('Graduate'); }
@@ -11,25 +14,23 @@ const displayRole = (student) => {
   if (student.ra) { results.push('RA'); }
 
   return results;
-};
+}; */
 
 /** Renders general Student information */
-const StudentInfoItem = ({ student }) => (
-  <Col className="align-content-center text-center">
-    <Row>
-      <h2 id="student-name">{student.firstname} {student.lastname}</h2>
-    </Row>
-    <Row>
-      <h3>Roles: {displayRole(student).map((role) => `[${role}]`)}</h3>
-    </Row>
-    <Row>
-      <h4><Link to={`/edit-student-profile/${student._id}`} id="edit-student-profile-link">Edit</Link></h4>
-    </Row>
-  </Col>
+const StudentInfoItem = (/* { student } */) => (
+  <div className="col-md-4">
+    <div className="p-3 py-5">
+      <div className="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span className="border px-3 p-1 add-experience"><i className="fa fa-plus" />&nbsp;Experience</span></div>
+      <br />
+      <div className="col-md-12"><label className="labels">Experience in Designing</label><input type="text" className="form-control" placeholder="experience" value="" /></div>
+      <br />
+      <div className="col-md-12"><label className="labels">Additional Details</label><input type="text" className="form-control" placeholder="additional details" value="" /></div>
+    </div>
+  </div>
 );
 
 /** Require a document to be passed to this component. */
-StudentInfoItem.propTypes = {
+/* StudentInfoItem.propTypes = {
   student: PropTypes.shape({
     firstname: PropTypes.string,
     lastname: PropTypes.string,
@@ -39,8 +40,6 @@ StudentInfoItem.propTypes = {
     graduate: PropTypes.bool,
     _id: PropTypes.string,
   }).isRequired,
-};
+}; */
 
-export {
-  StudentInfoItem,
-};
+export default StudentInfoItem;
