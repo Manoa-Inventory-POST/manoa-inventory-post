@@ -7,6 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { ROLE } from '../../api/role/Role';
 
 /**
  * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
@@ -38,7 +39,10 @@ const SignIn = () => {
   // Render the signin form.
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screen
-  if (redirect) {
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
+    return (<Navigate to="/admin" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
     return (<Navigate to="/home" />);
   }
   // Otherwise return the Login form.

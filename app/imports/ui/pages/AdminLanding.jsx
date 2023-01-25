@@ -1,21 +1,13 @@
 import React from 'react';
-import { Button, Card, Col, Container, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Card, Col, Container, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 
-const Landing = () => (
+const AdminLanding = () => (
   <div>
     <div className="landing-page-background">
       <h1> MĀNOA INVENTORY: POST</h1>
+      <h1> UPDATE IN PROGRESS </h1>
       <div id="about-summary">
-        <h4>Manage and View Office Space/Inventory with ease</h4>
-      </div>
-      <div id="sign-up-button">
-        <h3>New User?</h3>
-        <Button as={NavLink} exact to="/signup" variant="primary" size="large">Sign up</Button>
-      </div>
-      <div id="log-in-button">
-        <h3>Already have an account?</h3>
-        <Button as={NavLink} to="/signin" variant="success" size="large">Log in</Button>
+        <h4>This is an admin home page</h4>
       </div>
     </div>
     <Container id="landing-page">
@@ -104,4 +96,4 @@ const Landing = () => (
   </div>
 );
 
-export default Landing;
+export default AdminLanding;
