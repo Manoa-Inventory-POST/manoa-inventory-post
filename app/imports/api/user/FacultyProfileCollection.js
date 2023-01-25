@@ -5,7 +5,7 @@ import { Users } from './UserCollection';
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('UserProfile', new SimpleSchema({}));
+    super('FacultyProfile', new SimpleSchema({}));
   }
 
   /**
@@ -81,7 +81,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.USER) {
+      if (doc.role !== ROLE.FACULTY) {
         problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
       }
     });
@@ -104,6 +104,6 @@ class FacultyProfileCollection extends BaseProfileCollection {
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {UserProfileCollection}
+ * @type {FacultyProfileCollection}
  */
 export const FacultyProfiles = new FacultyProfileCollection();

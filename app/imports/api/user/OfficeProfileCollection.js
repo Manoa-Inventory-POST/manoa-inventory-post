@@ -104,6 +104,6 @@ class OfficeProfileCollection extends BaseProfileCollection {
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {UserProfileCollection}
+ * @type {OfficeProfileCollection}
  */
 export const OfficeProfiles = new OfficeProfileCollection();
