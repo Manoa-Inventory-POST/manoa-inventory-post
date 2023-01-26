@@ -5,8 +5,12 @@ import { Container } from 'react-bootstrap';
 // import { StudentInfoItem } from '../components/StudentProfilePageItem';
 // import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import StudentInfoItem from '../components/StudentProfilePageItem';
-import { FacultyInfoItem } from '../components/FacultyProfilePageItem';
+
+/* import depending on role
+ import StudentInfoItem from '../components/StudentProfilePageItem';
+ import { FacultyInfoItem } from '../components/FacultyProfilePageItem';
+ */
+
 // import { Users } from '../../api/user/UserCollection';
 // import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Link } from 'react-router-dom';
