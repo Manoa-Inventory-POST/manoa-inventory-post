@@ -5,7 +5,12 @@ import { Users } from './UserCollection';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('StudentProfile', new SimpleSchema({}));
+    super('StudentProfile', new SimpleSchema({
+      TA: { type: Boolean, defaultValue: false },
+      RA: { type: Boolean, defaultValue: false },
+      graduate: { type: Boolean, defaultValue: false },
+      undergraduate: { type: Boolean, defaultValue: false },
+    }));
   }
 
   /**
