@@ -18,13 +18,13 @@ import { Link } from 'react-router-dom'; */
 
 /** Renders general Student information */
 const StudentInfoItem = (/* { student } */) => (
-  <div className="col-md-4">
+  <div className="col-md-6">
     <div className="p-3 py-5">
-      <div className="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span className="border px-3 p-1 add-experience"><i className="fa fa-plus" />&nbsp;Experience</span></div>
+      <div className="d-flex justify-content-between align-items-center experience">Student Info</div>
       <br />
-      <div className="col-md-12"><label className="labels">Experience in Designing</label><input type="text" className="form-control" placeholder="experience" value="" /></div>
+      <div className="col-md-12">[student data]<input type="text" className="form-control" placeholder="more data" /></div>
       <br />
-      <div className="col-md-12"><label className="labels">Additional Details</label><input type="text" className="form-control" placeholder="additional details" value="" /></div>
+      <div className="col-md-12">[additional data]<input type="text" className="form-control" placeholder="additional details" /></div>
     </div>
   </div>
 );

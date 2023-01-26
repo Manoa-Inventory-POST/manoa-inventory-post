@@ -14,7 +14,7 @@ const displayRole = (student) => {
 };
 
 /** Renders general Student information */
-const StudentInfoItem = ({ student }) => (
+const FacultyInfoItem = ({ student }) => (
   <Col className="align-content-center text-center">
     <Row>
       <h2 id="student-name">{student.firstname} {student.lastname}</h2>
@@ -29,7 +29,7 @@ const StudentInfoItem = ({ student }) => (
 );
 
 /** Require a document to be passed to this component. */
-StudentInfoItem.propTypes = {
+FacultyInfoItem.propTypes = {
   student: PropTypes.shape({
     firstname: PropTypes.string,
     lastname: PropTypes.string,
@@ -42,5 +42,5 @@ StudentInfoItem.propTypes = {
 };
 
 export {
-  StudentInfoItem,
+  FacultyInfoItem,
 };

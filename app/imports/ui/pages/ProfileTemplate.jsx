@@ -1,12 +1,12 @@
 import React from 'react';
 // import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 // import { useTracker } from 'meteor/react-meteor-data';
 // import { StudentInfoItem } from '../components/StudentProfilePageItem';
 // import LoadingSpinner from '../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import StudentInfoItem from '../components/StudentProfilePageItem';
+import { FacultyInfoItem } from '../components/FacultyProfilePageItem';
 // import { Users } from '../../api/user/UserCollection';
 // import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Link } from 'react-router-dom';
@@ -44,28 +44,21 @@ const ProfileTemplate = () => (
 
     <div className="container rounded bg-white mt-5 mb-5">
       <div className="row">
-        <div className="col-md-3 border-right">
-          <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5" width="150px" src="http://www.ics.hawaii.edu/wp-content/uploads/2013/08/cam-moore.jpg" alt="none" /><span
-            className="font-weight-bold"
-          >[Insert Name]
-          </span><span className="text-black-50">[Insert Email]</span><span> </span>
-          </div>
-        </div>
-        <div className="col-md-5 border-right">
+        <div className="col-md-6 border-right">
           <div className="p-3 py-5">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h4 className="text-right">Profile Settings</h4>
             </div>
             <div className="row mt-2">
-              <div className="col-md-6"><label className="labels">First</label><input type="text" className="form-control" placeholder="first name" value="" /></div>
-              <div className="col-md-6"><label className="labels">Last</label><input type="text" className="form-control" value="" placeholder="surname" /></div>
+              <div className="col-md-6">First Name<input type="text" className="form-control" placeholder="First Name" /></div>
+              <div className="col-md-6">Last Name<input type="text" className="form-control" value="" placeholder="Last Name" /></div>
             </div>
             <div className="row mt-2">
-              <div className="col-md-12"><label className="labels">Email Address</label><input type="text" className="form-control disabled" value="[Insert Email]" disabled /></div>
+              <div className="col-md-12">Email Address<input type="text" className="form-control disabled" value="[Insert Email]" disabled /></div>
             </div>
             <div className="row mt-3">
-              <div className="col-md-6"><label className="labels">Phone Number</label><input type="text" className="form-control" placeholder="country" value="" /></div>
-              <div className="col-md-6"><label className="labels">State/Region</label><input type="text" className="form-control" value="" placeholder="state" /></div>
+              <div className="col-md-6">Phone Number<input type="text" className="form-control" placeholder="(xxx)xxx-xxxx" /></div>
+              <div className="col-md-6">Building/Room<input type="text" className="form-control" placeholder="Building-Room#" disabled /></div>
             </div>
             <div className="mt-5 text-center">
               <button className="btn btn-primary profile-button" type="button">Save Profile</button>
