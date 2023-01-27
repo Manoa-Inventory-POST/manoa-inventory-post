@@ -63,7 +63,7 @@ const ReservationForm = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField name="Room" placeholder="#3" />
+                <TextField name="Room" placeholder="#" />
                 <TextField name="Duration" placeholder="YYMMDDHH" />
                 <TextField name="Attendance" placeholder="" />
                 <TextField name="Usage" placeholder="" />
