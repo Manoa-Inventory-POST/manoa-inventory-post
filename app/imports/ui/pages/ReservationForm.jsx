@@ -1,79 +1,81 @@
-import React from 'react';
-// import { Meteor } from 'meteor/meteor';
-import { Container } from 'react-bootstrap';
-// import { useTracker } from 'meteor/react-meteor-data';
-// import { StudentInfoItem } from '../components/StudentProfilePageItem';
-// import LoadingSpinner from '../components/LoadingSpinner';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
 
-/* import depending on role
- import StudentInfoItem from '../components/StudentProfilePageItem';
- import { FacultyInfoItem } from '../components/FacultyProfilePageItem';
+/**
+ * SignUp component is similar to signin component, but we create a new user instead.
  */
+const ReservationForm = () => {
+  const [error, setError] = useState('');
+  const [redirectToReferer, setRedirectToRef] = useState(false);
 
-// import { Users } from '../../api/user/UserCollection';
-// import { StudentProfiles } from '../../api/user/StudentProfileCollection';
-// import { Link } from 'react-router-dom';
+  const schema = new SimpleSchema({
+    Room: String,
+    Duration: String,
+    Attendance: String,
+    Usage: String,
+    DesignatedAdvisor: String,
+  });
+  const bridge = new SimpleSchema2Bridge(schema);
 
-/* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const ReservationForm = () => (
-  /**
-  const { ready } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const sub1 = Meteor.subscribe(Users.userPublicationName);
-    // Determine if the subscription is ready
-    const rdy = sub1.ready();
-    // const rdy = sub2.ready() && sub3.ready();
-    // Get the Stuff documents
-    // const studentInfoItems = StudentProfiles.collection.find({}).fetch();
-    return {
-      // students: studentInfoItems,
-      ready: rdy,
-    };
-  }, []);
-   const owner = Meteor.user().username;
-   const filteredStudents = students.filter(stu => stu.owner === owner);
-*/
-  <Container className="py-3" id={PAGE_IDS.STUDENT_PROFILE}>
-    {/*    <Row className="text-center">
-      <Col className="text-center">
-        <h1>John Doe</h1>
-        <h3>Graduate</h3>
-        <h4>TA</h4>
-        <Link to="/">Edit</Link>
-      </Col>
-    </Row> */}
+  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
+  const submit = (doc) => {
+    // const collectionName = UserProfiles.getCollectionName();
+    // const definitionData = doc;
+    // // create the new UserProfile
+    // defineMethod.callPromise({ collectionName, definitionData })
+    //   .then(() => {
+    //     // log the new user in.
+    //     const { email, password } = doc;
+    //     Meteor.loginWithPassword(email, password, (err) => {
+    //       if (err) {
+    //         setError(err.reason);
+    //       } else {
+    //         setError('');
+    //         setRedirectToRef(true);
+    //       }
+    //     });
+    //   })
+    //   .catch((err) => setError(err.reason));
+  };
 
-    <div className="container-md rounded bg-white mt-5 mb-5">
-      <div className="row">
-        <div className="col-md-6 border-right">
-          <div className="p-3 py-5">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h4 className="text-center">Reserve Now</h4>
-            </div>
-            <div className="row mt-2">
-              <div className="col-md-6">Room<input type="text" className="form-control" placeholder="#" /></div>
-              <div className="col-md-6">Duration<input type="text" className="form-control" value="" placeholder="YYMMDD" /></div>
-            </div>
-            <div className="row mt-3">
-              <div className="col-md-6">Attendance<input type="text" className="form-control" placeholder="10" /></div>
-              <div className="col-md-6">Usage<input type="text" className="form-control" value="" placeholder="seminar" /></div>
-            </div>
-            <div className="row mt-3">
-              <div className="col-md-12">Designated advisor(student only)<input type="text" className="form-control" placeholder="name " /></div>
-            </div>
-            <div className="mt-5 text-center">
-              <button className="btn btn-primary profile-button" type="button">Submit</button>
-            </div>
-          </div>
-        </div>
-        {/* insert component per role */}
-
-      </div>
-    </div>
-  </Container>
-);
+  /* Display the signup form. Redirect to add page after successful registration and login. */
+  // if correct authentication, redirect to from: page instead of signup screen
+  // if (redirectToReferer) {
+  //   return <Navigate to="/add" />;
+  // }
+  return (
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={5}>
+          <Col className="text-center">
+            <h2>Reserve Now</h2>
+          </Col>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
+            <Card>
+              <Card.Body>
+                <TextField name="Room" placeholder="#3" />
+                <TextField name="Duration" placeholder="YYMMDDHH" />
+                <TextField name="Attendance" placeholder="" />
+                <TextField name="Usage" placeholder="" />
+                <TextField name="DesignatedAdvisor" placeholder="N/A" />
+                <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} className="text-center" />
+              </Card.Body>
+            </Card>
+          </AutoForm>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default ReservationForm;
