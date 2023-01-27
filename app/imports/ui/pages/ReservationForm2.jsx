@@ -5,13 +5,11 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField,SelectField, } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-import {Stuffs} from "../../api/stuff/StuffCollection";
-import swal from "sweetalert";
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -29,27 +27,29 @@ const ReservationForm = () => {
     Duration: String,
     Attendance: Number,
     Usage: String,
-    DesignatedAdvisor: {
-      type: String,
-      allowedValues: ['N/A','Carleton Moore', 'Philip Johnson','Scott Robertson', 'Dan Suthers', 'Henri Casanova', ],
-      defaultValue: 'N/A',
-    },
+    DesignatedAdvisor: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
-  // On submit, insert the data.
-
-  const submit = (data, formRef) => {
-    // const { name, quantity, condition } = data;
-    // const owner = Meteor.user().username;
-    // const collectionName = Stuffs.getCollectionName();
-    // const definitionData = { name, quantity, condition, owner };
+  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
+  const submit = (doc) => {
+    // const collectionName = UserProfiles.getCollectionName();
+    // const definitionData = doc;
+    // // create the new UserProfile
     // defineMethod.callPromise({ collectionName, definitionData })
-    //     .catch(error => swal('Error', error.message, 'error'))
-    //     .then(() => {
-    //       swal('Success', 'Item added successfully', 'success');
-    //       formRef.reset();
+    //   .then(() => {
+    //     // log the new user in.
+    //     const { email, password } = doc;
+    //     Meteor.loginWithPassword(email, password, (err) => {
+    //       if (err) {
+    //         setError(err.reason);
+    //       } else {
+    //         setError('');
+    //         setRedirectToRef(true);
+    //       }
     //     });
+    //   })
+    //   .catch((err) => setError(err.reason));
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
@@ -64,14 +64,14 @@ const ReservationForm = () => {
           <Col className="text-center">
             <h2>Reserve Now</h2>
           </Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <SelectField name="Room" />
+                <TextField name="Room" placeholder="#" />
                 <TextField name="Duration" placeholder="YYMMDDHH" />
                 <TextField name="Attendance" placeholder="" />
                 <TextField name="Usage" placeholder="" />
-                <SelectField name="DesignatedAdvisor" placeholder="N/A" />
+                <TextField name="DesignatedAdvisor" placeholder="N/A" />
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} className="text-center" />
               </Card.Body>
             </Card>
