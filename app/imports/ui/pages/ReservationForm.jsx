@@ -5,13 +5,13 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField,SelectField, } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField, SelectField, DateField } from 'uniforms-bootstrap5';
+import swal from 'sweetalert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-import {Stuffs} from "../../api/stuff/StuffCollection";
-import swal from "sweetalert";
+import { Stuffs } from '../../api/stuff/StuffCollection';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -26,7 +26,8 @@ const ReservationForm = () => {
       allowedValues: ['319', '318A', '318B', '316', '315'],
       defaultValue: '319',
     },
-    Duration: String,
+    StartTime: String,
+    EndTime: String,
     RecurringMeeting: {
       type: String,
       allowedValues: ['one-time', 'daily', 'weekly', 'biweekly', 'monthly'],
@@ -36,7 +37,7 @@ const ReservationForm = () => {
     Usage: String,
     DesignatedAdvisor: {
       type: String,
-      allowedValues: ['N/A','Carleton Moore', 'Philip Johnson','Scott Robertson', 'Dan Suthers', 'Henri Casanova', ],
+      allowedValues: ['N/A', 'Carleton Moore', 'Philip Johnson', 'Scott Robertson', 'Dan Suthers', 'Henri Casanova'],
       defaultValue: 'N/A',
     },
   });
@@ -73,8 +74,9 @@ const ReservationForm = () => {
             <Card>
               <Card.Body>
                 <SelectField name="Room" />
-                <TextField name="Duration" placeholder="YYMMDDHH" />
-                <TextField name="RecurringMeeting" placeholder="" />
+                <DateField name="StartTime"/>
+                <DateField name="EndTime"/>
+                <SelectField name="RecurringMeeting" placeholder="" />
                 <TextField name="Attendance" placeholder="" />
                 <TextField name="Usage" placeholder="" />
                 <SelectField name="DesignatedAdvisor" placeholder="N/A" />
