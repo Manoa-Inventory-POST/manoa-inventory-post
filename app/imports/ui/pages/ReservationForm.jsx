@@ -27,6 +27,11 @@ const ReservationForm = () => {
       defaultValue: '319',
     },
     Duration: String,
+    RecurringMeeting: {
+      type: String,
+      allowedValues: ['one-time', 'daily', 'weekly', 'biweekly', 'monthly'],
+      defaultValue: 'one-time',
+    },
     Attendance: Number,
     Usage: String,
     DesignatedAdvisor: {
@@ -69,6 +74,7 @@ const ReservationForm = () => {
               <Card.Body>
                 <SelectField name="Room" />
                 <TextField name="Duration" placeholder="YYMMDDHH" />
+                <TextField name="RecurringMeeting" placeholder="" />
                 <TextField name="Attendance" placeholder="" />
                 <TextField name="Usage" placeholder="" />
                 <SelectField name="DesignatedAdvisor" placeholder="N/A" />
