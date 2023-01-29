@@ -72,7 +72,7 @@ body {
   padding-top: 50px;
 }
 
-.dashboard-header, .accordion-button {
+.dashboard-header, .accordion-button, .search-results-table-header {
   border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
   background-color: #75abcf !important;
   color: white !important;
@@ -88,4 +88,9 @@ body {
 .btn-dashboard {
   background-color: var(--manoa-green) !important;
   border-radius: 0px !important;
+}
+
+.search-results {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
 }
