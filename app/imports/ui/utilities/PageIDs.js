@@ -5,6 +5,7 @@ export const PAGE_IDS = {
   LANDING: 'landing',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
+  FACULTY_HOME: 'faculty-home',
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
