@@ -7,7 +7,7 @@ export const COMPONENT_IDS = {
   NAVBAR_LANDING_PAGE: 'navbar-landing-page',
   NAVBAR_HOME: 'navbar-home',
   NAVBAR_MAP: 'navbar-map',
-  NAVBAR_PROFESSORS: 'navbar-professors',
+  NAVBAR_FACULTY: 'navbar-faculty',
   NAVBAR_ROOM_AVAILABILITY: 'navbar-room-availability',
   NAVBAR_RESERVE_ROOM: 'navbar-reserve-room',
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',
