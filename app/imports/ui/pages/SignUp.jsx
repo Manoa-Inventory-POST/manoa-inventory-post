@@ -23,6 +23,7 @@ const SignUp = () => {
     lastName: String,
     email: String,
     password: String,
+    TA: { type  }
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
