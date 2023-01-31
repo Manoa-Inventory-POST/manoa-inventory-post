@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import InfoBar from '../components/InfoBar';
 import SearchBox from '../components/SearchBox';
-import SearchResultsTable from "../components/SearchResultsTable";
+import SearchResultsTable from '../components/SearchResultsTable';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const ListStuffAdmin = () => {
