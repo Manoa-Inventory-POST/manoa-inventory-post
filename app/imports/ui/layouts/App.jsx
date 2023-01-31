@@ -21,6 +21,7 @@ import ReservationForm from '../pages/ReservationForm';
 import Map from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
 import {Test} from "../pages/Test";
+import ConfirmEditUser from '../pages/ConfirmEditUser';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -40,7 +41,7 @@ const App = () => (
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
         <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
-        <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+        <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
