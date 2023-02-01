@@ -4,7 +4,7 @@ import { Accordion, Col, Dropdown, DropdownButton, Row, Table, Container } from 
 import { useTracker } from 'meteor/react-meteor-data';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
-import RecipeItem from '../components/RecipeItem';
+import FacultyItem from '../components/FacultyItem';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const FacultySearch = () => {
