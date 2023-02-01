@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
@@ -20,9 +20,10 @@ import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
 import Map from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
-import {Test} from "../pages/Test";
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
+import StudentHome from '../pages/StudentHome';
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
   <Router>
@@ -44,6 +45,7 @@ const App = () => (
         <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
         <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
+        <Route path="/student" element={<ProtectedRoute><StudentHome /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
