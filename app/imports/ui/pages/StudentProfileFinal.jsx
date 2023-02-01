@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Student } from '../../api/role/Student';
-import { StudentInfoItem } from '../components/StudentProfilePageItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
@@ -33,6 +32,7 @@ const StudentProfileFinal = () => {
     <Container className="py-3" id={PAGE_IDS.STUDENT_PROFILE}>
       <Row className="justify-content-center">
         <Col md={7} className="justify-content-center">
+          {/* eslint-disable-next-line react/jsx-no-undef */}
           {filteredStudents.map((student) => <StudentInfoItem key={student.id} student={student} />)}
         </Col>
       </Row>

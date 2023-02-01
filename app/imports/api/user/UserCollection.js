@@ -17,6 +17,7 @@ import { Stuffs } from '../stuff/StuffCollection';
  *
  * Clients provide a "user" as a parameter, which is either the username (i.e. email) or userID.
  */
+
 class UserCollection {
   _collectionName;
 

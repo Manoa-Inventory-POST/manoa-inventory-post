@@ -1,13 +1,9 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP" },
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
+    },
     { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" },
-    { "email": "faculty@foo.com", "password": "changeme", "role": "FACULTY" , "firstName": "Mary", "lastName": "Smith" },
-    { "email": "itsupport@foo.com", "password": "changeme", "role": "IT" , "firstName": "Will", "lastName": "Brown" },
-    { "email": "student@foo.com", "password": "changeme", "role": "STUDENT" , "firstName": "James", "lastName": "White" },
-    { "email": "office@foo.com", "password": "changeme", "role": "OFFICE" , "firstName": "Emma", "lastName": "Jones" },
-    { "email": "advisor@foo.com", "password": "changeme", "role": "ADVISOR" , "firstName": "Robert", "lastName": "Green" }
-
+    { "email": "lydia@foo.com", "password": "changeme", "role": "ADMIN" , "firstName": "Lydia", "lastName": "Sollis" }
   ],
 
   "defaultData": [
