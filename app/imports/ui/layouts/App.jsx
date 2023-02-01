@@ -19,7 +19,10 @@ import { ROLE } from '../../api/role/Role';
 import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
 import Map from '../pages/MapPage';
-
+import EditUser from '../pages/EditUser';
+import {Test} from "../pages/Test";
+import ConfirmEditUser from '../pages/ConfirmEditUser';
+import ServiceRequest from '../pages/ServiceRequest';
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
   <Router>
@@ -36,7 +39,10 @@ const App = () => (
         <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+        <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+        <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+        <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
