@@ -53,17 +53,17 @@ const ProfileTemplate = () => (
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h4 className="text-right">Profile Settings</h4>
             </div>
-            <div className="row mt-2">
-              <div className="col-md-6">First Name<input type="text" className="form-control" placeholder="First Name" /></div>
-              <div className="col-md-6">Last Name<input type="text" className="form-control" value="" placeholder="Last Name" /></div>
-            </div>
-            <div className="row mt-2">
-              <div className="col-md-12">Email Address<input type="text" className="form-control disabled" value="[Insert Email]" disabled /></div>
-            </div>
-            <div className="row mt-3">
-              <div className="col-md-6">Phone Number<input type="text" className="form-control" placeholder="(xxx)xxx-xxxx" /></div>
-              <div className="col-md-6">Building/Room<input type="text" className="form-control" placeholder="Building-Room#" disabled /></div>
-            </div>
+            <Row className="mt-2">
+              <Col className="md-6">First Name<input type="text" className="form-control" placeholder="First Name" /></Col>
+              <Col className="md-6">Last Name<input type="text" className="form-control" placeholder="Last Name" /></Col>
+            </Row>
+            <Row className="mt-2">
+              <Col className="md-12">Email Address<input type="text" className="form-control disabled" value="[Insert Email]" disabled /></Col>
+            </Row>
+            <Row className="mt-3">
+              <Col className="md-6">Phone Number<input type="text" className="form-control" placeholder="(xxx)xxx-xxxx" /></Col>
+              <Col className="md-6">Building/Room<input type="text" className="form-control" placeholder="Building-Room#" disabled /></Col>
+            </Row>
             <div className="mt-5 text-center">
               <button className="btn btn-primary profile-button" type="button">Save Profile</button>
             </div>
