@@ -10,13 +10,14 @@ const SearchResultsTable = () => {
     const subscription = UserProfiles.subscribe();
     const rdy = subscription.ready();
     const userEntries = UserProfiles.find({}, { sort: { name: 1 } }).fetch();
+    console.log(userEntries, rdy);
     return {
       users: userEntries,
       ready: rdy,
     };
   }, []);
   return (ready ? (
-    <Container className="container-fluid py-3 search-results">
+    <Container className="py-3 search-results">
       <h2 className="ms-5 my-3">Search Results</h2>
       <Table striped bordered hover>
         <thead className="search-results-table-header">
