@@ -8,6 +8,7 @@ export const PAGE_IDS = {
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
+  MAP: 'map',
   STUDENT_PROFILE: 'student-profile',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',
