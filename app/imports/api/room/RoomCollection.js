@@ -10,12 +10,12 @@ class RoomCollection extends BaseProfileCollection {
   /**
    * Defines a new Room.
    * @param roomNum the number of the room.
-   * @param picture of the room.
+   * @param description of the room.
    */
-  define({ roomNum, picture }) {
+  define({ roomNum, description }) {
     const docID = this._collection.insert({
       roomNum,
-      picture,
+      description,
     });
     return docID;
   }
@@ -24,15 +24,15 @@ class RoomCollection extends BaseProfileCollection {
    * Updates the given document.
    * @param docID the id of the document to update.
    * @param roomNum the new room number.
-   * @param picture the new picture.
+   * @param description the new picture.
    */
-  update(docID, { roomNum, picture }) {
+  update(docID, { roomNum, description }) {
     const updateData = {};
     if (roomNum) {
       updateData.roomNum = roomNum;
     }
-    if (picture) {
-      updateData.quantity = picture;
+    if (description) {
+      updateData.quantity = description;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -104,13 +104,13 @@ class RoomCollection extends BaseProfileCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{owner: (*|number), condition: *, quantity: *, name}}
+   * @return {{owner: (*|number), description, name}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const roomNum = doc.roomNum;
-    const picture = doc.picture;
-    return { roomNum, picture };
+    const description = doc.description;
+    return { roomNum, description };
   }
 }
 
