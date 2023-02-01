@@ -6,7 +6,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const Map = () => (
   // <Container className="map-page-background" id={PAGE_IDS.MAP} style={{ height: '900px' }}>
   <Container>
-    <Image src="/images/POST3rd.jpeg" id={PAGE_IDS.MAP} style={{ width: '100%' }} />
+    <Image src="/images/FloorPlan.png" id={PAGE_IDS.MAP} style={{ width: '100%' }} />
   </Container>
 );
 

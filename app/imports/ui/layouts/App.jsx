@@ -18,7 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
-import Map from '../pages/MapPage';
+import Map from '../pages/Map';
 import EditUser from '../pages/EditUser';
 import {Test} from "../pages/Test";
 import ConfirmEditUser from '../pages/ConfirmEditUser';
@@ -33,9 +33,9 @@ const App = () => (
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
+        <Route path="/map" element={<Map />} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
-        <Route path="/map" element={<ProtectedRoute><Map /></ProtectedRoute>} />
         <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
