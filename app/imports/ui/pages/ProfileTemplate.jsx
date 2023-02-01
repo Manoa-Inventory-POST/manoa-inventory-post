@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Meteor } from 'meteor/meteor';
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 // import { useTracker } from 'meteor/react-meteor-data';
 // import { StudentInfoItem } from '../components/StudentProfilePageItem';
 // import LoadingSpinner from '../components/LoadingSpinner';
@@ -46,9 +46,9 @@ const ProfileTemplate = () => (
       </Col>
     </Row> */}
 
-    <div className="container rounded bg-white mt-5 mb-5">
-      <div className="row">
-        <div className="col-md-6 border-right">
+    <Container className="rounded bg-white mt-5 mb-5">
+      <Row>
+        <Col className="md-6 border-right">
           <div className="p-3 py-5">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h4 className="text-right">Profile Settings</h4>
@@ -68,11 +68,11 @@ const ProfileTemplate = () => (
               <button className="btn btn-primary profile-button" type="button">Save Profile</button>
             </div>
           </div>
-        </div>
+        </Col>
         {/* insert component per role */}
 
-      </div>
-    </div>
+      </Row>
+    </Container>
   </Container>
 );
 
