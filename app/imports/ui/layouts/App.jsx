@@ -21,7 +21,7 @@ import ReservationForm from '../pages/ReservationForm';
 import Map from '../pages/Map';
 import EditUser from '../pages/EditUser';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
-import {Test} from "../pages/Test";
+// import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
 
