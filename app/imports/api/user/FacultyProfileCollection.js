@@ -109,7 +109,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   getData() {
     const profile = this.find({ userID: Meteor.userID }).fetch();
     if (profile.isEmpty()) {
-      return 'There is no profile';
+      return [];
     }
     return profile[0];
   }
