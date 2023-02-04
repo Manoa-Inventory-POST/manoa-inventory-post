@@ -5,10 +5,10 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const OccupantRoomPublications = {
-  // will be using "orp" as acronym for OccupantRoomPublications
-  orp: 'orp',
-  orpAdmin: 'orpAdmin',
+export const occupantRoomPublications = {
+  // will be using "ORPub" as acronym for occupantRoomPublications
+  ORPub: 'ORPub',
+  ORPubAdmin: 'ORPubAdmin',
 };
 
 class OccupantRoomCollection extends BaseCollection {
@@ -71,7 +71,7 @@ class OccupantRoomCollection extends BaseCollection {
       // get the StuffCollection instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged-in user */
-      Meteor.publish(OccupantRoomPublications.orp, function publish() {
+      Meteor.publish(occupantRoomPublications.ORPub, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -80,7 +80,7 @@ class OccupantRoomCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(OccupantRoomPublications.orpAdmin, function publish() {
+      Meteor.publish(occupantRoomPublications.ORPubAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -94,7 +94,7 @@ class OccupantRoomCollection extends BaseCollection {
    */
   subscribeOccupantRoom() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(OccupantRoomPublications.orp);
+      return Meteor.subscribe(occupantRoomPublications.ORPub);
     }
     return null;
   }
@@ -105,7 +105,7 @@ class OccupantRoomCollection extends BaseCollection {
    */
   subscribeOccupantRoomAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(OccupantRoomPublications.orp);
+      return Meteor.subscribe(occupantRoomPublications.ORPub);
     }
     return null;
   }
