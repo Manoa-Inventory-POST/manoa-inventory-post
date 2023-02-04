@@ -19,9 +19,9 @@ const FacultySearch = () => {
   const { ready, recipes } = useTracker(() => {
     const subscription = Meteor.subscribe(FacultyProfiles.userPublicationName);
     const rdy = subscription.ready();
-    const recipeItems = FacultyProfiles.collection.find({}).fetch();
+    const facultyItems = FacultyProfiles.collection.find({}).fetch();
     return {
-      recipes: recipeItems,
+      faculty: facultyItems,
       ready: rdy,
     };
   }, []);
