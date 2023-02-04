@@ -122,7 +122,7 @@ class PhoneCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{owner: (*|number), condition: *, quantity: *, name}}
+   * @return {caller, phoneNum }
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
