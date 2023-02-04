@@ -124,7 +124,7 @@ class OccupantRoomCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return { occupant, room}
+   * @return {{occupant: *, room: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
