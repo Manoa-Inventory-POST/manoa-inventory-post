@@ -20,10 +20,12 @@ import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
 import Map from '../pages/Map';
 import EditUser from '../pages/EditUser';
-import {Test} from "../pages/Test";
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+// import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
 import FacultySearch from '../pages/FacultySearch';
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
   <Router>
@@ -151,7 +153,11 @@ const TAProtectedRoute = ({ children }) => {
     return <Navigate to="/signin" />;
   }
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  const isTA = Meteor.userID().TA;
+  let isTA = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isTA = profile.TA;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
   return (isLogged && isStudent && isTA) ? children : <Navigate to="/notauthorized" />;
 };
@@ -167,7 +173,11 @@ const RAProtectedRoute = ({ children }) => {
     return <Navigate to="/signin" />;
   }
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  const isRA = Meteor.userID().RA;
+  let isRA = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isRA = profile.RA;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
   return (isLogged && isStudent && isRA) ? children : <Navigate to="/notauthorized" />;
 };
@@ -183,7 +193,11 @@ const GraduateProtectedRoute = ({ children }) => {
     return <Navigate to="/signin" />;
   }
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  const isGraduate = Meteor.userID().graduate;
+  let isGraduate = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isGraduate = profile.graduate;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
   return (isLogged && isStudent && isGraduate) ? children : <Navigate to="/notauthorized" />;
 };
