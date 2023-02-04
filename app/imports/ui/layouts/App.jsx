@@ -171,7 +171,11 @@ const RAProtectedRoute = ({ children }) => {
     return <Navigate to="/signin" />;
   }
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  const isRA = Meteor.userID().RA;
+  let isRA = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isRA = profile.RA;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
   return (isLogged && isStudent && isRA) ? children : <Navigate to="/notauthorized" />;
 };
@@ -187,7 +191,11 @@ const GraduateProtectedRoute = ({ children }) => {
     return <Navigate to="/signin" />;
   }
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  const isGraduate = Meteor.userID().graduate;
+  let isGraduate = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isGraduate = profile.graduate;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
   return (isLogged && isStudent && isGraduate) ? children : <Navigate to="/notauthorized" />;
 };
