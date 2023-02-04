@@ -38,6 +38,7 @@ class OccupantRoomCollection extends BaseCollection {
    * @param docID the id of the document to update.
    * @param occupant the new occupant (optional).
    * @param room the new room (optional).
+   * @returns never
    */
   update(docID, { occupant, room }) {
     const updateData = {};
