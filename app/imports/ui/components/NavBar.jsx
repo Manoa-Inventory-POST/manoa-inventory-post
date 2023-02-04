@@ -14,6 +14,12 @@ const NavBar = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const menuStyle = { marginBottom: '10px' };
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]));
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]));
+  const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]));
+  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]));
+  const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]));
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]));
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
