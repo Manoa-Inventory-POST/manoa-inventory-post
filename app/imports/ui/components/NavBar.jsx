@@ -14,12 +14,12 @@ const NavBar = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const menuStyle = { marginBottom: '10px' };
-  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]));
-  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]));
-  const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]));
-  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]));
-  const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]));
-  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]));
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
+  const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
+  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]);
+  const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]);
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
@@ -37,8 +37,8 @@ const NavBar = () => {
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
             ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
-              [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin" key="admin">Users</Nav.Link>,
+            { isAdmin ? (
+              [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
                 </NavDropdown>]
