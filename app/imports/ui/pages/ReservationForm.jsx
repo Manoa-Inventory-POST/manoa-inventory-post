@@ -5,7 +5,15 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField, SelectField, DateField } from 'uniforms-bootstrap5';
+import {
+  AutoForm,
+  ErrorsField,
+  SubmitField,
+  TextField,
+  SelectField,
+  DateField,
+  LongTextField, HiddenField,
+} from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -40,47 +48,58 @@ const ReservationForm = () => {
       allowedValues: ['N/A', 'Carleton Moore', 'Philip Johnson', 'Scott Robertson', 'Dan Suthers', 'Henri Casanova'],
       defaultValue: 'N/A',
     },
+    applicantId: {
+      type: String,
+      // defaultValue: Meteor.user().username, // need to update upon
+      defaultValue: 'john@hawaii.edu', // need to update upon discussion
+
+    },
+    createdAt: Date,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   // On submit, insert the data.
-
   const submit = (data, formRef) => {
-    // const { name, quantity, condition } = data;
-    // const owner = Meteor.user().username;
-    // const collectionName = Stuffs.getCollectionName();
-    // const definitionData = { name, quantity, condition, owner };
-    // defineMethod.callPromise({ collectionName, definitionData })
-    //     .catch(error => swal('Error', error.message, 'error'))
-    //     .then(() => {
-    //       swal('Success', 'Item added successfully', 'success');
-    //       formRef.reset();
-    //     });
+    const { startTime, endTime, attendance, usage, recurrence, createdAt } = data;
+    const applicantId = Meteor.user().username;
+    const definitionData = { startTime, endTime, attendance, usage, recurrence, createdAt, applicantId };
+    defineMethod.callPromise({ definitionData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => {
+        swal('Success', 'Reservation submitted successfully', 'success');
+        formRef.reset();
+      });
   };
 
-  /* Display the signup form. Redirect to add page after successful registration and login. */
-  // if correct authentication, redirect to from: page instead of signup screen
-  // if (redirectToReferer) {
-  //   return <Navigate to="/add" />;
-  // }
+  /* Display the reserve form. */
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={10}>
           <Col className="text-center">
             <h2>Reserve Now</h2>
           </Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <SelectField name="Room" />
-                <DateField name="StartTime"/>
-                <DateField name="EndTime"/>
-                <SelectField name="RecurringMeeting" placeholder="" />
-                <TextField name="Attendance" placeholder="" />
-                <TextField name="Usage" placeholder="" />
-                <SelectField name="DesignatedAdvisor" placeholder="N/A" />
+                <Row>
+                  <Col><SelectField name="Room" showInlineError /></Col>
+                  <Col><TextField name="Attendance" showInlineError placeholder="" /></Col>
+                </Row>
+                <Row>
+                  <Col><DateField name="StartTime" showInlineError /></Col>
+                  <Col><DateField name="EndTime" showInlineError /></Col>
+                </Row>
+                <Row>
+                  <Col><SelectField name="RecurringMeeting" showInlineError placeholder="" /></Col>
+                  <Col><SelectField name="DesignatedAdvisor" showInlineError placeholder="N/A" /></Col>
+                </Row>
+                <Row>
+                  <LongTextField name="Usage" showInlineError placeholder="" />
+                </Row>
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} className="text-center" />
+                <ErrorsField />
+                <HiddenField name="createdAt" value={new Date()} />
               </Card.Body>
             </Card>
           </AutoForm>
