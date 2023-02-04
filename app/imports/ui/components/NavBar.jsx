@@ -20,6 +20,7 @@ const NavBar = () => {
   const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]);
   const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]);
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  // const isUser = Roles.userIsInRole(Meteor.userId(), [ROLE.USER]);
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
@@ -31,10 +32,14 @@ const NavBar = () => {
               <Nav.Link id={COMPONENT_IDS.NAVBAR_HOME} as={NavLink} to="/home" key="home">Home</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
-            <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>
-            {currentUser ? ([
+            { isAdmin ? '' : ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
+            ])}
+            {isOffice || isITSupport || isFaculty || isAdvisor || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
+            ]) : ''}
+            { isOffice || isFaculty || isAdvisor || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
             ]) : ''}
             { isAdmin ? (
