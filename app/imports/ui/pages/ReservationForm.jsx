@@ -17,7 +17,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-import { ReservationForm } from '../../api/reserveform/ReservationForm';
+import { ReservationForm } from '../../api/reserveform/ReservationCollection';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -46,9 +46,7 @@ const AddReservationForm = () => {
     },
     applicantId: {
       type: String,
-      // defaultValue: Meteor.user().username, // need to update upon
-      defaultValue: 'john@hawaii.edu', // need to update upon discussion
-
+      defaultValue: Meteor.user().username, // need to update upon
     },
     createdAt: Date,
   });
@@ -58,17 +56,14 @@ const AddReservationForm = () => {
   const submit = (data, formRef) => {
     const { room, startTime, endTime, attendance, usage, designatedAdvisor, recurringMeeting, createdAt } = data;
     const applicantId = Meteor.user().username;
-    ReservationForm.collection.insert(
-      { room, startTime, endTime, attendance, usage, designatedAdvisor, recurringMeeting, createdAt, applicantId },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Reservation submitted successfully', 'success');
-          formRef.reset();
-        }
-      },
-    );
+    const collectionName = ReservationForm.getCollectionName();
+    const definitionData = { room, startTime, endTime, recurringMeeting, attendance, usage, designatedAdvisor, applicantId, createdAt };
+    defineMethod.callPromise({ collectionName, definitionData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => {
+        swal('Success', 'Reservation submitted successfully', 'success');
+        formRef.reset();
+      });
   };
 
   /* Display the reserve form. */

@@ -6,40 +6,51 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const stuffConditions = ['excellent', 'good', 'fair', 'poor'];
-export const stuffPublications = {
-  stuff: 'Stuff',
-  stuffAdmin: 'StuffAdmin',
+export const frequency = ['one-time', 'daily', 'weekly', 'biweekly', 'monthly'];
+
+export const reservationPublications = {
+  reservation: 'reservation',
+  reservationAdmin: 'reservationAdmin',
 };
 
-class StuffCollection extends BaseCollection {
+class ReservationsCollection extends BaseCollection {
   constructor() {
-    super('Stuffs', new SimpleSchema({
-      name: String,
-      quantity: Number,
-      owner: String,
-      condition: {
+    super('ReservationForm', new SimpleSchema({
+      room: String,
+      startTime: Date,
+      endTime: Date,
+      recurringMeeting: {
         type: String,
-        allowedValues: stuffConditions,
-        defaultValue: 'good',
+        allowedValues: frequency,
+        defaultValue: 'one-time',
       },
+      attendance: Number,
+      usage: String,
+      designatedAdvisor: String,
+      applicantId: String,
+      createdAt: Date,
     }));
   }
 
   /**
-   * Defines a new Stuff item.
+   * Defines a new reservation item.
    * @param name the name of the item.
    * @param quantity how many.
    * @param owner the owner of the item.
    * @param condition the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ name, quantity, owner, condition }) {
+  define({ room, startTime, endTime, recurringMeeting, attendance, usage, designatedAdvisor, applicantId, createdAt }) {
     const docID = this._collection.insert({
-      name,
-      quantity,
-      owner,
-      condition,
+      room,
+      startTime,
+      endTime,
+      recurringMeeting,
+      attendance,
+      usage,
+      designatedAdvisor,
+      applicantId,
+      createdAt,
     });
     return docID;
   }
@@ -51,18 +62,20 @@ class StuffCollection extends BaseCollection {
    * @param quantity the new quantity (optional).
    * @param condition the new condition (optional).
    */
-  update(docID, { name, quantity, condition }) {
+  update(docID, { room, startTime, endTime, recurringMeeting, attendance, usage, designatedAdvisor }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
-    }
+    updateData.room = room;
+    updateData.startTime = startTime;
+    updateData.endTime = endTime;
+    updateData.recurringMeeting = recurringMeeting;
+    updateData.usage = usage;
+    updateData.designatedAdvisor = designatedAdvisor;
+
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
-    if (_.isNumber(quantity)) {
-      updateData.quantity = quantity;
+    if (_.isNumber(attendance)) {
+      updateData.quantity = attendance;
     }
-    if (condition) {
-      updateData.condition = condition;
-    }
+
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -71,8 +84,8 @@ class StuffCollection extends BaseCollection {
    * @param { String | Object } name A document or docID in this collection.
    * @returns true
    */
-  removeIt(name) {
-    const doc = this.findDoc(name);
+  removeIt(applicant) {
+    const doc = this.findDoc(applicant);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -84,10 +97,10 @@ class StuffCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
+      // get the ReservationsCollection instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(stuffPublications.stuff, function publish() {
+      Meteor.publish(reservationPublications.reservation, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -96,7 +109,7 @@ class StuffCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(stuffPublications.stuffAdmin, function publish() {
+      Meteor.publish(reservationPublications.reservationAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -106,11 +119,11 @@ class StuffCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for stuff owned by the current user.
+   * Subscription method for reservation owned by the current user.
    */
-  subscribeStuff() {
+  subscribeReservation() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(stuffPublications.stuff);
+      return Meteor.subscribe(reservationPublications.reservation);
     }
     return null;
   }
@@ -119,9 +132,9 @@ class StuffCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeStuffAdmin() {
+  subscribeReservationAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(stuffPublications.stuffAdmin);
+      return Meteor.subscribe(reservationPublications.reservationAdmin);
     }
     return null;
   }
@@ -133,7 +146,7 @@ class StuffCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
   }
 
   /**
@@ -143,15 +156,20 @@ class StuffCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const quantity = doc.quantity;
-    const condition = doc.condition;
-    const owner = doc.owner;
-    return { name, quantity, condition, owner };
+    const room = doc.room;
+    const startTime = doc.startTime;
+    const endTime = doc.endTime;
+    const usage = doc.usage;
+    const recurringMeeting = doc.recurringMeeting;
+    const attendance = doc.attendance;
+    const designatedAdvisor = doc.designatedAdvisor;
+    const applicantId = doc.applicantId;
+    const createdAt = doc.applicantId;
+    return { room, startTime, endTime, recurringMeeting, attendance, usage, designatedAdvisor, applicantId, createdAt };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Stuffs = new StuffCollection();
+export const ReservationForm = new ReservationsCollection();
