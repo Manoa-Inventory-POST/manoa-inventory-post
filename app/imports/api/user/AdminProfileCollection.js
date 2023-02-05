@@ -101,6 +101,18 @@ class AdminProfileCollection extends BaseProfileCollection {
     const lastName = doc.lastName;
     return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
   }
+
+  /**
+   * Searches for a User ID. If ID exists, returns the User Object. Else, there is no profile.
+   * @returns { Object } A profile.
+   */
+  getData() {
+    const profile = this.find({ userID: Meteor.userID }).fetch();
+    if (profile.isEmpty()) {
+      return [];
+    }
+    return profile[0];
+  }
 }
 
 /**

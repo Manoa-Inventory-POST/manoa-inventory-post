@@ -6,6 +6,7 @@ import { Github, Instagram, Facebook, GeoAltFill } from 'react-bootstrap-icons';
 const Footer = () => {
   const divStyle = { paddingTop: '15px', color: 'white' };
   const linkStyle = { color: 'white', textDecoration: 'none' };
+  const iconLinkStyle = { color: 'white', fontSize: '30px', textDecoration: 'none' };
   return (
     <footer className="mt-auto" style={{ backgroundColor: '#75ABCF' }}>
       <Container style={divStyle} align="center">
@@ -43,11 +44,11 @@ const Footer = () => {
         <hr />
         <div className="pb-3 col-sm-4">
           <h4>Contact Us</h4>
-          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Github /></a>
+          <a style={iconLinkStyle} href="https://bowfolios.github.io"> <Github /></a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Instagram /></a>
+          <a style={iconLinkStyle} href="https://bowfolios.github.io"> <Instagram /></a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }} href="https://bowfolios.github.io"> <Facebook /></a>
+          <a style={iconLinkStyle} href="https://bowfolios.github.io"> <Facebook /></a>
         </div>
       </Container>
     </footer>
