@@ -2,6 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../stuff/StuffCollection';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { OfficeProfiles } from '../user/OfficeProfileCollection';
+import { ITSupportProfiles } from '../user/ITSupportProfileCollection';
+import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
+import { OccupantRoom } from '../room/OccupantRoom';
+import { Phone } from '../room/Phone';
+import { Ports } from '../room/Ports';
 
 class MATPClass {
   collections;
@@ -16,6 +24,14 @@ class MATPClass {
       AdminProfiles,
       Stuffs,
       UserProfiles,
+      StudentProfiles,
+      FacultyProfiles,
+      OfficeProfiles,
+      ITSupportProfiles,
+      AdvisorProfiles,
+      OccupantRoom,
+      Phone,
+      Ports,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -24,6 +40,14 @@ class MATPClass {
       AdminProfiles,
       UserProfiles,
       Stuffs,
+      StudentProfiles,
+      FacultyProfiles,
+      OfficeProfiles,
+      ITSupportProfiles,
+      AdvisorProfiles,
+      OccupantRoom,
+      Phone,
+      Ports,
     ];
 
     /*
