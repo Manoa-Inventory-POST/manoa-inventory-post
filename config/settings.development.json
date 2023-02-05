@@ -5,7 +5,7 @@
     { "email": "lydia@foo.com", "password": "changeme", "role": "ADMIN" , "firstName": "Lydia", "lastName": "Sollis" },
     { "email": "faculty@foo.com", "password": "changeme", "role": "FACULTY" , "firstName": "Mary", "lastName": "Smith" },
     { "email": "itsupport@foo.com", "password": "changeme", "role": "ITSUPPORT" , "firstName": "Will", "lastName": "Brown" },
-    { "email": "student@foo.com", "password": "changeme", "role": "STUDENT" , "firstName": "James", "lastName": "White" },
+    { "email": "student@foo.com", "password": "changeme", "role": "STUDENT" , "firstName": "James", "lastName": "White", "TA": false, "RA": false, "Graduate": false, "Undergraduate": false },
     { "email": "office@foo.com", "password": "changeme", "role": "OFFICE" , "firstName": "Emma", "lastName": "Jones" },
     { "email": "advisor@foo.com", "password": "changeme", "role": "ADVISOR" , "firstName": "Robert", "lastName": "Green" }
 
