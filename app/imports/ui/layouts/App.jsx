@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import AdminDashboard from '../pages/AdminDashboard';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -25,6 +25,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
 import FacultySearch from '../pages/FacultySearch';
+import HomeTemplate from '../pages/HomeTemplate';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -38,7 +39,7 @@ const App = () => (
         <Route path="/signout" element={<SignOut />} />
         <Route path="/map" element={<Map />} />
         <Route path="/faculty" element={<FacultySearch />} />
-        <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
         <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
@@ -47,7 +48,7 @@ const App = () => (
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
         <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
         <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
+        <Route path="/admin" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -64,7 +65,7 @@ const App = () => (
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   // console.log('ProtectedRoute', isLogged);
-  return isLogged ? children : <Navigate to="/signin" />;
+  return isLogged ? children : <Navigate to="/" />;
 };
 
 /**
@@ -75,7 +76,7 @@ const ProtectedRoute = ({ children }) => {
 const AdminProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/" />;
   }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
