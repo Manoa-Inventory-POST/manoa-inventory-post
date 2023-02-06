@@ -45,7 +45,7 @@ const App = () => (
         <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
         <Route path="/editUser/confirm/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
-        <Route path="/student" element={<ProtectedRoute><StudentHome /></ProtectedRoute>} />
+        <Route path="/student" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
