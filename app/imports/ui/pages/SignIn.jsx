@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -47,16 +46,7 @@ const SignIn = () => {
     return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    return (<Navigate to="/home" />);
-  }
-  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
-    return (<Navigate to="/home" />);
-  }
-  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
-    return (<Navigate to="/home" />);
-  }
-  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
-    return (<Navigate to="/home" />);
+    return (<Navigate to="/student" />);
   }
   // Otherwise return the Login form.
   return (
