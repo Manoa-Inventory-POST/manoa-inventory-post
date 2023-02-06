@@ -25,9 +25,10 @@ const EditUser = () => {
     const rdy = subscription.ready();
     // Get the document
     const document = UserProfiles.find({ _id }).fetch();
+    const userToEdit = document[0];
     console.log(document);
     return {
-      user: document,
+      doc: userToEdit,
       ready: rdy,
     };
   }, [_id]);
@@ -50,8 +51,8 @@ const EditUser = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" value="John" />
-                <TextField name="lastName" value="Doe" />
+                <TextField name="firstName" />
+                <TextField name="lastName" />
                 <TextField name="email" />
                 <TextField name="role" />
                 <SubmitField value="Submit" />
