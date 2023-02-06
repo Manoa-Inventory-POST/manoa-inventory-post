@@ -24,6 +24,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
+import HomeTemplate from '../pages/HomeTemplate';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -36,7 +37,7 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/map" element={<Map />} />
-        <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
         <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
@@ -62,7 +63,7 @@ const App = () => (
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   // console.log('ProtectedRoute', isLogged);
-  return isLogged ? children : <Navigate to="/signin" />;
+  return isLogged ? children : <Navigate to="/" />;
 };
 
 /**
@@ -73,7 +74,7 @@ const ProtectedRoute = ({ children }) => {
 const AdminProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/" />;
   }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
