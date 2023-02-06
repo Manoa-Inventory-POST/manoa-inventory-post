@@ -1,21 +1,37 @@
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import BaseProfileCollection from '../user/BaseProfileCollection';
+import { Roles } from 'meteor/alanning:roles';
+import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
 
-class RoomCollection extends BaseProfileCollection {
+export const roomPublications = {
+  // will be using "roomPub" as acronym for roomPublications
+  roomPub: 'roomPub',
+  roomPubAdmin: 'roomPubAdmin',
+};
+
+class RoomCollection extends BaseCollection {
   constructor() {
-    super('StudentProfile', new SimpleSchema({}));
+    super('Room', new SimpleSchema({
+      num: String,
+      description: String,
+      status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'occupied' },
+    }));
   }
 
   /**
-   * Defines a new Room.
-   * @param roomNum the number of the room.
-   * @param description of the room.
+   * Defines a new Room item.
+   * @return {never} the docID of the new document.
+   * @param num
+   * @param description
+   * @param status
    */
-  define({ roomNum, description }) {
+  define({ num, description, status }) {
     const docID = this._collection.insert({
-      roomNum,
+      num,
       description,
+      status,
     });
     return docID;
   }
@@ -23,94 +39,106 @@ class RoomCollection extends BaseProfileCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param roomNum the new room number.
-   * @param description the new picture.
+   * @param num the new num (optional).
+   * @param description the new description (optional).
+   * @param status the new status (optional).
+   * @returns never
    */
-  update(docID, { roomNum, description }) {
+  update(docID, { num, description, status }) {
     const updateData = {};
-    if (roomNum) {
-      updateData.roomNum = roomNum;
+    if (num) {
+      updateData.num = num;
     }
     if (description) {
-      updateData.quantity = description;
+      updateData.description = description;
+    }
+    if (status) {
+      updateData.status = status;
     }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } roomNum A document or docID in this collection.
+   * @param { String | Object } num A document or docID in this collection.
    * @returns true
    */
-  removeIt(roomNum) {
-    const doc = this.findDoc(roomNum);
+  removeIt(num) {
+    const doc = this.findDoc(num);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
   }
 
   /**
-   * We will deal with this later, but kept it for now
    * Default publication method for entities.
    * It publishes the entire collection for admin and just the stuff associated to an owner.
    */
-  /*
   publish() {
     if (Meteor.isServer) {
       // get the StuffCollection instance.
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged in user */
-  /** Meteor.publish(stuffPublications.stuff, function publish() {
+      /** This subscription publishes only the documents associated with the logged-in user */
+      Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
+          const usernum = Meteor.users.findOne(this.userId).usernum;
+          return instance._collection.find({ owner: usernum });
         }
         return this.ready();
       });
-*/
-  /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-  /**
-      Meteor.publish(stuffPublications.stuffAdmin, function publish() {
+
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
+      Meteor.publish(roomPublications.roomPubAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
         return this.ready();
       });
     }
-  } */
+  }
 
   /**
    * Subscription method for stuff owned by the current user.
-
-  subscribeStuff() {
+   */
+  subscribeRoom() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(stuffPublications.stuff);
+      return Meteor.subscribe(roomPublications.roomPub);
     }
     return null;
   }
-*/
+
   /**
    * Subscription method for admin users.
    * It subscribes to the entire collection.
-
-  subscribeStuffAdmin() {
+   */
+  subscribeRoomAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(stuffPublications.stuffAdmin);
+      return Meteor.subscribe(roomPublications.roomPub);
     }
     return null;
   }
-*/
+
+  /**
+   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
+   */
+  assertValidRoleForMethod(userId) {
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
+  }
 
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{owner: (*|number), description, name}}
+   * @return {{num: *, description: *, status: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const roomNum = doc.roomNum;
+    const num = doc.num;
     const description = doc.description;
-    return { roomNum, description };
+    const status = doc.status;
+    return { num, description, status };
   }
 }
 
