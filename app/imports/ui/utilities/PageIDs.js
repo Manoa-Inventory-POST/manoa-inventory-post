@@ -10,6 +10,7 @@ export const PAGE_IDS = {
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
   MAP: 'map',
+  FACULTY_SEARCH: 'faculty-search',
   STUDENT_PROFILE: 'student-profile',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',
