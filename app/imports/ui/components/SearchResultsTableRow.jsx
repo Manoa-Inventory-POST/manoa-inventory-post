@@ -11,7 +11,7 @@ const SearchResultsTableRow = ({ user }) => (
     <td>{ user.phoneNumber }</td>
     <td>{ user.role }</td>
     <td>
-      <Link to={`/edit/${user._id}`}>Edit</Link>
+      <Link to={`/editUser/${user._id}`}>Edit</Link>
     </td>
   </tr>
 );
