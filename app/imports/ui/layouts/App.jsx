@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { useTracker } from 'meteor/react-meteor-data';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
@@ -27,37 +28,49 @@ import ServiceRequest from '../pages/ServiceRequest';
 import HomeTemplate from '../pages/HomeTemplate';
 import CreateUser from '../pages/CreateUser';
 import ConfirmCreateUser from '../pages/ConfirmCreateUser';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-const App = () => (
-  <Router>
-    <div className="d-flex flex-column min-vh-100">
-      <NavBar />
-      <Routes>
-        <Route exact path="/" element={<Landing />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
-        <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
-        <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-        <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-        <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
-        <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-        <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
-        <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
-        <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
-        <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
-        <Route path="/notauthorized" element={<NotAuthorized />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </div>
-  </Router>
-);
+const App = () => {
+  const { ready } = useTracker(() => {
+    const rdy = Roles.subscription.ready();
+    return {
+      ready: rdy,
+    };
+  });
+  return (
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
+          <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
+          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
+          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+          <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+          <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
+          <Route
+            path="/createUser/confirmCreate/:_id"
+            element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>}
+          />
+          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
 /**
  * ProtectedRoute (see React Router v6 sample)
@@ -75,14 +88,16 @@ const ProtectedRoute = ({ children }) => {
  * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
-const AdminProtectedRoute = ({ children }) => {
+const AdminProtectedRoute = ({ ready, children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
     return <Navigate to="/" />;
   }
+  if (!ready) {
+    return <LoadingSpinner />;
+  }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
-  // race condition
   return (isLogged && isAdmin) ? children : <Navigate to="/notauthorized" />;
 };
 
@@ -232,10 +247,12 @@ ProtectedRoute.defaultProps = {
 
 // Require a component and location to be passed to each AdminProtectedRoute.
 AdminProtectedRoute.propTypes = {
+  ready: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 AdminProtectedRoute.defaultProps = {
+  ready: false,
   children: <Landing />,
 };
 
