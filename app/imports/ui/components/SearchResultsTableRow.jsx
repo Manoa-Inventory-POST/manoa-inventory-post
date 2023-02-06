@@ -11,7 +11,8 @@ const SearchResultsTableRow = ({ user }) => (
     <td>{ user.phoneNumber }</td>
     <td>{ user.role }</td>
     <td>
-      <Link to={`/editUser/${user._id}`}>Edit</Link>
+      <Link className="btn btn-dashboard text-white me-2 d-inline" to={`/editUser/${user._id}`}>Edit</Link>
+      <Link className="btn btn-danger btn-delete d-inline" to={`/editUser/${user._id}`}>Delete</Link>
     </td>
   </tr>
 );
