@@ -1,10 +1,10 @@
 // import { Selector, t } from 'testcafe';
 import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, */ /* manageDatabasePage, */ signOutPage } from './simple.page';
-import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
 import { studentProfilePage } from './studentprofile.page';
+import { landingPage } from './landing.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -16,11 +16,12 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
-/*
-test('Test that landing page shows up', async () => {
-  await landingPage.isDisplayed();
+
+test('Test that landing page shows up', async (testController) => {
+  await landingPage.isDisplayed(testController);
 });
-*/
+
+
 test('Test that signin and signout work', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);

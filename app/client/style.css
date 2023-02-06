@@ -44,7 +44,7 @@ body {
 .map-page-background {
   background: url('images/POST3rd.jpeg') no-repeat center;
   background-size: cover;
-  height: 100px;
+  height: 100%;
   padding-top: 10px;
   text-align: center;
   text-shadow: 4px 4px 8px black;
