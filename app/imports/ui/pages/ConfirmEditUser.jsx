@@ -18,9 +18,10 @@ const ConfirmEditUser = () => {
     const rdy = subscription.ready();
     // Get the document
     const document = UserProfiles.find({ _id }).fetch();
-    console.log(document);
+    const document2 = document[0];
+    console.log(document2);
     return {
-      doc: document,
+      doc: document2,
       ready: rdy,
     };
   }, [_id]);
@@ -34,15 +35,15 @@ const ConfirmEditUser = () => {
           <Col className="text-center"><h2>Confirmation</h2></Col>
           <Card>
             <Card.Header>
-              <Card.Title>John Doe has been updated</Card.Title>
+              <Card.Title>{ doc.firstName } { doc.lastName } has been updated</Card.Title>
             </Card.Header>
             <Card.Body>
-              <Card.Text>First Name: John</Card.Text>
-              <Card.Text>Last Name: Doe</Card.Text>
+              <Card.Text>First Name: { doc.firstName }</Card.Text>
+              <Card.Text>Last Name: { doc.lastName }</Card.Text>
               <Card.Text>Office Building: POST</Card.Text>
               <Card.Text>Room Number: 121</Card.Text>
               <Card.Text>Phone Number: 808-XXX-XXXX</Card.Text>
-              <Card.Text>Role: USER</Card.Text>
+              <Card.Text>Role: { doc.role }</Card.Text>
               <Card.Link href="/admin">Go to my dashboard</Card.Link>
             </Card.Body>
           </Card>

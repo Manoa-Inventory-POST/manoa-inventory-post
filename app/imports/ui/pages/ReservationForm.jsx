@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -19,40 +17,36 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-import { Stuffs } from '../../api/stuff/StuffCollection';
+import { ReservationForm } from '../../api/reserveform/ReservationCollection';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
  */
-const ReservationForm = () => {
-  const [error, setError] = useState('');
-  const [redirectToReferer, setRedirectToRef] = useState(false);
+const AddReservationForm = () => {
 
   const schema = new SimpleSchema({
-    Room: {
+    room: {
       type: String,
       allowedValues: ['319', '318A', '318B', '316', '315'],
       defaultValue: '319',
     },
-    StartTime: String,
-    EndTime: String,
-    RecurringMeeting: {
+    startTime: Date,
+    endTime: Date,
+    recurringMeeting: {
       type: String,
       allowedValues: ['one-time', 'daily', 'weekly', 'biweekly', 'monthly'],
       defaultValue: 'one-time',
     },
-    Attendance: Number,
-    Usage: String,
-    DesignatedAdvisor: {
+    attendance: Number,
+    usage: String,
+    designatedAdvisor: {
       type: String,
       allowedValues: ['N/A', 'Carleton Moore', 'Philip Johnson', 'Scott Robertson', 'Dan Suthers', 'Henri Casanova'],
       defaultValue: 'N/A',
     },
     applicantId: {
       type: String,
-      // defaultValue: Meteor.user().username, // need to update upon
-      defaultValue: 'john@hawaii.edu', // need to update upon discussion
-
+      defaultValue: Meteor.user().username, // need to update upon
     },
     createdAt: Date,
   });
@@ -60,10 +54,11 @@ const ReservationForm = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { startTime, endTime, attendance, usage, recurrence, createdAt } = data;
+    const { room, startTime, endTime, attendance, usage, designatedAdvisor, recurringMeeting, createdAt } = data;
     const applicantId = Meteor.user().username;
-    const definitionData = { startTime, endTime, attendance, usage, recurrence, createdAt, applicantId };
-    defineMethod.callPromise({ definitionData })
+    const collectionName = ReservationForm.getCollectionName();
+    const definitionData = { room, startTime, endTime, recurringMeeting, attendance, usage, designatedAdvisor, applicantId, createdAt };
+    defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
         swal('Success', 'Reservation submitted successfully', 'success');
@@ -72,6 +67,7 @@ const ReservationForm = () => {
   };
 
   /* Display the reserve form. */
+  let fRef = null;
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -83,19 +79,19 @@ const ReservationForm = () => {
             <Card>
               <Card.Body>
                 <Row>
-                  <Col><SelectField name="Room" showInlineError /></Col>
-                  <Col><TextField name="Attendance" showInlineError placeholder="" /></Col>
+                  <Col><SelectField name="room" showInlineError /></Col>
+                  <Col><TextField name="attendance" showInlineError placeholder="" /></Col>
                 </Row>
                 <Row>
-                  <Col><DateField name="StartTime" showInlineError /></Col>
-                  <Col><DateField name="EndTime" showInlineError /></Col>
+                  <Col><DateField name="startTime" showInlineError /></Col>
+                  <Col><DateField name="endTime" showInlineError /></Col>
                 </Row>
                 <Row>
-                  <Col><SelectField name="RecurringMeeting" showInlineError placeholder="" /></Col>
-                  <Col><SelectField name="DesignatedAdvisor" showInlineError placeholder="N/A" /></Col>
+                  <Col><SelectField name="recurringMeeting" showInlineError placeholder="" /></Col>
+                  <Col><SelectField name="designatedAdvisor" showInlineError placeholder="N/A" /></Col>
                 </Row>
                 <Row>
-                  <LongTextField name="Usage" showInlineError placeholder="" />
+                  <LongTextField name="usage" showInlineError placeholder="" />
                 </Row>
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} className="text-center" />
                 <ErrorsField />
@@ -109,4 +105,4 @@ const ReservationForm = () => {
   );
 };
 
-export default ReservationForm;
+export default AddReservationForm;
