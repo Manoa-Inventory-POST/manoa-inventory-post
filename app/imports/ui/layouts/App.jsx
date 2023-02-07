@@ -29,6 +29,8 @@ import HomeTemplate from '../pages/HomeTemplate';
 import CreateUser from '../pages/CreateUser';
 import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
+import CreateRoom from "../pages/CreateRoom";
+import EditRoom from "../pages/EditRoom";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -56,12 +58,11 @@ const App = () => {
           <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+          <Route path="/createSpace" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
-          <Route
-            path="/createUser/confirmCreate/:_id"
-            element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>}
-          />
+          <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
