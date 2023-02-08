@@ -99,6 +99,10 @@ body {
   border-radius: 0px !important;
 }
 
+.btn-delete {
+  border-radius: 0px !important;
+}
+
 .search-results {
   padding-right: 0px !important;
   padding-left: 0px !important;

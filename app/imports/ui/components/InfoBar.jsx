@@ -6,7 +6,7 @@ import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 
 const InfoBar = () => {
 
-  /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <SearchResultsTable> to render each row of search results. */
+  /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { admins } = useTracker(() => {
     // Get access to Admin documents
@@ -38,16 +38,22 @@ const InfoBar = () => {
       </Card.Header>
       <ListGroup className="list-group-flush rounded-0">
         <ListGroup.Item>
-          Bulk upload: <Card.Link className="ms-2" href="#">spaces</Card.Link><Card.Link
-            href="#"
-          >people
-          </Card.Link><Card.Link href="#">schedules</Card.Link>
+          Bulk upload:
+          <Card.Link className="ms-2" href="#">spaces</Card.Link>
+          <Card.Link href="#">people</Card.Link>
+          <Card.Link href="#">schedules</Card.Link>
         </ListGroup.Item>
         <ListGroup.Item>
-          Search: <Card.Link className="ms-2" href="#">spaces</Card.Link><Card.Link
-            href="#"
-          >people
-          </Card.Link><Card.Link href="#">schedules</Card.Link>
+          Add one:
+          <Card.Link className="ms-2" href="/createSpace">space</Card.Link>
+          <Card.Link href="/createUser">person</Card.Link>
+          <Card.Link href="/createSchedule">schedule</Card.Link>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          Search:
+          <Card.Link className="ms-2" href="#">spaces</Card.Link>
+          <Card.Link href="#">people</Card.Link>
+          <Card.Link href="#">schedules</Card.Link>
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Link href="#">View campus map</Card.Link>
