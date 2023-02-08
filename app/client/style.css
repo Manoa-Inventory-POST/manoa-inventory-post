@@ -107,3 +107,9 @@ body {
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
+
+.my-space-image {
+  width: 30%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}

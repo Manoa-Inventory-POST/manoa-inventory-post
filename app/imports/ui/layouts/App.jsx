@@ -33,6 +33,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import CreateRoom from '../pages/CreateRoom';
 import EditRoom from '../pages/EditRoom';
 import StudentHome from '../pages/StudentHome';
+import FacultyHome from '../pages/FacultyHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -72,6 +73,7 @@ const App = () => {
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/StudentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
+          <Route path="/facultyhome" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
