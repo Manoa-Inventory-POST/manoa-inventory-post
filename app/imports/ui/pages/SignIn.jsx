@@ -58,6 +58,9 @@ const SignIn = () => {
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
     return (<Navigate to="/home" />);
   }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE])) {
+    return (<Navigate to="/home" />);
+  }
   // Otherwise return the Login form.
   return (
     <Container id={PAGE_IDS.SIGN_IN} className="py-3">

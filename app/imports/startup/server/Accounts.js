@@ -6,6 +6,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { AdvisorProfiles } from '../../api/user/AdvisorProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
+import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
 /* eslint-disable no-console */
 
@@ -21,6 +22,8 @@ function createUser(email, role, firstName, lastName, password) {
     AdvisorProfiles.define({ email, firstName, lastName, password });
   } else if (role === ROLE.ITSUPPORT) {
     ITSupportProfiles.define({ email, firstName, lastName, password });
+  } else if (role === ROLE.OFFICE) {
+    OfficeProfiles.define({ email, firstName, lastName, password });
   } else { // everyone else is just a user.
     UserProfiles.define({ email, firstName, lastName, password });
   }
