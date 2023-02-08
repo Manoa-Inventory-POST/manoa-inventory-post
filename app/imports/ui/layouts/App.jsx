@@ -71,7 +71,7 @@ const App = () => {
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/StudentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
-          <Route path="/facultyhome" element={<FacultyProtectedRoute ><FacultyHome /></FacultyProtectedRoute>} />
+          <Route path="/facultyhome" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
