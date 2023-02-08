@@ -3,9 +3,9 @@ import { Container, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
-import SearchResultsTableRow from './SearchResultsTableRow';
+import PeopleSearchResultsTableRow from './PeopleSearchResultsTableRow';
 
-const SearchResultsTable = () => {
+const PeopleSearchResultsTable = () => {
   const { ready, users } = useTracker(() => {
     const subscription = UserProfiles.subscribe();
     const rdy = subscription.ready();
@@ -32,10 +32,10 @@ const SearchResultsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => <SearchResultsTableRow key={user._id} user={user} />)}
+          {users.map((user) => <PeopleSearchResultsTableRow key={user._id} user={user} />)}
         </tbody>
       </Table>
     </Container>
   ) : <LoadingSpinner message="Loading Users" />);
 };
-export default SearchResultsTable;
+export default PeopleSearchResultsTable;
