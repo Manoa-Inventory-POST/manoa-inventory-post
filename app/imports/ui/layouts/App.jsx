@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { useTracker } from 'meteor/react-meteor-data';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
@@ -31,7 +31,7 @@ import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
 import CreateRoom from '../pages/CreateRoom';
 import EditRoom from '../pages/EditRoom';
-
+import StudentHome from '../pages/StudentHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -69,6 +69,7 @@ const App = () => {
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="/StudentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
