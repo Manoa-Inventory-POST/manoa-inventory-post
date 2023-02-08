@@ -10,7 +10,6 @@ import { Room } from '../../api/room/RoomCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
-
 const bridge = new SimpleSchema2Bridge(Room._schema);
 
 /* Renders the EditStuff page for editing a single document. */
@@ -21,6 +20,7 @@ const EditRoom = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
     // Get access to Stuff documents.
+
     const subscription = Room.subscribeRoomAdmin();
     // const subscription = UserProfiles.subscribe();
     // Determine if the subscription is ready

@@ -10,7 +10,6 @@ import { Room } from '../../api/room/RoomCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
-
 const bridge = new SimpleSchema2Bridge(Room._schema);
 
 /* Renders the EditStuff page for editing a single document. */

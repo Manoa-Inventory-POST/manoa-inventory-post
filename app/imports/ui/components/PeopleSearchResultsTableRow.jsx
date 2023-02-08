@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const SearchResultsTableRow = ({ user }) => (
+const PeopleSearchResultsTableRow = ({ user }) => (
   <tr>
     <td>{ user.firstName }</td>
     <td>{ user.lastName }</td>
@@ -17,7 +17,7 @@ const SearchResultsTableRow = ({ user }) => (
   </tr>
 );
 
-SearchResultsTableRow.propTypes = {
+PeopleSearchResultsTableRow.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -29,4 +29,4 @@ SearchResultsTableRow.propTypes = {
   }).isRequired,
 };
 
-export default SearchResultsTableRow;
+export default PeopleSearchResultsTableRow;
