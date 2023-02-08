@@ -15,16 +15,16 @@ const FacultySearch = () => {
   const ready = true;
   const facultyProfiles = [
     {
-      firstName: 'Carleton', lastName: 'Moore', role: 'Assistant Professor', picture: 'images/cam-moore.jpg', office: 'POST 307B', phone: '808-956-6920', email: 'cmoore@hawaii.edu',
+      firstName: 'Carleton', lastName: 'Moore', role: 'Assistant Professor', image: '/images/cam-moore.jpg', office: 'POST 307B', phone: '808-956-6920', email: 'cmoore@hawaii.edu',
     },
     {
-      firstName: 'Philip', lastName: 'Johnson', role: 'Professor', picture: 'images/philip-johnson', office: 'POST 326', phone: '808-956-7639', email: 'toddtt@hawaii.edu',
+      firstName: 'Philip', lastName: 'Johnson', role: 'Professor', image: '/images/philip-johnson.jfif', office: 'POST 326', phone: '808-956-7639', email: 'toddtt@hawaii.edu',
     },
     {
-      firstName: 'Jason', lastName: 'Leigh', role: 'Professor', picture: '/images/jason-leigh.jpg', office: 'POST 327', phone: '808-956-4989', email: 'leighj@hawaii.edu',
+      firstName: 'Jason', lastName: 'Leigh', role: 'Professor', image: '/images/jason-leigh.jpg', office: 'POST 327', phone: '808-956-4989', email: 'leighj@hawaii.edu',
     },
     {
-      firstName: 'Henri', lastName: 'Casanova', role: 'Professor', picture: '/images/henri-casanova.jpg', office: 'POST 303B', phone: '808-956-8249', email: 'henric@hawaii.edu',
+      firstName: 'Henri', lastName: 'Casanova', role: 'Professor', image: '/images/henri-casanova.jpg', office: 'POST 303B', phone: '808-956-8249', email: 'henric@hawaii.edu',
 
     },
   ];
