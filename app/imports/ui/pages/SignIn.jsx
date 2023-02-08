@@ -50,7 +50,7 @@ const SignIn = () => {
     return (<Navigate to="/StudentHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
-    return (<Navigate to="/home" />);
+    return (<Navigate to="/facultyhome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
     return (<Navigate to="/home" />);
