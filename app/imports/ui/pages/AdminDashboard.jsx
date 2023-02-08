@@ -6,10 +6,11 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import InfoBar from '../components/InfoBar';
 import SearchBox from '../components/SearchBox';
-import SearchResultsTable from '../components/SearchResultsTable';
+import PeopleSearchResultsTable from '../components/PeopleSearchResultsTable';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import RoomSearchResultsTable from '../components/RoomSearchResultsTable';
 
-/* Renders an admin dashboard with options to search people, rooms, and schedules. Use <SearchResultsTable> to render each row of search results. */
+/* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
 const AdminDashboard = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, admins } = useTracker(() => {
@@ -35,7 +36,8 @@ const AdminDashboard = () => {
       <Row className="justify-content-center">
         <Col md={8}>
           <SearchBox />
-          <SearchResultsTable />
+          <PeopleSearchResultsTable />
+          <RoomSearchResultsTable />.
         </Col>
         <Col md={4}>
           <InfoBar />
