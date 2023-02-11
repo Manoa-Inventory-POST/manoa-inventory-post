@@ -46,8 +46,13 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param TA update TA sub role (optional).
+   * @param RA update RA sub role (optional).
+   * @param graduate update graduate sub role (optional).
+   * @param undergraduate update undergraduate sub role (optional).
+   * @return never
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -55,6 +60,18 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (TA) {
+      updateData.TA = TA;
+    }
+    if (RA) {
+      updateData.RA = RA;
+    }
+    if (graduate) {
+      updateData.graduate = graduate;
+    }
+    if (undergraduate) {
+      updateData.undergraduate = undergraduate;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -101,14 +118,18 @@ class StudentProfileCollection extends BaseProfileCollection {
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
-   * @returns { Object } An object representing the definition of docID.
+   * @returns {{firstName: *, lastName: *, graduate: *, TA: *, email: *, undergraduate: *, RA: *}} An object representing the definition of docID.
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const TA = doc.TA;
+    const RA = doc.RA;
+    const graduate = doc.graduate;
+    const undergraduate = doc.undergraduate;
+    return { email, firstName, lastName, TA, RA, graduate, undergraduate }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**
@@ -127,6 +148,6 @@ class StudentProfileCollection extends BaseProfileCollection {
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {UserProfileCollection}
+ * @type {StudentProfileCollection}
  */
 export const StudentProfiles = new StudentProfileCollection();
