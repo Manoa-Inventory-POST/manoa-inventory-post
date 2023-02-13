@@ -34,6 +34,7 @@ import CreateRoom from '../pages/CreateRoom';
 import EditRoom from '../pages/EditRoom';
 import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
+import ClubSearch from '../pages/SearchClubs';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />

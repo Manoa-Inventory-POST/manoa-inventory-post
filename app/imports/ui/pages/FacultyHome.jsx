@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import FacultyInfoBar from '../components/FacultyInfoBar';
 import MySpaces from '../components/MySpaces';
-import { Meteor } from 'meteor/meteor';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItemAdmin> to render each row. */
 const FacultyHome = () => {
@@ -22,7 +22,7 @@ const FacultyHome = () => {
       faculty: facultyProfiles,
       ready: rdy,
     };
-    }, []);
+  }, []);
   console.log(faculty);
   const currentUser = faculty[0];
   return (ready ? (
@@ -43,4 +43,3 @@ const FacultyHome = () => {
 };
 
 export default FacultyHome;
-

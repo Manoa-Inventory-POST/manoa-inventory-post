@@ -34,6 +34,7 @@ const NavBar = () => {
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             { isAdmin ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
             ])}
             { isOffice || isITSupport || isFaculty || isAdvisor || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
