@@ -10,6 +10,7 @@ import { Room } from '../../api/room/RoomCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
+
 const bridge = new SimpleSchema2Bridge(Room._schema);
 
 /* Renders the EditStuff page for editing a single document. */
@@ -41,29 +42,29 @@ const EditRoom = () => {
     const collectionName = UserProfiles.getCollectionName();
     const updateData = { id: _id, firstName, lastName, role };
     updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => swal('Success', 'User updated successfully', 'success'));
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => swal('Success', 'User updated successfully', 'success'));
   };
 
   return (
-      <Container className="py-3">
-        <Row className="justify-content-center">
-          <Col xs={5}>
-            <Col className="text-center"><h2>Update Room</h2></Col>
-            <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
-              <Card>
-                <Card.Body>
-                  <TextField name="num" />
-                  <TextField name="description" />
-                  <TextField name="status" />
-                  <SubmitField value="Submit" />
-                  <ErrorsField />
-                </Card.Body>
-              </Card>
-            </AutoForm>
-          </Col>
-        </Row>
-      </Container>
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={5}>
+          <Col className="text-center"><h2>Update Room</h2></Col>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+            <Card>
+              <Card.Body>
+                <TextField name="num" />
+                <TextField name="description" />
+                <TextField name="status" />
+                <SubmitField value="Submit" />
+                <ErrorsField />
+              </Card.Body>
+            </Card>
+          </AutoForm>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

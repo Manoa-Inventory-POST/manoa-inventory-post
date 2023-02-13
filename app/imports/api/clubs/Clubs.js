@@ -13,7 +13,7 @@ export const clubsPublications = {
 class ClubsCollection extends BaseCollection {
   constructor() {
     super('Clubs', new SimpleSchema({
-      name: String,
+      name: { type: String, index: true, unique: true },
       website: { type: String, optional: true },
       description: String,
       picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
@@ -61,7 +61,8 @@ class ClubsCollection extends BaseCollection {
   }
 
   /**
-   * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
+   * A stricter form of remove that throws an error if the document or docID could not be found in
+   * this collection.
    * @param { String | Object } num A document or docID in this collection.
    * @returns true
    */
@@ -121,8 +122,9 @@ class ClubsCollection extends BaseCollection {
   }
 
   /**
-   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
-   * This is used in to define, update, and removeIt Meteor methods associated with each class.
+   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an
+   * Admin or User. This is used in to define, update, and removeIt Meteor methods associated with
+   * each class.
    * @param userId The userId of the logged-in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged-in user, or the user is not an Admin or User.
    */
@@ -131,7 +133,8 @@ class ClubsCollection extends BaseCollection {
   }
 
   /**
-   * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
+   * Returns an object representing the definition of docID in a format appropriate to the
+   * restoreOne or define function.
    * @param docID
    * @return {{name: *, description: *, website: *, picture: *}}
    */
@@ -148,4 +151,5 @@ class ClubsCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
+
 export const Clubs = new ClubsCollection();
