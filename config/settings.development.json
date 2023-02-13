@@ -1,4 +1,5 @@
 {
+  "loadAssetsFile":  true,
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "John", "lastName": "Doe" },
     { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" },
@@ -91,6 +92,18 @@
     { "num": "330", "description": "men" },
     { "num": "331", "description": "women" },
     { "num": "331", "description": "utility" }
+  ],
+  "defaultClubs": [
+    {
+      "name": "Mockup Club",
+      "website": "https://www.google.com/",
+      "description": "Insert some description",
+      "interests": [
+        "Mockup",
+        "Clubs"
+      ],
+      "picture": "https://www.logolynx.com/images/logolynx/aa/aa2c83b718d1f5f077c0297ae4f401dd.jpeg"
+    }
   ],
   "public": {
     "development": true

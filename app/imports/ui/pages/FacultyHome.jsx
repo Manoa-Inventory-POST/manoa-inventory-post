@@ -22,7 +22,7 @@ const FacultyHome = () => {
       faculty: facultyProfiles,
       ready: rdy,
     };
-    }, []);
+  }, []);
   console.log(faculty);
   const currentUser = faculty[0];
   return (ready ? (
@@ -43,4 +43,3 @@ const FacultyHome = () => {
 };
 
 export default FacultyHome;
-
