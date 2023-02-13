@@ -123,7 +123,7 @@ const FacultySearch = () => {
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by room">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Room
+                      Office
                     </Col>
                     <input
                       type="text"
@@ -150,7 +150,7 @@ const FacultySearch = () => {
             <th>Name</th>
             <th>Role</th>
             <th>Contact Info</th>
-            <th>Room</th>
+            <th>Office</th>
           </tr>
         </thead>
         <tbody>
