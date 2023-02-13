@@ -3,6 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+import { UserClubs } from '../clubs/UserClubs';
+import { ClubOfficer } from '../clubs/ClubOfficer';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -25,15 +27,17 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, clubOfficer }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
     if (!user) {
       const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });
+      // const clubs = UserClubs.define({ email, Clubs.dumpOne().name});
       const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
-      // this._collection.update(profileID, { $set: { userID } });
+      clubs.forEach((name) => UserClubs.define({ email, name }));
+      clubOfficer.forEach((name) => ClubOfficer.define({ email, name }));
       return profileID;
     }
     return user._id;

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -16,7 +17,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, password }) {
+  define({ email, firstName, lastName, password, clubAdvisor }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
@@ -25,6 +26,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
+      clubAdvisor.forEach((name) => ClubAdvisor.define({ email, name }));
       return profileID;
     }
     return user._id;
