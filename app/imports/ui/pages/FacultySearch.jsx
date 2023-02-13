@@ -1,6 +1,5 @@
 // import { Meteor } from 'meteor/meteor';
 import React, { useEffect, useState } from 'react';
-// import React, { useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
 // import { Col, Row, Table, Container, Dropdown, DropdownButton } from 'react-bootstrap';
 // import { useTracker } from 'meteor/react-meteor-data';
@@ -35,8 +34,6 @@ const FacultySearch = () => {
     },
   ];
   /*
-  const [sortingBy, setSortingBy] = useState('lastName');
-  facultyProfiles.sort((a, b) => a[sortingBy].localeCompare(b[sortingBy]));
   const { ready, faculty } = useTracker(() => {
     const subscription = Meteor.subscribe(FacultyProfiles.userPublicationName);
     const rdy = subscription.ready();
@@ -123,7 +120,7 @@ const FacultySearch = () => {
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by room">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Room
+                      Office
                     </Col>
                     <input
                       type="text"
@@ -150,14 +147,14 @@ const FacultySearch = () => {
             <th>Name</th>
             <th>Role</th>
             <th>Contact Info</th>
-            <th>Room</th>
+            <th>Office</th>
           </tr>
         </thead>
         <tbody>
           { filteredFaculty.length === 0 ? (<tr><td>-</td></tr>) : filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}
         </tbody>
       </Table>
-      { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center">No faculty found.</div> : '' }
+      { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center pb-2">No faculty found.</div> : '' }
     </div>
   );
   return (
@@ -173,42 +170,6 @@ const FacultySearch = () => {
       </div>
     </Container>
   );
-  /*
-  return (ready ? (
-    <Container id={PAGE_IDS.FACULTY_SEARCH} className="py-3">
-      <Row className="justify-content-center">
-        <Col md={8}>
-          <Col className="text-center">
-            <h2>Faculty Search</h2>
-          </Col>
-          <Col style={{ display: 'flex' }}>
-            <DropdownButton id={COMPONENT_IDS.FACULTY_SEARCH_SORT} title="Sort by">
-              <Dropdown.Item onClick={() => setSortingBy('firstName')}>First Name</Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortingBy('lastName')}>Last Name</Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortingBy('role')}>Role</Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortingBy('office')}>Office</Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortingBy('phone')}>Phone</Dropdown.Item>
-              <Dropdown.Item onClick={() => setSortingBy('email')}>Email</Dropdown.Item>
-            </DropdownButton>
-          </Col>
-          <Table hover>
-            <thead>
-              <tr>
-                <th> </th>
-                <th>Name</th>
-                <th>Contact Info</th>
-                <th>Office</th>
-              </tr>
-            </thead>
-            <tbody>
-              {facultyProfiles.map((profile) => <FacultyItem key={profile._id} faculty={profile} />)}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
-    </Container>
-  ) : <LoadingSpinner message="Loading Faculty Information" />);
-  */
 };
 
 export default FacultySearch;
