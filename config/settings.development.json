@@ -93,20 +93,7 @@
     { "num": "331", "description": "women" },
     { "num": "331", "description": "utility" }
   ],
-  "defaultClubs": [
-    {
-      "name": "Mockup Club",
-      "website": "https://www.google.com/",
-      "description": "Insert some description",
-      "interests": [
-        "Mockup",
-        "Clubs"
-      ],
-      "picture": "https://www.logolynx.com/images/logolynx/aa/aa2c83b718d1f5f077c0297ae4f401dd.jpeg"
-    }
-  ],
-  "public": {
-    "development": true
-  }
+  "defaultClubs": [ { "name": "Mockup Club", "website": "https://www.google.com/", "description": "Insert some description", "interests": ["Mockup", "Clubs"], "picture": "https://www.logolynx.com/images/logolynx/aa/aa2c83b718d1f5f077c0297ae4f401dd.jpeg"} ],
+  "public": { "development": true }
 }
 
