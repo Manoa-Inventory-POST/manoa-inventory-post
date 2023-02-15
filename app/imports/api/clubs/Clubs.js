@@ -84,8 +84,8 @@ class ClubsCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(clubsPublications.clubsPub, function publish() {
         if (this.userId) {
-          const usernum = Meteor.users.findOne(this.userId).usernum;
-          return instance._collection.find({ owner: usernum });
+          const username = Meteor.users.findOne(this.userId).username;
+          return instance._collection.find({ owner: username });
         }
         return this.ready();
       });
