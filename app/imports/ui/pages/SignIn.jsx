@@ -41,16 +41,16 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screenif (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
-    return (<Navigate to="/admin" />);
+    return (<Navigate to="/adminHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
     return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    return (<Navigate to="/StudentHome" />);
+    return (<Navigate to="/studentHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
-    return (<Navigate to="/facultyhome" />);
+    return (<Navigate to="/facultyHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
     return (<Navigate to="/home" />);
