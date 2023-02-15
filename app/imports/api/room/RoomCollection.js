@@ -16,11 +16,7 @@ class RoomCollection extends BaseCollection {
     super('Room', new SimpleSchema({
       num: String,
       description: String,
-      status: {
-        type: String,
-        allowedValues: ['open', 'occupied', 'maintenance'],
-        defaultValue: 'occupied',
-      },
+      status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'open' },
     }));
   }
 
