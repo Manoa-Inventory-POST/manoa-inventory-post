@@ -1,13 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const clubsPublications = {
   clubsPub: 'clubsPub',
-  clubsPubAdmin: 'clubsPubAdmin',
 };
 
 class ClubsCollection extends BaseCollection {
@@ -79,24 +77,16 @@ class ClubsCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
+      // get the club instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(clubsPublications.clubsPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(clubsPublications.clubsPubAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
         return this.ready();
       });
+
     }
   }
 
@@ -104,17 +94,6 @@ class ClubsCollection extends BaseCollection {
    * Subscription method for stuff owned by the current user.
    */
   subscribeClubs() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(clubsPublications.clubsPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeClubsAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(clubsPublications.clubsPub);
     }
