@@ -41,6 +41,18 @@ body {
   text-shadow: 4px 4px 8px black;
   color: white;
 }
+
+.student-home-page-background {
+  background: url('images/UHManoa.jpg') no-repeat center;
+  background-size: cover;
+  opacity: 85%;
+  height: 500px;
+  padding-top: 100px;
+  text-align: center;
+  text-shadow: 4px 4px 8px black;
+  color: white;
+}
+
 .map-page-background {
   background: url('images/POST3rd.jpeg') no-repeat center;
   background-size: cover;
@@ -86,6 +98,7 @@ body {
   background-color: #75abcf !important;
   color: white !important;
 }
+
 .card-body, .list-group-item, .accordion-body {
   background-color: #e1edf4 !important;
 }
@@ -106,4 +119,10 @@ body {
 .search-results {
   padding-right: 0px !important;
   padding-left: 0px !important;
+}
+
+.my-space-image {
+  width: 30%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: calc(0.25rem - 1px);
 }

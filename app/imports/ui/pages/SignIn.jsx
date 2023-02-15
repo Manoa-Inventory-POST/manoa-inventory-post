@@ -47,15 +47,18 @@ const SignIn = () => {
     return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    return (<Navigate to="/home" />);
+    return (<Navigate to="/StudentHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
-    return (<Navigate to="/home" />);
+    return (<Navigate to="/facultyhome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
     return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
+    return (<Navigate to="/home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE])) {
     return (<Navigate to="/home" />);
   }
   // Otherwise return the Login form.
