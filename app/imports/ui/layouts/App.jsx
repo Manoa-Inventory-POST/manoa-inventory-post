@@ -31,8 +31,6 @@ import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
 import CreateRoom from '../pages/CreateRoom';
 import EditRoom from '../pages/EditRoom';
-import RoomAvi from '../pages/RoomAvi';
-
 
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -53,7 +51,6 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/availability" element={<RoomAvi />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />

@@ -16,11 +16,7 @@ class RoomCollection extends BaseCollection {
     super('Room', new SimpleSchema({
       num: String,
       description: String,
-      status: {
-        type: String,
-        allowedValues: ['open', 'occupied', 'maintenance'],
-        defaultValue: 'occupied',
-      },
+      status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'occupied' },
     }));
   }
 
@@ -85,7 +81,8 @@ class RoomCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          return instance._collection.find({ });
+          const usernum = Meteor.users.findOne(this.userId).usernum;
+          return instance._collection.find({ owner: usernum });
         }
         return this.ready();
       });
@@ -116,7 +113,7 @@ class RoomCollection extends BaseCollection {
    */
   subscribeRoomAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPubAdmin);
+      return Meteor.subscribe(roomPublications.roomPub);
     }
     return null;
   }

@@ -29,7 +29,7 @@ const ServiceRequest = () => {
         <h5>To:</h5>
         <FormControl
           type="text"
-          value="Office"
+          value="admin@hawaii.edu"
           readOnly
           className="mx-auto my-1"
         />
@@ -40,7 +40,6 @@ const ServiceRequest = () => {
           readOnly
           className="mx-auto my-1"
         />
-        <h5>Request</h5>
         <Form onSubmit={handleSubmit} className="text-center">
           <FormControl
             as="textarea"
@@ -48,7 +47,7 @@ const ServiceRequest = () => {
             placeholder="Enter your request here"
             value={message}
             onChange={handleChange}
-            className="mx-auto my-1"
+            className="mx-auto my-5"
           />
           <Button type="submit">Submit</Button>
         </Form>
