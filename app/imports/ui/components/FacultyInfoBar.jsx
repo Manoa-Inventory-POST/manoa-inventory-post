@@ -5,22 +5,19 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 
 const FacultyInfoBar = () => {
-
-  /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { faculty } = useTracker(() => {
-    // Get access to Admin documents
+    // Get access to Faculty documents
     const subscription = FacultyProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
+    // Get the Faculty documents
     const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
       faculty: facultyProfiles,
       ready: rdy,
     };
   }, []);
-  console.log(faculty);
   const currentUser = faculty[0];
 
   return (
@@ -52,4 +49,5 @@ const FacultyInfoBar = () => {
     </Card>
   );
 };
+
 export default FacultyInfoBar;
