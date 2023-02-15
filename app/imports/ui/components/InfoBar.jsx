@@ -13,14 +13,13 @@ const InfoBar = () => {
     const subscription = AdminProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
+    // Get the Admin documents
     const adminProfiles = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
       admins: adminProfiles,
       ready: rdy,
     };
   }, []);
-  console.log(admins);
   const currentUser = admins[0];
 
   return (
