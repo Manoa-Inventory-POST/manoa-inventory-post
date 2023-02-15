@@ -81,8 +81,7 @@ class RoomCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
+          return instance._collection.find({ });
         }
         return this.ready();
       });
@@ -113,7 +112,7 @@ class RoomCollection extends BaseCollection {
    */
   subscribeRoomAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPub);
+      return Meteor.subscribe(roomPublications.roomPubAdmin);
     }
     return null;
   }
