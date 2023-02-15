@@ -8,7 +8,6 @@ import { ROLE } from '../role/Role';
 export const portPublications = {
   // will be using "portPub" as acronym for portPublications
   portPub: 'portPub',
-  portPubAdmin: 'portPubAdmin',
 };
 
 class PortsCollection extends BaseCollection {
@@ -81,22 +80,12 @@ class PortsCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(portPublications.portPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(portPublications.portPubAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-          return instance._collection.find();
+          return instance._collection.find({});
         }
         return this.ready();
       });
     }
   }
-
   /**
    * Subscription method for stuff owned by the current user.
    */

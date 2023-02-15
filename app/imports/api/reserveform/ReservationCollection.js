@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/underscore';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
@@ -10,7 +9,6 @@ export const frequency = ['one-time', 'daily', 'weekly', 'biweekly', 'monthly'];
 
 export const reservationPublications = {
   reservation: 'reservation',
-  reservationAdmin: 'reservationAdmin',
 };
 
 class ReservationsCollection extends BaseCollection {
@@ -102,16 +100,7 @@ class ReservationsCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged in user */
       Meteor.publish(reservationPublications.reservation, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(reservationPublications.reservationAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-          return instance._collection.find();
+          return instance._collection.find({});
         }
         return this.ready();
       });
