@@ -81,8 +81,8 @@ class RoomCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
+          const usernum = Meteor.users.findOne(this.userId).usernum;
+          return instance._collection.find({ owner: usernum });
         }
         return this.ready();
       });
