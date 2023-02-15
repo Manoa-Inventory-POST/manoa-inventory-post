@@ -2,7 +2,7 @@
 // import React, { useEffect, useState } from 'react';
 import React, { useState } from 'react';
 // import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
-import { Col, Row, Table, Container,} from 'react-bootstrap';
+import { Col, Row, Table, Container } from 'react-bootstrap';
 // import { useTracker } from 'meteor/react-meteor-data';
 // import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import PropTypes from 'prop-types';
@@ -18,9 +18,12 @@ const ClubSearch = () => {
     {
       name: 'Club Moore', _id: 'hi', homepage: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam Moore'], adminList: ['Cam Moore'],
     },
+    {
+      name: 'Better Club Moore', _id: 'hi2', homepage: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam Moore'], adminList: ['Cam Moore'],
+    },
   ];
 
-  const [sortingBy, setSortingBy] = useState('Name');
+  const [sortingBy, setSortingBy] = useState('name');
   clubProfiles.sort((a, b) => a[sortingBy].localeCompare(b[sortingBy]));
 
   return (ready ? (
