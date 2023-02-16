@@ -5,32 +5,29 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const roomPublications = {
-  // will be using "roomPub" as acronym for roomPublications
-  roomPub: 'roomPub',
+export const clubAdvisorPublications = {
+  clubAdvisorPub: 'clubAdvisorPub',
+  clubAdvisorPubAdmin: 'clubAdvisorPubAdmin',
 };
 
-class RoomCollection extends BaseCollection {
+class ClubAdvisorCollection extends BaseCollection {
   constructor() {
-    super('Room', new SimpleSchema({
-      num: String,
-      description: String,
-      status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'open' },
+    super('ClubAdvisor', new SimpleSchema({
+      advisor: String,
+      club: String,
     }));
   }
 
   /**
-   * Defines a new Room item.
-   * @return {never} the docID of the new document.
-   * @param num
-   * @param description
-   * @param status
+   * Defines a new ClubAdvisor item.
+   * @return {String} the docID of the new document.
+   * @param advisor
+   * @param club
    */
-  define({ num, description, status }) {
+  define({ advisor, club }) {
     const docID = this._collection.insert({
-      num,
-      description,
-      status,
+      advisor,
+      club,
     });
     return docID;
   }
@@ -38,32 +35,28 @@ class RoomCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param num the new num (optional).
-   * @param description the new description (optional).
-   * @param status the new status (optional).
+   * @param advisor the new advisor (optional).
+   * @param club the new club (optional).
    * @returns never
    */
-  update(docID, { num, description, status }) {
+  update(docID, { advisor, club }) {
     const updateData = {};
-    if (num) {
-      updateData.num = num;
+    if (advisor) {
+      updateData.advisor = advisor;
     }
-    if (description) {
-      updateData.description = description;
-    }
-    if (status) {
-      updateData.status = status;
+    if (club) {
+      updateData.club = club;
     }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } num A document or docID in this collection.
+   * @param { String | Object } name A document or docID in this collection.
    * @returns true
    */
-  removeIt(num) {
-    const doc = this.findDoc(num);
+  removeIt(name) {
+    const doc = this.findDoc(name);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -78,15 +71,16 @@ class RoomCollection extends BaseCollection {
       // get the StuffCollection instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged-in user */
-      Meteor.publish(roomPublications.roomPub, function publish() {
+      Meteor.publish(clubAdvisorPublications.clubAdvisorPub, function publish() {
         if (this.userId) {
-          return instance._collection.find({ });
+          const username = Meteor.users.findOne(this.userId).username;
+          return instance._collection.find({ owner: username });
         }
         return this.ready();
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(roomPublications.roomPubAdmin, function publish() {
+      Meteor.publish(clubAdvisorPublications.clubAdvisorPubAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -98,9 +92,20 @@ class RoomCollection extends BaseCollection {
   /**
    * Subscription method for stuff owned by the current user.
    */
-  subscribeRoom() {
+  subscribeClubAdvisor() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPub);
+      return Meteor.subscribe(clubAdvisorPublications.clubAdvisorPub);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for admin users.
+   * It subscribes to the entire collection.
+   */
+  subscribeClubAdvisorAdmin() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(clubAdvisorPublications.clubAdvisorPub);
     }
     return null;
   }
@@ -118,18 +123,17 @@ class RoomCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{num: *, description: *, status: *}}
+   * @return { advisor, club}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const num = doc.num;
-    const description = doc.description;
-    const status = doc.status;
-    return { num, description, status };
+    const advisor = doc.advisor;
+    const club = doc.club;
+    return { advisor, club };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Room = new RoomCollection();
+export const ClubAdvisor = new ClubAdvisorCollection();
