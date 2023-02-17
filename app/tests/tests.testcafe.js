@@ -6,12 +6,14 @@ import { navBar } from './navbar.component';
 import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
 import { studenthomePage } from './studenthome.page';
+import { facultyhomePage } from './facultyhome.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
+const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
@@ -80,4 +82,11 @@ test('Test that student home and profile pages show up', async () => {
   await studenthomePage.isDisplayed();
   await navBar.gotoStudentProfilePage();
   await studentProfilePage.isDisplayed();
+});
+
+test('Test that faculty home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
+  await navBar.isLoggedIn(facultyCredentials.username);
+  await facultyhomePage.isDisplayed();
 });
