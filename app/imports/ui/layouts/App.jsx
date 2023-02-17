@@ -36,7 +36,6 @@ import RoomAvi from '../pages/RoomAvi';
 import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
 
-
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {

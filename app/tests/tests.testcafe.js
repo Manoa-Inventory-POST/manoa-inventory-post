@@ -11,7 +11,7 @@ import { studenthomePage } from './studenthome.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
-const studentcredentials = { username: 'student@foo.com', password: 'changeme' };
+const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
@@ -24,8 +24,8 @@ test('Test that landing page shows up', async (testController) => {
 
 test('Test that signin and signout work', async () => {
   await navBar.gotoSignInPage();
-  await signInPage.signin(credentials.username, credentials.password);
-  await navBar.isLoggedIn(credentials.username);
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
@@ -75,8 +75,8 @@ test('Test that admin pages show up', async () => {
 
 test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
-  await signInPage.signin(studentcredentials.username, studentcredentials.password);
-  await navBar.isLoggedIn(studentcredentials.username);
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
   await studenthomePage.isDisplayed();
   await navBar.gotoStudentProfilePage();
   await studentProfilePage.isDisplayed();
