@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Mongo } from 'meteor/mongo';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import {
@@ -9,7 +10,7 @@ import {
   SubmitField,
   TextField,
   AutoField,
-  BoolField, LongTextField,
+  BoolField, LongTextField, ErrorField,
 } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
@@ -50,9 +51,10 @@ const CreateUser = () => {
   }
 
   const { clubs } = useTracker(() => {
+    // const subscription = Clubs.subscribeClubsAdmin();
     const subscription = Clubs.subscribeClubs();
     const rdy = subscription.ready();
-    const clubEntries = Clubs.find({}, { sort: { name: 1 } }).fetch();
+    const clubEntries = Clubs.find({}, {}).fetch();
     console.log(clubEntries, rdy);
     return {
       clubs: clubEntries,
@@ -76,17 +78,17 @@ const CreateUser = () => {
     'room.$': { type: String, allowedValues: roomValues },
     phone: { type: Array, label: 'Phone Numbers', optional: true },
     'phone.$': String,
-    TA: { type: Boolean, defaultValue: false },
-    RA: { type: Boolean, defaultValue: false },
+    TA: { type: Boolean, label: 'TA', defaultValue: false },
+    RA: { type: Boolean, label: 'RA', defaultValue: false },
     graduate: { type: Boolean, defaultValue: false },
     undergraduate: { type: Boolean, defaultValue: false },
     clubAdvisor: { type: Boolean, defaultValue: false },
-    club: { type: String, allowedValues: clubNames },
+    club: { type: String, allowedValues: clubNames, optional: true },
   });
   const bridge = new SimpleSchema2Bridge(UserFormSchema);
 
   // On successful submit, insert the data.
-  const submit = (data, formRef) => {
+  const submit = (data) => {
     let insertError;
     const { firstName, lastName, email, password, role, room, studentType, phone, clubAdvisor, club } = data;
     switch (data.role) {
@@ -132,23 +134,22 @@ const CreateUser = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create User</h2></Col>
-          <AutoForm ref={(ref) => { fRef = ref; }} schema={bridge} onSubmit={(data) => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={(data) => submit(data)}>
             <Card>
               <Card.Body>
-                <AutoField name="firstName" placeholder="Your first name" />
-                <ErrorsField name="firstName" />
-                <AutoField name="lastName" placeholder="Your last name" />
-                <AutoField name="email" placeholder="Your email" />
+                <AutoField name="firstName" placeholder="Your first name (required)" />
+                <AutoField name="lastName" placeholder="Your last name (required)" />
+                <AutoField name="email" placeholder="Your email (required)" />
                 <HiddenField name="password" value="changeme" />
                 <SelectField name="role" placeholder="select role (required)" />
                 <LongTextField name="phone" placeholder="Enter one or more phone numbers" />
                 <SelectField name="room" multiple inline />
                 <BoolField name="TA" inline />
-                <BoolField name="RA" />
-                <BoolField name="undergraduate" />
+                <BoolField name="RA" inline />
+                <BoolField name="undergraduate" inline />
                 <BoolField name="graduate" inline />
                 <BoolField name="clubAdvisor" inline />
-                <SelectField name="club" multiple />
+                <SelectField name="club" placeholder="Select any clubs you are the advisor for" multiple />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

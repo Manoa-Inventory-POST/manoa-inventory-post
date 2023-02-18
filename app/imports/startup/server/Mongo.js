@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
+import {Clubs} from "../../api/clubs/Clubs";
 // import { Clubs } from
 /* eslint-disable no-console */
 
@@ -14,6 +15,11 @@ function addData(data) {
 function addRoom(data) {
   console.log(`  Adding: ${data.num} (${data.description})`);
   Room.define(data);
+}
+
+function addClub(data) {
+  console.log(`Adding: ${data.name}`);
+  Clubs.define(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -32,12 +38,10 @@ if (Room.count() === 0) {
   }
 }
 
-/*
 // Initialize the ClubsCollection if empty.
 if (Clubs.count() === 0) {
   if (Meteor.settings.defaultClubs) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultClubs.map(clubs => addClubs(clubs));
+    console.log('Creating default clubs.');
+    Meteor.settings.defaultClubs.map(clubs => addClub(clubs));
   }
 }
- */
