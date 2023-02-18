@@ -3,7 +3,8 @@ import { Container, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
-import { Room, roomPublications } from '../../api/room/RoomCollection';
+// import { Room, roomPublications } from '../../api/room/RoomCollection';
+import { Room } from '../../api/room/RoomCollection';
 import RoomSearchResultsTableRow from './RoomSearchResultsTableRow';
 
 const RoomSearchResultsTable = () => {

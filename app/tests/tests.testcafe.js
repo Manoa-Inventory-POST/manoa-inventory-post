@@ -5,12 +5,15 @@ import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
 import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
+import { studenthomePage } from './studenthome.page';
+import { facultyhomePage } from './facultyhome.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
-const credentials = { username: 'john@foo.com', password: 'changeme' };
+const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
+const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
@@ -21,11 +24,10 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
-
 test('Test that signin and signout work', async () => {
   await navBar.gotoSignInPage();
-  await signInPage.signin(credentials.username, credentials.password);
-  await navBar.isLoggedIn(credentials.username);
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
@@ -73,10 +75,18 @@ test('Test that admin pages show up', async () => {
   // await manageDatabasePage.isDisplayed();
 });
 
-test('Test that student profile page shows up', async () => {
+test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
-  await signInPage.signin(credentials.username, credentials.password);
-  await navBar.isLoggedIn(credentials.username);
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
   await navBar.gotoStudentProfilePage();
   await studentProfilePage.isDisplayed();
+});
+
+test('Test that faculty home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
+  await navBar.isLoggedIn(facultyCredentials.username);
+  await facultyhomePage.isDisplayed();
 });

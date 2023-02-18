@@ -36,7 +36,7 @@ const ProfileTemplate = () => (
    const owner = Meteor.user().username;
    const filteredStudents = students.filter(stu => stu.owner === owner);
 */
-  <Container className="py-3" id={PAGE_IDS.STUDENT_PROFILE}>
+  <Container className="py-3" id={PAGE_IDS.PROFILE}>
     {/*    <Row className="text-center">
       <Col className="text-center">
         <h1>John Doe</h1>

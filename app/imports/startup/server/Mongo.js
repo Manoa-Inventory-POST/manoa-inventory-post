@@ -1,9 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
-import {Clubs} from "../../api/clubs/Clubs";
-// import { Clubs } from
-/* eslint-disable no-console */
+import { Clubs } from '../../api/clubs/Clubs';
+
 
 // Initialize the database with a default data document.
 function addData(data) {
@@ -45,3 +44,4 @@ if (Clubs.count() === 0) {
     Meteor.settings.defaultClubs.map(clubs => addClub(clubs));
   }
 }
+
