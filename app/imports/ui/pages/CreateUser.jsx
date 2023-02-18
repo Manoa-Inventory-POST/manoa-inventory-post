@@ -1,60 +1,154 @@
-import React from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import {
+  AutoForm,
+  ErrorsField,
+  HiddenField,
+  SelectField,
+  SubmitField,
+  TextField,
+  AutoField,
+  BoolField, LongTextField,
+} from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
-import { Users } from '../../api/user/UserCollection';
-import { updateMethod } from '../../api/base/BaseCollection.methods';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Users } from '../../api/user/UserCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
+import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+import { Room } from '../../api/room/RoomCollection';
+import { Clubs } from '../../api/clubs/Clubs';
+import { AdvisorProfiles } from '../../api/user/AdvisorProfileCollection';
+import { Phone } from '../../api/room/Phone';
+import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 
-const bridge = new SimpleSchema2Bridge(UserProfiles._schema);
+const CreateUser = () => {
 
-/* Renders the EditStuff page for editing a single document. */
-const EditUser = () => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const { _id } = useParams();
-  console.log(_id);
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { doc, ready } = useTracker(() => {
-    // Get access to Stuff documents.
-    const subscription = UserProfiles.subscribe();
-    // Determine if the subscription is ready
+  const [error, setError] = useState('');
+  const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT', 'ADVISOR'];
+
+  const { rooms } = useTracker(() => {
+    const subscription = Room.subscribeRoom();
     const rdy = subscription.ready();
-    // Get the document
-    const document = UserProfiles.find({ _id }).fetch();
-    const userToEdit = document[0];
-    console.log(document);
+    const roomEntries = Room.find({}, { sort: { num: 1 } }).fetch();
+    console.log(roomEntries, rdy);
     return {
-      doc: userToEdit,
-      ready: rdy,
+      rooms: roomEntries,
     };
-  }, [_id]);
+  });
+
+  const roomValues = [];
+  for (let i = 0; i < rooms.length; i++) {
+    roomValues[i] = rooms[i].num;
+  }
+
+  const { clubs } = useTracker(() => {
+    const subscription = Clubs.subscribeClubs();
+    const rdy = subscription.ready();
+    const clubEntries = Clubs.find({}, { sort: { name: 1 } }).fetch();
+    console.log(clubEntries, rdy);
+    return {
+      clubs: clubEntries,
+    };
+  });
+
+  const clubNames = [];
+  for (let i = 0; i < clubs.length; i++) {
+    clubNames[i] = clubs[i].name;
+  }
+
+  const phoneRegEx = new RegExp("\d{3}-\d{3}-\d{4}");
+
+  const UserFormSchema = new SimpleSchema({
+    email: String,
+    firstName: String,
+    lastName: String,
+    password: String,
+    role: { type: String, allowedValues: profileRoleValues },
+    room: { type: Array, label: 'Office(s)', optional: true },
+    'room.$': { type: String, allowedValues: roomValues },
+    phone: { type: Array, label: 'Phone Numbers', optional: true },
+    'phone.$': String,
+    TA: { type: Boolean, defaultValue: false },
+    RA: { type: Boolean, defaultValue: false },
+    graduate: { type: Boolean, defaultValue: false },
+    undergraduate: { type: Boolean, defaultValue: false },
+    clubAdvisor: { type: Boolean, defaultValue: false },
+    club: { type: String, allowedValues: clubNames },
+  });
+  const bridge = new SimpleSchema2Bridge(UserFormSchema);
 
   // On successful submit, insert the data.
-  const submit = (data) => {
-    const { firstName, lastName, role } = data;
-    const collectionName = UserProfiles.getCollectionName();
-    const updateData = { id: _id, firstName, lastName, role };
-    updateMethod.callPromise({ collectionName, updateData })
-      .catch(error => swal('Error', error.message, 'error'))
-      .then(() => swal('Success', 'User updated successfully', 'success'));
+  const submit = (data, formRef) => {
+    let insertError;
+    const { firstName, lastName, email, password, role, room, studentType, phone, clubAdvisor, club } = data;
+    switch (data.role) {
+    case 'ADMIN':
+      AdminProfiles.define({ email, firstName, lastName, password });
+      if (phone !== '') {
+        Phone.define({ email, phone });
+      }
+      break;
+    case 'FACULTY':
+      FacultyProfiles.define({ email, firstName, lastName, password });
+      Phone.define({ email, phone });
+      if (clubAdvisor === 'true') {
+        ClubAdvisor.define({ email, club });
+      }
+      break;
+    case 'USER':
+      UserProfiles.define({ email, firstName, lastName, password });
+      break;
+    case 'STUDENT':
+      StudentProfiles.define({ email, firstName, lastName, password });
+      break;
+    case 'OFFICE':
+      OfficeProfiles.define({ email, firstName, lastName, password });
+      Phone.define({ email, phone });
+      break;
+    case 'ITSUPPORT':
+      ITSupportProfiles.define({ email, firstName, lastName, password });
+      Phone.define({ email, phone });
+      break;
+    case 'ADVISOR':
+      AdvisorProfiles.define({ email, firstName, lastName, password });
+      Phone.define({ email, phone });
+      break;
+    default:
+      break;
+    }
   };
 
-  return ready ? (
+  let fRef = null;
+  return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create User</h2></Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+          <AutoForm ref={(ref) => { fRef = ref; }} schema={bridge} onSubmit={(data) => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" />
-                <TextField name="lastName" />
-                <TextField name="email" />
-                <TextField name="role" />
+                <AutoField name="firstName" placeholder="Your first name" />
+                <ErrorsField name="firstName" />
+                <AutoField name="lastName" placeholder="Your last name" />
+                <AutoField name="email" placeholder="Your email" />
+                <HiddenField name="password" value="changeme" />
+                <SelectField name="role" placeholder="select role (required)" />
+                <LongTextField name="phone" placeholder="Enter one or more phone numbers" />
+                <SelectField name="room" multiple inline />
+                <BoolField name="TA" inline />
+                <BoolField name="RA" />
+                <BoolField name="undergraduate" />
+                <BoolField name="graduate" inline />
+                <BoolField name="clubAdvisor" inline />
+                <SelectField name="club" multiple />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -63,7 +157,7 @@ const EditUser = () => {
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner />;
+  );
 };
 
-export default EditUser;
+export default CreateUser;

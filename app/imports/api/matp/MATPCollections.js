@@ -12,6 +12,7 @@ import { Phone } from '../room/Phone';
 import { Ports } from '../room/Ports';
 import { ReservationForm } from '../reserveform/ReservationCollection';
 import { Room } from '../room/RoomCollection';
+import { Clubs } from '../clubs/Clubs';
 
 class MATPClass {
   collections;
@@ -36,6 +37,7 @@ class MATPClass {
       Ports,
       ReservationForm,
       Room,
+      Clubs,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
