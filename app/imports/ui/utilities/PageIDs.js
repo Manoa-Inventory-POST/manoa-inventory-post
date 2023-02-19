@@ -12,6 +12,7 @@ export const PAGE_IDS = {
   MAP: 'map',
   Room_Avi: 'room',
   FACULTY_SEARCH: 'faculty-search',
+  CLUB_SEARCH: 'club-search',
   PROFILE: 'profile',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
