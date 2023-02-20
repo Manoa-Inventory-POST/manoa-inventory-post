@@ -8,7 +8,6 @@ import { ROLE } from '../role/Role';
 export const roomPublications = {
   // will be using "roomPub" as acronym for roomPublications
   roomPub: 'roomPub',
-  roomPubAdmin: 'roomPubAdmin',
 };
 
 class RoomCollection extends BaseCollection {
@@ -81,8 +80,7 @@ class RoomCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
+          return instance._collection.find({ });
         }
         return this.ready();
       });
@@ -101,17 +99,6 @@ class RoomCollection extends BaseCollection {
    * Subscription method for stuff owned by the current user.
    */
   subscribeRoom() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeRoomAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(roomPublications.roomPub);
     }

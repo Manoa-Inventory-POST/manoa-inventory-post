@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
@@ -13,9 +13,9 @@ import {
   LongTextField, HiddenField,
 } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
-import { PAGE_IDS } from '../utilities/PageIDs';
+// import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { UserProfiles } from '../../api/user/UserProfileCollection';
+// import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { ReservationForm } from '../../api/reserveform/ReservationCollection';
 
