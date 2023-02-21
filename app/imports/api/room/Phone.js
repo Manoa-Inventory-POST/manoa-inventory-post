@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
@@ -19,7 +18,7 @@ class PhoneCollection extends BaseCollection {
 
   /**
    * Defines a new Phone item.
-   * @return {String} the docID of the new document.
+   * @return {never} the docID of the new document.
    * @param phoneUser
    * @param phoneNum
    */
@@ -67,7 +66,7 @@ class PhoneCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
+      // get the phone instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(phonePublications.phonePub, function publish() {
@@ -83,17 +82,6 @@ class PhoneCollection extends BaseCollection {
    * Subscription method for stuff owned by the current user.
    */
   subscribePhone() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(phonePublications.phonePub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribePhoneAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(phonePublications.phonePub);
     }

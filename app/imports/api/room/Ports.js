@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
@@ -80,27 +79,17 @@ class PortsCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(portPublications.portPub, function publish() {
         if (this.userId) {
-          return instance._collection.find({});
+          return instance._collection.find();
         }
         return this.ready();
       });
     }
   }
+
   /**
    * Subscription method for stuff owned by the current user.
    */
   subscribePorts() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(portPublications.portPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribePortsAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(portPublications.portPub);
     }
