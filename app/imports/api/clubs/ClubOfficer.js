@@ -1,13 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const clubOfficerPublications = {
   clubOfficerPub: 'clubOfficerPub',
-  clubOfficerPubAdmin: 'clubOfficerPubAdmin',
 };
 
 class ClubOfficerCollection extends BaseCollection {
@@ -62,47 +60,27 @@ class ClubOfficerCollection extends BaseCollection {
     return true;
   }
 
-  /**
+  /*
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for users.
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
+      // get the ClubOfficer instance.
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(clubOfficerPublications.clubOfficerPub, function publish() {
         if (this.userId) {
           return instance._collection.find();
         }
         return this.ready();
       });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(clubOfficerPublications.clubOfficerPubAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
     }
   }
 
-  /**
-   * Subscription method for stuff owned by the current user.
+  /*
+   * Subscription method for ClubOfficer.
    */
   subscribeClubOfficer() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(clubOfficerPublications.clubOfficerPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeClubOfficerAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(clubOfficerPublications.clubOfficerPub);
     }
@@ -132,7 +110,7 @@ class ClubOfficerCollection extends BaseCollection {
   }
 }
 
-/**
+/*
  * Provides the singleton instance of this class to all other entities.
  */
 export const ClubOfficer = new ClubOfficerCollection();

@@ -71,15 +71,14 @@ class ClubsCollection extends BaseCollection {
     return true;
   }
 
-  /**
+  /*
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for users.
    */
   publish() {
     if (Meteor.isServer) {
       // get the club instance.
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(clubsPublications.clubsPub, function publish() {
         if (this.userId) {
           return instance._collection.find();
@@ -90,8 +89,8 @@ class ClubsCollection extends BaseCollection {
     }
   }
 
-  /**
-   * Subscription method for stuff owned by the current user.
+  /*
+   * Subscription method for clubs.
    */
   subscribeClubs() {
     if (Meteor.isClient) {
@@ -127,7 +126,7 @@ class ClubsCollection extends BaseCollection {
   }
 }
 
-/**
+/*
  * Provides the singleton instance of this class to all other entities.
  */
 

@@ -60,14 +60,13 @@ class UserClubsCollection extends BaseCollection {
     return true;
   }
 
-  /**
+  /*
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for users.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(userClubsPublications.userClubsPub, function publish() {
         if (this.userId) {
           return instance._collection.find();
@@ -77,8 +76,8 @@ class UserClubsCollection extends BaseCollection {
     }
   }
 
-  /**
-   * Subscription method for stuff owned by the current user.
+  /*
+   * Subscription method for UserClubs.
    */
   subscribeUserClubs() {
     if (Meteor.isClient) {
@@ -100,7 +99,7 @@ class UserClubsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return { profile, club}
+   * @return {{profile: *, club: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
@@ -110,7 +109,7 @@ class UserClubsCollection extends BaseCollection {
   }
 }
 
-/**
+/*
  * Provides the singleton instance of this class to all other entities.
  */
 export const UserClubs = new UserClubsCollection();
