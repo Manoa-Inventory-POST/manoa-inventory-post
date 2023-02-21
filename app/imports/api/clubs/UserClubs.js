@@ -1,13 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const userClubsPublications = {
   userClubsPub: 'userClubsPub',
-  userClubsPubAdmin: 'userClubsPubAdmin',
 };
 
 class UserClubsCollection extends BaseCollection {
@@ -62,26 +60,15 @@ class UserClubsCollection extends BaseCollection {
     return true;
   }
 
-  /**
+  /*
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for users.
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(userClubsPublications.userClubsPub, function publish() {
         if (this.userId) {
-          const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ owner: username });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(userClubsPublications.userClubsPubAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
         return this.ready();
@@ -89,21 +76,10 @@ class UserClubsCollection extends BaseCollection {
     }
   }
 
-  /**
-   * Subscription method for stuff owned by the current user.
+  /*
+   * Subscription method for UserClubs.
    */
   subscribeUserClubs() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(userClubsPublications.userClubsPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeUserClubsAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(userClubsPublications.userClubsPub);
     }
@@ -123,7 +99,7 @@ class UserClubsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return { profile, club}
+   * @return {{profile: *, club: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
@@ -133,7 +109,7 @@ class UserClubsCollection extends BaseCollection {
   }
 }
 
-/**
+/*
  * Provides the singleton instance of this class to all other entities.
  */
 export const UserClubs = new UserClubsCollection();
