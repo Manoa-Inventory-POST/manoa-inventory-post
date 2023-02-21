@@ -35,7 +35,7 @@ import EditRoom from '../pages/EditRoom';
 import RoomAvi from '../pages/RoomAvi';
 import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
-
+import ClubSearch from '../pages/SearchClubs';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -57,6 +57,7 @@ const App = () => {
           <Route path="/map" element={<Map />} />
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
@@ -73,10 +74,10 @@ const App = () => {
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
-          <Route path="/StudentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
-          <Route path="/facultyhome" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
+          <Route path="/studentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
+          <Route path="/facultyHome" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

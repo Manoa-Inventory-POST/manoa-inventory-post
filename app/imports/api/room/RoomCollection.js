@@ -7,7 +7,6 @@ import { ROLE } from '../role/Role';
 export const roomPublications = {
   // will be using "roomPub" as acronym for roomPublications
   roomPub: 'roomPub',
-  roomPubAdmin: 'roomPubAdmin',
 };
 
 class RoomCollection extends BaseCollection {
@@ -101,17 +100,6 @@ class RoomCollection extends BaseCollection {
   subscribeRoom() {
     if (Meteor.isClient) {
       return Meteor.subscribe(roomPublications.roomPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeRoomAdmin() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPubAdmin);
     }
     return null;
   }
