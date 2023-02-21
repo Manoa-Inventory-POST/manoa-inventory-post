@@ -11,7 +11,7 @@ export const userClubsPublications = {
 class UserClubsCollection extends BaseCollection {
   constructor() {
     super('UserClubs', new SimpleSchema({
-      profile: String,
+      email: String,
       club: String,
     }));
   }
@@ -19,12 +19,12 @@ class UserClubsCollection extends BaseCollection {
   /**
    * Defines a new UserClubs item.
    * @return {String} the docID of the new document.
-   * @param profile
+   * @param email
    * @param club
    */
-  define({ profile, club }) {
+  define({ email, club }) {
     const docID = this._collection.insert({
-      profile,
+      email,
       club,
     });
     return docID;
@@ -33,14 +33,14 @@ class UserClubsCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param profile the new profile (optional).
+   * @param email the new email (optional).
    * @param club the new club (optional).
    * @returns never
    */
-  update(docID, { profile, club }) {
+  update(docID, { email, club }) {
     const updateData = {};
-    if (profile) {
-      updateData.profile = profile;
+    if (email) {
+      updateData.email = email;
     }
     if (club) {
       updateData.club = club;
@@ -99,13 +99,13 @@ class UserClubsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{profile: *, club: *}}
+   * @return {{email: *, club: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const profile = doc.profile;
+    const email = doc.email;
     const club = doc.club;
-    return { profile, club };
+    return { email, club };
   }
 }
 
