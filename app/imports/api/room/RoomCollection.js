@@ -1,14 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const roomPublications = {
-  // will be using "roomPub" as acronym for roomPublications
   roomPub: 'roomPub',
-  roomPubAdmin: 'roomPubAdmin',
 };
 
 class RoomCollection extends BaseCollection {
@@ -81,15 +78,6 @@ class RoomCollection extends BaseCollection {
       /** This subscription publishes only the documents associated with the logged-in user */
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
-          const usernum = Meteor.users.findOne(this.userId).usernum;
-          return instance._collection.find({ owner: usernum });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(roomPublications.roomPubAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
         return this.ready();
@@ -101,17 +89,6 @@ class RoomCollection extends BaseCollection {
    * Subscription method for stuff owned by the current user.
    */
   subscribeRoom() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(roomPublications.roomPub);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeRoomAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(roomPublications.roomPub);
     }

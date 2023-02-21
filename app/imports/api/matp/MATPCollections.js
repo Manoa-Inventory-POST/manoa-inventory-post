@@ -18,6 +18,7 @@ import { ClubInterests } from '../clubs/ClubInterests';
 import { ClubOfficer } from '../clubs/ClubOfficer';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
+import { Room } from '../room/RoomCollection';
 
 class MATPClass {
   collections;
@@ -48,6 +49,7 @@ class MATPClass {
       ClubOfficer,
       UserClubs,
       UserInterests,
+      Room,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -72,6 +74,7 @@ class MATPClass {
       ClubOfficer,
       UserClubs,
       UserInterests,
+      Room,
     ];
 
     /*
