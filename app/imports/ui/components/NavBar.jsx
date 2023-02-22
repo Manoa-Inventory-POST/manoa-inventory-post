@@ -17,7 +17,6 @@ const NavBar = () => {
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
   const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
-  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]);
   const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]);
   const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
   // const isUser = Roles.userIsInRole(Meteor.userId(), [ROLE.USER]);
@@ -30,9 +29,6 @@ const NavBar = () => {
           <Nav className="me-auto justify-content-start">
             { isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/studentHome" key="student">Home</Nav.Link>,
-            ]) : ''}
-            { isAdvisor ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADVISOR_HOME} as={NavLink} to="/facultyHome" key="advisor">Home</Nav.Link>,
             ]) : ''}
             { isFaculty ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/facultyHome" key="faculty">Home</Nav.Link>,
@@ -51,11 +47,11 @@ const NavBar = () => {
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
             ])}
-            { isOffice || isITSupport || isFaculty || isAdvisor || isStudent ? ([
+            { isOffice || isITSupport || isFaculty || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
             ]) : ''}
-            { isOffice || isFaculty || isAdvisor || isStudent ? ([
+            { isOffice || isFaculty || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
             ]) : ''}
             { isAdmin ? ([

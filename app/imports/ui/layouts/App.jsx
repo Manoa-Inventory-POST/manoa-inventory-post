@@ -161,21 +161,6 @@ const ITSupportProtectedRoute = ({ children }) => {
 };
 
 /**
- * AdvisorProtectedRoute (see React Router v6 sample)
- * Checks for Meteor login and advisor role before routing to the requested page, otherwise goes to signin page.
- * @param {any} { component: Component, ...rest }
- */
-const AdvisorProtectedRoute = ({ children }) => {
-  const isLogged = Meteor.userId() !== null;
-  if (!isLogged) {
-    return <Navigate to="/signin" />;
-  }
-  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]);
-  // console.log('AdminProtectedRoute', isLogged, isAdmin);
-  return (isLogged && isAdvisor) ? children : <Navigate to="/notauthorized" />;
-};
-
-/**
  * TAProtectedRoute (see React Router v6 sample)
  * Checks for Meteor login and student role with TA attribute before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
@@ -291,14 +276,6 @@ ITSupportProtectedRoute.propTypes = {
 };
 
 ITSupportProtectedRoute.defaultProps = {
-  children: <Landing />,
-};
-
-AdvisorProtectedRoute.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-};
-
-AdvisorProtectedRoute.defaultProps = {
   children: <Landing />,
 };
 

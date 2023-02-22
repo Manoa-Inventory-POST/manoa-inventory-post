@@ -6,7 +6,6 @@ import { StudentProfiles } from '../user/StudentProfileCollection';
 import { FacultyProfiles } from '../user/FacultyProfileCollection';
 import { OfficeProfiles } from '../user/OfficeProfileCollection';
 import { ITSupportProfiles } from '../user/ITSupportProfileCollection';
-import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
 import { OccupantRoom } from '../room/OccupantRoom';
 import { Phone } from '../room/Phone';
 import { Ports } from '../room/Ports';
@@ -37,7 +36,6 @@ class MATPClass {
       FacultyProfiles,
       OfficeProfiles,
       ITSupportProfiles,
-      AdvisorProfiles,
       OccupantRoom,
       Phone,
       Ports,
@@ -62,7 +60,6 @@ class MATPClass {
       FacultyProfiles,
       OfficeProfiles,
       ITSupportProfiles,
-      AdvisorProfiles,
       OccupantRoom,
       Phone,
       Ports,
