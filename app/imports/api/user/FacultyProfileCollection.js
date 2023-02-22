@@ -62,7 +62,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       updateData.position = position;
     }
     if (picture) {
-      updateData.phone = picture;
+      updateData.picture = picture;
     }
     this._collection.update(docID, { $set: updateData });
   }
