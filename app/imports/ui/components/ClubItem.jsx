@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Image, Container, Badge } from 'react-bootstrap';
-import { _ } from 'meteor/underscore';
+import { Image } from 'react-bootstrap';
+// import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 
 const ClubItem = ({ club }) => (
@@ -20,8 +20,8 @@ ClubItem.propTypes = {
     homepage: PropTypes.string,
     description: PropTypes.string,
     picture: PropTypes.string,
-    interests: PropTypes.array,
-    adminList: PropTypes.array,
+    // interests: PropTypes.array,
+    // adminList: PropTypes.array,
   }).isRequired,
 };
 
