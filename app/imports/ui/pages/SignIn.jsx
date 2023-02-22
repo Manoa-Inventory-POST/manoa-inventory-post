@@ -41,25 +41,25 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screenif (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
-    return (<Navigate to="/admin-home" />);
+    return (<Navigate to="/adminHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
     return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    return (<Navigate to="/student-home" />);
+    return (<Navigate to="/studentHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
-    return (<Navigate to="/faculty-home" />);
+    return (<Navigate to="/facultyHome" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
-    return (<Navigate to="/itsupp-home" />);
+    return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
-    return (<Navigate to="/advisor-home" />);
+    return (<Navigate to="/home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE])) {
-    return (<Navigate to="/office-home" />);
+    return (<Navigate to="/home" />);
   }
   // Otherwise return the Login form.
   return (
