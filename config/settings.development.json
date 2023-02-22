@@ -3,16 +3,15 @@
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "John", "lastName": "Doe" },
     { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" },
     { "email": "lydia@foo.com", "password": "changeme", "role": "ADMIN" , "firstName": "Lydia", "lastName": "Sollis" },
-    { "email": "faculty@foo.com", "password": "changeme", "role": "FACULTY" , "firstName": "Mary", "lastName": "Smith" },
+    { "email": "faculty@foo.com", "password": "changeme", "role": "FACULTY" , "firstName": "Mary", "lastName": "Smith", "position": "Other" },
     { "email": "itsupport@foo.com", "password": "changeme", "role": "ITSUPPORT" , "firstName": "Will", "lastName": "Brown" },
     { "email": "student@foo.com", "password": "changeme", "role": "STUDENT" , "firstName": "James", "lastName": "White", "TA": false, "RA": false, "Graduate": false, "Undergraduate": false },
-    { "email": "office@foo.com", "password": "changeme", "role": "OFFICE" , "firstName": "Emma", "lastName": "Jones" },
+    { "email": "office@foo.com", "password": "changeme", "role": "OFFICE" , "firstName": "Emma", "lastName": "Jones" }
 
   ],
 
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "advisor@foo.com", "condition": "poor" },
     { "name": "Apple", "quantity": 2, "owner": "student@foo.com", "condition": "poor" },
     { "name": "Chair", "quantity": 2, "owner": "itsupport@foo.com", "condition": "poor" },
     { "name": "TV", "quantity": 2, "owner": "faculty@foo.com", "condition": "excellent" },
