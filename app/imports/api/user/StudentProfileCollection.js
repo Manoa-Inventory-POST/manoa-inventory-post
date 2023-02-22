@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import { UserClubs } from '../clubs/UserClubs';
-import { UserInterests } from '../clubs/UserInterests';
+// import { UserClubs } from '../clubs/UserClubs';
+// import { UserInterests } from '../clubs/UserInterests';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -27,7 +27,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password /* , clubs, interests */ }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });

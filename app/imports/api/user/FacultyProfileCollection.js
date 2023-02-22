@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import { OccupantRoom } from '../room/OccupantRoom';
-import { Phone } from '../room/Phone';
+// import { OccupantRoom } from '../room/OccupantRoom';
+// import { Phone } from '../room/Phone';
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -23,7 +23,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, position, picture, password, room, phone }) {
+  define({ email, firstName, lastName, position, picture, password /* , room, phone */ }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, position, picture });
