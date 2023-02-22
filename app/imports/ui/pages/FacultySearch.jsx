@@ -23,7 +23,7 @@ const FacultySearch = () => {
       firstName: 'Carleton', lastName: 'Moore', role: 'Assistant Professor', image: '/images/cam-moore.jpg', office: 'POST 307B', phone: '808-956-6920', email: 'cmoore@hawaii.edu',
     },
     {
-      firstName: 'Philip', lastName: 'Johnson', role: 'Professor', image: '/images/philip-johnson.jfif', office: 'POST 326', phone: '808-956-7639', email: 'johnson@hawaii.edu',
+      firstName: 'Philip', lastName: 'Johnson', role: 'Professor', image: '/images/johnsonP.jpeg', office: 'POST 326', phone: '808-956-7639', email: 'johnson@hawaii.edu',
     },
     {
       firstName: 'Jason', lastName: 'Leigh', role: 'Professor', image: '/images/jason-leigh.jpg', office: 'POST 327', phone: '808-956-4989', email: 'leighj@hawaii.edu',
@@ -71,7 +71,7 @@ const FacultySearch = () => {
 
   const returnFilter = () => (
     <div className="pb-3">
-      <h2 className="mt-4 text-center mb-2">Search Faculty</h2>
+      <h2 className="mt-4 text-center mb-2">Faculty Search</h2>
       <div id="filter-border">
         <Accordion>
           <Accordion.Item eventKey="0">
