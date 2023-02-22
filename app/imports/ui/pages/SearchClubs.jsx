@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { Col, Row, Table, Container } from 'react-bootstrap';
 // import { useTracker } from 'meteor/react-meteor-data';
 // import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+// import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ClubItem from '../components/ClubItem';
 
@@ -23,7 +23,7 @@ const ClubSearch = () => {
     },
   ];
 
-  const [sortingBy, setSortingBy] = useState('name');
+  const [sortingBy] = useState('name');
   clubProfiles.sort((a, b) => a[sortingBy].localeCompare(b[sortingBy]));
 
   return (ready ? (
