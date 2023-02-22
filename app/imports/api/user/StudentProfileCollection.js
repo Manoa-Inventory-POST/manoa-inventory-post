@@ -5,6 +5,7 @@ import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { UserClubs } from '../clubs/UserClubs';
 import { ClubOfficer } from '../clubs/ClubOfficer';
+import { UserInterests } from '../clubs/UserInterests';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -27,7 +28,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, clubOfficer }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, clubOfficer, interests }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
@@ -38,6 +39,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
       clubs.forEach((name) => UserClubs.define({ email, name }));
       clubOfficer.forEach((name) => ClubOfficer.define({ email, name }));
+      interests.forEach((name) => UserInterests.define({ email, name }));
       return profileID;
     }
     return user._id;
