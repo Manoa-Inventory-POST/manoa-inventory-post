@@ -11,8 +11,8 @@ export const clubInterestsPublications = {
 class ClubInterestsCollection extends BaseCollection {
   constructor() {
     super('ClubInterests', new SimpleSchema({
-      interest: String,
       club: String,
+      interest: String,
     }));
   }
 
@@ -22,10 +22,10 @@ class ClubInterestsCollection extends BaseCollection {
    * @param interest
    * @param club
    */
-  define({ interest, club }) {
+  define({ club, interest }) {
     const docID = this._collection.insert({
-      interest,
       club,
+      interest,
     });
     return docID;
   }
@@ -37,13 +37,13 @@ class ClubInterestsCollection extends BaseCollection {
    * @param club the new club (optional).
    * @returns never
    */
-  update(docID, { interest, club }) {
+  update(docID, { club, interest }) {
     const updateData = {};
-    if (interest) {
-      updateData.interest = interest;
-    }
     if (club) {
       updateData.club = club;
+    }
+    if (interest) {
+      updateData.interest = interest;
     }
     this._collection.update(docID, { $set: updateData });
   }
