@@ -53,6 +53,8 @@ class MATPClass {
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
      */
     this.collectionLoadSequence = [
+      Interests,
+      Clubs,
       AdminProfiles,
       UserProfiles,
       Stuffs,
@@ -64,8 +66,6 @@ class MATPClass {
       Phone,
       Ports,
       ReservationForm,
-      Interests,
-      Clubs,
       ClubAdvisor,
       ClubInterests,
       ClubOfficer,
