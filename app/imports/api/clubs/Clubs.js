@@ -4,6 +4,8 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 import { ClubInterests } from './ClubInterests';
+import { ClubOfficer } from './ClubOfficer';
+import { ClubAdvisor } from './ClubAdvisor';
 
 export const clubsPublications = {
   clubsPub: 'clubsPub',
@@ -27,7 +29,7 @@ class ClubsCollection extends BaseCollection {
    * @param description
    * @param picture
    */
-  define({ name, website, description, picture, interests }) {
+  define({ name, website, description, picture, interests, advisors, officers }) {
     const docID = this._collection.insert({
       name,
       website,
@@ -35,6 +37,8 @@ class ClubsCollection extends BaseCollection {
       picture,
     });
     interests.forEach((interest) => ClubInterests.define({ interest, name }));
+    advisors.forEach((advisor) => ClubAdvisor.define({ advisor, name }));
+    officers.forEach((officer) => ClubOfficer.define({ officer, name }));
     return docID;
   }
 

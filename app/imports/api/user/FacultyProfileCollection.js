@@ -3,30 +3,37 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import { ClubAdvisor } from '../clubs/ClubAdvisor';
+import { OccupantRoom } from '../room/OccupantRoom';
+import { Phone } from '../room/Phone';
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('FacultyProfile', new SimpleSchema({}));
+    super('FacultyProfile', new SimpleSchema({
+      picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
+      position: { type: String, allowedValues: ['Professor', 'Assistant Professor', 'Advisor', 'Other'], defaultValue: 'Other' },
+    }));
   }
 
   /**
-   * Defines the profile associated with an User and the associated Meteor account.
+   * Defines the profile associated with a User and the associated Meteor account.
    * @param email The email associated with this profile. Will be the username.
+   * @param picture The user's profile picture
+   * @param position The user's position.
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, password, clubAdvisor }) {
+  define({ email, firstName, lastName, position, picture, password, room, phone }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName });
+    const user = this.findOne({ email, firstName, lastName, position, picture });
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, position, picture, userID, role });
+      room.forEach((name) => OccupantRoom.define({ email, name }));
+      phone.forEach((num) => Phone.define({ email, num }));
       // this._collection.update(profileID, { $set: { userID } });
-      clubAdvisor.forEach((name) => ClubAdvisor.define({ email, name }));
       return profileID;
     }
     return user._id;
@@ -39,8 +46,10 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param position new position (optional).
+   * @param picture new picture (optional).
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, position, picture }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -48,6 +57,12 @@ class FacultyProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (position) {
+      updateData.position = position;
+    }
+    if (picture) {
+      updateData.phone = picture;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -94,14 +109,16 @@ class FacultyProfileCollection extends BaseProfileCollection {
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
-   * @returns { Object } An object representing the definition of docID.
+   * @returns {{firstName: *, lastName: *, position: *, picture: *, email: *}} An object representing the definition of docID.
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const position = doc.position;
+    const picture = doc.picture;
+    return { email, firstName, lastName, position, picture }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**
