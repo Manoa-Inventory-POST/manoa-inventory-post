@@ -101,332 +101,362 @@
     {
       "firstName": "Kyungim",
       "lastName": "Baek",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/kyungimB.jpeg",
       "email": "kyungim@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303F"],
       "phone": ["808-956-8560"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Mahdi",
       "lastName": "Belcaid",
-      "role": "Assistant Research Professor",
+      "position": "Assistant Research Professor",
       "image": "/images/mahdiB.png",
       "email": "mahdi@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 306B"],
       "phone": ["808-956-6049"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Edo",
       "lastName": "Biagioni",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/",
       "email": "esb@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 305F"],
       "phone": ["808-956-3891"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Kim",
       "lastName": "Binsted",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/kimB.jpeg",
       "email": "binsted@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303D"],
       "phone": ["808-956-6107"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Henri",
       "lastName": "Casanova",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/henri-casanova.jpg",
       "email": "henric@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 310C"],
       "phone": ["808-956-2649"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Martha",
       "lastName": "Crosby",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/marthaC.jpeg",
       "email": "crosby@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 305D"],
       "phone": ["808-956-3493"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Barbara",
       "lastName": "Endicott-Popovsky",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/barbaraEP.jpeg",
       "email": "endicott@uw.edu",
       "officeHour": "N/A",
       "office": ["N/A"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Richard",
       "lastName": "Halverson",
-      "role": "Instructor",
+      "position": "Instructor",
       "image": "/images/richardH.jpeg",
       "email": "richardh@hawaii.edu",
       "officeHour": "N/A",
       "office": ["N/A"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Philip",
       "lastName": "Johnson",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/johnsonP.jpeg",
       "email": "johnson@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 307A"],
       "phone": ["808-956-3489"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Jason",
       "lastName": "Leigh",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/jason-leigh.jpg",
       "email": "leighj@hawaii.edu",
       "officeHour": "N/A",
       "office": ["Keller 102A"],
       "phone": ["808-956-9164"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Depeng",
       "lastName": "Li",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/DepengL.jpeg",
       "email": "depengli@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 314D"],
       "phone": ["808-956-3973"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Carleton",
       "lastName": "Moore",
-      "role": "Assistant Professor",
+      "position": "Assistant Professor",
       "image": "/images/cam-moore.jpg",
       "email": "cmoore@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 307B"],
       "phone": ["808-956-6920"],
-      "clubAdvisor": ["Mockup Club"]
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Ravi",
       "lastName": "Narayan",
-      "role": "Instructor",
+      "position": "Instructor",
       "image": "/images/RaviN.jpeg",
       "email": "rnarayan@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 314A"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Michael",
       "lastName": "Ogawa",
-      "role": "Faculty Specialist",
+      "position": "Faculty Specialist",
       "image": "/images/MBO.jpeg",
       "email": "ogawam@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 314B"],
       "phone": ["808-956-5069"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Dusko",
       "lastName": "Pavlovic",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/DuskoE.jpeg",
       "email": "dusko@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 311B"],
       "phone": ["808-956-9639"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Anthony",
       "lastName": "Peruma",
-      "role": "Assistant Professor",
+      "position": "Assistant Professor",
       "image": "/images/AnthonyP.jpeg",
       "email": "peruma@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 310B"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Guylaine",
       "lastName": "Poisson",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/GuylaineP.jpeg",
       "email": "guylaine@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303C"],
       "phone": ["808-956-3496"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Scott",
       "lastName": "Robertson",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/ScottR.jpeg",
       "email": "scottpr@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 317"],
       "phone": ["808-956-3500"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Peter",
       "lastName": "Sadowski",
-      "role": "Assistant Professor",
+      "position": "Assistant Professor",
       "image": "/images/PeterS.jpeg",
       "email": "psadow@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 306C"],
       "phone": ["808-956-2023"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Peter",
       "lastName": "Seidel",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/PeterMS.jpeg",
       "email": "pseidel@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 311A"],
       "phone": ["808-956-6068"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Nodari",
       "lastName": "Sitchinava",
-      "role": "Associate Professor",
+      "position": "Associate Professor",
       "image": "/images/NodariS.jpeg",
       "email": "nodari@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 309C"],
       "phone": ["808-956-3581"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Dan",
       "lastName": "Suthers",
-      "role": "Professor",
+      "position": "Professor",
       "image": "/images/DanS.jpeg",
       "email": "suthers@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 309B"],
       "phone": ["808-956-3890"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Peter",
       "lastName": "Washington",
-      "role": "Assistant Professor",
+      "position": "Assistant Professor",
       "image": "/images/PeterW.png",
       "email": "pyw@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 312B"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "David",
       "lastName": "Chin",
-      "role": "Professor Emeritus",
+      "position": "Professor Emeritus",
       "image": "/images/DavidC.jpeg",
       "email": "chin@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303G"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Stephen",
       "lastName": "Itoga",
-      "role": "Professor Emeritus",
+      "position": "Professor Emeritus",
       "image": "/images/StephenI.jpeg",
       "email": "itoga@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303G"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "David",
       "lastName": "Pager",
-      "role": "Professor Emeritus",
+      "position": "Professor Emeritus",
       "image": "/images/DavidP.jpeg",
       "email": "N/A",
       "officeHour": "N/A",
       "office": ["POST 303G"],
       "phone": ["N/A"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Kenny",
       "lastName": "Quibilan",
-      "role": "Undergraduate Academic Advisor",
+      "position": "Undergraduate Academic Advisor",
       "image": "/images/KennyQ.png",
       "email": "kennydq@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303A"],
       "phone": ["808-956-5428"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Wesley",
       "lastName": "Sugimoto",
-      "role": "Admin. and Fiscal Support",
+      "position": "Admin. and Fiscal Support",
       "image": "/images/WesleyS.jpeg",
       "email": "wesleysu@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 303B"],
       "phone": ["808-956-8249"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Todd",
       "lastName": "Tomita",
-      "role": "IT System Admin.",
+      "position": "IT System Admin.",
       "image": "/images/ICSLogo.jpeg",
       "email": "toddtt@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 327"],
       "phone": ["808-956-7639"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     },
     {
       "firstName": "Charles",
       "lastName": "Shackford",
-      "role": "IT Network/System Admin.",
+      "position": "IT Network/System Admin.",
       "image": "/images/ICSLogo.jpeg",
       "email": "shackfor@hawaii.edu",
       "officeHour": "N/A",
       "office": ["POST 327"],
       "phone": ["808-956-4989"],
-      "clubAdvisor": []
+      "password": "changeme",
+      "role": "FACULTY"
     }
   ],
   "public": {

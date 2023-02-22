@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -19,6 +20,11 @@ function addRoom(data) {
 function addClub(data) {
   console.log(`Adding: ${data.name}`);
   Clubs.define(data);
+}
+
+function addFaculty(data) {
+  console.log(`Adding: ${data.email}`);
+  FacultyProfiles.define(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -42,5 +48,12 @@ if (Clubs.count() === 0) {
   if (Meteor.settings.defaultClubs) {
     console.log('Creating default clubs.');
     Meteor.settings.defaultClubs.map(clubs => addClub(clubs));
+  }
+}
+
+if (FacultyProfiles.count() === 1) {
+  if (Meteor.settings.defaultFacultys) {
+    console.log('Creating default Facultys data.');
+    Meteor.settings.defaultFacultys.map(data => addFaculty(data));
   }
 }
