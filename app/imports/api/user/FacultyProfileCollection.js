@@ -10,7 +10,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
     super('FacultyProfile', new SimpleSchema({
       picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
-      /*position: String, */
+      /* position: String, */
     }));
   }
 
