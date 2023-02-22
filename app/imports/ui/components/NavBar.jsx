@@ -23,24 +23,24 @@ const NavBar = () => {
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
-        <span style={{ fontWeight: 700, fontSize: '18px' }}><Nav.Link as={NavLink} to="/home"><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory </Nav.Link></span>
+        <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isStudent ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/studentHome" key="student">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student">Home</Nav.Link>,
             ]) : ''}
             { isFaculty ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/facultyHome" key="faculty">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/faculty-home" key="faculty">Home</Nav.Link>,
             ]) : ''}
             { isITSupport ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/home" key="itsupport">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/itsupp-home" key="itsupport">Home</Nav.Link>,
             ]) : ''}
             { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/home" key="office">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office">Home</Nav.Link>,
             ]) : ''}
             { isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/adminHome" key="admin">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin">Home</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             { isAdmin ? '' : ([
