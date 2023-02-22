@@ -4,7 +4,6 @@ import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
-import { AdvisorProfiles } from '../../api/user/AdvisorProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
@@ -18,8 +17,6 @@ function createUser(email, role, firstName, lastName, password) {
     StudentProfiles.define({ email, firstName, lastName, password });
   } else if (role === ROLE.FACULTY) {
     FacultyProfiles.define({ email, firstName, lastName, password });
-  } else if (role === ROLE.ADVISOR) {
-    AdvisorProfiles.define({ email, firstName, lastName, password });
   } else if (role === ROLE.ITSUPPORT) {
     ITSupportProfiles.define({ email, firstName, lastName, password });
   } else if (role === ROLE.OFFICE) {

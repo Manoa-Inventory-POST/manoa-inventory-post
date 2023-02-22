@@ -9,7 +9,6 @@ export const ROLE = {
   FACULTY: 'FACULTY',
   OFFICE: 'OFFICE',
   ITSUPPORT: 'ITSUPPORT',
-  ADVISOR: 'ADVISOR',
 };
 
 export const ROLES = _.values(ROLE);
