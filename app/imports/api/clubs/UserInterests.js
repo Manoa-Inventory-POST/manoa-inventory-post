@@ -11,8 +11,8 @@ export const userInterestsPublications = {
 class UserInterestsCollection extends BaseCollection {
   constructor() {
     super('UserInterests', new SimpleSchema({
-      interest: String,
       email: String,
+      interest: String,
     }));
   }
 
@@ -22,10 +22,10 @@ class UserInterestsCollection extends BaseCollection {
    * @param interest
    * @param email
    */
-  define({ interest, email }) {
+  define({ email, interest }) {
     const docID = this._collection.insert({
-      interest,
       email,
+      interest,
     });
     return docID;
   }
@@ -37,13 +37,13 @@ class UserInterestsCollection extends BaseCollection {
    * @param email the new email (optional).
    * @returns never
    */
-  update(docID, { interest, email }) {
+  update(docID, { email, interest }) {
     const updateData = {};
-    if (interest) {
-      updateData.interest = interest;
-    }
     if (email) {
       updateData.email = email;
+    }
+    if (interest) {
+      updateData.interest = interest;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -105,9 +105,9 @@ class UserInterestsCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const interest = doc.interest;
     const email = doc.email;
-    return { interest, email };
+    const interest = doc.interest;
+    return { email, interest };
   }
 }
 

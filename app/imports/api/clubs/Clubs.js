@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { ClubInterests } from './ClubInterests';
 
 export const clubsPublications = {
   clubsPub: 'clubsPub',
@@ -26,13 +27,14 @@ class ClubsCollection extends BaseCollection {
    * @param description
    * @param picture
    */
-  define({ name, website, description, picture }) {
+  define({ name, website, description, picture, interests }) {
     const docID = this._collection.insert({
       name,
       website,
       description,
       picture,
     });
+    interests.forEach((interest) => ClubInterests.define({ interest, name }));
     return docID;
   }
 
