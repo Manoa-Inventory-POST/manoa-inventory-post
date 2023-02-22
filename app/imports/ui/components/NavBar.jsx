@@ -29,22 +29,22 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isStudent ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/studentHome" key="student">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student">Home</Nav.Link>,
             ]) : ''}
             { isAdvisor ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADVISOR_HOME} as={NavLink} to="/facultyHome" key="advisor">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADVISOR_HOME} as={NavLink} to="/advisor-home" key="advisor">Home</Nav.Link>,
             ]) : ''}
             { isFaculty ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/facultyHome" key="faculty">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/faculty-home" key="faculty">Home</Nav.Link>,
             ]) : ''}
             { isITSupport ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/home" key="itsupport">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/itsupp-home" key="itsupport">Home</Nav.Link>,
             ]) : ''}
             { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/home" key="office">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office">Home</Nav.Link>,
             ]) : ''}
             { isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/adminHome" key="admin">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin">Home</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             { isAdmin ? '' : ([
