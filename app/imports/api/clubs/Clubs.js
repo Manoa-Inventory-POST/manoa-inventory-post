@@ -36,7 +36,7 @@ class ClubsCollection extends BaseCollection {
       description,
       picture,
     });
-    interests.forEach((interest) => ClubInterests.define({ interest, name }));
+    interests.forEach((interest) => ClubInterests.define({ name, interest }));
     advisors.forEach((advisor) => ClubAdvisor.define({ advisor, name }));
     officers.forEach((officer) => ClubOfficer.define({ officer, name }));
     return docID;
