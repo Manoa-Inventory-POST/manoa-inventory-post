@@ -13,6 +13,7 @@ import { Ports } from '../room/Ports';
 import { ReservationForm } from '../reserveform/ReservationCollection';
 import { Room } from '../room/RoomCollection';
 import { Clubs } from '../clubs/Clubs';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
 
 class MATPClass {
   collections;
@@ -56,6 +57,7 @@ class MATPClass {
       Ports,
       ReservationForm,
       Room,
+      ClubAdvisor,
     ];
 
     /*
@@ -78,7 +80,7 @@ class MATPClass {
     // console.log('MATPCollections', collectionName, this.collectionAssociation);
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called MARTPCollections.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called MATPCollections.getCollection with unknown collection name: ${collectionName}`);
     }
     return collection;
   }

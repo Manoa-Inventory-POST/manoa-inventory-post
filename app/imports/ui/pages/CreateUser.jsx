@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Mongo } from 'meteor/mongo';
+import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import {
@@ -8,18 +7,13 @@ import {
   HiddenField,
   SelectField,
   SubmitField,
-  TextField,
-  AutoField,
   BoolField,
   LongTextField,
-  ErrorField,
+  TextField,
 } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useParams } from 'react-router';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Users } from '../../api/user/UserCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
@@ -28,14 +22,12 @@ import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
-import { AdvisorProfiles } from '../../api/user/AdvisorProfileCollection';
 import { Phone } from '../../api/room/Phone';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const CreateUser = () => {
-
-  const [error, setError] = useState('');
-  const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT', 'ADVISOR'];
 
   const { rooms } = useTracker(() => {
     const subscription = Room.subscribeRoom();
@@ -69,7 +61,7 @@ const CreateUser = () => {
     clubNames[i] = clubs[i].name;
   }
 
-  const phoneRegEx = new RegExp("\d{3}-\d{3}-\d{4}");
+  const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT', 'ADVISOR'];
 
   const UserFormSchema = new SimpleSchema({
     email: String,
@@ -88,64 +80,143 @@ const CreateUser = () => {
     clubAdvisor: { type: Boolean, defaultValue: false },
     club: { type: String, allowedValues: clubNames, optional: true },
   });
+
   const bridge = new SimpleSchema2Bridge(UserFormSchema);
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    let insertError;
+
     const { firstName, lastName, email, password, role, room, studentType, phone, clubAdvisor, club } = data;
-    switch (data.role) {
-    case 'ADMIN':
-      AdminProfiles.define({ email, firstName, lastName, password });
-      if (phone !== '') {
-        Phone.define({ email, phone });
+    const phoneArray = phone.split(',');
+    let accountCollectionName;
+    const accountDefinitionData = { firstName, lastName, password, email };
+/*
+    const phoneCollectionName = Phone.getCollectionName();
+    if (phone !== '') {
+      for (let i = 0; i < phoneArray.length; i++) {
+        if (/^\d{10}$/.test(phoneArray[i])) {
+          const phoneNumber = phoneArray[i];
+          const phoneDefinitionData = { phoneNumber, email };
+          defineMethod.callPromise({ phoneCollectionName, phoneDefinitionData })
+            .catch(error => swal('Error', error.message, 'error'))
+            .then(() => {
+              swal('Success', 'Phone added successfully', 'success');
+            });
+        }
       }
+    }
+
+    const occupantRoomCollectionName = OccupantRoom.getCollectionName();
+    if (room.length > 0) {
+      for (let i = 0; i < room.length; i++) {
+        const roomNumber = room[i];
+        const occupantRoomDefinitionData = { email, roomNumber };
+        defineMethod.callPromise({ occupantRoomCollectionName, occupantRoomDefinitionData })
+          .catch(error => swal('Error', error.message, 'error'))
+          .then(() => {
+            swal('Success', 'Phone added successfully', 'success');
+          });
+      }
+    }
+
+    const clubAdvisorCollectionName = ClubAdvisor.getCollectionName();
+    if (clubAdvisor) {
+      const clubAdvisorDefinitionData = { club, email };
+      defineMethod.callPromise({ clubAdvisorCollectionName, clubAdvisorDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'Phone added successfully', 'success');
+        });
+    }
+    */
+
+    switch (role) {
+    case 'ADMIN':
+      console.log('ADMIN SWITCH');
+      accountCollectionName = AdminProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     case 'FACULTY':
-      FacultyProfiles.define({ email, firstName, lastName, password });
-      Phone.define({ email, phone });
-      if (clubAdvisor === 'true') {
-        ClubAdvisor.define({ email, club });
-      }
+      console.log('FACULTY SWITCH');
+      accountCollectionName = FacultyProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     case 'USER':
-      UserProfiles.define({ email, firstName, lastName, password });
+      console.log('USER SWITCH');
+      accountCollectionName = UserProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     case 'STUDENT':
-      StudentProfiles.define({ email, firstName, lastName, password });
+      console.log('STUDENT SWITCH');
+      accountCollectionName = StudentProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     case 'OFFICE':
-      OfficeProfiles.define({ email, firstName, lastName, password });
-      Phone.define({ email, phone });
+      console.log('OFFICE SWITCH');
+      accountCollectionName = OfficeProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     case 'ITSUPPORT':
-      ITSupportProfiles.define({ email, firstName, lastName, password });
-      Phone.define({ email, phone });
-      break;
-    case 'ADVISOR':
-      AdvisorProfiles.define({ email, firstName, lastName, password });
-      Phone.define({ email, phone });
+      console.log('ITSUPPORT SWITCH');
+      accountCollectionName = ITSupportProfiles.getCollectionName();
+      console.log(accountCollectionName);
+      console.log(typeof accountCollectionName);
+      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+        .catch(error => swal('Error', error.message, 'error'))
+        .then(() => {
+          swal('Success', 'User added successfully', 'success');
+        });
       break;
     default:
       break;
     }
+
   };
 
-  let fRef = null;
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create User</h2></Col>
-          <AutoForm schema={bridge} onSubmit={(data) => submit(data)}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <AutoField name="firstName" placeholder="Your first name (required)" />
-                <AutoField name="lastName" placeholder="Your last name (required)" />
-                <AutoField name="email" placeholder="Your email (required)" />
+                <TextField name="firstName" placeholder="Your first name (required)" />
+                <TextField name="lastName" placeholder="Your last name (required)" />
+                <TextField name="email" placeholder="Your email (required)" />
                 <HiddenField name="password" value="changeme" />
                 <SelectField name="role" placeholder="select role (required)" />
-                <LongTextField name="phone" placeholder="Enter one or more phone numbers" />
+                <LongTextField name="phone" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
                 <SelectField name="room" multiple inline />
                 <BoolField name="TA" inline />
                 <BoolField name="RA" inline />
