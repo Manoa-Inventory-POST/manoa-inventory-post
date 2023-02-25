@@ -35,6 +35,8 @@ import EditRoom from '../pages/EditRoom';
 import RoomAvi from '../pages/RoomAvi';
 import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
+import ITSuppHome from '../pages/ITSuppHome';
+import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -74,10 +76,13 @@ const App = () => {
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
-          <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
-          <Route path="/studentHome" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
-          <Route path="/facultyHome" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
+          <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
+          <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
+          <Route path="/itsupp-home" element={<ITSupportProtectedRoute><ITSuppHome /></ITSupportProtectedRoute>} />
+          <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

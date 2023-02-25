@@ -14,13 +14,15 @@ rolesToCollectionNames[ROLE.OFFICE] = 'OfficeProfileCollection';
 rolesToCollectionNames[ROLE.ITSUPPORT] = 'ITSupportProfileCollection';
 rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
 
+const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT', 'ADVISOR'];
+
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
     super(type, schema.extend(new SimpleSchema({
       email: String,
       firstName: String,
       lastName: String,
-      role: String,
+      role: { type: String, allowedValues: profileRoleValues },
       userID: /^[23456789ABCDEFGHJKLMNPQRSTWXYZabcdefghijkmnopqrstuvwxyz]{17}$/,
     })));
   }
