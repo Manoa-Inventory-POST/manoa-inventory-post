@@ -4,6 +4,7 @@ import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Interests } from '../../api/clubs/Interests';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+/* eslint-disable no-console */
 
 // Initialize the database with a default data document.
 function addData(data) {

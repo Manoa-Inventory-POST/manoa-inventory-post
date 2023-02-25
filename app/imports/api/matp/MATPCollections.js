@@ -18,8 +18,6 @@ import { ClubOfficer } from '../clubs/ClubOfficer';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
 import { Room } from '../room/RoomCollection';
-import { Clubs } from '../clubs/Clubs';
-import { ClubAdvisor } from '../clubs/ClubAdvisor';
 
 class MATPClass {
   collections;
@@ -50,7 +48,6 @@ class MATPClass {
       UserClubs,
       UserInterests,
       Room,
-      Clubs,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -75,7 +72,6 @@ class MATPClass {
       UserClubs,
       UserInterests,
       Room,
-      ClubAdvisor,
     ];
 
     /*
@@ -98,7 +94,7 @@ class MATPClass {
     // console.log('MATPCollections', collectionName, this.collectionAssociation);
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called MATPCollections.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called MARTPCollections.getCollection with unknown collection name: ${collectionName}`);
     }
     return collection;
   }
