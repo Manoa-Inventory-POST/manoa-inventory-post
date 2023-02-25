@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { Interests } from './Interests';
 
 export const clubInterestsPublications = {
   clubInterestsPub: 'clubInterestsPub',
@@ -23,6 +24,9 @@ class ClubInterestsCollection extends BaseCollection {
    * @param club
    */
   define({ club, interest }) {
+    if (Interests.find(interest).fetch().isEmpty()) {
+      Interests.define(interest);
+    }
     const docID = this._collection.insert({
       club,
       interest,
