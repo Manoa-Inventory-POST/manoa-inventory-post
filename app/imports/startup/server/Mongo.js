@@ -3,7 +3,6 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
-/* eslint-disable no-console */
 
 // Initialize the database with a default data document.
 function addData(data) {
