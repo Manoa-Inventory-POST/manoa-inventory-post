@@ -11,7 +11,7 @@ export const phonePublications = {
 class PhoneCollection extends BaseCollection {
   constructor() {
     super('Phone', new SimpleSchema({
-      phoneUser: String,
+      phoneUser: String, // the phone user's email
       phoneNum: String,
     }));
   }

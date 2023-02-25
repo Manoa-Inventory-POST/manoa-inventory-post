@@ -30,6 +30,7 @@ const AddStuff = () => {
     const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
     const collectionName = Stuffs.getCollectionName();
+    console.log(typeof collectionName);
     const definitionData = { name, quantity, condition, owner };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
