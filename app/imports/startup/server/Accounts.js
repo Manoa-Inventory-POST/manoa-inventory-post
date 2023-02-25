@@ -28,9 +28,9 @@ function createStudent(email, role, firstName, lastName, TA, RA, graduate, under
   }
 }
 
-function createFaculty(email, role, firstName, lastName, position, picture, password, room, phone) {
+function createFaculty(email, role, firstName, lastName, officeHours, position, picture, password, rooms, phone) {
   if (role === ROLE.FACULTY) {
-    FacultyProfiles.define({ email, firstName, lastName, position, picture, password, room, phone });
+    FacultyProfiles.define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phone });
   }
 }
 
@@ -41,7 +41,7 @@ if (Meteor.users.find().count() === 0) {
     console.log('Creating the default user(s)');
     defaultData.map(({ email, password, role, firstName, lastName }) => createUser(email, role, firstName, lastName, password));
     defaultData.map(({ email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) => createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests));
-    defaultData.map(({ email, role, firstName, lastName, position, picture, password, room, phone }) => createFaculty(email, role, firstName, lastName, position, picture, password, room, phone));
+    defaultData.map(({ email, role, firstName, lastName, officeHours, position, picture, password, rooms, phone }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, password, rooms, phone));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }
