@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { Interests } from './Interests';
 
 export const clubInterestsPublications = {
   clubInterestsPub: 'clubInterestsPub',
@@ -23,6 +24,9 @@ class ClubInterestsCollection extends BaseCollection {
    * @param club
    */
   define({ club, interest }) {
+    if (Interests.find(interest).fetch().isEmpty()) {
+      Interests.define(interest);
+    }
     const docID = this._collection.insert({
       club,
       interest,
@@ -95,7 +99,7 @@ class ClubInterestsCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT]);
   }
 
   /**
