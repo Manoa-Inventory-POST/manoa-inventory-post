@@ -22,7 +22,7 @@ function getRoomNum(room) {
 const roomValues = rooms.map(getRoomNum);
 
 const { clubs } = useTracker(() => {
-  const subscription = Clubs.subscribeClubsAdmin();
+  const subscription = Clubs.subscribeClubs();
   const rdy = subscription.ready();
   const clubEntries = Clubs.find({}, { sort: { name: 1 } }).fetch();
   console.log(clubEntries, rdy);
