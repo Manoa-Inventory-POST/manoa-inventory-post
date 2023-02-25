@@ -18,6 +18,8 @@ import { ClubOfficer } from '../clubs/ClubOfficer';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
 import { Room } from '../room/RoomCollection';
+import { Clubs } from '../clubs/Clubs';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
 
 class MATPClass {
   collections;
