@@ -93,42 +93,70 @@
     { "name": "Association for Computing Machinery (ACM)",
       "website": "https://acmanoa.github.io/",
       "description": "We are a registered student chapter of the Association for Computing Machinery as well as a recognized student-chartered registered independent organization (RIO) at the University of Hawaii at Manoa. We welcome students of all different backgrounds, interests, and skill levels to join our community and share our passion for computer science.",
-      "interests": ["RIO", "Networking", "Professional Development", "Technical Workshops"],
+      "interests": [
+        "RIO",
+        "Networking",
+        "Professional Development",
+        "Technical Workshops"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/officers/placehold.png"},
     { "name": "Programming AND Algorithms (PANDA)",
       "website": "https://acmanoa.github.io/panda/",
       "description": "PANDA (Programming AND Algorithms) is a special interest group of ACM Manoa dedicated to studying and applying algorithms. We aim to help students develop the algorithmic problem solving skills needed to succeed in the field of computer science.",
-      "interests": ["SIG", "Algorithms", "Technical Workshops"],
+      "interests": [
+        "SIG",
+        "Algorithms",
+        "Technical Workshops"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/logos/Panda.png" },
     { "name": "Grey Hats",
       "website": "https://acmanoa.github.io/greyhats/",
       "description": "The Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, attack and defend systems, and to network with others interested in modern security issues.",
-      "interests": ["SIG", "Cybersecurity", "Networking", "Competitions"],
+      "interests": [
+        "SIG",
+        "Cybersecurity",
+        "Networking",
+        "Competitions"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/logos/greyhats.png" },
     { "name": "Game Dev",
       "website": "https://acmanoa.github.io/gamedev/",
       "description": "We are a group dedicated to designing, building, and demoing video games using Unity and other various tools.",
-      "interests": ["SIG", "Art", "Animation", "Video Games", "Game Design"],
+      "interests": [
+        "SIG",
+        "Art",
+        "Animation",
+        "Video Games",
+        "Game Design"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/logos/gamedev.png" },
     { "name": "ICSpark",
       "website": "https://icspark.github.io/index.html",
       "description": "ICSpark is a Registered Independent Organization (RIO) at the University of Hawaii. We are a group of students who offer free coding classes every Saturday for students through the 6th - 12th grade.",
-      "interests": ["RIO", "Mentor", "Teaching"],
+      "interests": [
+        "RIO",
+        "Mentor",
+        "Teaching"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/logos/icspark.PNG" },
     { "name": "Supporting Women in Technology Computing Hawaii (SWITCH)",
       "website": "https://switch-uhm.github.io/",
       "description": "SWITCH (Supporting Women in Technology Computing Hawaii) is the culmination of efforts of the awesome students, faculty, and working professionals supporting social change in the ICS department. We strive to provide useful resources from these organizations to improve your professional, technical, and personal development.",
-      "interests": ["SIG", "Professional Development", "Guest Speakers", "Career Opportunities"],
+      "interests": [
+        "SIG",
+        "Professional Development",
+        "Guest Speakers",
+        "Career Opportunities"
+      ],
       "picture": "https://acmanoa.github.io/assets/img/logos/switchlogo.png" }
   ],
   "defaultInterests": [
     { "interest": "Mockup" },
-    { "interest": "Mockup" },
-    { "interest": "Mockup" },
-    { "interest": "Mockup" },
-    { "interest": "Mockup" },
-    { "interest": "Mockup" },
-
+    { "interest": "RIO" },
+    { "interest": "SIG" },
+    { "interest": "Animation" },
+    { "interest": "Networking" },
+    { "interest": "Algorithms" }
   ],
   "defaultFacultys": [
     {
