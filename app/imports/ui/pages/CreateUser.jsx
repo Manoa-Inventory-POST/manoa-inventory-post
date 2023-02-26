@@ -21,7 +21,7 @@ import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { Room } from '../../api/room/RoomCollection';
-import { Clubs } from '../clubs/Clubs';
+import { Clubs } from '../../api/clubs/Clubs';
 import { Phone } from '../../api/room/Phone';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
@@ -86,11 +86,11 @@ const CreateUser = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
 
-    const { firstName, lastName, email, password, role, room, studentType, phone, clubAdvisor, club } = data;
+    const { firstName, lastName, email, password, role, room, phone, clubAdvisor, club } = data;
     const phoneArray = phone.split(',');
     let accountCollectionName;
     const accountDefinitionData = { firstName, lastName, password, email };
-/*
+
     const phoneCollectionName = Phone.getCollectionName();
     if (phone !== '') {
       for (let i = 0; i < phoneArray.length; i++) {
@@ -128,7 +128,6 @@ const CreateUser = () => {
           swal('Success', 'Phone added successfully', 'success');
         });
     }
-    */
 
     switch (role) {
     case 'ADMIN':
