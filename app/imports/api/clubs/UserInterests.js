@@ -24,6 +24,9 @@ class UserInterestsCollection extends BaseCollection {
    * @param email
    */
   define({ email, interest }) {
+    if (!Interests.checkExists(interest)) {
+      Interests.define({ interest });
+    }
     const docID = this._collection.insert({
       email,
       interest,
