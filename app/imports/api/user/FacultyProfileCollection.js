@@ -34,8 +34,12 @@ class FacultyProfileCollection extends BaseProfileCollection {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role });
-      rooms.forEach((room) => OccupantRoom.define({ email, room }));
-      phone.forEach((num) => Phone.define({ email, num }));
+      if (rooms) {
+        rooms.forEach((room) => OccupantRoom.define({ email, room }));
+      }
+      if (phone) {
+        phone.forEach((phoneNum) => Phone.define({ email, phoneNum }));
+      }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }

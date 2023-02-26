@@ -30,15 +30,22 @@ class ClubsCollection extends BaseCollection {
    * @param picture
    */
   define({ name, website, description, picture, interests, advisors, officers }) {
+    const club = name;
     const docID = this._collection.insert({
       name,
       website,
       description,
       picture,
     });
-    interests.forEach((interest) => ClubInterests.define({ name, interest }));
-    advisors.forEach((advisor) => ClubAdvisor.define({ advisor, name }));
-    officers.forEach((officer) => ClubOfficer.define({ officer, name }));
+    if (interests) {
+      interests.forEach((interest) => ClubInterests.define({ club, interest }));
+    }
+    if (advisors) {
+      advisors.forEach((advisor) => ClubAdvisor.define({ advisor, club }));
+    }
+    if (officers) {
+      officers.forEach((officer) => ClubOfficer.define({ officer, club }));
+    }
     return docID;
   }
 

@@ -24,9 +24,6 @@ class ClubInterestsCollection extends BaseCollection {
    * @param club
    */
   define({ club, interest }) {
-    if (Interests.find(interest).fetch().isEmpty()) {
-      Interests.define(interest);
-    }
     const docID = this._collection.insert({
       club,
       interest,

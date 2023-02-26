@@ -36,8 +36,12 @@ class StudentProfileCollection extends BaseProfileCollection {
       const userID = Users.define({ username, role, password });
       // const clubs = UserClubs.define({ email, Clubs.dumpOne().name});
       const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
-      clubs.forEach((club) => UserClubs.define({ email, club }));
-      interests.forEach((interest) => UserInterests.define({ email, interest }));
+      if (clubs) {
+        clubs.forEach((club) => UserClubs.define({ email, club }));
+      }
+      if (interests) {
+        interests.forEach((interest) => UserInterests.define({ email, interest }));
+      }
       return profileID;
     }
     return user._id;
