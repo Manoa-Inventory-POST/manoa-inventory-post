@@ -21,7 +21,7 @@ import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { Room } from '../../api/room/RoomCollection';
-import { Clubs } from '../../api/clubs/Clubs';
+import { Clubs } from '../clubs/Clubs';
 import { Phone } from '../../api/room/Phone';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
