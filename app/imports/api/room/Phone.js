@@ -11,7 +11,7 @@ export const phonePublications = {
 class PhoneCollection extends BaseCollection {
   constructor() {
     super('Phone', new SimpleSchema({
-      phoneUser: String, // the phone user's email
+      email: String,
       phoneNum: String,
     }));
   }
@@ -19,12 +19,12 @@ class PhoneCollection extends BaseCollection {
   /**
    * Defines a new Phone item.
    * @return {never} the docID of the new document.
-   * @param phoneUser
+   * @param email
    * @param phoneNum
    */
-  define({ phoneUser, phoneNum }) {
+  define({ email, phoneNum }) {
     const docID = this._collection.insert({
-      phoneUser,
+      email,
       phoneNum,
     });
     return docID;
@@ -33,14 +33,14 @@ class PhoneCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param phoneUser the new phoneUser (optional).
+   * @param email the new email (optional).
    * @param phoneNum the new phoneNum (optional).
    * @returns never
    */
-  update(docID, { phoneUser, phoneNum }) {
+  update(docID, { email, phoneNum }) {
     const updateData = {};
-    if (phoneUser) {
-      updateData.phoneUser = phoneUser;
+    if (email) {
+      updateData.email = email;
     }
     if (phoneNum) {
       updateData.phoneNum = phoneNum;
@@ -101,13 +101,13 @@ class PhoneCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{phoneUser: *, phoneNum: *}}
+   * @return {{email: *, phoneNum: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const phoneUser = doc.phoneUser;
+    const email = doc.email;
     const phoneNum = doc.phoneNum;
-    return { phoneUser, phoneNum };
+    return { email, phoneNum };
   }
 }
 

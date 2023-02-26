@@ -11,20 +11,20 @@ export const occupantRoomPublications = {
 class OccupantRoomCollection extends BaseCollection {
   constructor() {
     super('OccupantRoom', new SimpleSchema({
-      occupant: String,
+      email: String,
       room: String,
     }));
   }
 
   /**
    * Defines a new OccupantRoom item.
-   * @return {String} the docID of the new document.
-   * @param occupant
+   * @return {never} the docID of the new document.
+   * @param email
    * @param room
    */
-  define({ occupant, room }) {
+  define({ email, room }) {
     const docID = this._collection.insert({
-      occupant,
+      email,
       room,
     });
     return docID;
@@ -33,14 +33,14 @@ class OccupantRoomCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param occupant the new occupant (optional).
+   * @param email the new email (optional).
    * @param room the new room (optional).
    * @returns never
    */
-  update(docID, { occupant, room }) {
+  update(docID, { email, room }) {
     const updateData = {};
-    if (occupant) {
-      updateData.occupant = occupant;
+    if (email) {
+      updateData.email = email;
     }
     if (room) {
       updateData.room = room;
@@ -101,13 +101,13 @@ class OccupantRoomCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{occupant: *, room: *}}
+   * @return {{email: *, room: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const occupant = doc.occupant;
+    const email = doc.email;
     const room = doc.room;
-    return { occupant, room };
+    return { email, room };
   }
 }
 

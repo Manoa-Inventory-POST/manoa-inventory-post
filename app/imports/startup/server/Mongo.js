@@ -17,14 +17,14 @@ function addRoom(data) {
   Room.define(data);
 }
 
-function addClub(data) {
-  console.log(`  Adding: ${data.name}`);
-  Clubs.define(data);
-}
-
 function addInterest(data) {
   console.log(`  Adding: ${data.interest}`);
   Interests.define(data);
+}
+
+function addClub(data) {
+  console.log(`  Adding: ${data.name}`);
+  Clubs.define(data);
 }
 
 function addFaculty(data) {
@@ -48,19 +48,19 @@ if (Room.count() === 0) {
   }
 }
 
-// Initialize the ClubsCollection if empty.
-if (Clubs.count() === 0) {
-  if (Meteor.settings.defaultClubs) {
-    console.log('Creating default clubs.');
-    Meteor.settings.defaultClubs.map(clubs => addClub(clubs));
-  }
-}
-
 // Initialize the Interests if empty.
 if (Interests.count() === 0) {
   if (Meteor.settings.defaultInterests) {
     console.log('Creating default interests.');
     Meteor.settings.defaultInterests.map(interests => addInterest(interests));
+  }
+}
+
+// Initialize the ClubsCollection if empty.
+if (Clubs.count() === 0) {
+  if (Meteor.settings.defaultClubs) {
+    console.log('Creating default clubs.');
+    Meteor.settings.defaultClubs.map(clubs => addClub(clubs));
   }
 }
 
