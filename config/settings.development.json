@@ -138,7 +138,7 @@
     { "num": "324", "description": "electrical", "building": "POST" },
     { "num": "325", "description": "EE", "building": "POST" },
     { "num": "326", "description": "storage", "building": "POST" },
-    { "num": "327", "description": "Todd's and Charlie's rooms", "building": "POST" },
+    { "num": "327", "description": "Todd's and Charlie's office", "building": "POST" },
     { "num": "328", "description": "ICS IT", "building": "POST" },
     { "num": "329", "description": "telephone", "building": "POST" },
     { "num": "330", "description": "men", "building": "POST" },
