@@ -103,6 +103,21 @@ class InterestsCollection extends BaseCollection {
     const interest = doc.interest;
     return { interest };
   }
+
+  /**
+   * Checks the Interest collection to see if an inputted Interest already exists.
+   * @param interest
+   * @return true
+   * @return false
+   */
+  checkExists(interest) {
+    const instances = this.find({ interest: interest }).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
+
 }
 
 /**
