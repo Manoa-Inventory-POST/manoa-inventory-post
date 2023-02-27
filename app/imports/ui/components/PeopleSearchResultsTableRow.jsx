@@ -8,7 +8,7 @@ const PeopleSearchResultsTableRow = ({ user }) => (
     <td>{ user.lastName }</td>
     <td>{ user.officeBuilding }</td>
     <td>{ user.officeRoomNumber }</td>
-    <td>{ user.phoneNumber }</td>
+    <td>{ user.phoneNum }</td>
     <td>{ user.role }</td>
     <td>
       <Link className="btn btn-dashboard text-white me-2 d-inline" to={`/editUser/${user._id}`}>Edit</Link>
@@ -24,7 +24,7 @@ PeopleSearchResultsTableRow.propTypes = {
     officeBuilding: PropTypes.string,
     officeRoomNumber: PropTypes.string,
     _id: PropTypes.string,
-    phoneNumber: PropTypes.string,
+    phoneNum: PropTypes.string,
     role: PropTypes.string,
   }).isRequired,
 };
