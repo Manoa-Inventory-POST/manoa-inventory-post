@@ -35,8 +35,6 @@ const AdminDashboard = () => {
       <Row className="justify-content-center">
         <Col md={8}>
           <SearchBox />
-          <PeopleSearchResultsTable />
-          <RoomSearchResultsTable />.
         </Col>
         <Col md={4}>
           <InfoBar />
