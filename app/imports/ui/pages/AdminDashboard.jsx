@@ -6,9 +6,9 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import InfoBar from '../components/InfoBar';
 import SearchBox from '../components/SearchBox';
-// import PeopleSearchResultsTable from '../components/PeopleSearchResultsTable';
+import PeopleSearchResultsTable from '../components/PeopleSearchResultsTable';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
-// import RoomSearchResultsTable from '../components/RoomSearchResultsTable';
+import RoomSearchResultsTable from '../components/RoomSearchResultsTable';
 
 /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
 const AdminDashboard = () => {

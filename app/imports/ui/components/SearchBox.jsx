@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import PeopleSearchResultsTable from './PeopleSearchResultsTable';
-import RoomSearchResultsTable from './RoomSearchResultsTable';
+import PeopleSearchResultsTable from "./PeopleSearchResultsTable";
+import RoomSearchResultsTable from "./RoomSearchResultsTable";
 
 const SearchBox = () => (
   <Accordion defaultActiveKey="0" className="rounded-0">
