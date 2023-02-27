@@ -3,9 +3,9 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
-// import { ClubInterests } from './ClubInterests';
-// import { ClubOfficer } from './ClubOfficer';
-// import { ClubAdvisor } from './ClubAdvisor';
+import { ClubInterests } from './ClubInterests';
+import { ClubOfficer } from './ClubOfficer';
+import { ClubAdvisor } from './ClubAdvisor';
 
 export const clubsPublications = {
   clubsPub: 'clubsPub',
@@ -29,16 +29,23 @@ class ClubsCollection extends BaseCollection {
    * @param description
    * @param picture
    */
-  define({ name, website, description, picture /* , interests, advisors, officers */ }) {
+  define({ name, website, description, picture, interests, advisors, officers }) {
+    const club = name;
     const docID = this._collection.insert({
       name,
       website,
       description,
       picture,
     });
-    // interests.forEach((interest) => ClubInterests.define({ name, interest }));
-    // advisors.forEach((advisor) => ClubAdvisor.define({ advisor, name }));
-    // officers.forEach((officer) => ClubOfficer.define({ officer, name }));
+    if (interests) {
+      interests.forEach((interest) => ClubInterests.define({ club, interest }));
+    }
+    if (advisors) {
+      advisors.forEach((advisor) => ClubAdvisor.define({ advisor, club }));
+    }
+    if (officers) {
+      officers.forEach((officer) => ClubOfficer.define({ officer, club }));
+    }
     return docID;
   }
 
@@ -113,7 +120,7 @@ class ClubsCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged-in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT]);
   }
 
   /**

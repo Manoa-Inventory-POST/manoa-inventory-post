@@ -13,6 +13,7 @@ class RoomCollection extends BaseCollection {
     super('Room', new SimpleSchema({
       num: String,
       description: String,
+      building: String,
       status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'open' },
     }));
   }
@@ -24,10 +25,11 @@ class RoomCollection extends BaseCollection {
    * @param description
    * @param status
    */
-  define({ num, description, status }) {
+  define({ num, description, building, status }) {
     const docID = this._collection.insert({
       num,
       description,
+      building,
       status,
     });
     return docID;
@@ -41,13 +43,16 @@ class RoomCollection extends BaseCollection {
    * @param status the new status (optional).
    * @returns never
    */
-  update(docID, { num, description, status }) {
+  update(docID, { num, description, building, status }) {
     const updateData = {};
     if (num) {
       updateData.num = num;
     }
     if (description) {
       updateData.description = description;
+    }
+    if (building) {
+      updateData.building = building;
     }
     if (status) {
       updateData.status = status;
@@ -75,7 +80,7 @@ class RoomCollection extends BaseCollection {
     if (Meteor.isServer) {
       // get the StuffCollection instance.
       const instance = this;
-      /** This subscription publishes only the documents associated with the logged-in user */
+      // This subscription publishes only the documents associated with the logged-in user
       Meteor.publish(roomPublications.roomPub, function publish() {
         if (this.userId) {
           return instance._collection.find();
@@ -102,20 +107,21 @@ class RoomCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT]);
   }
 
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{num: *, description: *, status: *}}
+   * @return {{num: *, description: *, building: *, status: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const num = doc.num;
     const description = doc.description;
+    const building = doc.building;
     const status = doc.status;
-    return { num, description, status };
+    return { num, description, building, status };
   }
 }
 
