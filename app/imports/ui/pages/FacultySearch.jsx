@@ -1,9 +1,7 @@
-// import { Meteor } from 'meteor/meteor';
 import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
-// import { Col, Row, Table, Container, Dropdown, DropdownButton } from 'react-bootstrap';
-// import { useTracker } from 'meteor/react-meteor-data';
-// import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { useTracker } from 'meteor/react-meteor-data';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -17,33 +15,19 @@ const FacultySearch = () => {
   const [facultyRole, setFacultyRole] = useState('');
   const [facultyOffice, setFacultyOffice] = useState('');
 
-  const ready = true;
-  const faculty = [
-    {
-      firstName: 'Carleton', lastName: 'Moore', role: 'Assistant Professor', image: '/images/cam-moore.jpg', office: 'POST 307B', phone: '808-956-6920', email: 'cmoore@hawaii.edu',
-    },
-    {
-      firstName: 'Philip', lastName: 'Johnson', role: 'Professor', image: '/images/johnsonP.jpeg', office: 'POST 326', phone: '808-956-7639', email: 'johnson@hawaii.edu',
-    },
-    {
-      firstName: 'Jason', lastName: 'Leigh', role: 'Professor', image: '/images/jason-leigh.jpg', office: 'POST 327', phone: '808-956-4989', email: 'leighj@hawaii.edu',
-    },
-    {
-      firstName: 'Henri', lastName: 'Casanova', role: 'Professor', image: '/images/henri-casanova.jpg', office: 'POST 303B', phone: '808-956-8249', email: 'henric@hawaii.edu',
-
-    },
-  ];
-  /*
+  /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
-    const subscription = Meteor.subscribe(FacultyProfiles.userPublicationName);
+    const subscription = FacultyProfiles.subscribeFaculty();
+    console.log(subscription);
     const rdy = subscription.ready();
-    const facultyItems = FacultyProfiles.collection.find({}).fetch();
+    const facultyItems = FacultyProfiles.find({}).fetch();
+    console.log(rdy, facultyItems);
     return {
       faculty: facultyItems,
       ready: rdy,
     };
   }, []);
-  */
+
   // set faculty in filteredFaculty when finished loading
   useEffect(() => {
     if (ready) {
@@ -157,7 +141,7 @@ const FacultySearch = () => {
       { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center pb-2">No faculty found.</div> : '' }
     </div>
   );
-  return (
+  return (ready ? (
     <Container id={PAGE_IDS.FACULTY_SEARCH}>
       <div className="d-flex justify-content-center">
         <Row id="dashboard-screen">
@@ -169,7 +153,7 @@ const FacultySearch = () => {
         </Row>
       </div>
     </Container>
-  );
+  ) : <LoadingSpinner message="Loading" />);
 };
 
 export default FacultySearch;
