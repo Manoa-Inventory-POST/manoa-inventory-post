@@ -90,7 +90,7 @@ class InterestsCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT, ROLE.ADVISOR]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT]);
   }
 
   /**
@@ -103,6 +103,21 @@ class InterestsCollection extends BaseCollection {
     const interest = doc.interest;
     return { interest };
   }
+
+  /**
+   * Checks the Interest collection to see if an inputted Interest already exists.
+   * @param interest
+   * @return true
+   * @return false
+   */
+  checkExists(interest) {
+    const instances = this.find({ interest: interest }).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
+
 }
 
 /**

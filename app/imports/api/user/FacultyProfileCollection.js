@@ -3,14 +3,15 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-// import { OccupantRoom } from '../room/OccupantRoom';
-// import { Phone } from '../room/Phone';
+import { OccupantRoom } from '../room/OccupantRoom';
+import { Phone } from '../room/Phone';
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
     super('FacultyProfile', new SimpleSchema({
+      officeHours: { type: String, optional: true, defaultValue: 'N/A' },
       picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
-      position: { type: String, allowedValues: ['Professor', 'Assistant Professor', 'Advisor', 'Other'], defaultValue: 'Other' },
+      position: { type: String, optional: true, defaultValue: 'Other' },
     }));
   }
 
@@ -22,17 +23,23 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
+   * @param room An array of rooms.
+   * @param phone An array of phone numbers.
    */
-  define({ email, firstName, lastName, position, picture, password /* , room, phone */ }) {
+  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phone }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, position, picture });
+    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture });
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, position, picture, userID, role });
-      // room.forEach((name) => OccupantRoom.define({ email, name }));
-      // phone.forEach((num) => Phone.define({ email, num }));
+      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role });
+      if (rooms) {
+        rooms.forEach((room) => OccupantRoom.define({ email, room }));
+      }
+      if (phone) {
+        phone.forEach((phoneNum) => Phone.define({ email, phoneNum }));
+      }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
