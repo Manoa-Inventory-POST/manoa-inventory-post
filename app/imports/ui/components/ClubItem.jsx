@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 // import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 
@@ -9,6 +9,8 @@ const ClubItem = ({ club }) => (
     <td>{`${club.name}`}</td>
     <td>{club.homepage} </td>
     <td>{club.description}</td>
+    <td>{club.interests}</td>
+    <td>{`${club.adminList}`}</td>
   </tr>
 );
 
@@ -20,8 +22,10 @@ ClubItem.propTypes = {
     homepage: PropTypes.string,
     description: PropTypes.string,
     picture: PropTypes.string,
-    // interests: PropTypes.array,
-    // adminList: PropTypes.array,
+    // eslint-disable-next-line react/forbid-prop-types
+    interests: PropTypes.array,
+    // eslint-disable-next-line react/forbid-prop-types
+    adminList: PropTypes.array,
   }).isRequired,
 };
 
