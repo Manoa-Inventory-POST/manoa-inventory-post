@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const FacultyItem = ({ faculty }) => (
   <tr>
-    <td><Image alt="" src={faculty.picture} width="180" height="180" /></td>
+    <td><Image alt="" src={faculty.image} width="180" height="180" /></td>
     <td>{`${faculty.firstName} ${faculty.lastName}`}</td>
     <td>{faculty.role}</td>
     <td>{faculty.email}<br />{faculty.phone}</td>
@@ -17,7 +17,7 @@ FacultyItem.propTypes = {
   faculty: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    picture: PropTypes.string,
+    image: PropTypes.string,
     role: PropTypes.string,
     office: PropTypes.string,
     phone: PropTypes.string,
