@@ -21,7 +21,7 @@ class PhoneCollection extends BaseCollection {
    * Defines a new Phone item.
    * @return {never} the docID of the new document.
    * @param email
-   * @paran room
+   * @param room
    * @param phoneNum
    */
   define({ email, room, phoneNum }) {
