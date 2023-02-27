@@ -11,7 +11,8 @@ export const phonePublications = {
 class PhoneCollection extends BaseCollection {
   constructor() {
     super('Phone', new SimpleSchema({
-      email: String,
+      email: { type: String, optional: true },
+      room: { type: String, optional: true },
       phoneNum: String,
     }));
   }
@@ -20,11 +21,13 @@ class PhoneCollection extends BaseCollection {
    * Defines a new Phone item.
    * @return {never} the docID of the new document.
    * @param email
+   * @paran room
    * @param phoneNum
    */
-  define({ email, phoneNum }) {
+  define({ email, room, phoneNum }) {
     const docID = this._collection.insert({
       email,
+      room,
       phoneNum,
     });
     return docID;
@@ -37,10 +40,13 @@ class PhoneCollection extends BaseCollection {
    * @param phoneNum the new phoneNum (optional).
    * @returns never
    */
-  update(docID, { email, phoneNum }) {
+  update(docID, { email, room, phoneNum }) {
     const updateData = {};
     if (email) {
       updateData.email = email;
+    }
+    if (room) {
+      updateData.room = room;
     }
     if (phoneNum) {
       updateData.phoneNum = phoneNum;
@@ -106,8 +112,23 @@ class PhoneCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
+    const room = doc.room;
     const phoneNum = doc.phoneNum;
-    return { email, phoneNum };
+    return { email, room, phoneNum };
+  }
+
+  /**
+   * Checks the Phone collection to see if an inputted Phone already exists.
+   * @param phone
+   * @return true
+   * @return false
+   */
+  checkExists(phoneNum) {
+    const instances = this.find({ phoneNum }).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
   }
 }
 
