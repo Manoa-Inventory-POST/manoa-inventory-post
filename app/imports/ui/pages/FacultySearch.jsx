@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -17,11 +18,9 @@ const FacultySearch = () => {
 
   /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
-    const subscription = FacultyProfiles.subscribeFaculty();
-    console.log(subscription);
+    const subscription = Meteor.subscribe(FacultyProfiles.userPublicationName);
     const rdy = subscription.ready();
-    const facultyItems = FacultyProfiles.find({}).fetch();
-    console.log(rdy, facultyItems);
+    const facultyItems = FacultyProfiles.collection.find({}).fetch();
     return {
       faculty: facultyItems,
       ready: rdy,
@@ -141,7 +140,7 @@ const FacultySearch = () => {
       { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center pb-2">No faculty found.</div> : '' }
     </div>
   );
-  return (ready ? (
+  return (
     <Container id={PAGE_IDS.FACULTY_SEARCH}>
       <div className="d-flex justify-content-center">
         <Row id="dashboard-screen">
@@ -153,7 +152,7 @@ const FacultySearch = () => {
         </Row>
       </div>
     </Container>
-  ) : <LoadingSpinner message="Loading" />);
+  );
 };
 
 export default FacultySearch;
