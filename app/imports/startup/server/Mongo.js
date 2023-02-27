@@ -13,7 +13,7 @@ function addData(data) {
 
 // Initialize the database with a default data document.
 function addRoom(data) {
-  console.log(`  Adding: ${data.num} (${data.description})`);
+  console.log(`  Adding: ${data.room} (${data.description}) ${data.building}`);
   Room.define(data);
 }
 

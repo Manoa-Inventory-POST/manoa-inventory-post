@@ -26,7 +26,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param room An array of rooms.
    * @param phone An array of phone numbers.
    */
-  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phone }) {
+  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, officeHours, position, picture });
@@ -37,8 +37,18 @@ class FacultyProfileCollection extends BaseProfileCollection {
       if (rooms) {
         rooms.forEach((room) => OccupantRoom.define({ email, room }));
       }
-      if (phone) {
-        phone.forEach((phoneNum) => Phone.define({ email, phoneNum }));
+      if (phones) {
+        // checks if phones exist
+        phones.forEach(phoneNum => {
+          // if exists, update
+          if (Phone.checkExists(phoneNum)) {
+            const phoneID = Phone.findDoc({ phoneNum })._id;
+            Phone.update(phoneID, { email });
+            // else, define new phone
+          } else {
+            Phone.define({ email, phoneNum });
+          }
+        });
       }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;

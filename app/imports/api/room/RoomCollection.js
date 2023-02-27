@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { Phone } from './Phone';
 
 export const roomPublications = {
   roomPub: 'roomPub',
@@ -11,7 +12,7 @@ export const roomPublications = {
 class RoomCollection extends BaseCollection {
   constructor() {
     super('Room', new SimpleSchema({
-      num: String,
+      room: String,
       description: String,
       building: String,
       status: { type: String, allowedValues: ['open', 'occupied', 'maintenance'], defaultValue: 'open' },
@@ -21,13 +22,26 @@ class RoomCollection extends BaseCollection {
   /**
    * Defines a new Room item.
    * @return {never} the docID of the new document.
-   * @param num
+   * @param room
    * @param description
    * @param status
    */
-  define({ num, description, building, status }) {
+  define({ room, description, building, status, phones }) {
+    if (phones) {
+      // checks if phones exist
+      phones.forEach(phoneNum => {
+        // if exists, update
+        if (Phone.checkExists(phoneNum)) {
+          const phoneID = Phone.findDoc({ phoneNum })._id;
+          Phone.update(phoneID, { room });
+        // else, define new phone
+        } else {
+          Phone.define({ room, phoneNum });
+        }
+      });
+    }
     const docID = this._collection.insert({
-      num,
+      room,
       description,
       building,
       status,
@@ -38,15 +52,15 @@ class RoomCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param num the new num (optional).
+   * @param room the new room (optional).
    * @param description the new description (optional).
    * @param status the new status (optional).
    * @returns never
    */
-  update(docID, { num, description, building, status }) {
+  update(docID, { room, description, building, status }) {
     const updateData = {};
-    if (num) {
-      updateData.num = num;
+    if (room) {
+      updateData.room = room;
     }
     if (description) {
       updateData.description = description;
@@ -62,11 +76,11 @@ class RoomCollection extends BaseCollection {
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } num A document or docID in this collection.
+   * @param { String | Object } room A document or docID in this collection.
    * @returns true
    */
-  removeIt(num) {
-    const doc = this.findDoc(num);
+  removeIt(room) {
+    const doc = this.findDoc(room);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -113,15 +127,15 @@ class RoomCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{num: *, description: *, building: *, status: *}}
+   * @return {{room: *, description: *, building: *, status: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const num = doc.num;
+    const room = doc.room;
     const description = doc.description;
     const building = doc.building;
     const status = doc.status;
-    return { num, description, building, status };
+    return { room, description, building, status };
   }
 }
 
