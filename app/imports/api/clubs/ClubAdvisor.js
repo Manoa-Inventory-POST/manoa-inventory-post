@@ -109,6 +109,34 @@ class ClubAdvisorCollection extends BaseCollection {
     const club = doc.club;
     return { advisor, club };
   }
+
+  /**
+   * Searches for a club with a given advisor. If club exists, returns the array of clubs. Else,
+   * there is no club.
+   * @param advisor an advisor.
+   * @returns { Object } Array of clubs.
+   */
+  getClub(advisor) {
+    const clubs = this.find({ advisor }).fetch();
+    if (clubs.isEmpty()) {
+      return [];
+    }
+    return clubs;
+  }
+
+  /**
+   * Searches for an advisor with a given club. If advisor exists, returns the array of advisors.
+   * Else, there are no advisors.
+   * @param club a club.
+   * @returns { Object } Array of advisors.
+   */
+  getAdvisor(club) {
+    const advisors = this.find({ club }).fetch();
+    if (advisors.isEmpty()) {
+      return [];
+    }
+    return advisors;
+  }
 }
 
 /*
