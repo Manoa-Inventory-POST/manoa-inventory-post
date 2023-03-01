@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import AdminHome from '../pages/AdminHome';
+import AdminDashboard from '../pages/AdminDashboard';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -76,7 +76,7 @@ const App = () => {
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
-          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
+          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />

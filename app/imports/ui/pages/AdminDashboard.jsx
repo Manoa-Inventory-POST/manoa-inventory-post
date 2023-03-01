@@ -11,7 +11,7 @@ import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 // import RoomSearchResultsTable from '../components/RoomSearchResultsTable';
 
 /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
-const AdminHome = () => {
+const AdminDashboard = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, admins } = useTracker(() => {
     // Get access to Admin documents
@@ -44,4 +44,4 @@ const AdminHome = () => {
   ) : <LoadingSpinner />);
 };
 
-export default AdminHome;
+export default AdminDashboard;

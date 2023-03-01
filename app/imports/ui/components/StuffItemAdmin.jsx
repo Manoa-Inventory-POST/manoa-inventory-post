@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/** Renders a single row in the List Stuff (Admin) table. See pages/AdminHome.jsx. */
+/** Renders a single row in the List Stuff (Admin) table. See pages/AdminDashboard.jsx. */
 const StuffItemAdmin = ({ stuff }) => (
   <tr>
     <td>{stuff.name}</td>
