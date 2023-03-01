@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import { Container, Image } from 'react-bootstrap';
 // import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';

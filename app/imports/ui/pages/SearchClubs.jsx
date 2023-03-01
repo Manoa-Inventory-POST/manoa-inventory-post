@@ -21,10 +21,10 @@ const ClubSearch = () => {
   const ready = true;
   const clubProfiles = [
     {
-      name: 'Club Moore', _id: 'hi', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Moore', 'Cats',], adminList: ['Moore', 'Cats',],
+      name: 'Club Moore', _id: 'hi', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Moore', 'Cats'], adminList: ['Moore', 'Cats'],
     },
     {
-      name: 'Better Club Moore', _id: 'hi2', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam', 'Dogs',], adminList: ['Cam', 'Dogs',],
+      name: 'Better Club Moore', _id: 'hi2', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam', 'Dogs'], adminList: ['Cam', 'Dogs'],
     },
   ];
 
@@ -108,6 +108,7 @@ const ClubSearch = () => {
       <Table striped className="border border-2">
         <thead style={{ zIndex: 200 }}>
           <tr>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <th />
             <th>Name</th>
             <th>Website</th>
