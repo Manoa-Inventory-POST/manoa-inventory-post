@@ -137,6 +137,18 @@ class ClubsCollection extends BaseCollection {
     const picture = doc.picture;
     return { name, description, website, picture };
   }
+
+  /**
+   * Searches for a club name. If name exists, returns the Club Object. Else, there is no club.
+   * @returns { Object } A club.
+   */
+  getData(name) {
+    const club = this.find({ name }).fetch();
+    if (name.isEmpty()) {
+      return [];
+    }
+    return club[0];
+  }
 }
 
 /*

@@ -129,7 +129,7 @@ class ClubOfficerCollection extends BaseCollection {
    * @param club a club.
    * @returns { Object } Array of officers.
    */
-  getAdvisor(club) {
+  getOfficer(club) {
     const officers = this.find({ club }).fetch();
     if (officers.isEmpty()) {
       return [];

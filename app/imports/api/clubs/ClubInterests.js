@@ -134,7 +134,7 @@ class ClubInterestsCollection extends BaseCollection {
    * @param club a club.
    * @returns { Object } Array of interests.
    */
-  getAdvisor(club) {
+  getInterest(club) {
     const interests = this.find({ club }).fetch();
     if (interests.isEmpty()) {
       return [];
