@@ -21,10 +21,10 @@ const ClubSearch = () => {
   const ready = true;
   const clubProfiles = [
     {
-      name: 'Club Moore', _id: 'hi', homepage: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: 'Moore', adminList: 'Cam',
+      name: 'Club Moore', _id: 'hi', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Moore', 'Cats',], adminList: ['Moore', 'Cats',],
     },
     {
-      name: 'Better Club Moore', _id: 'hi2', homepage: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: 'Cam', adminList: 'Moore',
+      name: 'Better Club Moore', _id: 'hi2', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam', 'Dogs',], adminList: ['Cam', 'Dogs',],
     },
   ];
 
@@ -40,10 +40,10 @@ const ClubSearch = () => {
       filtered = filtered.filter(function (obj) { return obj.name.toLowerCase().includes(filteredName.toLowerCase()); });
     }
     if (filteredInterests) {
-      filtered = filtered.filter(function (obj) { return obj.interests.toLowerCase().includes(filteredInterests.toLowerCase()); });
+      filtered = filtered.filter(function (obj) { return obj.interests.toLocaleString().toLowerCase().includes(filteredInterests.toLowerCase()); });
     }
     if (filteredAdmins) {
-      filtered = filtered.filter(function (obj) { return obj.adminList.toLowerCase().includes(filteredAdmins.toLowerCase()); });
+      filtered = filtered.filter(function (obj) { return obj.adminList.toLocaleString().toLowerCase().includes(filteredAdmins.toLowerCase()); });
     }
     setFilteredClubs(filtered);
   }, [filteredName, filteredInterests, filteredAdmins]);
@@ -110,7 +110,7 @@ const ClubSearch = () => {
           <tr>
             <th />
             <th>Name</th>
-            <th>Homepage</th>
+            <th>Website</th>
             <th>Description</th>
             <th>Interests</th>
             <th>Advisor</th>
