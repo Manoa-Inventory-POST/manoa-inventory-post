@@ -23,9 +23,9 @@ ClubItem.propTypes = {
     description: PropTypes.string,
     picture: PropTypes.string,
     // eslint-disable-next-line react/forbid-prop-types
-    interests: PropTypes.array,
+    interests: PropTypes.string,
     // eslint-disable-next-line react/forbid-prop-types
-    adminList: PropTypes.array,
+    adminList: PropTypes.string,
   }).isRequired,
 };
 
