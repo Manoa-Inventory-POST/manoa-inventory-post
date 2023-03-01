@@ -38,6 +38,7 @@ import FacultyHome from '../pages/FacultyHome';
 import ITSuppHome from '../pages/ITSuppHome';
 import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
+import ClubPage from '../pages/ClubPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -82,6 +83,7 @@ const App = () => {
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="/itsupp-home" element={<ITSupportProtectedRoute><ITSuppHome /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
+          <Route path="/club-page" element={<ClubPage />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
