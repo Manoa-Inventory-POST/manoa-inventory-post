@@ -18,9 +18,9 @@ const FacultySearch = () => {
 
   /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
-    const subscription = Meteor.subscribe(FacultyProfiles.userPublicationName);
+    const subscription = FacultyProfiles.subscribeFaculty();
     const rdy = subscription.ready();
-    const facultyItems = FacultyProfiles.collection.find({}).fetch();
+    const facultyItems = FacultyProfiles.find({}).fetch();
     return {
       faculty: facultyItems,
       ready: rdy,
