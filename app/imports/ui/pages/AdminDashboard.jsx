@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   const currentUser = admins[0];
 
   return (ready ? (
-    <Container id={PAGE_IDS.LIST_STUFF_ADMIN} className="py-3">
+    <Container id={PAGE_IDS.ADMIN_HOME} className="py-3">
       <Row>
         <Col className="ms-5 my-3"><h2>Welcome, { currentUser.firstName } { currentUser.lastName }</h2></Col>
       </Row>

@@ -7,6 +7,7 @@ import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
 import { studenthomePage } from './studenthome.page';
 import { facultyhomePage } from './facultyhome.page';
+import { adminhomePage } from './adminhome.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -89,4 +90,11 @@ test('Test that faculty home page shows up', async () => {
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
   await facultyhomePage.isDisplayed();
+});
+
+test('Test that admin home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(adminCredentials.username, adminCredentials.password);
+  await navBar.isLoggedIn(adminCredentials.username);
+  await adminhomePage.isDisplayed();
 });
