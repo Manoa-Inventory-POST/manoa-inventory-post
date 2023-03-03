@@ -53,7 +53,7 @@ const FacultySearch = () => {
   }, [facultyFirstName, facultyLastName, facultyRole, facultyOffice]);
 
   const returnFilter = () => (
-    <div className="pb-3">
+    <div className="pb-3" id={PAGE_IDS.FACULTY_SEARCH}>
       <h2 className="mt-4 text-center mb-2">Faculty Search</h2>
       <div id="filter-border">
         <Accordion>

@@ -1,14 +1,15 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const FacultyItem = ({ faculty }) => (
   <tr>
     <td><Image alt="" src={faculty.picture} width="180" height="180" /></td>
-    <td>{`${faculty.firstName} ${faculty.lastName}`}</td>
-    <td>{faculty.role}</td>
+    <td><Link to={`/facultyinfo/${faculty._id}`}>{`${faculty.firstName} ${faculty.lastName}`}</Link></td>
+    <td>{faculty.position}</td>
     <td>{faculty.email}<br />{faculty.phone}</td>
-    <td>{faculty.office}</td>
+    <td>{faculty.officeHours}</td>
   </tr>
 );
 
@@ -18,8 +19,8 @@ FacultyItem.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     picture: PropTypes.string,
-    role: PropTypes.string,
-    office: PropTypes.string,
+    position: PropTypes.string,
+    officeHours: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     _id: PropTypes.string,
