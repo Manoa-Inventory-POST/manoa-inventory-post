@@ -54,7 +54,8 @@ const FullFacultyInfo = () => {
             </Row>
             <Row>
               <Col>
-                <Row lg={2}><h5>Office Hours: Fake text to test how far the text will go out. Testing with lg=2</h5></Row>
+                <Row lg={2}><h5>Office Hours: M, W 2:30-3:30pm in POST314</h5></Row>
+                <Row lg={2}><h5>M, W 2:30-3:30pm in POST314</h5></Row>
               </Col>
             </Row>
           </Col>
