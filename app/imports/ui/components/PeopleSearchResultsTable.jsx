@@ -11,6 +11,7 @@ import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { Phone } from '../../api/room/Phone';
 import { Room } from '../../api/room/RoomCollection';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const PeopleSearchResultsTable = () => {
 
@@ -25,12 +26,13 @@ const PeopleSearchResultsTable = () => {
   const { ready, users, admins, ITSupport, office, faculty, students } = useTracker(() => {
 
     const subscriptionUser = UserProfiles.subscribe();
-    const subscriptionFaculty = FacultyProfiles.subscribe();
+    const subscriptionFaculty = FacultyProfiles.subscribeFaculty();
     const subscriptionOffice = OfficeProfiles.subscribe();
     const subscriptionAdmin = AdminProfiles.subscribe();
     const subscriptionIT = ITSupportProfiles.subscribe();
     const subscriptionStudent = StudentProfiles.subscribe();
     const subscriptionPhone = Phone.subscribePhone();
+    const subscriptionOccRoom = OccupantRoom.subscribeOccupantRoom();
 
     const rdy = subscriptionUser.ready() && subscriptionFaculty.ready() && subscriptionOffice.ready() && subscriptionAdmin.ready() && subscriptionIT.ready() && subscriptionStudent.ready() && subscriptionPhone.ready();
 
@@ -49,13 +51,22 @@ const PeopleSearchResultsTable = () => {
       result.firstName = user.firstName;
       result.lastName = user.lastName;
       result.role = user.role;
-      let roomArr = RoomCollection.find({ email: user.email }).fetch();
-      roomArr = roomArr.map(room => room.num);
+      let roomArr = OccupantRoom.find({ email: user.email }).fetch();
+      roomArr = roomArr.map(room => room.room);
+      if (roomArr.length === 1) {
+        roomArr = roomArr[0];
+      } else {
+        roomArr = roomArr.join(', ');
+      }
       console.log(roomArr);
       let phoneArr = PhoneCollection.find({ email: user.email }).fetch();
       phoneArr = phoneArr.map(item => item.phoneNum);
+      if (phoneArr.length === 1) {
+        phoneArr = phoneArr[0];
+      } else {
+        phoneArr = phoneArr.join(', ');
+      }
       console.log(phoneArr);
-      result.officeBuilding = 'POST';
       result.room = roomArr;
       result.phones = phoneArr;
       return result;
@@ -94,11 +105,8 @@ const PeopleSearchResultsTable = () => {
     if (userLastName) {
       filtered = filtered.filter(function (obj) { return obj.lastName.toLowerCase().includes(userLastName.toLowerCase()); });
     }
-    if (userOfficeBuilding) {
-      filtered = filtered.filter(function (obj) { return obj.officeBuilding.toUpperCase().includes(userOfficeBuilding.toUpperCase()); });
-    }
     if (userRoom) {
-      filtered = filtered.filter(function (obj) { return obj.room.includes(userRoom); });
+      filtered = filtered.filter(function (obj) { return obj.room.toLowerCase().includes(userRoom.toLowerCase()); });
     }
     if (userPhone) {
       filtered = filtered.filter(function (obj) { return obj.phones.toLowerCase().includes(userPhone.toLowerCase()); });
@@ -135,19 +143,6 @@ const PeopleSearchResultsTable = () => {
               className="shadow-sm"
               placeholder="last name"
               onChange={e => setUserLastName(e.target.value)}
-            />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by office building">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Office Building
-            </Col>
-            <input
-              type="text"
-              className="shadow-sm"
-              placeholder="office building"
-              onChange={e => setUserOfficeBuilding(e.target.value)}
             />
           </label>
         </Col>
@@ -196,7 +191,6 @@ const PeopleSearchResultsTable = () => {
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Office Building</th>
             <th>Room</th>
             <th>Phone Number</th>
             <th>Role</th>

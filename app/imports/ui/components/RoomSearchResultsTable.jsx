@@ -36,7 +36,7 @@ const RoomSearchResultsTable = () => {
       filtered = filtered.filter(function (obj) { return obj.building.toLowerCase().includes(roomBuilding.toLowerCase()); });
     }
     if (roomNumber) {
-      filtered = filtered.filter(function (obj) { return obj.num.includes(roomNumber); });
+      filtered = filtered.filter(function (obj) { return obj.room.includes(roomNumber); });
     }
     if (roomDescription) {
       filtered = filtered.filter(function (obj) { return obj.description.toLowerCase().includes(roomDescription.toLowerCase()); });

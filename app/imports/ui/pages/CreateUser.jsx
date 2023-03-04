@@ -42,7 +42,7 @@ const CreateUser = () => {
 
   const roomValues = [];
   for (let i = 0; i < rooms.length; i++) {
-    roomValues[i] = rooms[i].num;
+    roomValues[i] = rooms[i].room;
   }
 
   const { clubs } = useTracker(() => {
