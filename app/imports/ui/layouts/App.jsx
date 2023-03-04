@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import AdminDashboard from '../pages/AdminDashboard';
+import AdminHome from '../pages/AdminHome';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -38,6 +38,7 @@ import FacultyHome from '../pages/FacultyHome';
 import ITSuppHome from '../pages/ITSuppHome';
 import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
+import FullFacultyInfo from '../pages/FullFacultyInfo';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/map" element={<Map />} />
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
@@ -76,7 +78,7 @@ const App = () => {
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
-          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
