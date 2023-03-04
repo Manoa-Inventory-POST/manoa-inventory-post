@@ -22,6 +22,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN}`);
   }
 
+  async gotoFacultySearchPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_FACULTY_SEARCH}`);
+  }
+
   /* Check that the specified user is currently logged in. */
   async isLoggedIn(username) {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
