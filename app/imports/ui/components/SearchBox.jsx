@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import PeopleSearchResultsTable from "./PeopleSearchResultsTable";
-import RoomSearchResultsTable from "./RoomSearchResultsTable";
+import PeopleSearchResultsTable from './PeopleSearchResultsTable';
+import RoomSearchResultsTable from './RoomSearchResultsTable';
 
 const SearchBox = () => (
   <Accordion defaultActiveKey="0" className="rounded-0">
@@ -15,49 +15,6 @@ const SearchBox = () => (
     <Accordion.Item eventKey="1" className="rounded-0 dashboard-header">
       <Accordion.Header className="rounded-0">Search People</Accordion.Header>
       <Accordion.Body className="rounded-0 text-black">
-        <Form>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>Role</Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option value="any">ANY</option>
-              <option value="POST">Professor</option>
-              <option value="POST">TA</option>
-              <option value="POST">RA</option>
-              <option value="POST">Student Advisor</option>
-              <option value="POST">Undergraduate Student</option>
-              <option value="POST">Graduate Student</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>Building</Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option value="any">ANY</option>
-              <option value="POST">POST</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>Room</Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option value="any">ANY</option>
-              <option value="POST">POST</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-          <Button variant="primary" type="submit" className="btn-dashboard">
-            Search
-          </Button>
-        </Form>
         <PeopleSearchResultsTable />
       </Accordion.Body>
     </Accordion.Item>

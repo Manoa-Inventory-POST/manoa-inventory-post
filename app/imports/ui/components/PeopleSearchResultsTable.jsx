@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
@@ -10,17 +10,30 @@ import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { Phone } from '../../api/room/Phone';
+import { Room } from '../../api/room/RoomCollection';
 
 const PeopleSearchResultsTable = () => {
+
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [userFirstName, setUserFirstName] = useState('');
+  const [userLastName, setUserLastName] = useState('');
+  const [userOfficeBuilding, setUserOfficeBuilding] = useState('');
+  const [userRoom, setUserRoom] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [userRole, setUserRole] = useState('');
+
   const { ready, users, admins, ITSupport, office, faculty, students } = useTracker(() => {
-    const subscription = UserProfiles.subscribe();
-    FacultyProfiles.subscribe();
-    OfficeProfiles.subscribe();
-    AdminProfiles.subscribe();
-    ITSupportProfiles.subscribe();
-    StudentProfiles.subscribe();
-    Phone.subscribePhone();
-    const rdy = subscription.ready();
+
+    const subscriptionUser = UserProfiles.subscribe();
+    const subscriptionFaculty = FacultyProfiles.subscribe();
+    const subscriptionOffice = OfficeProfiles.subscribe();
+    const subscriptionAdmin = AdminProfiles.subscribe();
+    const subscriptionIT = ITSupportProfiles.subscribe();
+    const subscriptionStudent = StudentProfiles.subscribe();
+    const subscriptionPhone = Phone.subscribePhone();
+
+    const rdy = subscriptionUser.ready() && subscriptionFaculty.ready() && subscriptionOffice.ready() && subscriptionAdmin.ready() && subscriptionIT.ready() && subscriptionStudent.ready() && subscriptionPhone.ready();
+
     const userEntries = UserProfiles.find({}, { sort: { name: 1 } }).fetch();
     const adminEntries = AdminProfiles.find({}, { sort: { name: 1 } }).fetch();
     const officeEntries = OfficeProfiles.find({}, { sort: { name: 1 } }).fetch();
@@ -28,26 +41,156 @@ const PeopleSearchResultsTable = () => {
     const facultyEntries = FacultyProfiles.find({}, { sort: { name: 1 } }).fetch();
     const studentEntries = StudentProfiles.find({}, { sort: { name: 1 } }).fetch();
     const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
-    console.log(userEntries, rdy);
-    console.log(adminEntries);
-    console.log(officeEntries);
-    console.log(facultyEntries);
-    console.log(itEntries);
-    console.log(studentEntries);
-    console.log(phoneEntries);
+
+    console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
+
+    function buildPerson(user, RoomCollection, PhoneCollection) {
+      const result = {};
+      result.firstName = user.firstName;
+      result.lastName = user.lastName;
+      result.role = user.role;
+      let roomArr = RoomCollection.find({ email: user.email }).fetch();
+      roomArr = roomArr.map(room => room.num);
+      console.log(roomArr);
+      let phoneArr = PhoneCollection.find({ email: user.email }).fetch();
+      phoneArr = phoneArr.map(item => item.phoneNum);
+      console.log(phoneArr);
+      result.officeBuilding = 'POST';
+      result.room = roomArr;
+      result.phones = phoneArr;
+      return result;
+    }
+    const adminObjects = adminEntries.map(item => buildPerson(item, Room, Phone));
+    const facultyObjects = facultyEntries.map(item => buildPerson(item, Room, Phone));
+    const officeObjects = officeEntries.map(item => buildPerson(item, Room, Phone));
+    const itObjects = itEntries.map(item => buildPerson(item, Room, Phone));
+    const studentObjects = studentEntries.map(item => buildPerson(item, Room, Phone));
+    const userObjects = userEntries.map(item => buildPerson(item, Room, Phone));
+    console.log(facultyObjects);
+
+    Array.prototype.push.apply(userObjects, adminObjects);
+    Array.prototype.push.apply(userObjects, facultyObjects);
+    Array.prototype.push.apply(userObjects, officeObjects);
+    Array.prototype.push.apply(userObjects, itObjects);
+    Array.prototype.push.apply(userObjects, studentObjects);
+
     return {
-      admins: adminEntries,
-      users: userEntries,
-      ITSupport: itEntries,
-      office: officeEntries,
-      faculty: facultyEntries,
-      students: studentEntries,
+      users: userObjects,
       ready: rdy,
     };
   }, []);
+
+  useEffect(() => {
+    if (ready) {
+      setFilteredUsers(users);
+    }
+  }, [ready]);
+
+  useEffect(() => {
+    let filtered = users;
+    if (userFirstName) {
+      filtered = filtered.filter(function (obj) { return obj.firstName.toLowerCase().includes(userFirstName.toLowerCase()); });
+    }
+    if (userLastName) {
+      filtered = filtered.filter(function (obj) { return obj.lastName.toLowerCase().includes(userLastName.toLowerCase()); });
+    }
+    if (userOfficeBuilding) {
+      filtered = filtered.filter(function (obj) { return obj.officeBuilding.toUpperCase().includes(userOfficeBuilding.toUpperCase()); });
+    }
+    if (userRoom) {
+      filtered = filtered.filter(function (obj) { return obj.room.includes(userRoom); });
+    }
+    if (userPhone) {
+      filtered = filtered.filter(function (obj) { return obj.phones.toLowerCase().includes(userPhone.toLowerCase()); });
+    }
+    if (userRole) {
+      filtered = filtered.filter(function (obj) { return obj.role.toLowerCase().includes(userRole.toLowerCase()); });
+    }
+    setFilteredUsers(filtered);
+  }, [userFirstName, userLastName, userOfficeBuilding, userRoom, userPhone, userRole]);
+
   return (ready ? (
     <Container className="py-3 search-results">
-      <h2 className="ms-5 my-3">Search Results</h2>
+      <Row className="pt-3 px-3">
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by first name">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              First Name
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="first name"
+              onChange={e => setUserFirstName(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by last name">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Last name
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="last name"
+              onChange={e => setUserLastName(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by office building">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Office Building
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="office building"
+              onChange={e => setUserOfficeBuilding(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by room number">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Office Room Number
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="room number"
+              onChange={e => setUserRoom(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by room number">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Phone Number
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="phone number"
+              onChange={e => setUserPhone(e.target.value)}
+            />
+          </label>
+        </Col>
+        <Col className="d-flex justify-content-center">
+          <label htmlFor="Search by role">
+            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
+              Role
+            </Col>
+            <input
+              type="text"
+              className="shadow-sm"
+              placeholder="role"
+              onChange={e => setUserRole(e.target.value)}
+            />
+          </label>
+        </Col>
+      </Row>
       <Table striped bordered hover>
         <thead className="search-results-table-header">
           <tr>
@@ -57,16 +200,11 @@ const PeopleSearchResultsTable = () => {
             <th>Room</th>
             <th>Phone Number</th>
             <th>Role</th>
-            <th>Edit</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => <PeopleSearchResultsTableRow key={user.email} user={user} />)}
-          {admins.map((admin) => <PeopleSearchResultsTableRow key={admin.email} user={admin} />)}
-          {ITSupport.map((it) => <PeopleSearchResultsTableRow key={it.email} user={it} />)}
-          {office.map((officePerson) => <PeopleSearchResultsTableRow key={officePerson.email} user={officePerson} />)}
-          {faculty.map((facultyPerson) => <PeopleSearchResultsTableRow key={facultyPerson.email} user={facultyPerson} />)}
-          {students.map((student) => <PeopleSearchResultsTableRow key={student.email} user={student} />)}
+          { filteredUsers.length === 0 ? (<tr><td>-</td></tr>) : filteredUsers.map((user) => <PeopleSearchResultsTableRow key={user.email} user={user} />)}
         </tbody>
       </Table>
     </Container>

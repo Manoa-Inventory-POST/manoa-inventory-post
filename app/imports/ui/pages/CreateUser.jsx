@@ -85,57 +85,20 @@ const CreateUser = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-
+    console.log('submit');
     const { firstName, lastName, email, password, role, room, phone, clubAdvisor, club } = data;
-    const phoneArray = phone.split(',');
-    let accountCollectionName;
-    const accountDefinitionData = { firstName, lastName, password, email };
-
-    const phoneCollectionName = Phone.getCollectionName();
-    if (phone !== '') {
-      for (let i = 0; i < phoneArray.length; i++) {
-        if (/^\d{10}$/.test(phoneArray[i])) {
-          const phoneNumber = phoneArray[i];
-          const phoneDefinitionData = { phoneNumber, email };
-          defineMethod.callPromise({ phoneCollectionName, phoneDefinitionData })
-            .catch(error => swal('Error', error.message, 'error'))
-            .then(() => {
-              swal('Success', 'Phone added successfully', 'success');
-            });
-        }
-      }
-    }
-
-    const occupantRoomCollectionName = OccupantRoom.getCollectionName();
-    if (room.length > 0) {
-      for (let i = 0; i < room.length; i++) {
-        const roomNumber = room[i];
-        const occupantRoomDefinitionData = { email, roomNumber };
-        defineMethod.callPromise({ occupantRoomCollectionName, occupantRoomDefinitionData })
-          .catch(error => swal('Error', error.message, 'error'))
-          .then(() => {
-            swal('Success', 'Phone added successfully', 'success');
-          });
-      }
-    }
-
-    const clubAdvisorCollectionName = ClubAdvisor.getCollectionName();
-    if (clubAdvisor) {
-      const clubAdvisorDefinitionData = { club, email };
-      defineMethod.callPromise({ clubAdvisorCollectionName, clubAdvisorDefinitionData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'Phone added successfully', 'success');
-        });
-    }
+    console.log(data);
+    // const phoneArray = phone.split(',');
+    let collectionName;
+    const definitionData = { firstName, lastName, password, email };
 
     switch (role) {
     case 'ADMIN':
       console.log('ADMIN SWITCH');
-      accountCollectionName = AdminProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = AdminProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
@@ -143,10 +106,10 @@ const CreateUser = () => {
       break;
     case 'FACULTY':
       console.log('FACULTY SWITCH');
-      accountCollectionName = FacultyProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = FacultyProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
@@ -154,10 +117,10 @@ const CreateUser = () => {
       break;
     case 'USER':
       console.log('USER SWITCH');
-      accountCollectionName = UserProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = UserProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
@@ -165,10 +128,10 @@ const CreateUser = () => {
       break;
     case 'STUDENT':
       console.log('STUDENT SWITCH');
-      accountCollectionName = StudentProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = StudentProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
@@ -176,10 +139,10 @@ const CreateUser = () => {
       break;
     case 'OFFICE':
       console.log('OFFICE SWITCH');
-      accountCollectionName = OfficeProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = OfficeProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
@@ -187,10 +150,10 @@ const CreateUser = () => {
       break;
     case 'ITSUPPORT':
       console.log('ITSUPPORT SWITCH');
-      accountCollectionName = ITSupportProfiles.getCollectionName();
-      console.log(accountCollectionName);
-      console.log(typeof accountCollectionName);
-      defineMethod.callPromise({ accountCollectionName, accountDefinitionData })
+      collectionName = ITSupportProfiles.getCollectionName();
+      console.log(collectionName);
+      console.log(typeof collectionName);
+      defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'User added successfully', 'success');
