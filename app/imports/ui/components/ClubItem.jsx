@@ -1,7 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { Container, Image } from 'react-bootstrap';
-// import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 
 const ClubItem = ({ club }) => (
@@ -10,8 +9,8 @@ const ClubItem = ({ club }) => (
     <td>{`${club.name}`}</td>
     <td>{club.website} </td>
     <td>{club.description}</td>
-    <td>{club.interests.toLocaleString()}</td>
-    <td>{club.adminList.toLocaleString()}</td>
+    <td>{club.interests}</td>
+    <td>{club.advisor}</td>
   </tr>
 );
 
@@ -26,7 +25,7 @@ ClubItem.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     interests: PropTypes.array,
     // eslint-disable-next-line react/forbid-prop-types
-    adminList: PropTypes.array,
+    advisor: PropTypes.string,
   }).isRequired,
 };
 

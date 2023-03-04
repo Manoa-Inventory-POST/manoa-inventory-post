@@ -146,20 +146,6 @@
     { "room": "331", "description": "utility", "building": "POST" }
   ],
   "defaultClubs": [
-    { "name": "Mockup Club",
-      "website": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "description": "club club club club club club club club club club",
-      "interests": [
-        "Mockup",
-        "RIO"
-      ],
-      "advisors": [
-        "faculty@foo.com"
-      ],
-      "officers": [
-        "student@foo.com"
-      ]
-    },
     { "name": "Association for Computing Machinery (ACM)",
       "website": "https://acmanoa.github.io/",
       "description": "We are a registered student chapter of the Association for Computing Machinery as well as a recognized student-chartered registered independent organization (RIO) at the University of Hawaii at Manoa. We welcome students of all different backgrounds, interests, and skill levels to join our community and share our passion for computer science.",
