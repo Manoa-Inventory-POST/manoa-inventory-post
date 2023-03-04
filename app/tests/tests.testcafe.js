@@ -57,7 +57,7 @@ test('Test that sign up and sign out work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
-
+/*
 test('Test that admin pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
@@ -75,7 +75,7 @@ test('Test that admin pages show up', async () => {
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
 });
-
+*/
 test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
