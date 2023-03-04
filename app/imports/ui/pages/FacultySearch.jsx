@@ -13,8 +13,8 @@ const FacultySearch = () => {
   const [filteredFaculty, setFilteredFaculty] = useState([]);
   const [facultyFirstName, setFacultyFirstName] = useState('');
   const [facultyLastName, setFacultyLastName] = useState('');
-  const [facultyRole, setFacultyRole] = useState('');
-  const [facultyOffice, setFacultyOffice] = useState('');
+  const [facultyPosition, setFacultyPosition] = useState('');
+  const [facultyOfficeHours, setFacultyOfficeHours] = useState('');
 
   /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
@@ -43,14 +43,14 @@ const FacultySearch = () => {
     if (facultyLastName) {
       filtered = filtered.filter(function (obj) { return obj.lastName.toLowerCase().includes(facultyLastName.toLowerCase()); });
     }
-    if (facultyRole) {
-      filtered = filtered.filter(function (obj) { return obj.role.toLowerCase().includes(facultyRole.toLowerCase()); });
+    if (facultyPosition) {
+      filtered = filtered.filter(function (obj) { return obj.position.toLowerCase().includes(facultyPosition.toLowerCase()); });
     }
-    if (facultyOffice) {
-      filtered = filtered.filter(function (obj) { return obj.office.toLowerCase().includes(facultyOffice.toLowerCase()); });
+    if (facultyOfficeHours) {
+      filtered = filtered.filter(function (obj) { return obj.officeHours.toLowerCase().includes(facultyOfficeHours.toLowerCase()); });
     }
     setFilteredFaculty(filtered);
-  }, [facultyFirstName, facultyLastName, facultyRole, facultyOffice]);
+  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.FACULTY_SEARCH}>
@@ -90,13 +90,13 @@ const FacultySearch = () => {
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by role">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Role
+                      Position
                     </Col>
                     <input
                       type="text"
                       className="shadow-sm"
                       placeholder="Professor"
-                      onChange={e => setFacultyRole(e.target.value)}
+                      onChange={e => setFacultyPosition(e.target.value)}
                     />
                   </label>
                 </Col>
@@ -109,7 +109,7 @@ const FacultySearch = () => {
                       type="text"
                       className="shadow-sm"
                       placeholder="Enter a room number"
-                      onChange={e => setFacultyOffice(e.target.value)}
+                      onChange={e => setFacultyOfficeHours(e.target.value)}
                     />
                   </label>
                 </Col>
@@ -128,7 +128,7 @@ const FacultySearch = () => {
           <tr>
             <th> </th>
             <th>Name</th>
-            <th>Role</th>
+            <th>Position</th>
             <th>Contact Info</th>
             <th>Office</th>
           </tr>
