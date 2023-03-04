@@ -1,4 +1,4 @@
-// import { Selector, t } from 'testcafe';
+import { Selector, t } from 'testcafe';
 import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, */ /* manageDatabasePage, */ signOutPage } from './simple.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
@@ -9,6 +9,7 @@ import { studenthomePage } from './studenthome.page';
 // import { facultyhomePage } from './facultyhome.page';
 import { adminhomePage } from './adminhome.page';
 import { facultySearchPage } from './facultysearch.page';
+import { fullFacultyInfoPage } from './fullfacultyinfo.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -86,13 +87,16 @@ test('Test that student home and profile pages show up', async () => {
   await studentProfilePage.isDisplayed();
 });
 
-test.only('Test that the faculty search page shows up', async () => {
+test.only('Test that faculty search and faculty info pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
   await navBar.isLoggedIn(studentCredentials.username);
   await studenthomePage.isDisplayed();
   await navBar.gotoFacultySearchPage();
   await facultySearchPage.isDisplayed();
+  const KBaek = Selector('a').withText('Kyungim Baek');
+  await t.click(KBaek);
+  await fullFacultyInfoPage.isDisplayed();
 });
 
 /*
