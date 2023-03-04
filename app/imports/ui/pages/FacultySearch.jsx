@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
