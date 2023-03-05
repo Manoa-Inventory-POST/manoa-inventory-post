@@ -6,7 +6,7 @@ import { navBar } from './navbar.component';
 import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
 import { studenthomePage } from './studenthome.page';
-// import { facultyhomePage } from './facultyhome.page';
+import { facultyhomePage } from './facultyhome.page';
 import { adminhomePage } from './adminhome.page';
 import { facultySearchPage } from './facultysearch.page';
 import { fullFacultyInfoPage } from './fullfacultyinfo.page';
@@ -17,7 +17,7 @@ import { clubSearchPage } from './clubsearch.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
-// const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
+const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
@@ -100,14 +100,12 @@ test('Test that faculty search and faculty info pages show up', async () => {
   await fullFacultyInfoPage.isDisplayed();
 });
 
-/*
-test('Test that faculty home page shows up', async () => {
+test.only('Test that faculty home page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
   await facultyhomePage.isDisplayed();
 });
-*/
 
 test('Test that the club search page shows up', async () => {
   await navBar.gotoSignInPage();
