@@ -27,8 +27,6 @@ const ClubSearch = () => {
     const sub4 = Interests.subscribeInterests();
     const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
     const clubItems = Clubs.find({}, {}).fetch();
-    const clubAdvisors = ClubAdvisor.find({}, {}).fetch();
-    console.log(clubAdvisors);
 
     function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
       const result = {};
@@ -43,7 +41,7 @@ const ClubSearch = () => {
       } else {
         clubInterestsArray = clubInterestsArray.join(', ');
       }
-      console.log(clubInterestsArray);
+
       let clubAdvisorsArray = ClubAdvisorColl.find({ club: club.name }, {}).fetch();
       clubAdvisorsArray = clubAdvisorsArray.map(item => item.advisor);
       if (clubAdvisorsArray.length === 1) {
@@ -51,14 +49,13 @@ const ClubSearch = () => {
       } else {
         clubAdvisorsArray = clubAdvisorsArray.join(', ');
       }
-      console.log(clubAdvisorsArray);
+
       result.interests = clubInterestsArray;
       result.advisor = clubAdvisorsArray;
       return result;
     }
 
     const clubInfoObjects = clubItems.map(item => buildClubInfo(item, ClubInterests, ClubAdvisor));
-    console.log(clubInfoObjects);
 
     return {
       clubProfiles: clubInfoObjects,
@@ -87,7 +84,7 @@ const ClubSearch = () => {
   }, [filteredName, filteredInterests, filteredAdmins]);
 
   const returnFilter = () => (
-    <div className="pb-3">
+    <div className="pb-3" id={PAGE_IDS.CLUB_SEARCH}>
       <h2 className="mt-4 text-center mb-2">Club Search</h2>
       <div id="filter-border">
         <Accordion>
@@ -146,8 +143,7 @@ const ClubSearch = () => {
       <Table striped className="border border-2">
         <thead style={{ zIndex: 200 }}>
           <tr>
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <th />
+            <th> </th>
             <th>Name</th>
             <th>Website</th>
             <th>Description</th>

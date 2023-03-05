@@ -26,6 +26,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_FACULTY_SEARCH}`);
   }
 
+  async gotoClubSearchPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CLUB_SEARCH}`);
+  }
+
   /* Check that the specified user is currently logged in. */
   async isLoggedIn(username) {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;

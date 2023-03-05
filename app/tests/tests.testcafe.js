@@ -10,6 +10,7 @@ import { studenthomePage } from './studenthome.page';
 import { adminhomePage } from './adminhome.page';
 import { facultySearchPage } from './facultysearch.page';
 import { fullFacultyInfoPage } from './fullfacultyinfo.page';
+import { clubSearchPage } from './clubsearch.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -107,6 +108,15 @@ test('Test that faculty home page shows up', async () => {
   await facultyhomePage.isDisplayed();
 });
 */
+
+test('Test that the club search page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
+  await navBar.gotoClubSearchPage();
+  await clubSearchPage.isDisplayed();
+});
 
 test('Test that admin home page shows up', async () => {
   await navBar.gotoSignInPage();
