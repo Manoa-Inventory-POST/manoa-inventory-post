@@ -27,7 +27,7 @@ const FacultyInfoBar = () => {
       </Card.Header>
       <Card.Body>
         <Card.Text>Name: { currentUser.firstName } { currentUser.lastName }</Card.Text>
-        <Card.Text>Role: { currentUser.role }</Card.Text>
+        <Card.Text>Position: { currentUser.position }</Card.Text>
         <Card.Text>Email: { currentUser.email }</Card.Text>
         <Card.Text>Office: POST 311</Card.Text>
         <Card.Text>Office Phone: 808-123-4567</Card.Text>
