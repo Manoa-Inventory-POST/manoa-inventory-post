@@ -1,16 +1,17 @@
 // import { Meteor } from 'meteor/meteor';
-// import React, { useEffect, useState } from 'react';
 import React, { useState, useEffect } from 'react';
-// import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Row, Table, Container, Accordion } from 'react-bootstrap';
-// import { useTracker } from 'meteor/react-meteor-data';
-// import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 // import PropTypes from 'prop-types';
 import AccordionBody from 'react-bootstrap/AccordionBody';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ClubItem from '../components/ClubItem';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ClubInterests } from '../../api/clubs/ClubInterests';
+import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
+import { Interests } from '../../api/clubs/Interests';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const ClubSearch = () => {
@@ -18,15 +19,52 @@ const ClubSearch = () => {
   const [filteredName, setFilteredName] = useState('');
   const [filteredInterests, setFilteredInterests] = useState('');
   const [filteredAdmins, setFilteredAdmins] = useState('');
-  const ready = true;
-  const clubProfiles = [
-    {
-      name: 'Club Moore', _id: 'hi', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Moore', 'Cats'], adminList: ['Moore', 'Cats'],
-    },
-    {
-      name: 'Better Club Moore', _id: 'hi2', website: 'https://courses.ics.hawaii.edu/ics414s23/', description: 'Cam Moore Fan Club', picture: '/images/cam-moore.jpg', interests: ['Cam', 'Dogs'], adminList: ['Cam', 'Dogs'],
-    },
-  ];
+
+  const { ready, clubProfiles } = useTracker(() => {
+    const sub1 = Clubs.subscribeClubs();
+    const sub2 = ClubInterests.subscribeClubInterests();
+    const sub3 = ClubAdvisor.subscribeClubAdvisor();
+    const sub4 = Interests.subscribeInterests();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
+    const clubItems = Clubs.find({}, {}).fetch();
+    const clubAdvisors = ClubAdvisor.find({}, {}).fetch();
+    console.log(clubAdvisors);
+
+    function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
+      const result = {};
+      result.name = club.name;
+      result.website = club.website;
+      result.description = club.description;
+      result.picture = club.picture;
+      let clubInterestsArray = ClubInterestsColl.find({ club: club.name }, {}).fetch();
+      clubInterestsArray = clubInterestsArray.map(clubInt => clubInt.interest);
+      if (clubInterestsArray.length === 1) {
+        clubInterestsArray = clubInterestsArray[0];
+      } else {
+        clubInterestsArray = clubInterestsArray.join(', ');
+      }
+      console.log(clubInterestsArray);
+      let clubAdvisorsArray = ClubAdvisorColl.find({ club: club.name }, {}).fetch();
+      clubAdvisorsArray = clubAdvisorsArray.map(item => item.advisor);
+      if (clubAdvisorsArray.length === 1) {
+        clubAdvisorsArray = clubAdvisorsArray[0];
+      } else {
+        clubAdvisorsArray = clubAdvisorsArray.join(', ');
+      }
+      console.log(clubAdvisorsArray);
+      result.interests = clubInterestsArray;
+      result.advisor = clubAdvisorsArray;
+      return result;
+    }
+
+    const clubInfoObjects = clubItems.map(item => buildClubInfo(item, ClubInterests, ClubAdvisor));
+    console.log(clubInfoObjects);
+
+    return {
+      clubProfiles: clubInfoObjects,
+      ready: rdy,
+    };
+  }, []);
 
   useEffect(() => {
     if (ready) {
@@ -43,7 +81,7 @@ const ClubSearch = () => {
       filtered = filtered.filter(function (obj) { return obj.interests.toLocaleString().toLowerCase().includes(filteredInterests.toLowerCase()); });
     }
     if (filteredAdmins) {
-      filtered = filtered.filter(function (obj) { return obj.adminList.toLocaleString().toLowerCase().includes(filteredAdmins.toLowerCase()); });
+      filtered = filtered.filter(function (obj) { return obj.advisor.toLocaleString().toLowerCase().includes(filteredAdmins.toLowerCase()); });
     }
     setFilteredClubs(filtered);
   }, [filteredName, filteredInterests, filteredAdmins]);
