@@ -195,7 +195,7 @@
         "Teaching"
       ],
       "picture": "https://acmanoa.github.io/assets/img/logos/icspark.PNG",
-      "advisor":  "Charles Shackford" },
+      "advisors":  ["Charles Shackford"] },
     { "name": "Supporting Women in Technology Computing Hawaii (SWITCH)",
       "website": "https://switch-uhm.github.io/",
       "description": "SWITCH (Supporting Women in Technology Computing Hawaii) is the culmination of efforts of the awesome students, faculty, and working professionals supporting social change in the ICS department. We strive to provide useful resources from these organizations to improve your professional, technical, and personal development.",

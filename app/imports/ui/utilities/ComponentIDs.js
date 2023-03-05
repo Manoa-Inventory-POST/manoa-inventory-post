@@ -7,6 +7,7 @@ export const COMPONENT_IDS = {
   NAVBAR_CURRENT_USER: 'navbar-current-user',
   NAVBAR_LANDING_PAGE: 'navbar-landing-page',
   NAVBAR_STUDENT_HOME: 'navbar-student-home',
+  NAVBAR_FACULTY_HOME: 'navbar-faculty-home',
   NAVBAR_ADVISOR_HOME: 'navbar-advisor-home',
   NAVBAR_OFFICE_HOME: 'navbar-office-home',
   NAVBAR_ITSUPPORT_HOME: 'navbar-itsupport-home',
