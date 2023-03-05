@@ -13,7 +13,7 @@ const FacultyHome = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, faculty } = useTracker(() => {
     // Get access to Faculty documents
-    const subscription = FacultyProfiles.subscribe();
+    const subscription = FacultyProfiles.subscribeFaculty();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Faculty documents
@@ -24,6 +24,7 @@ const FacultyHome = () => {
     };
   }, []);
   const currentUser = faculty[0];
+
   return (ready ? (
     <Container id={PAGE_IDS.FACULTY_HOME} className="py-3">
       <Row>
