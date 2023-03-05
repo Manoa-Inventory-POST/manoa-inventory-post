@@ -100,7 +100,7 @@ test('Test that faculty search and faculty info pages show up', async () => {
   await fullFacultyInfoPage.isDisplayed();
 });
 
-test.only('Test that faculty home page shows up', async () => {
+test('Test that faculty home page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
