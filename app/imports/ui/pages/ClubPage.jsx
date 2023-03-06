@@ -5,13 +5,12 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
-import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { Profiles } from '../../api/profiles/Profiles';
-import { ClubAdmin } from '../../api/clubs/ClubAdmin';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { ClubOfficer } from '../../api/clubs/ClubOfficer';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+import { UserInterests } from '../../api/clubs/UserInterests';
 
 /**
  * Returns an array of Advisor emails for this club.
@@ -50,28 +49,31 @@ function checkEdit(email, clubName) {
 }
 
 /** Get the interests corresponding to the profile entered. */
-function getMemberInterests(profileName) {
-  const interests = _.filter(ProfilesInterests.collection.find().fetch(), (profilesInterest) => profilesInterest.profile === profileName);
-  return _.pluck(interests, 'interest');
+function getMemberInterests(email) {
+  const interests = UserInterests.find().fetch().filter((interest) => interest.email === email);
+  return interests;
 }
 
-/** Get the get relevant MEMBER profile data using corresponding email (unique). */
-function getMemberData(email) {
-  const profiles = _.find(Profiles.collection.find().fetch(), (member) => member.email === email);
-  const interests = getMemberInterests(email);
-  return _.extend({ }, profiles, { interests });
+function getAdvisorData(email) {
+  const profile = FacultyProfiles.checkEmail(email);
+  return profile;
+}
+
+function getOfficerData(email) {
+  const profile = StudentProfiles.checkEmail(email);
+  return profile;
 }
 
 /** Get the corresponding CLUB profile data using the club's name (unique). */
 function getClubData(name) {
-  const data = Clubs.collection.findOne({ name });
-  return _.extend({ }, data);
+  const data = Clubs.getData(name);
+  return data;
 }
 
 /** Get the interests corresponding to this specific organization. */
 function getClubInterests(clubName) {
-  const interests = _.filter(ClubInterests.collection.find().fetch(), (clubInterest) => clubInterest.club === clubName);
-  return _.pluck(interests, 'interest');
+  const interests = ClubInterests.getInterest(clubName);
+  return interests;
 }
 
 /** Renders a color-blocked static ClubPage page. */
@@ -88,8 +90,10 @@ class ClubPage extends React.Component {
     const doc = Clubs.collection.findOne(this.props.documentId);
     const clubName = doc.name;
     // array of club's advisors' emails, can do a forEach or something
-    const advisorEmails = ClubAdvisor.getAdvisor(clubName);
-    const adminData = advisorEmails.map(email => getMemberData(email));
+    const advisorEmails = getAdvisorEmails(clubName);
+    const officerEmails = getOfficerEmails(clubName);
+    const advisorData = advisorEmails.map(email => getAdvisorData(email));
+    const officerData = officerEmails.map(email => getOfficerData(email));
     const club = getClubData(clubName);
     const interests = getClubInterests(clubName);
     return (
