@@ -28,25 +28,31 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isStudent ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student-home">Home</Nav.Link>,
             ]) : ''}
             { isFaculty ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/faculty-home" key="faculty">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/faculty-home" key="faculty-home">Home</Nav.Link>,
             ]) : ''}
             { isITSupport ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/itsupp-home" key="itsupport">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/itsupport-home" key="itsupport-home">Home</Nav.Link>,
             ]) : ''}
             { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office-home">Home</Nav.Link>,
             ]) : ''}
             { isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin">Home</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
-            { isAdmin ? '' : ([
+            { isAdmin || isITSupport ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_SEARCH} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_CLUB_SEARCH} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
             ])}
+            { isStudent || isFaculty ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_CLUB_SEARCH} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
+            ]) : ''}
+            { isITSupport ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_PORTS} as={NavLink} to="/ports" key="ports">Ports</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_EQUIPMENT} as={NavLink} to="/equipment" key="equipment">Equipment</Nav.Link>,
+            ]) : ''}
             { isOffice || isITSupport || isFaculty || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,

@@ -35,7 +35,7 @@ import EditRoom from '../pages/EditRoom';
 import RoomAvi from '../pages/RoomAvi';
 import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
-import ITSuppHome from '../pages/ITSuppHome';
+import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
@@ -82,7 +82,7 @@ const App = () => {
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
-          <Route path="/itsupp-home" element={<ITSupportProtectedRoute><ITSuppHome /></ITSupportProtectedRoute>} />
+          <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
