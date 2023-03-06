@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
-const MySpaces = () => (
+const FacultyMySpaces = () => (
   /** something to do with room collections here */
 
   <Card className="rounded-0">
@@ -34,6 +34,9 @@ const MySpaces = () => (
         </Card.Text>
       </Card.Body>
     </Card>
+    <Card.Footer>
+      <a href="#" className="btn btn-primary">Go somewhere</a>
+    </Card.Footer>
   </Card>
 );
-export default MySpaces;
+export default FacultyMySpaces;
