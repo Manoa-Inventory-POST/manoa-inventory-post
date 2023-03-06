@@ -129,7 +129,7 @@ const FacultySearch = () => {
             <th>Name</th>
             <th>Position</th>
             <th>Contact Info</th>
-            <th>Office</th>
+            <th>Office Hours</th>
           </tr>
         </thead>
         <tbody>

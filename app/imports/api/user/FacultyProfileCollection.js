@@ -137,10 +137,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       const instance = this;
       // This subscription publishes only the documents associated with the logged-in user
       Meteor.publish(facultyPublications.facultyP, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
+        return instance._collection.find();
       });
     }
   }

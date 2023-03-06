@@ -27,7 +27,7 @@ import { Interests } from '../../api/clubs/Interests';
 
 const CreateUser = () => {
 
-  const { roomNums, interests, clubsNames } = useTracker(() => {
+  const { roomNums, interestsColl, clubsNames } = useTracker(() => {
     const subClubs = Clubs.subscribeClubs();
     const subscription = Room.subscribeRoom();
     const subClubAdvisor = ClubAdvisor.subscribeClubAdvisor();
@@ -40,7 +40,7 @@ const CreateUser = () => {
 
     return {
       roomNums: roomEntries,
-      interests: interestEntries,
+      interestsColl: interestEntries,
       clubsNames: clubEntries,
     };
   });
@@ -56,8 +56,8 @@ const CreateUser = () => {
   }
 
   const interestNames = [];
-  for (let i = 0; i < interests.length; i++) {
-    interestNames[i] = interests[i].interest;
+  for (let i = 0; i < interestsColl.length; i++) {
+    interestNames[i] = interestsColl[i].interest;
   }
 
   const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT'];
@@ -91,7 +91,7 @@ const CreateUser = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, email, password, role, rooms, phones, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture } = data;
+    const { firstName, lastName, email, password, role, rooms, phones, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
     console.log(data);
     let collectionName;
     let definitionData = { firstName, lastName, password, email };
