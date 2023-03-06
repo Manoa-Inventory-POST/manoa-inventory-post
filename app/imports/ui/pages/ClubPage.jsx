@@ -13,11 +13,40 @@ import { ClubAdmin } from '../../api/clubs/ClubAdmin';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 
-/** Get the clubadmin emails for this specific organization. */
+/**
+ * Returns an array of Advisor emails for this club.
+ * @param clubName the name of the club.
+ * @return array of emails
+ */
 function getAdvisorEmails(clubName) {
   const emails = ClubAdvisor.find().fetch().filter((clubadvisor) => clubadvisor.club === clubName);
-  // console.log(emails);
-  return _.pluck(emails, 'admin');
+  return emails;
+}
+
+/**
+ * Returns an array of Officer emails for this club.
+ * @param clubName the name of the club.
+ * @return array of emails
+ */
+function getOfficerEmails(clubName) {
+  const emails = ClubOfficer.find().fetch().filter((clubofficer) => clubofficer.club === clubName);
+  return emails;
+}
+
+/**
+ * Checks if the logged in user is either an Advisor or an Officer.
+ * @param email user's email
+ * @param clubName the name of the club.
+ * @return true if can edit
+ * @reutrn false if cannot
+ */
+function checkEdit(email, clubName) {
+  const advisors = getAdvisorEmails(clubName);
+  const officers = getOfficerEmails(clubName);
+  if (advisors.includes(email) || officers.includes(email)) {
+    return true;
+  }
+  return false;
 }
 
 /** Get the interests corresponding to the profile entered. */
