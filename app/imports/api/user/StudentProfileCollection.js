@@ -152,6 +152,17 @@ class StudentProfileCollection extends BaseProfileCollection {
     return profile[0];
   }
 
+  /**
+   * Searches for an email. If email exists, returns the User Object. Else, there is no profile.
+   * @returns { Object } A profile.
+   */
+  checkEmail(email) {
+    const profile = this.find({ email }).fetch();
+    if (profile.isEmpty()) {
+      return [];
+    }
+    return profile[0];
+  }
 }
 
 /**
