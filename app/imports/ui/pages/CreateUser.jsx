@@ -8,7 +8,6 @@ import {
   SelectField,
   SubmitField,
   BoolField,
-  LongTextField,
   TextField,
 } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -144,6 +143,7 @@ const CreateUser = () => {
     case 'STUDENT':
       console.log('STUDENT SWITCH');
       collectionName = StudentProfiles.getCollectionName();
+      console.log(interests);
       definitionData = { email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests };
       defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -182,28 +182,40 @@ const CreateUser = () => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col className="col-lg-10">
           <Col className="text-center"><h2>Create User</h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" placeholder="Your first name (required)" />
-                <TextField name="lastName" placeholder="Your last name (required)" />
-                <TextField name="email" placeholder="Your email (required)" />
+                <div className="row">
+                  <TextField className="col-md-6" name="firstName" placeholder="Your first name (required)" />
+                  <TextField className="col-md-6" name="lastName" placeholder="Your last name (required)" />
+                </div>
+                <div className="row">
+                  <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
+                  <SelectField className="col-md-6" name="role" placeholder="select role (required)" />
+                </div>
+                <div className="row">
+                  <TextField className="col-md-6" name="phones" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
+                  <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
+                </div>
+                <div className="row">
+                  <TextField className="col" name="picture" placeholder="picture url" />
+                  <TextField className="col" name="position" placeholder="Your position" />
+                </div>
+                <div className="row">
+                  <SelectField className="col-md-3" name="rooms" multiple inline />
+                  <SelectField className="col-md-5" name="clubs" placeholder="Select any clubs you are the advisor for" multiple />
+                  <SelectField className="col-md-4" name="interests" placeholder="Select your interests from the options provided" multiple />
+                </div>
+                <div className="my-3">
+                  <BoolField className="d-md-inline" name="TA" inline />
+                  <BoolField className="d-md-inline" name="RA" inline />
+                  <BoolField className="d-md-inline" name="undergraduate" inline />
+                  <BoolField className="d-md-inline" name="graduate" inline />
+                  <BoolField className="d-md-inline" name="clubAdvisor" inline />
+                </div>
                 <HiddenField name="password" value="changeme" />
-                <SelectField name="role" placeholder="select role (required)" />
-                <LongTextField name="phones" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
-                <SelectField name="rooms" multiple inline />
-                <TextField name="officeHours" placeholder="Your office hours" />
-                <TextField name="picture" placeholder="picture url" />
-                <TextField name="position" placeholder="Your position" />
-                <BoolField name="TA" inline />
-                <BoolField name="RA" inline />
-                <BoolField name="undergraduate" inline />
-                <BoolField name="graduate" inline />
-                <BoolField name="clubAdvisor" inline />
-                <SelectField name="clubs" placeholder="Select any clubs you are the advisor for" multiple />
-                <SelectField name="interests" placeholder="Select your interests from the options provided" multiple />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
