@@ -33,10 +33,10 @@ const AdminHome = () => {
         <Col className="ms-5 my-3"><h2>Welcome, { currentUser.firstName } { currentUser.lastName }</h2></Col>
       </Row>
       <Row className="justify-content-center">
-        <Col md={8}>
+        <Col className="col-lg-8">
           <SearchBox />
         </Col>
-        <Col md={4}>
+        <Col className="col-lg-4">
           <InfoBar />
         </Col>
       </Row>

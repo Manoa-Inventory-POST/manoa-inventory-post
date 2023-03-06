@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
@@ -118,74 +118,58 @@ const PeopleSearchResultsTable = () => {
   }, [userFirstName, userLastName, userOfficeBuilding, userRoom, userPhone, userRole]);
 
   return (ready ? (
-    <Container className="py-3 search-results">
-      <Row className="pt-3 px-3">
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by first name">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              First Name
-            </Col>
-            <input
+    <Container className="">
+      <Form className="">
+        <div className="row mb-2">
+          <Form.Group className="col-lg-6">
+            <Form.Label htmlFor="Search by first name">First Name</Form.Label>
+            <Form.Control
               type="text"
               className="shadow-sm"
               placeholder="first name"
               onChange={e => setUserFirstName(e.target.value)}
             />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by last name">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Last name
-            </Col>
-            <input
+          </Form.Group>
+          <Form.Group className="col-lg-6">
+            <Form.Label htmlFor="Search by last name">Last Name</Form.Label>
+            <Form.Control
               type="text"
               className="shadow-sm"
               placeholder="last name"
               onChange={e => setUserLastName(e.target.value)}
             />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by room number">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Office Room Number
-            </Col>
-            <input
+          </Form.Group>
+        </div>
+        <div className="row mb-4">
+          <Form.Group className="col-lg-4">
+            <Form.Label htmlFor="Search by room number">Office Room Number</Form.Label>
+            <Form.Control
               type="text"
               className="shadow-sm"
               placeholder="room number"
               onChange={e => setUserRoom(e.target.value)}
             />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by room number">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Phone Number
-            </Col>
-            <input
+          </Form.Group>
+          <Form.Group className="col-lg-4">
+            <Form.Label htmlFor="Search by room number">Phone Number</Form.Label>
+            <Form.Control
               type="text"
               className="shadow-sm"
               placeholder="phone number"
               onChange={e => setUserPhone(e.target.value)}
             />
-          </label>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <label htmlFor="Search by role">
-            <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-              Role
-            </Col>
-            <input
+          </Form.Group>
+          <Form.Group className="col-lg-4">
+            <Form.Label htmlFor="Search by role">Role</Form.Label>
+            <Form.Control
               type="text"
               className="shadow-sm"
               placeholder="role"
               onChange={e => setUserRole(e.target.value)}
             />
-          </label>
-        </Col>
-      </Row>
+          </Form.Group>
+        </div>
+      </Form>
       <Table striped bordered hover>
         <thead className="search-results-table-header">
           <tr>
