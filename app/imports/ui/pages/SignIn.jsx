@@ -55,9 +55,6 @@ const SignIn = () => {
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
     return (<Navigate to="/itsupport-home" />);
   }
-  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
-    return (<Navigate to="/advisor-home" />);
-  }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE])) {
     return (<Navigate to="/office-home" />);
   }
