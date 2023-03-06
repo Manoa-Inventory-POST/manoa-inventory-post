@@ -11,6 +11,7 @@ import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { UserInterests } from '../../api/clubs/UserInterests';
+import { Interests } from '../../api/clubs/Interests';
 
 /**
  * Returns an array of Advisor emails for this club.
@@ -149,13 +150,14 @@ export default withTracker(({ match }) => {
   const documentId = match.params._id;
   // Ensure that minimongo is populated with all collections prior to running render().
   const sub1 = Meteor.subscribe(Clubs.userPublicationName);
-  const sub2 = Meteor.subscribe(ProfilesClubs.userPublicationName);
-  const sub3 = Meteor.subscribe(ClubInterests.userPublicationName);
-  const sub4 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-  const sub5 = Meteor.subscribe(Profiles.userPublicationName);
-  const sub6 = Meteor.subscribe(ClubAdmin.userPublicationName);
+  const sub2 = Meteor.subscribe(Interests.userPublicationName);
+  const sub3 = Meteor.subscribe(FacultyProfiles.userPublicationName);
+  const sub4 = Meteor.subscribe(StudentProfiles.userPublicationName);
+  const sub5 = Meteor.subscribe(ClubAdvisor.userPublicationName);
+  const sub6 = Meteor.subscribe(ClubOfficer.userPublicationName);
+  const sub7 = Meteor.subscribe(ClubInterests.userPublicationName);
   return {
     documentId,
-    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready(),
   };
 })(ClubPage);
