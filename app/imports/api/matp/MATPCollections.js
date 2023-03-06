@@ -2,6 +2,22 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../stuff/StuffCollection';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { OfficeProfiles } from '../user/OfficeProfileCollection';
+import { ITSupportProfiles } from '../user/ITSupportProfileCollection';
+import { OccupantRoom } from '../room/OccupantRoom';
+import { Phone } from '../room/Phone';
+import { Ports } from '../room/Ports';
+import { ReservationForm } from '../reserveform/ReservationCollection';
+import { Clubs } from '../clubs/Clubs';
+import { Interests } from '../clubs/Interests';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
+import { ClubInterests } from '../clubs/ClubInterests';
+import { ClubOfficer } from '../clubs/ClubOfficer';
+import { UserClubs } from '../clubs/UserClubs';
+import { UserInterests } from '../clubs/UserInterests';
+import { Room } from '../room/RoomCollection';
 
 class MATPClass {
   collections;
@@ -16,14 +32,48 @@ class MATPClass {
       AdminProfiles,
       Stuffs,
       UserProfiles,
+      StudentProfiles,
+      FacultyProfiles,
+      OfficeProfiles,
+      ITSupportProfiles,
+      OccupantRoom,
+      Phone,
+      Ports,
+      ReservationForm,
+      Interests,
+      Clubs,
+      ClubAdvisor,
+      ClubInterests,
+      ClubOfficer,
+      UserClubs,
+      UserInterests,
+      Room,
+      Clubs,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
      */
     this.collectionLoadSequence = [
+      Interests,
+      Clubs,
       AdminProfiles,
       UserProfiles,
       Stuffs,
+      StudentProfiles,
+      FacultyProfiles,
+      OfficeProfiles,
+      ITSupportProfiles,
+      OccupantRoom,
+      Phone,
+      Ports,
+      ReservationForm,
+      ClubAdvisor,
+      ClubInterests,
+      ClubOfficer,
+      UserClubs,
+      UserInterests,
+      Room,
+      ClubAdvisor,
     ];
 
     /*
@@ -46,7 +96,7 @@ class MATPClass {
     // console.log('MATPCollections', collectionName, this.collectionAssociation);
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called MARTPCollections.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called MATPCollections.getCollection with unknown collection name: ${collectionName}`);
     }
     return collection;
   }

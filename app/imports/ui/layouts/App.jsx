@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useTracker } from 'meteor/react-meteor-data';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import AdminHome from '../pages/AdminHome';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
@@ -17,30 +18,80 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import ProfileTemplate from '../pages/ProfileTemplate';
+import ReservationForm from '../pages/ReservationForm';
+import Map from '../pages/Map';
+import EditUser from '../pages/EditUser';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+// import { Test } from '../pages/Test';
+import ConfirmEditUser from '../pages/ConfirmEditUser';
+import ServiceRequest from '../pages/ServiceRequest';
+import FacultySearch from '../pages/FacultySearch';
+import HomeTemplate from '../pages/HomeTemplate';
+import CreateUser from '../pages/CreateUser';
+import ConfirmCreateUser from '../pages/ConfirmCreateUser';
+import LoadingSpinner from '../components/LoadingSpinner';
+import CreateRoom from '../pages/CreateRoom';
+import EditRoom from '../pages/EditRoom';
+import RoomAvi from '../pages/RoomAvi';
+import StudentHome from '../pages/StudentHome';
+import FacultyHome from '../pages/FacultyHome';
+import ITSuppHome from '../pages/ITSuppHome';
+import OfficeHome from '../pages/OfficeHome';
+import ClubSearch from '../pages/SearchClubs';
+import FullFacultyInfo from '../pages/FullFacultyInfo';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-const App = () => (
-  <Router>
-    <div className="d-flex flex-column min-vh-100">
-      <NavBar />
-      <Routes>
-        <Route exact path="/" element={<Landing />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
-        <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-        <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-        <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
-        <Route path="/notauthorized" element={<NotAuthorized />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </div>
-  </Router>
-);
+const App = () => {
+  const { ready } = useTracker(() => {
+    const rdy = Roles.subscription.ready();
+    return {
+      ready: rdy,
+    };
+  });
+  return (
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/availability" element={<RoomAvi />} />
+          <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
+          <Route path="/clubs" element={<ClubSearch />} />
+          <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
+          <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
+          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
+          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+          <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
+          <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+          <Route path="/createSpace" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
+          <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
+          <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
+          <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
+          <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
+          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
+          <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
+          <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
+          <Route path="/itsupp-home" element={<ITSupportProtectedRoute><ITSuppHome /></ITSupportProtectedRoute>} />
+          <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
 /**
  * ProtectedRoute (see React Router v6 sample)
@@ -50,7 +101,7 @@ const App = () => (
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   // console.log('ProtectedRoute', isLogged);
-  return isLogged ? children : <Navigate to="/signin" />;
+  return isLogged ? children : <Navigate to="/" />;
 };
 
 /**
@@ -58,10 +109,13 @@ const ProtectedRoute = ({ children }) => {
  * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
-const AdminProtectedRoute = ({ children }) => {
+const AdminProtectedRoute = ({ ready, children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/" />;
+  }
+  if (!ready) {
+    return <LoadingSpinner />;
   }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
@@ -70,7 +124,7 @@ const AdminProtectedRoute = ({ children }) => {
 
 /**
  * FacultyProtectedRoute (see React Router v6 sample)
- * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
+ * Checks for Meteor login and faculty role before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
 const FacultyProtectedRoute = ({ children }) => {
@@ -85,7 +139,7 @@ const FacultyProtectedRoute = ({ children }) => {
 
 /**
  * OfficeProtectedRoute (see React Router v6 sample)
- * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
+ * Checks for Meteor login and office role before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
 const OfficeProtectedRoute = ({ children }) => {
@@ -100,7 +154,7 @@ const OfficeProtectedRoute = ({ children }) => {
 
 /**
  * ITSupportProtectedRoute (see React Router v6 sample)
- * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
+ * Checks for Meteor login and IT support role before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
 const ITSupportProtectedRoute = ({ children }) => {
@@ -114,18 +168,78 @@ const ITSupportProtectedRoute = ({ children }) => {
 };
 
 /**
- * AdvisorProtectedRoute (see React Router v6 sample)
- * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
+ * TAProtectedRoute (see React Router v6 sample)
+ * Checks for Meteor login and student role with TA attribute before routing to the requested page, otherwise goes to signin page.
  * @param {any} { component: Component, ...rest }
  */
-const AdvisorProtectedRoute = ({ children }) => {
+const TAProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
     return <Navigate to="/signin" />;
   }
-  const isAdvisor = Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR]);
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  let isTA = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isTA = profile.TA;
+  }
   // console.log('AdminProtectedRoute', isLogged, isAdmin);
-  return (isLogged && isAdvisor) ? children : <Navigate to="/notauthorized" />;
+  return (isLogged && isStudent && isTA) ? children : <Navigate to="/notauthorized" />;
+};
+
+/**
+ * RAProtectedRoute (see React Router v6 sample)
+ * Checks for Meteor login and student role with RA attribute before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+const RAProtectedRoute = ({ children }) => {
+  const isLogged = Meteor.userId() !== null;
+  if (!isLogged) {
+    return <Navigate to="/signin" />;
+  }
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  let isRA = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isRA = profile.RA;
+  }
+  // console.log('AdminProtectedRoute', isLogged, isAdmin);
+  return (isLogged && isStudent && isRA) ? children : <Navigate to="/notauthorized" />;
+};
+
+/**
+ * GraduateProtectedRoute (see React Router v6 sample)
+ * Checks for Meteor login and student role with graduate attribute before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+const GraduateProtectedRoute = ({ children }) => {
+  const isLogged = Meteor.userId() !== null;
+  if (!isLogged) {
+    return <Navigate to="/signin" />;
+  }
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  let isGraduate = false;
+  if (isStudent) {
+    const profile = StudentProfiles.getData();
+    isGraduate = profile.graduate;
+  }
+  // console.log('AdminProtectedRoute', isLogged, isAdmin);
+  return (isLogged && isStudent && isGraduate) ? children : <Navigate to="/notauthorized" />;
+};
+
+/**
+ * StudentProtectedRoute (see React Router v6 sample)
+ * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+const StudentProtectedRoute = ({ children }) => {
+  const isLogged = Meteor.userId() !== null;
+  if (!isLogged) {
+    return <Navigate to="/signin" />;
+  }
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  // console.log('AdminProtectedRoute', isLogged, isAdmin);
+  return (isLogged && isStudent) ? children : <Navigate to="/notauthorized" />;
 };
 
 // Require a component and location to be passed to each ProtectedRoute.
@@ -139,10 +253,12 @@ ProtectedRoute.defaultProps = {
 
 // Require a component and location to be passed to each AdminProtectedRoute.
 AdminProtectedRoute.propTypes = {
+  ready: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 AdminProtectedRoute.defaultProps = {
+  ready: false,
   children: <Landing />,
 };
 
@@ -170,11 +286,35 @@ ITSupportProtectedRoute.defaultProps = {
   children: <Landing />,
 };
 
-AdvisorProtectedRoute.propTypes = {
+TAProtectedRoute.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
-AdvisorProtectedRoute.defaultProps = {
+TAProtectedRoute.defaultProps = {
+  children: <Landing />,
+};
+
+RAProtectedRoute.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
+
+RAProtectedRoute.defaultProps = {
+  children: <Landing />,
+};
+
+GraduateProtectedRoute.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
+
+GraduateProtectedRoute.defaultProps = {
+  children: <Landing />,
+};
+
+StudentProtectedRoute.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+};
+
+StudentProtectedRoute.defaultProps = {
   children: <Landing />,
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -40,10 +41,25 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screenif (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
-    return (<Navigate to="/admin" />);
+    return (<Navigate to="/admin-home" />);
   }
   if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
     return (<Navigate to="/home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
+    return (<Navigate to="/student-home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY])) {
+    return (<Navigate to="/faculty-home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT])) {
+    return (<Navigate to="/itsupp-home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.ADVISOR])) {
+    return (<Navigate to="/advisor-home" />);
+  }
+  if (redirect && Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE])) {
+    return (<Navigate to="/office-home" />);
   }
   // Otherwise return the Login form.
   return (

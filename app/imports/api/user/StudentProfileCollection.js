@@ -1,7 +1,10 @@
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+import { UserClubs } from '../clubs/UserClubs';
+import { UserInterests } from '../clubs/UserInterests';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -24,15 +27,21 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
+    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
     if (!user) {
       const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });
+      // const clubs = UserClubs.define({ email, Clubs.dumpOne().name});
       const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
-      // this._collection.update(profileID, { $set: { userID } });
+      if (clubs) {
+        clubs.forEach((club) => UserClubs.define({ email, club }));
+      }
+      if (interests) {
+        interests.forEach((interest) => UserInterests.define({ email, interest }));
+      }
       return profileID;
     }
     return user._id;
@@ -45,8 +54,13 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param TA update TA sub role (optional).
+   * @param RA update RA sub role (optional).
+   * @param graduate update graduate sub role (optional).
+   * @param undergraduate update undergraduate sub role (optional).
+   * @return never
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -54,6 +68,18 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (TA) {
+      updateData.TA = TA;
+    }
+    if (RA) {
+      updateData.RA = RA;
+    }
+    if (graduate) {
+      updateData.graduate = graduate;
+    }
+    if (undergraduate) {
+      updateData.undergraduate = undergraduate;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -100,19 +126,36 @@ class StudentProfileCollection extends BaseProfileCollection {
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
-   * @returns { Object } An object representing the definition of docID.
+   * @returns {{firstName: *, lastName: *, graduate: *, TA: *, email: *, undergraduate: *, RA: *}} An object representing the definition of docID.
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const TA = doc.TA;
+    const RA = doc.RA;
+    const graduate = doc.graduate;
+    const undergraduate = doc.undergraduate;
+    return { email, firstName, lastName, TA, RA, graduate, undergraduate }; // CAM this is not enough for the define method. We lose the password.
   }
+
+  /**
+   * Searches for a User ID. If ID exists, returns the User Object. Else, there is no profile.
+   * @returns { Object } A profile.
+   */
+  getData() {
+    const profile = this.find({ userID: Meteor.userID }).fetch();
+    if (profile.isEmpty()) {
+      return [];
+    }
+    return profile[0];
+  }
+
 }
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {UserProfileCollection}
+ * @type {StudentProfileCollection}
  */
 export const StudentProfiles = new StudentProfileCollection();

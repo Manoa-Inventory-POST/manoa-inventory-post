@@ -1,28 +1,59 @@
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+import { OccupantRoom } from '../room/OccupantRoom';
+import { Phone } from '../room/Phone';
+
+export const facultyPublications = {
+  facultyP: 'facultyP',
+};
 
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('FacultyProfile', new SimpleSchema({}));
+    super('FacultyProfile', new SimpleSchema({
+      officeHours: { type: String, optional: true, defaultValue: 'N/A' },
+      picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
+      position: { type: String, optional: true, defaultValue: 'Other' },
+    }));
   }
 
   /**
-   * Defines the profile associated with an User and the associated Meteor account.
+   * Defines the profile associated with a User and the associated Meteor account.
    * @param email The email associated with this profile. Will be the username.
+   * @param picture The user's profile picture
+   * @param position The user's position.
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
+   * @param room An array of rooms.
+   * @param phone An array of phone numbers.
    */
-  define({ email, firstName, lastName, password }) {
+  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName });
+    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture });
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role });
+      if (rooms) {
+        rooms.forEach((room) => OccupantRoom.define({ email, room }));
+      }
+      if (phones) {
+        // checks if phones exist
+        phones.forEach(phoneNum => {
+          // if exists, update
+          if (Phone.checkExists(phoneNum)) {
+            const phoneID = Phone.findDoc({ phoneNum })._id;
+            Phone.update(phoneID, { email });
+            // else, define new phone
+          } else {
+            Phone.define({ email, phoneNum });
+          }
+        });
+      }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
@@ -36,8 +67,10 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param position new position (optional).
+   * @param picture new picture (optional).
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, position, picture }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -45,6 +78,12 @@ class FacultyProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (position) {
+      updateData.position = position;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -89,17 +128,60 @@ class FacultyProfileCollection extends BaseProfileCollection {
   }
 
   /**
+   * Default publication method for entities.
+   * It publishes the entire collection for admin and just the faculty associated to an owner.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      // get the FacultyProfileCollection instance.
+      const instance = this;
+      // This subscription publishes only the documents associated with the logged-in user
+      Meteor.publish(facultyPublications.facultyP, function publish() {
+        if (this.userId) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
+    }
+  }
+
+  /**
+   * Subscription method for stuff owned by the current user.
+   */
+  subscribeFaculty() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(facultyPublications.facultyP);
+    }
+    return null;
+  }
+
+  /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
-   * @returns { Object } An object representing the definition of docID.
+   * @returns {{firstName: *, lastName: *, position: *, picture: *, email: *}} An object representing the definition of docID.
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const position = doc.position;
+    const picture = doc.picture;
+    return { email, firstName, lastName, position, picture }; // CAM this is not enough for the define method. We lose the password.
   }
+
+  /**
+   * Searches for a User ID. If ID exists, returns the User Object. Else, there is no profile.
+   * @returns { Object } A profile.
+   */
+  getData() {
+    const profile = this.find({ userID: Meteor.userID }).fetch();
+    if (profile.isEmpty()) {
+      return [];
+    }
+    return profile[0];
+  }
+
 }
 
 /**
