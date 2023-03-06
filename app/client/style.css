@@ -53,16 +53,6 @@ body {
   color: white;
 }
 
-.map-page-background {
-  background: url('images/POST3rd.jpeg') no-repeat center;
-  background-size: cover;
-  height: 100%;
-  padding-top: 10px;
-  text-align: center;
-  text-shadow: 4px 4px 8px black;
-  color: white;
-}
-
 #landing-page {
   padding-bottom: 50px;
 }
@@ -126,3 +116,4 @@ body {
   border-top-right-radius: 0;
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
+
