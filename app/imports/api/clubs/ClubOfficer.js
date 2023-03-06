@@ -69,10 +69,7 @@ class ClubOfficerCollection extends BaseCollection {
       // get the ClubOfficer instance.
       const instance = this;
       Meteor.publish(clubOfficerPublications.clubOfficerPub, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
+        return instance._collection.find({ });
       });
     }
   }
