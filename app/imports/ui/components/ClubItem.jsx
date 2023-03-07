@@ -7,7 +7,9 @@ const ClubItem = ({ club }) => (
   <tr>
     <td><Image alt="" src={club.picture} width="180" height="180" /></td>
     <td>{`${club.name}`}</td>
-    <td>{club.website} </td>
+    <td>
+      <a href={club.website}>{club.website}</a>
+    </td>
     <td>{club.description}</td>
     <td>{club.interests}</td>
     <td>{club.advisor}</td>
