@@ -19,7 +19,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
-import Map from '../pages/Map';
+import MapPage from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Test } from '../pages/Test';
@@ -56,7 +56,7 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/map" element={<Map />} />
+          <Route path="/map" element={<MapPage />} />
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/clubs" element={<ClubSearch />} />
