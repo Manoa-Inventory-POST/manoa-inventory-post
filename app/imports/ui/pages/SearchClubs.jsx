@@ -165,7 +165,7 @@ const ClubSearch = () => {
 
   return (
     <Container id={PAGE_IDS.CLUB_SEARCH}>
-      <div className="d-flex justify-content-center">
+      <div className="justify-content-center">
         <Row id="dashboard-screen">
           <Col className="mx-3">
             <Row id="dashboard-filter"> {returnFilter()}</Row>
