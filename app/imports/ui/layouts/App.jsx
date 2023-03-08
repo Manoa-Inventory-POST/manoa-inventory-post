@@ -82,7 +82,6 @@ const App = () => {
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="/itsupp-home" element={<ITSupportProtectedRoute><ITSuppHome /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
