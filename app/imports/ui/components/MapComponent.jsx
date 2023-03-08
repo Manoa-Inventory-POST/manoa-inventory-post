@@ -419,6 +419,11 @@ const MapComponent = () => {
           <Modal.Title>{modalToShow}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h3>Room Information</h3>
+          <p>Building Location: {building}</p>
+          <p>Description: {description}</p>
+          <p>#TODO: Include details about resources/equipment in the room</p>
+          <p>Stretch Goal: Include (360) image of room???</p>
           <p>Modal content for {modalToShow} goes here.</p>
         </Modal.Body>
         <Modal.Footer>
