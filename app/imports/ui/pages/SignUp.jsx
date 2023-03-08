@@ -21,9 +21,6 @@ import { ROLE } from '../../api/role/Role';
  */
 const roleOptions = [
   { label: 'Student', value: 'STUDENT' },
-  { label: 'Faculty', value: 'FACULTY' },
-  { label: 'ITSupport', value: 'ITSUPPORT' },
-  { label: 'Office', value: 'OFFICE' },
 ];
 const SignUp = () => {
   const [error, setError] = useState('');
