@@ -600,6 +600,8 @@ const MapComponent = () => {
           <h3>Room Information</h3>
           <p>Building Location: {building}</p>
           <p>Description: {description}</p>
+          <p>#TODO: Include details about resources/equipment in the room</p>
+          <p>Stretch Goal: Include (360) image of room???</p>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleModalClose}>Close</Button>
