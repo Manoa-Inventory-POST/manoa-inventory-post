@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const RoomSearchResultsTableRow = ({ room }) => (
   <tr>
     <td>{ room.building }</td>
-    <td>{ room.num }</td>
+    <td>{ room.room }</td>
     <td>{ room.description }</td>
     <td>{ room.status }</td>
     <td>
@@ -18,7 +18,7 @@ const RoomSearchResultsTableRow = ({ room }) => (
 RoomSearchResultsTableRow.propTypes = {
   room: PropTypes.shape({
     building: PropTypes.string,
-    num: PropTypes.string,
+    room: PropTypes.string,
     description: PropTypes.string,
     status: PropTypes.string,
     _id: PropTypes.string,

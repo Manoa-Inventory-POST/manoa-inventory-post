@@ -1,4 +1,4 @@
-// import { Selector, t } from 'testcafe';
+import { Selector, t } from 'testcafe';
 import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, */ /* manageDatabasePage, */ signOutPage } from './simple.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
@@ -7,6 +7,10 @@ import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
 import { studenthomePage } from './studenthome.page';
 import { facultyhomePage } from './facultyhome.page';
+import { adminhomePage } from './adminhome.page';
+import { facultySearchPage } from './facultysearch.page';
+import { fullFacultyInfoPage } from './fullfacultyinfo.page';
+import { clubSearchPage } from './clubsearch.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -56,7 +60,7 @@ test('Test that sign up and sign out work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
-
+/*
 test('Test that admin pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
@@ -74,7 +78,7 @@ test('Test that admin pages show up', async () => {
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
 });
-
+*/
 test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
@@ -84,9 +88,37 @@ test('Test that student home and profile pages show up', async () => {
   await studentProfilePage.isDisplayed();
 });
 
+test('Test that faculty search and faculty info pages show up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
+  await navBar.gotoFacultySearchPage();
+  await facultySearchPage.isDisplayed();
+  const KBaek = Selector('a').withText('Kyungim Baek');
+  await t.click(KBaek);
+  await fullFacultyInfoPage.isDisplayed();
+});
+
 test('Test that faculty home page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
   await facultyhomePage.isDisplayed();
+});
+
+test('Test that the club search page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
+  await navBar.gotoClubSearchPage();
+  await clubSearchPage.isDisplayed();
+});
+
+test('Test that admin home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(adminCredentials.username, adminCredentials.password);
+  await navBar.isLoggedIn(adminCredentials.username);
+  await adminhomePage.isDisplayed();
 });

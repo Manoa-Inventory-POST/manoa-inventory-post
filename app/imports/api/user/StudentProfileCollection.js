@@ -30,7 +30,7 @@ class StudentProfileCollection extends BaseProfileCollection {
   define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate });
+    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
     if (!user) {
       const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });

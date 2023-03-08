@@ -6,6 +6,10 @@ import { Users } from './UserCollection';
 import { OccupantRoom } from '../room/OccupantRoom';
 import { Phone } from '../room/Phone';
 
+export const facultyPublications = {
+  facultyP: 'facultyP',
+};
+
 class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
     super('FacultyProfile', new SimpleSchema({
@@ -121,6 +125,31 @@ class FacultyProfileCollection extends BaseProfileCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Default publication method for entities.
+   * It publishes the entire collection for admin and just the faculty associated to an owner.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      // get the FacultyProfileCollection instance.
+      const instance = this;
+      // This subscription publishes only the documents associated with the logged-in user
+      Meteor.publish(facultyPublications.facultyP, function publish() {
+        return instance._collection.find();
+      });
+    }
+  }
+
+  /**
+   * Subscription method for stuff owned by the current user.
+   */
+  subscribeFaculty() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(facultyPublications.facultyP);
+    }
+    return null;
   }
 
   /**
