@@ -44,7 +44,7 @@ const PeopleSearchResultsTable = () => {
     const itEntries = ITSupportProfiles.find({}, { sort: { name: 1 } }).fetch();
     const facultyEntries = FacultyProfiles.find({}, { sort: { name: 1 } }).fetch();
     const studentEntries = StudentProfiles.find({}, { sort: { name: 1 } }).fetch();
-    const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
+    // const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
 
     // console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
 
