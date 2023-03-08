@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Roles } from 'meteor/alanning:roles';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
@@ -20,9 +21,6 @@ import { ROLE } from '../../api/role/Role';
  */
 const roleOptions = [
   { label: 'Student', value: 'STUDENT' },
-  { label: 'Faculty', value: 'FACULTY' },
-  { label: 'ITSupport', value: 'ITSUPPORT' },
-  { label: 'Office', value: 'OFFICE' },
 ];
 const SignUp = () => {
   const [error, setError] = useState('');
