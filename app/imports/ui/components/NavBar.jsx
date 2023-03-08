@@ -64,6 +64,7 @@ const NavBar = () => {
               <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
               </NavDropdown>,
+              <Nav.Link id = {COMPONENT_IDS.NAVBAR_ADMIN_INTERESTS} title="Interests" as={NavLink} to="/admin-interests">Interests</Nav.Link>
             ]) : ''}
           </Nav>
           <Nav className="justify-content-end">

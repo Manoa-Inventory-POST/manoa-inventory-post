@@ -12,6 +12,7 @@ export const COMPONENT_IDS = {
   NAVBAR_OFFICE_HOME: 'navbar-office-home',
   NAVBAR_ITSUPPORT_HOME: 'navbar-itsupport-home',
   NAVBAR_ADMIN_HOME: 'navbar-admin-home',
+  NAVBAR_ADMIN_INTERESTS: 'navbar-admin-interest',
   NAVBAR_MAP: 'navbar-map',
   NAVBAR_FACULTY_SEARCH: 'navbar-faculty-search',
   NAVBAR_CLUB_SEARCH: 'navbar-club-search',
