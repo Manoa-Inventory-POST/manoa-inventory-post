@@ -24,6 +24,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { Interests } from '../../api/clubs/Interests';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const CreateUser = () => {
 
@@ -121,6 +122,18 @@ const CreateUser = () => {
         for (let i = 0; i < clubs.length; i++) {
           const club = clubs[i];
           definitionData = { advisor, club };
+          defineMethod.callPromise({ collectionName, definitionData })
+            .catch(error => swal('Error', error.message, 'error'))
+            .then(() => {
+              swal('Success', 'User added successfully', 'success');
+            });
+        }
+      }
+      if (rooms) {
+        collectionName = OccupantRoom.getCollectionName();
+        for (let i = 0; i < rooms.length; i++) {
+          const roomNum = rooms[i];
+          definitionData = { email, roomNum };
           defineMethod.callPromise({ collectionName, definitionData })
             .catch(error => swal('Error', error.message, 'error'))
             .then(() => {
