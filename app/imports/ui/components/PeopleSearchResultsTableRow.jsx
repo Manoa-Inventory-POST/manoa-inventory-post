@@ -23,7 +23,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       collectionName = AdminProfiles.getCollectionName();
       console.log(collectionName);
       console.log(user);
-      instance = AdminProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = AdminProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
@@ -37,7 +37,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       console.log('FACULTY SWITCH');
       collectionName = FacultyProfiles.getCollectionName();
       console.log(user);
-      instance = FacultyProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = FacultyProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
@@ -51,7 +51,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       console.log('USER SWITCH');
       collectionName = UserProfiles.getCollectionName();
       console.log(user);
-      instance = UserProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = UserProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
@@ -65,7 +65,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       console.log('STUDENT SWITCH');
       collectionName = StudentProfiles.getCollectionName();
       console.log(user);
-      instance = StudentProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = StudentProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
@@ -79,7 +79,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       console.log('OFFICE SWITCH');
       collectionName = OfficeProfiles.getCollectionName();
       console.log(user);
-      instance = OfficeProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = OfficeProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
@@ -93,7 +93,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       console.log('ITSUPPORT SWITCH');
       collectionName = ITSupportProfiles.getCollectionName();
       console.log(user);
-      instance = ITSupportProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email }, {});
+      instance = ITSupportProfiles.findOne({ firstName: user.firstName, lastName: user.lastName, role: user.role }, {});
       console.log(instance);
       docId = instance._id;
       console.log(docId);
