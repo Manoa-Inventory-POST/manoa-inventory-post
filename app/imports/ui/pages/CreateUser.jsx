@@ -71,8 +71,7 @@ const CreateUser = () => {
     role: { type: String, allowedValues: profileRoleValues },
     rooms: { type: Array, label: 'Office(s)', optional: true },
     'rooms.$': { type: String, allowedValues: roomValues },
-    phones: { type: Array, label: 'Phone Numbers', optional: true },
-    'phones.$': String,
+    phoneNums: { type: String, label: 'Phone Numbers', optional: true },
     officeHours: { type: String, optional: true },
     picture: { type: String, optional: true },
     position: { type: String, optional: true },
@@ -92,7 +91,9 @@ const CreateUser = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, email, password, role, rooms, phones, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
+    const { firstName, lastName, email, password, role, rooms, phoneNums, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
+    const phones = phoneNums.split(',');
+    console.log(typeof phones);
     console.log(data);
     let collectionName;
     let definitionData = { firstName, lastName, password, email };
@@ -130,10 +131,13 @@ const CreateUser = () => {
         }
       }
       if (rooms) {
+        console.log('rooms true');
         collectionName = OccupantRoom.getCollectionName();
+        console.log(collectionName);
         for (let i = 0; i < rooms.length; i++) {
-          const roomNum = rooms[i];
-          definitionData = { email, roomNum };
+          const room = rooms[i];
+          definitionData = { email, room };
+          console.log(definitionData);
           defineMethod.callPromise({ collectionName, definitionData })
             .catch(error => swal('Error', error.message, 'error'))
             .then(() => {
@@ -209,7 +213,7 @@ const CreateUser = () => {
                   <SelectField className="col-md-6" name="role" placeholder="select role (required)" />
                 </div>
                 <div className="row">
-                  <TextField className="col-md-6" name="phones" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
+                  <TextField className="col-md-6" name="phoneNums" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
                   <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
                 </div>
                 <div className="row">
