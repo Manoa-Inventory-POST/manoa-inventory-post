@@ -116,7 +116,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       <td>{ user.room }</td>
       <td>{ user.phones }</td>
       <td>{ user.role }</td>
-      <td>
+      <td className="d-flex">
         <Link className="btn btn-dashboard text-white me-2 d-inline" to={`/editUser/${user._id}`}>Edit</Link>
         <Button className="btn btn-danger btn-delete d-inline" onClick={deleteUser}>Delete</Button>
       </td>
