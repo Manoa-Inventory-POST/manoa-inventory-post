@@ -6,17 +6,17 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import SearchBox from '../components/SearchBox';
-import WorkerInfoBar from '../components/WorkerInfoBar';
+import OfficeInfoBar from '../components/OfficeInfoBar';
 
-/* Renders a table containing all of the IT Support documents. Use <ITSupportInfoBar> to render each row. */
+/* Renders a table containing all of the Office documents. Use <OfficeInfoBar> to render each row. */
 const OfficeHome = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, office } = useTracker(() => {
-    // Get access to Faculty documents
+    // Get access to Office documents
     const subscription = OfficeProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Faculty documents
+    // Get the Office documents
     const officeProfiles = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
       office: officeProfiles,
@@ -34,7 +34,7 @@ const OfficeHome = () => {
           <SearchBox />
         </Col>
         <Col md={4}>
-          <WorkerInfoBar />
+          <OfficeInfoBar />
         </Col>
       </Row>
     </Container>

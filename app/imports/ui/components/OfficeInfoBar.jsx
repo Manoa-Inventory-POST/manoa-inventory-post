@@ -4,7 +4,7 @@ import { Card, ListGroup } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
-const InfoBar = () => {
+const OfficeInfoBar = () => {
 
   /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -61,4 +61,4 @@ const InfoBar = () => {
     </Card>
   );
 };
-export default InfoBar;
+export default OfficeInfoBar;
