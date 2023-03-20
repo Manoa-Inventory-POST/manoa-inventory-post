@@ -12,11 +12,11 @@ import ITSupportInfoBar from '../components/ITSupportInfoBar';
 const ITSupportHome = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, itsupport } = useTracker(() => {
-    // Get access to Faculty documents
+    // Get access to IT documents
     const subscription = ITSupportProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Faculty documents
+    // Get the IT documents
     const itProfiles = ITSupportProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
       itsupport: itProfiles,
