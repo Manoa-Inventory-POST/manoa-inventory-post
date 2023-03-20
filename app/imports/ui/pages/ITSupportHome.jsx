@@ -8,7 +8,7 @@ import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import ITSupportMySpaces from '../components/ITSupportMySpaces';
 import ITSupportInfoBar from '../components/ITSupportInfoBar';
 
-/* Renders a table containing all of the Faculty documents. Use <FacultyInfoBar> to render each row. */
+/* Renders a table containing all of the IT Support documents. Use <ITSupportInfoBar> to render each row. */
 const ITSupportHome = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, itsupport } = useTracker(() => {
