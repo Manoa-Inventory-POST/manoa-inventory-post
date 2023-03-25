@@ -32,15 +32,15 @@ const ListStuff = () => {
           </Col>
           <Table striped bordered hover>
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Condition</th>
-                <th>Edit</th>
-              </tr>
+            <tr>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Condition</th>
+              <th>Edit</th>
+            </tr>
             </thead>
             <tbody>
-              {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+            {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
             </tbody>
           </Table>
         </Col>
