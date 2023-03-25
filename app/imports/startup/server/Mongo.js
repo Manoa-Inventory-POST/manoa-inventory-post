@@ -3,19 +3,12 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Interests } from '../../api/clubs/Interests';
-import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 
 // Initialize the database with a default data document.
 function addData(data) {
   console.log(`  Adding: ${data.name} (${data.owner})`);
   Stuffs.define(data);
-}
-
-// Initialize the database with a default data document.
-function addRequest(data) {
-  console.log(`  Adding: ${data.name} (${data.description}) `);
-  OfficeProfiles.define(data);
 }
 
 // Initialize the database with a default data document.
@@ -44,14 +37,6 @@ if (Stuffs.count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.map(data => addData(data));
-  }
-}
-
-// Initialize the StuffsCollection if empty.
-if (OfficeProfiles.count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addRequest(data));
   }
 }
 

@@ -1,52 +1,47 @@
 import React from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Stuffs } from '../../api/stuff/StuffCollection';
-import StuffItem from '../components/StuffItem';
+import { Col, Container, Row } from 'react-bootstrap';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import InfoBar from '../components/InfoBar';
+import SearchBox from '../components/SearchBox';
+// import PeopleSearchResultsTable from '../components/PeopleSearchResultsTable';
+import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+// import RoomSearchResultsTable from '../components/RoomSearchResultsTable';
 
-/* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const ListStuff = () => {
+/* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
+const AdminHome = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, stuffs } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const subscription = Stuffs.subscribeStuff();
+  const { ready, admins } = useTracker(() => {
+    // Get access to Admin documents
+    const subscription = AdminProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Stuff documents
-    const stuffItems = Stuffs.find({}, { sort: { name: 1 } }).fetch();
+    // Get the Admin documents
+    const adminProfiles = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
-      stuffs: stuffItems,
+      admins: adminProfiles,
       ready: rdy,
     };
   }, []);
+  const currentUser = admins[0];
+
   return (ready ? (
-    <Container id={PAGE_IDS.LIST_STUFF} className="py-3">
+    <Container id={PAGE_IDS.ADMIN_HOME} className="py-3">
+      <Row>
+        <Col className="ms-5 my-3"><h2>Welcome, { currentUser.firstName } { currentUser.lastName }</h2></Col>
+      </Row>
       <Row className="justify-content-center">
-        <Col md={7}>
-          <Col className="text-center">
-            <h2>List Stuff</h2>
-          </Col>
-          <Table striped bordered hover>
-            <thead>
-            <tr>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Condition</th>
-              <th>Edit</th>
-            </tr>
-            </thead>
-            <tbody>
-            {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
-            </tbody>
-          </Table>
+        <Col className="col-lg-8">
+          <SearchBox />
+        </Col>
+        <Col className="col-lg-4">
+          <InfoBar />
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner message="Loading Stuff" />);
+  ) : <LoadingSpinner />);
 };
 
-export default ListStuff;
+export default AdminHome;

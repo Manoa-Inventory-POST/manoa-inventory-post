@@ -39,7 +39,7 @@ import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
-import OfficeRequestHome from '../pages/officeRequestHome';
+import PortSearch from '../pages/SearchPorts';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -56,7 +56,6 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/addstuff" element={<AddStuff />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/map" element={<MapPage />} />
@@ -64,7 +63,6 @@ const App = () => {
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
-          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
@@ -86,6 +84,7 @@ const App = () => {
           <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
+          <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
@@ -115,7 +114,7 @@ const ProtectedRoute = ({ children }) => {
 const AdminProtectedRoute = ({ ready, children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/" />;
+    return <Navigate to="/admin-home" />;
   }
   if (!ready) {
     return <LoadingSpinner />;
