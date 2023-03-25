@@ -8,6 +8,7 @@ const StuffItem = ({ stuff }) => (
   <tr>
     <td>{stuff.name}</td>
     <td>{stuff.condition}</td>
+    {/* eslint-disable-next-line react/prop-types */}
     <td>{stuff.description}</td>
     <td>
       <Link className={COMPONENT_IDS.LIST_STUFF_EDIT} to={`/edit/${stuff._id}`}>Edit</Link>
