@@ -1,16 +1,16 @@
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
-import BaseProfileCollection from './BaseProfileCollection';
-import { ROLE } from '../role/Role';
-import { Users } from './UserCollection';
+import { check } from 'meteor/check';
+import BaseCollection from '../base/BaseCollection';
 
-export const officeRequestConditions = ['approve', 'disapprove'];
+export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
 export const officePublications = {
   office: 'office',
 };
-class OfficeProfileCollection extends BaseProfileCollection {
+
+class OfficeRequestCollection extends BaseCollection {
   constructor() {
-    super('OfficeProfile', new SimpleSchema({
+    super('OfficeRequest', new SimpleSchema({
       description: String,
       condition: {
         type: String,
@@ -23,26 +23,20 @@ class OfficeProfileCollection extends BaseProfileCollection {
   /**
    * Defines the profile associated with an User and the associated Meteor account.
    * @param email The email associated with this profile. Will be the username.
-   * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
    * @param condition the condition of the item.
    * @param description the description of the request.
    */
-  define({ email, firstName, lastName, password, condition, description }) {
-    // if (Meteor.isServer) {
-    const username = email;
-    const user = this.findOne({ email, firstName, lastName, condition, description });
-    if (!user) {
-      const role = ROLE.OFFICE;
-      const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
-      // this._collection.update(profileID, { $set: { userID } });
-      return profileID;
-    }
-    return user._id;
-    // }
-    // return undefined;
+  define({ email, firstName, lastName, condition, description }) {
+    const docID = this._collection.insert({
+      email,
+      firstName,
+      lastName,
+      condition,
+      description,
+    });
+    return docID;
   }
 
   /**
@@ -76,11 +70,11 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * Also removes this user from Meteor Accounts.
    * @param profileID The ID for this profile object.
    */
-  removeIt(profileID) {
-    if (this.isDefined(profileID)) {
-      return super.removeIt(profileID);
-    }
-    return null;
+  removeIt(email) {
+    const doc = this.findDoc(email);
+    check(doc, Object);
+    this._collection.remove(doc._id);
+    return true;
   }
 
   /**
@@ -104,7 +98,7 @@ class OfficeProfileCollection extends BaseProfileCollection {
   /**
    * Subscription method for stuff owned by the current user.
    */
-  subscribeRoom() {
+  subscribeOffice() {
     if (Meteor.isClient) {
       return Meteor.subscribe(officePublications.office);
     }
@@ -118,24 +112,7 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod() {
-    // this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
     return true;
-  }
-
-  /**
-   * Returns an array of strings, each one representing an integrity problem with this collection.
-   * Returns an empty array if no problems were found.
-   * Checks the profile common fields and the role..
-   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
-   */
-  checkIntegrity() {
-    const problems = [];
-    this.find().forEach((doc) => {
-      if (doc.role !== ROLE.OFFICE) {
-        problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
-      }
-    });
-    return problems;
   }
 
   /**
@@ -149,26 +126,9 @@ class OfficeProfileCollection extends BaseProfileCollection {
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const condition = doc.condition;
-    const description = doc.lastName;
+    const description = doc.description;
     return { email, firstName, lastName, condition, description }; // CAM this is not enough for the define method. We lose the password.
   }
-
-  /**
-   * Searches for a User ID. If ID exists, returns the User Object. Else, there is no profile.
-   * @returns { Object } A profile.
-   */
-  getData() {
-    const profile = this.find({ userID: Meteor.userID }).fetch();
-    if (profile.isEmpty()) {
-      return [];
-    }
-    return profile[0];
-  }
-
 }
 
-/**
- * Profides the singleton instance of this class to all other entities.
- * @type {OfficeProfileCollection}
- */
-export const OfficeProfiles = new OfficeProfileCollection();
+export const OfficeRequests = new OfficeRequestCollection();
