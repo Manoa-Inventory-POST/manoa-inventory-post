@@ -1,45 +1,46 @@
 import React from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
-import OfficeItem from '../components/officeItem';
+import { Stuffs } from '../../api/stuff/StuffCollection';
+import StuffItem from '../components/StuffItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const ListStuff = () => {
-// useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, offices } = useTracker(() => {
-    // Get access to Office documents
-    const subscription = OfficeRequests.subscribe();
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const { ready, stuffs } = useTracker(() => {
+    // Note that this subscription will get cleaned up
+    // when your component is unmounted or deps change.
+    // Get access to Stuff documents.
+    const subscription = Stuffs.subscribeStuff();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    // Get the Office documents
-    const officeProfiles = OfficeRequests.find({});
+    // Get the Stuff documents
+    const stuffItems = Stuffs.find({}, { sort: { name: 1 } }).fetch();
     return {
-      offices: officeProfiles,
+      stuffs: stuffItems,
       ready: rdy,
     };
   }, []);
-
   return (ready ? (
-    <Container id={PAGE_IDS.OFFICE_HOME} className="py-3">
+    <Container id={PAGE_IDS.LIST_STUFF} className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>Request List</h2>
+            <h2>List Stuff</h2>
           </Col>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
-                <th>descrition</th>
+                <th>Quantity</th>
                 <th>Condition</th>
-                <th>Approval</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
-              {offices.map((officeReq) => <OfficeItem key={officeReq._id} officeReq={officeReq} />)}
+              {stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
             </tbody>
           </Table>
         </Col>

@@ -2,6 +2,7 @@ import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
 
 export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
 export const officePublications = {
@@ -11,6 +12,9 @@ export const officePublications = {
 class OfficeRequestCollection extends BaseCollection {
   constructor() {
     super('OfficeRequest', new SimpleSchema({
+      email: String,
+      firstName: String,
+      lastName: String,
       description: String,
       condition: {
         type: String,
@@ -42,14 +46,17 @@ class OfficeRequestCollection extends BaseCollection {
   /**
    * Updates the UserProfile. You cannot change the email or role.
    * @param docID the id of the UserProfile
+   * @param email new email (optional).
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { firstName, lastName, condition, description }) {
-    this.assertDefined(docID);
+  update(docID, { email, firstName, lastName, condition, description }) {
     const updateData = {};
+    if (email) {
+      updateData.email = email;
+    }
     if (firstName) {
       updateData.firstName = firstName;
     }
@@ -111,8 +118,8 @@ class OfficeRequestCollection extends BaseCollection {
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
-  assertValidRoleForMethod() {
-    return true;
+  assertValidRoleForMethod(userId) {
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.STUDENT, ROLE.OFFICE, ROLE.FACULTY, ROLE.ITSUPPORT]);
   }
 
   /**
@@ -127,7 +134,7 @@ class OfficeRequestCollection extends BaseCollection {
     const lastName = doc.lastName;
     const condition = doc.condition;
     const description = doc.description;
-    return { email, firstName, lastName, condition, description }; // CAM this is not enough for the define method. We lose the password.
+    return { email, firstName, lastName, condition, description };
   }
 }
 

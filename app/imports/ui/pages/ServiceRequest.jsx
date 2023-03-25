@@ -21,11 +21,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const ServiceRequest = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, request } = data;
+    const { email, firstName, lastName, description } = data;
     const owner = Meteor.user().username;
     const collectionName = OfficeRequests.getCollectionName();
-    console.log(typeof collectionName);
-    const definitionData = { name, request, owner };
+    const definitionData = { owner, email, firstName, lastName, description };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {

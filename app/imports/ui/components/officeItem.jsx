@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const OfficeItem = ({ officeReq }) => (
   <tr>
-    <td>{`${officeReq.email}`}</td>
+    <td>{officeReq.email}</td>
     <td>{officeReq.firstName}</td>
     <td>{officeReq.lastName}</td>
     <td>{officeReq.description}</td>
