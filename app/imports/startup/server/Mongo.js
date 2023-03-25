@@ -3,8 +3,8 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Interests } from '../../api/clubs/Interests';
-import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
 
 // Initialize the database with a default data document.
 function addData(data) {
@@ -14,8 +14,8 @@ function addData(data) {
 
 // Initialize the database with a default data document.
 function addRequest(data) {
-  console.log(`  Adding: ${data.name} (${data.description}) `);
-  OfficeProfiles.define(data);
+  console.log(`  Adding: ${data.email} (${data.description}) `);
+  OfficeRequests.define(data);
 }
 
 // Initialize the database with a default data document.
@@ -47,14 +47,6 @@ if (Stuffs.count() === 0) {
   }
 }
 
-// Initialize the StuffsCollection if empty.
-if (OfficeProfiles.count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addRequest(data));
-  }
-}
-
 // Initialize the RoomsCollection if empty.
 if (Room.count() === 0) {
   if (Meteor.settings.defaultRoomData) {
@@ -83,5 +75,12 @@ if (FacultyProfiles.count() === 1) {
   if (Meteor.settings.defaultFacultys) {
     console.log('Creating default Facultys data.');
     Meteor.settings.defaultFacultys.map(data => addFaculty(data));
+  }
+}
+
+if (OfficeRequests.count() === 0) {
+  if (Meteor.settings.defaultRequest) {
+    console.log('Creating default request data.');
+    Meteor.settings.defaultRequest.map(data => addRequest(data));
   }
 }

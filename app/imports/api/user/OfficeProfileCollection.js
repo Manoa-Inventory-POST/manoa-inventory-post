@@ -4,20 +4,9 @@ import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 
-export const officeRequestConditions = ['approve', 'disapprove'];
-export const officePublications = {
-  office: 'office',
-};
 class OfficeProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('OfficeProfile', new SimpleSchema({
-      description: String,
-      condition: {
-        type: String,
-        allowedValues: officeRequestConditions,
-        defaultValue: 'depending',
-      },
-    }));
+    super('OfficeProfile', new SimpleSchema({}));
   }
 
   /**
@@ -26,13 +15,11 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
-   * @param condition the condition of the item.
-   * @param description the description of the request.
    */
-  define({ email, firstName, lastName, password, condition, description }) {
+  define({ email, firstName, lastName, password }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, condition, description });
+    const user = this.findOne({ email, firstName, lastName });
     if (!user) {
       const role = ROLE.OFFICE;
       const userID = Users.define({ username, role, password });
@@ -50,10 +37,8 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
-   * @param condition the condition.
-   * @param description the description of the request.
    */
-  update(docID, { firstName, lastName, condition, description }) {
+  update(docID, { firstName, lastName }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -61,12 +46,6 @@ class OfficeProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
-    }
-    if (condition) {
-      updateData.condition = condition;
-    }
-    if (description) {
-      updateData.description = description;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -79,34 +58,6 @@ class OfficeProfileCollection extends BaseProfileCollection {
   removeIt(profileID) {
     if (this.isDefined(profileID)) {
       return super.removeIt(profileID);
-    }
-    return null;
-  }
-
-  /**
-   * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
-   */
-  publish() {
-    if (Meteor.isServer) {
-      // get the StuffCollection instance.
-      const instance = this;
-      // This subscription publishes only the documents associated with the logged-in user
-      Meteor.publish(officePublications.office, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
-    }
-  }
-
-  /**
-   * Subscription method for stuff owned by the current user.
-   */
-  subscribeRoom() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(officePublications.office);
     }
     return null;
   }
@@ -148,9 +99,7 @@ class OfficeProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    const condition = doc.condition;
-    const description = doc.lastName;
-    return { email, firstName, lastName, condition, description }; // CAM this is not enough for the define method. We lose the password.
+    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**
