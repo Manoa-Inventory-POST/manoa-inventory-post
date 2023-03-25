@@ -44,10 +44,10 @@
       "role": "STUDENT" ,
       "firstName": "James",
       "lastName": "White",
-      "TA": true,
+      "TA": false,
       "RA": false,
-      "graduate": true,
-      "undergraduate": false,
+      "Graduate": false,
+      "Undergraduate": false,
       "clubs": [
 
       ],

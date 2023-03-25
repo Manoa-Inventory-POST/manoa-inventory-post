@@ -8,7 +8,6 @@ export const PAGE_IDS = {
   FACULTY_HOME: 'faculty-home',
   ADMIN_HOME: 'admin-home',
   ITSUPPORT_HOME: 'itsupport-home',
-  OFFICE_HOME: 'office-home',
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',

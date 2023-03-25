@@ -1,43 +1,35 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { useTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
+import { Container } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { StudentProfiles } from '../../api/user/StudentProfileCollection';
-import LoadingSpinner from '../components/LoadingSpinner';
-import StudentInfoBar from '../components/StudentInfoBar';
-import StudentMySpaces from '../components/StudentMySpaces';
 
-const StudentHome = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, student } = useTracker(() => {
-    // Get access to Student documents
-    const subscription = StudentProfiles.subscribe();
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
-    // Get the Student documents
-    const studentProfiles = StudentProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
-    return {
-      student: studentProfiles,
-      ready: rdy,
-    };
-  }, []);
-  const currentUser = student[0];
-  return (ready ? (
-    <Container id={PAGE_IDS.STUDENT_HOME} className="py-3">
-      <Row>
-        <Col className="ms-5 my-3"><h2>Welcome, {currentUser.firstName} {currentUser.lastName}</h2></Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col md={8}>
-          <StudentMySpaces />
-        </Col>
-        <Col md={4}>
-          <StudentInfoBar />
-        </Col>
-      </Row>
+const StudentHome = () => (
+  <div>
+    <div className="student-home-page-background">
+      <h1> MĀNOA INVENTORY: POST</h1>
+      <div id="about-summary">
+        <h3>This is a HOME of ICS STUDENT</h3>
+      </div>
+    </div>
+    <Container id={PAGE_IDS.STUDENT_HOME}>
+      <section>
+        <div className="container px-5 my-5">
+          <div className=" mb-5 mb-lg-0">
+            <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-collection" /></div>
+            <h2 className="h4 fw-bolder text-center">Searching for Faculty</h2>
+            <br />
+            <p>
+              Allows your self to search for faculty information and office hours on the 3rd floor of POST Building.
+              As an undergraduate student I want to be able to look up my professor by name to find out his or her office hours and location.
+            </p>
+            <a className="text-decoration-none" href="/faculty">
+              Click Here
+              <i className="bi bi-arrow-right" />
+            </a>
+          </div>
+        </div>
+      </section>
     </Container>
-  ) : <LoadingSpinner />);
-};
+  </div>
+);
 
 export default StudentHome;

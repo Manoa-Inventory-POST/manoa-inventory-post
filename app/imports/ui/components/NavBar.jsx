@@ -23,36 +23,7 @@ const NavBar = () => {
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
-        { isStudent || isFaculty || isITSupport || isOffice || isAdmin ? '' : ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_LANDING} as={NavLink} to="/">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ])}
-        { isStudent ? ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_STUDENT_HOME} as={NavLink} to="/student-home">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ]) : ''}
-        { isFaculty ? ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_FACULTY_HOME} as={NavLink} to="/faculty-home">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ]) : ''}
-        { isITSupport ? ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ITSUPPORT_HOME} as={NavLink} to="/itsupport-home">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ]) : ''}
-        { isOffice ? ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_OFFICE_HOME} as={NavLink} to="/office-home">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ]) : ''}
-        { isAdmin ? ([
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ADMIN_HOME} as={NavLink} to="/admin-home">
-            <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
-          </Nav.Link>,
-        ]) : ''}
+        <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">

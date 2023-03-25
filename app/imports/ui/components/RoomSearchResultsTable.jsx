@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Form, Table } from 'react-bootstrap';
+import { Col, Container, Form, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from './LoadingSpinner';
 import { Room } from '../../api/room/RoomCollection';
@@ -17,7 +17,7 @@ const RoomSearchResultsTable = () => {
     const subscription = Room.subscribeRoom();
     const rdy = subscription.ready();
     const roomEntries = Room.find({}, { sort: { name: 1 } }).fetch();
-    // console.log(roomEntries, rdy);
+    console.log(roomEntries, rdy);
     return {
       rooms: roomEntries,
       ready: rdy,

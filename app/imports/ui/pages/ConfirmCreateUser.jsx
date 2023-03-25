@@ -9,7 +9,7 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 const ConfirmEditUser = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
-  // console.log(_id);
+  console.log(_id);
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
     // Get access to Stuff documents.
@@ -19,7 +19,7 @@ const ConfirmEditUser = () => {
     // Get the document
     const document = UserProfiles.find({ _id }).fetch();
     const document2 = document[0];
-    // console.log(document2);
+    console.log(document2);
     return {
       doc: document2,
       ready: rdy,
