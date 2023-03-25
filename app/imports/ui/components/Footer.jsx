@@ -22,22 +22,24 @@ const Footer = () => {
             <div className="col-sm-4">
               <h4>Services</h4>
               <hr />
-              <a style={linkStyle} href="https://bowfolios.github.io"><GeoAltFill /> Map</a>
+              <a style={linkStyle} href="/map"><GeoAltFill /> Map</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Professors</a>
+              <a style={linkStyle} href="/faculty">Faculty</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Room Availability</a>
+              <a style={linkStyle} href="/clubs">Clubs</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Reserve Room</a>
+              <a style={linkStyle} href="/signin">Room Availability</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Service Request</a>
+              <a style={linkStyle} href="/signin">Reserve Room</a>
+              <br />
+              <a style={linkStyle} href="/signin">Service Request</a>
             </div>
             <div className="col-sm-4">
               <h4>Resources</h4>
               <hr />
-              <a style={linkStyle} href="https://bowfolios.github.io">Office Hours Spreedsheet</a>
+              <a style={linkStyle} href="https://manoa-inventory-post.github.io/">Visit our Home Page</a>
               <br />
-              <a style={linkStyle} href="https://bowfolios.github.io">Port Number Spreedsheet</a>
+              <a style={linkStyle} href="https://github.com/Manoa-Inventory-POST/manoa-inventory-post">GitHub Repository</a>
             </div>
           </div>
         </div>

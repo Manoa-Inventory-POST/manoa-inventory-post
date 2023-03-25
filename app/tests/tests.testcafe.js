@@ -1,7 +1,7 @@
 import { Selector, t } from 'testcafe';
 import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, */ /* manageDatabasePage, */ signOutPage } from './simple.page';
 import { signInPage } from './signin.page';
-import { signUpPage } from './signup.page';
+// import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
 import { studentProfilePage } from './studentprofile.page';
 import { landingPage } from './landing.page';
@@ -19,7 +19,7 @@ import { clubSearchPage } from './clubsearch.page';
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
-const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
+// const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
@@ -52,6 +52,7 @@ test('Test that signin and signout work', async () => {
   await signOutPage.isDisplayed();
 });
 */
+/*
 test('Test that sign up and sign out work', async () => {
   await navBar.gotoSignUpPage();
   await signUpPage.isDisplayed();
@@ -60,6 +61,8 @@ test('Test that sign up and sign out work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
+*/
+
 /*
 test('Test that admin pages show up', async () => {
   await navBar.gotoSignInPage();

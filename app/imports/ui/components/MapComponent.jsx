@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Image, Modal } from 'react-bootstrap';
+import { Container, Image, Modal, Button } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { Room } from '../../api/room/RoomCollection';
 
 /** Render the map of the 3rd floor of POST. */
 const MapComponent = () => {
@@ -8,6 +10,18 @@ const MapComponent = () => {
 
   const handleModalClose = () => setModalToShow(null);
 
+  const { rooms } = useTracker(() => {
+    // Get access to Faculty documents
+    const subscription = Room.subscribe();
+    // Determine if the subscription is ready
+    const rdy = subscription.ready();
+    // Get the Faculty documents
+    const roomProfiles = Room.find({}).fetch();
+    return {
+      rooms: roomProfiles,
+      ready: rdy,
+    };
+  }, []);
   /** Render the map of the 3rd floor of POST. */
   return (
     <Container>
@@ -419,10 +433,15 @@ const MapComponent = () => {
           <Modal.Title>{modalToShow}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h3>Room Information</h3>
+          <p>Building Location: {rooms.location}</p>
+          <p>Description: {rooms.description}</p>
+          <p>#TODO: Include details about resources/equipment in the room</p>
+          <p>Stretch Goal: Include (360) image of room???</p>
           <p>Modal content for {modalToShow} goes here.</p>
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={handleModalClose}>Close</button>
+          <Button onClick={handleModalClose}>Close</Button>
         </Modal.Footer>
       </Modal>
     </Container>

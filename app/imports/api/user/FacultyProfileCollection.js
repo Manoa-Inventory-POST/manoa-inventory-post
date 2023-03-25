@@ -43,8 +43,9 @@ class FacultyProfileCollection extends BaseProfileCollection {
       }
       if (phones) {
         // checks if phones exist
-        phones.forEach(phoneNum => {
+        for (let i = 0; i < phones.length; i++) {
           // if exists, update
+          const phoneNum = phones[i];
           if (Phone.checkExists(phoneNum)) {
             const phoneID = Phone.findDoc({ phoneNum })._id;
             Phone.update(phoneID, { email });
@@ -52,7 +53,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
           } else {
             Phone.define({ email, phoneNum });
           }
-        });
+        }
       }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
