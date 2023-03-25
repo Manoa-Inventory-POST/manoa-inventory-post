@@ -29,8 +29,6 @@ const PortSearch = () => {
     function buildPortInfo(port, PortRoomColl, PortStatusColl) {
       const result = {};
       result.name = port.name;
-      result.room = port.room;
-      result.status = port.status;
       let portRoomArray = PortRoomColl.find({ port: port.name }, {}).fetch();
       portRoomArray = portRoomArray.map(portRoom => portRoom.room);
       if (portRoomArray.length === 1) {
@@ -39,8 +37,8 @@ const PortSearch = () => {
         portRoomArray = portRoomArray.join(', ');
       }
 
-      let portStatusArray = PortStatusColl.find({ port: port.status }, {}).fetch();
-      portStatusArray = portStatusArray.map(item => item.advisor);
+      let portStatusArray = PortStatusColl.find({ port: port.name }, {}).fetch();
+      portStatusArray = portStatusArray.map(portStatus => portStatus.status);
       if (portStatusArray.length === 1) {
         portStatusArray = portStatusArray[0];
       } else {
@@ -72,21 +70,21 @@ const PortSearch = () => {
       filtered = filtered.filter(function (obj) { return obj.name.toLowerCase().includes(filteredName.toLowerCase()); });
     }
     if (filteredRoom) {
-      filtered = filtered.filter(function (obj) { return obj.room.toLocaleString().toLowerCase().includes(filteredRoom.toLowerCase()); });
+      filtered = filtered.filter(function (obj) { return obj.room.toLowerCase().includes(filteredRoom.toLowerCase()); });
     }
     if (filteredStatus) {
-      filtered = filtered.filter(function (obj) { return obj.status.toLocaleString().toLowerCase().includes(filteredStatus.toLowerCase()); });
+      filtered = filtered.filter(function (obj) { return obj.status.toLowerCase().includes(filteredStatus.toLowerCase()); });
     }
     setFilteredPorts(filtered);
   }, [filteredName, filteredRoom, filteredStatus]);
 
   const returnFilter = () => (
-    <div className="pb-3" id={PAGE_IDS.CLUB_SEARCH}>
+    <div className="pb-3" id={PAGE_IDS.PORT_SEARCH}>
       <h2 className="mt-4 text-center mb-2">Port Search</h2>
       <div id="filter-border">
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header id={COMPONENT_IDS.CLUB_FILTER_OPTIONS}>
+            <Accordion.Header id={COMPONENT_IDS.PORT_FILTER_OPTIONS}>
               Filter Options
             </Accordion.Header>
             <AccordionBody>
@@ -147,11 +145,7 @@ const PortSearch = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredPorts.length === 0 ? (
-            <tr>
-              <td>-</td>
-            </tr>
-          ) : filteredPorts.map((portss) => <PortItem key={portss._id} port={portss} />)}
+          {filteredPorts.length === 0 ? (<tr><td>-</td></tr>) : filteredPorts.map((portname) => <PortItem key={portname._id} port={portname} />)}
         </tbody>
       </Table>
       {filteredPorts.length === 0 ? <div className="d-flex justify-content-center pb-2"> No club found. </div> : ''}

@@ -12,7 +12,7 @@ class PortStatusCollection extends BaseCollection {
   constructor() {
     super('PortStatus', new SimpleSchema({
       Port: String,
-      Status: String,
+      Status: { type: String, allowedValues: ['active', 'inactive', 'maintenance'], defaultValue: 'inactive' },
     }));
   }
 

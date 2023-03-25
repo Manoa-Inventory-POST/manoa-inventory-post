@@ -16,6 +16,7 @@ export const PAGE_IDS = {
   Room_Avi: 'room',
   FACULTY_SEARCH: 'faculty-search',
   FULL_FACULTY_INFO: 'full-faculty-info',
+  PORT_SEARCH: 'port-search',
   CLUB_SEARCH: 'club-search',
   PROFILE: 'profile',
   STUDENT_HOME: 'student-home',

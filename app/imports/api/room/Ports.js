@@ -3,10 +3,8 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
-import { ClubInterests } from '../clubs/ClubInterests';
-import { ClubAdvisor } from '../clubs/ClubAdvisor';
-import { ClubOfficer } from '../clubs/ClubOfficer';
 import { PortStatus } from './PortStatus';
+import { PortRoom } from './PortRoom';
 
 export const portPublications = {
   // will be using "portPub" as acronym for portPublications
@@ -17,8 +15,6 @@ class PortsCollection extends BaseCollection {
   constructor() {
     super('Ports', new SimpleSchema({
       name: String,
-      room: String,
-      status: { type: String, allowedValues: ['active', 'inactive', 'maintenance'], defaultValue: 'inactive' },
     }));
   }
 
@@ -29,17 +25,16 @@ class PortsCollection extends BaseCollection {
    * @param room
    * @param status
    */
-  define({ name, room, status }) {
+  define({ name, rooms, status }) {
+    const port = name;
     const docID = this._collection.insert({
       name,
-      room,
-      status,
     });
-    if (interests) {
-      interests.forEach((interest) => ClubInterests.define({ club, interest }));
+    if (rooms) {
+      rooms.forEach((room) => PortRoom.define({ port, room }));
     }
     if (status) {
-      status.forEach((status) => PortStatus.define({ status, name }));
+      status.forEach((statuses) => PortStatus.define({ statuses, port }));
     }
     return docID;
   }
@@ -124,9 +119,7 @@ class PortsCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const name = doc.name;
-    const room = doc.room;
-    const status = doc.status;
-    return { name, room, status };
+    return { name };
   }
 }
 
