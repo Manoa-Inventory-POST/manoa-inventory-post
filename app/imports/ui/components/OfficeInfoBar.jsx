@@ -2,25 +2,25 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, ListGroup } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
-const InfoBar = () => {
+const OfficeInfoBar = () => {
 
   /* Renders an admin dashboard with options to search people, rooms, and schedules. Use <PeopleSearchResultsTable> to render each row of search results. */
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { admins } = useTracker(() => {
+  const { office } = useTracker(() => {
     // Get access to Admin documents
-    const subscription = AdminProfiles.subscribe();
+    const subscription = OfficeProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Admin documents
-    const adminProfiles = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
+    const officeProfiles = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
-      admins: adminProfiles,
+      office: officeProfiles,
       ready: rdy,
     };
   }, []);
-  const currentUser = admins[0];
+  const currentUser = office[0];
 
   return (
     <Card className="rounded-0">
@@ -61,4 +61,4 @@ const InfoBar = () => {
     </Card>
   );
 };
-export default InfoBar;
+export default OfficeInfoBar;

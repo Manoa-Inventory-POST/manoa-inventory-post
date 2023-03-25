@@ -43,7 +43,7 @@ const FacultyInfoBar = () => {
       </Card.Body>
       <ListGroup className="list-group-flush rounded-0">
         <ListGroup.Item>
-          <Card.Link href="#">View campus map</Card.Link>
+          <Card.Link href="/map">View campus map</Card.Link>
         </ListGroup.Item>
       </ListGroup>
     </Card>
