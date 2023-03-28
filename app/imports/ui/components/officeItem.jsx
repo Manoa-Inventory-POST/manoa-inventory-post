@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const OfficeItem = ({ officeReq }) => (
@@ -9,6 +11,9 @@ const OfficeItem = ({ officeReq }) => (
     <td>{officeReq.lastName}</td>
     <td>{officeReq.description}</td>
     <td>{officeReq.condition}</td>
+    <td>
+      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/edit/${officeReq._id}`}>Edit</Link>
+    </td>
   </tr>
 );
 

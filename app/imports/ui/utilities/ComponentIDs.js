@@ -1,6 +1,7 @@
 export const COMPONENT_IDS = {
   Room_List: 'room-list',
   LIST_STUFF_EDIT: 'list-stuff-edit',
+  LIST_OFFICE_EDIT: 'list-office-edit',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
@@ -16,6 +17,7 @@ export const COMPONENT_IDS = {
   NAVBAR_FACULTY_HOME: 'navbar-faculty-home',
   NAVBAR_ADVISOR_HOME: 'navbar-advisor-home',
   NAVBAR_OFFICE_HOME: 'navbar-office-home',
+  NAVBAR_OFFICE_REQUEST: 'navbar-office-request',
   NAVBAR_ITSUPPORT_HOME: 'navbar-itsupport-home',
   NAVBAR_ADMIN_HOME: 'navbar-admin-home',
   NAVBAR_MAP: 'navbar-map',

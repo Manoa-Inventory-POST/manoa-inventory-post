@@ -2,6 +2,7 @@
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
   EDIT_STUFF: 'edit-stuff',
+  EDIT_REQUEST: 'edit-request',
   LANDING: 'landing',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',

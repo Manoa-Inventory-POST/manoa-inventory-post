@@ -37,6 +37,7 @@ const ListRequest = () => {
                 <th>lastName</th>
                 <th>description</th>
                 <th>condition</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>

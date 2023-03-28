@@ -40,6 +40,7 @@ import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import OfficeRequestHome from '../pages/officeRequestHome';
+import EditRequest from '../pages/EditRequest';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -87,7 +88,7 @@ const App = () => {
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
-
+          <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
