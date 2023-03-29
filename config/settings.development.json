@@ -576,6 +576,9 @@
       "role": "FACULTY"
     }
   ],
+  "defaultRequest": [
+    { "firstName": "Will", "lastName": "Smith", "email": "john@foo.com", "description":"Help!!!!!!!", "condition": "depending" }
+  ],
   "public": {
     "development": true
   }
