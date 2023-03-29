@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Container, Form, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
@@ -44,7 +44,7 @@ const PeopleSearchResultsTable = () => {
     const studentEntries = StudentProfiles.find({}, { sort: { name: 1 } }).fetch();
     const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
 
-    console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
+    // console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
 
     function buildPerson(user, RoomCollection, PhoneCollection) {
       const result = {};
@@ -58,7 +58,7 @@ const PeopleSearchResultsTable = () => {
       } else {
         roomArr = roomArr.join(', ');
       }
-      console.log(roomArr);
+      // console.log(roomArr);
       let phoneArr = PhoneCollection.find({ email: user.email }).fetch();
       phoneArr = phoneArr.map(item => item.phoneNum);
       if (phoneArr.length === 1) {
@@ -66,7 +66,7 @@ const PeopleSearchResultsTable = () => {
       } else {
         phoneArr = phoneArr.join(', ');
       }
-      console.log(phoneArr);
+      // console.log(phoneArr);
       result.room = roomArr;
       result.phones = phoneArr;
       return result;
@@ -77,7 +77,7 @@ const PeopleSearchResultsTable = () => {
     const itObjects = itEntries.map(item => buildPerson(item, Room, Phone));
     const studentObjects = studentEntries.map(item => buildPerson(item, Room, Phone));
     const userObjects = userEntries.map(item => buildPerson(item, Room, Phone));
-    console.log(facultyObjects);
+    // console.log(facultyObjects);
 
     Array.prototype.push.apply(userObjects, adminObjects);
     Array.prototype.push.apply(userObjects, facultyObjects);

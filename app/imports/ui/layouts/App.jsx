@@ -40,7 +40,7 @@ import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
-import UpdateUser from "../pages/UpdateUser";
+import UpdateUser from '../pages/UpdateUser';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
