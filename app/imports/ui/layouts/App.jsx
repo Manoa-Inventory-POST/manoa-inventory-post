@@ -44,7 +44,6 @@ import UpdateUser from "../pages/UpdateUser";
 import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
 
-
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
