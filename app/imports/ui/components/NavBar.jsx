@@ -39,6 +39,7 @@ const NavBar = () => {
             { isOffice ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office-home">Home</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/assign-faculty" key="assign-faculty">Assign Faculty</Nav.Link>,
             ]) : ''}
             { isAdmin ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>,
