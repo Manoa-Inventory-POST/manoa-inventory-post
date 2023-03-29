@@ -42,4 +42,5 @@ export const COMPONENT_IDS = {
   FACULTY_SEARCH_FIRST_NAME: 'faculty-search-first-name',
   FACULTY_SEARCH_LAST_NAME: 'faculty-search-last-name',
   FACULTY_SEARCH_POSITION: 'faculty-search-position',
+  NAVBAR_STUDENT_LIST: 'navbar-student-list',
 };
