@@ -4,6 +4,7 @@ import { Room } from '../../api/room/RoomCollection';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Interests } from '../../api/clubs/Interests';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
 
 // Initialize the database with a default data document.
 function addData(data) {
@@ -12,6 +13,11 @@ function addData(data) {
 }
 
 // Initialize the database with a default data document.
+function addRequest(data) {
+  console.log(`  Adding: ${data.email} (${data.description}) `);
+  OfficeRequests.define(data);
+}
+
 function addRoom(data) {
   console.log(`  Adding: ${data.room} (${data.description}) ${data.building}`);
   Room.define(data);
@@ -68,5 +74,12 @@ if (FacultyProfiles.count() === 1) {
   if (Meteor.settings.defaultFacultys) {
     console.log('Creating default Facultys data.');
     Meteor.settings.defaultFacultys.map(data => addFaculty(data));
+  }
+}
+
+if (OfficeRequests.count() === 0) {
+  if (Meteor.settings.defaultRequest) {
+    console.log('Creating default request data.');
+    Meteor.settings.defaultRequest.map(data => addRequest(data));
   }
 }
