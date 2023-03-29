@@ -1,8 +1,9 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import {AutoForm, ErrorsField, SelectField, SubmitField, TextField} from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
+import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
 // import { Users } from '../../api/user/UserCollection';
@@ -11,7 +12,17 @@ import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 
-const bridge = new SimpleSchema2Bridge(Room._schema);
+const statusValues = ['open', 'occupied', 'maintenance'];
+const buildingValues = ['POST'];
+
+const RoomSchema = new SimpleSchema({
+  room: String,
+  description: String,
+  building: { type: String, allowedValues: buildingValues },
+  status: { type: String, allowedValues: statusValues },
+});
+
+const bridge = new SimpleSchema2Bridge(RoomSchema);
 
 /* Renders the EditStuff page for editing a single document. */
 const EditRoom = () => {
@@ -20,7 +31,7 @@ const EditRoom = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
     // Get access to Stuff documents.
-    const subscription = Room.subscribeRoomAdmin();
+    const subscription = Room.subscribeRoom();
     // const subscription = UserProfiles.subscribe();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
@@ -35,9 +46,9 @@ const EditRoom = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { firstName, lastName, role } = data;
-    const collectionName = UserProfiles.getCollectionName();
-    const updateData = { id: _id, firstName, lastName, role };
+    const { room, description, building, status } = data;
+    const collectionName = Room.getCollectionName();
+    const updateData = { id: _id, room, description, building, status };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'User updated successfully', 'success'));
@@ -51,9 +62,10 @@ const EditRoom = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="num" />
+                <TextField name="room" />
                 <TextField name="description" />
-                <TextField name="status" />
+                <SelectField name="building" />
+                <SelectField name="status" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -62,7 +74,7 @@ const EditRoom = () => {
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner message="Loading Stuff" />);
+  ) : <LoadingSpinner message="Loading" />);
 };
 
 export default EditRoom;
