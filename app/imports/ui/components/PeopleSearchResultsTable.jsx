@@ -182,7 +182,7 @@ const PeopleSearchResultsTable = () => {
           </tr>
         </thead>
         <tbody>
-          { filteredUsers.length === 0 ? (<tr><td>-</td></tr>) : filteredUsers.map((user) => <PeopleSearchResultsTableRow key={user.email} user={user} />)}
+          { filteredUsers.length === 0 ? (<tr><td>-</td></tr>) : filteredUsers.map((user) => <PeopleSearchResultsTableRow key={user._id} user={user} />)}
         </tbody>
       </Table>
     </Container>
