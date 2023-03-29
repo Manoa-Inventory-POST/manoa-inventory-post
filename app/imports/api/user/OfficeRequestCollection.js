@@ -31,6 +31,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param lastName The last name.
    * @param condition the condition of the item.
    * @param description the description of the request.
+   * @return {String} the docID of the new document.
    */
   define({ email, firstName, lastName, condition, description }) {
     const docID = this._collection.insert({
