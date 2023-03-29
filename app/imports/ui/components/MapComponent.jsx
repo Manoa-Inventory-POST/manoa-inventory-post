@@ -422,6 +422,7 @@ const MapComponent = () => {
           <p>Modal content for {modalToShow} goes here.</p>
         </Modal.Body>
         <Modal.Footer>
+          {/* eslint-disable-next-line react/button-has-type */}
           <button onClick={handleModalClose}>Close</button>
         </Modal.Footer>
       </Modal>
