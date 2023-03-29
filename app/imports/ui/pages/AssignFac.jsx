@@ -3,10 +3,10 @@ import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
 const roomData = [
-  { room: '303A', occupant: 'John Doe' },
-  { room: '303B', occupant: 'Jane Smith' },
-  { room: '303C', occupant: 'Bob Johnson' },
-  { room: '303D', occupant: 'Sarah Lee' },
+  { room: '303A', occupant: '' },
+  { room: '303B', occupant: '' },
+  { room: '303C', occupant: '' },
+  { room: '303D', occupant: '' },
   // add more rooms and occupants as needed
 ];
 
@@ -19,7 +19,7 @@ const AssignFac = () => {
 
   return (
     <div className="container">
-      <h1>Room Occupancy</h1>
+      <h1 className="text-center">Room Occupancy</h1>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
