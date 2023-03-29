@@ -40,8 +40,14 @@ import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
+<<<<<<< HEAD
 import UpdateUser from "../pages/UpdateUser";
 import AssignFac from '../pages/AssignFac';
+=======
+import UpdateUser from '../pages/UpdateUser';
+import OfficeRequestHome from '../pages/officeRequestHome';
+import EditRequest from '../pages/EditRequest';
+>>>>>>> main
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -87,7 +93,12 @@ const App = () => {
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
+<<<<<<< HEAD
           <Route path="/assign-faculty" element={<OfficeProtectedRoute><AssignFac /></OfficeProtectedRoute>} />
+=======
+          <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
+          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
+>>>>>>> main
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
