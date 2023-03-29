@@ -7,85 +7,82 @@ import AccordionBody from 'react-bootstrap/AccordionBody';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import ClubItem from '../components/ClubItem';
-import { Clubs } from '../../api/clubs/Clubs';
-import { ClubInterests } from '../../api/clubs/ClubInterests';
-import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
-import { Interests } from '../../api/clubs/Interests';
+import { Ports } from '../../api/room/Ports';
+import { PortStatus } from '../../api/room/PortStatus';
+import { PortRoom } from '../../api/room/PortRoom';
+import PortItem from '../components/PortItem';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
-const ClubSearch = () => {
-  const [filteredClubs, setFilteredClubs] = useState([]);
+const PortSearch = () => {
+  const [filteredPorts, setFilteredPorts] = useState([]);
   const [filteredName, setFilteredName] = useState('');
-  const [filteredInterests, setFilteredInterests] = useState('');
-  const [filteredAdmins, setFilteredAdmins] = useState('');
+  const [filteredRoom, setFilteredRoom] = useState('');
+  const [filteredStatus, setFilteredStatus] = useState('');
 
-  const { ready, clubProfiles } = useTracker(() => {
-    const sub1 = Clubs.subscribeClubs();
-    const sub2 = ClubInterests.subscribeClubInterests();
-    const sub3 = ClubAdvisor.subscribeClubAdvisor();
-    const sub4 = Interests.subscribeInterests();
-    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
-    const clubItems = Clubs.find({}, {}).fetch();
+  const { ready, ports } = useTracker(() => {
+    const sub1 = Ports.subscribePorts();
+    const sub2 = PortStatus.subscribePortStatus();
+    const sub3 = PortRoom.subscribePortRoom();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready();
+    const portItems = Ports.find({}, {}).fetch();
 
-    function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
+    function buildPortInfo(port, PortRoomColl, PortStatusColl) {
       const result = {};
-      result.name = club.name;
-      result.website = club.website;
-      result.description = club.description;
-      result.picture = club.picture;
-      let clubInterestsArray = ClubInterestsColl.find({ club: club.name }, {}).fetch();
-      clubInterestsArray = clubInterestsArray.map(clubInt => clubInt.interest);
-      if (clubInterestsArray.length === 1) {
-        clubInterestsArray = clubInterestsArray[0];
+      result.name = port.name;
+      result.room = port.room;
+      result.status = port.status;
+      let portRoomArray = PortRoomColl.find({ port: port.name }, {}).fetch();
+      portRoomArray = portRoomArray.map(portRoom => portRoom.room);
+      if (portRoomArray.length === 1) {
+        portRoomArray = portRoomArray[0];
       } else {
-        clubInterestsArray = clubInterestsArray.join(', ');
+        portRoomArray = portRoomArray.join(', ');
       }
 
-      let clubAdvisorsArray = ClubAdvisorColl.find({ club: club.name }, {}).fetch();
-      clubAdvisorsArray = clubAdvisorsArray.map(item => item.advisor);
-      if (clubAdvisorsArray.length === 1) {
-        clubAdvisorsArray = clubAdvisorsArray[0];
+      let portStatusArray = PortStatusColl.find({ port: port.status }, {}).fetch();
+      portStatusArray = portStatusArray.map(item => item.advisor);
+      if (portStatusArray.length === 1) {
+        portStatusArray = portStatusArray[0];
       } else {
-        clubAdvisorsArray = clubAdvisorsArray.join(', ');
+        portStatusArray = portStatusArray.join(', ');
       }
 
-      result.interests = clubInterestsArray;
-      result.advisor = clubAdvisorsArray;
+      result.room = portRoomArray;
+      result.status = portStatusArray;
       return result;
     }
 
-    const clubInfoObjects = clubItems.map(item => buildClubInfo(item, ClubInterests, ClubAdvisor));
+    const portInfoObjects = portItems.map(item => buildPortInfo(item, PortRoom, PortStatus));
 
     return {
-      clubProfiles: clubInfoObjects,
+      ports: portInfoObjects,
       ready: rdy,
     };
   }, []);
 
   useEffect(() => {
     if (ready) {
-      setFilteredClubs(clubProfiles);
+      setFilteredPorts(ports);
     }
   }, [ready]);
 
   useEffect(() => {
-    let filtered = clubProfiles;
+    let filtered = ports;
     if (filteredName) {
       filtered = filtered.filter(function (obj) { return obj.name.toLowerCase().includes(filteredName.toLowerCase()); });
     }
-    if (filteredInterests) {
-      filtered = filtered.filter(function (obj) { return obj.interests.toLocaleString().toLowerCase().includes(filteredInterests.toLowerCase()); });
+    if (filteredRoom) {
+      filtered = filtered.filter(function (obj) { return obj.room.toLocaleString().toLowerCase().includes(filteredRoom.toLowerCase()); });
     }
-    if (filteredAdmins) {
-      filtered = filtered.filter(function (obj) { return obj.advisor.toLocaleString().toLowerCase().includes(filteredAdmins.toLowerCase()); });
+    if (filteredStatus) {
+      filtered = filtered.filter(function (obj) { return obj.status.toLocaleString().toLowerCase().includes(filteredStatus.toLowerCase()); });
     }
-    setFilteredClubs(filtered);
-  }, [filteredName, filteredInterests, filteredAdmins]);
+    setFilteredPorts(filtered);
+  }, [filteredName, filteredRoom, filteredStatus]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.CLUB_SEARCH}>
-      <h2 className="mt-4 text-center mb-2">Club Search</h2>
+      <h2 className="mt-4 text-center mb-2">Port Search</h2>
       <div id="filter-border">
         <Accordion>
           <Accordion.Item eventKey="0">
@@ -109,24 +106,24 @@ const ClubSearch = () => {
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by interest">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Interests
+                      room
                     </Col>
                     <input
                       type="text"
                       className="shadow-sm"
-                      onChange={e => setFilteredInterests(e.target.value)}
+                      onChange={e => setFilteredRoom(e.target.value)}
                     />
                   </label>
                 </Col>
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by name">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Advisor
+                      status
                     </Col>
                     <input
                       type="text"
                       className="shadow-sm"
-                      onChange={e => setFilteredAdmins(e.target.value)}
+                      onChange={e => setFilteredStatus(e.target.value)}
                     />
                   </label>
                 </Col>
@@ -145,21 +142,19 @@ const ClubSearch = () => {
           <tr>
             <th> </th>
             <th>Name</th>
-            <th>Website</th>
-            <th>Description</th>
-            <th>Interests</th>
-            <th>Advisor</th>
+            <th>Room</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {filteredClubs.length === 0 ? (
+          {filteredPorts.length === 0 ? (
             <tr>
               <td>-</td>
             </tr>
-          ) : filteredClubs.map((clubs) => <ClubItem key={clubs._id} club={clubs} />)}
+          ) : filteredPorts.map((portss) => <PortItem key={portss._id} port={portss} />)}
         </tbody>
       </Table>
-      {filteredClubs.length === 0 ? <div className="d-flex justify-content-center pb-2"> No club found. </div> : ''}
+      {filteredPorts.length === 0 ? <div className="d-flex justify-content-center pb-2"> No club found. </div> : ''}
     </div>
   );
 
@@ -177,4 +172,4 @@ const ClubSearch = () => {
     </Container>
   );
 };
-export default ClubSearch;
+export default PortSearch;

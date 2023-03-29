@@ -4,28 +4,28 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const clubOfficerPublications = {
-  clubOfficerPub: 'clubOfficerPub',
+export const portStatusPublications = {
+  portStatusPub: 'portStatusPub',
 };
 
-class ClubOfficerCollection extends BaseCollection {
+class PortStatusCollection extends BaseCollection {
   constructor() {
-    super('ClubOfficer', new SimpleSchema({
-      officer: String,
-      club: String,
+    super('PortStatus', new SimpleSchema({
+      Port: String,
+      Status: String,
     }));
   }
 
   /**
-   * Defines a new ClubOfficer item.
-   * @return {String} the docID of the new document.
-   * @param officer
+   * Defines a new ClubAdvisor item.
+   * @return {never} the docID of the new document.
+   * @param advisor
    * @param club
    */
-  define({ officer, club }) {
+  define({ status, port }) {
     const docID = this._collection.insert({
-      officer,
-      club,
+      status,
+      port,
     });
     return docID;
   }
@@ -33,17 +33,17 @@ class ClubOfficerCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param officer the new officer (optional).
+   * @param advisor the new advisor (optional).
    * @param club the new club (optional).
    * @returns never
    */
-  update(docID, { officer, club }) {
+  update(docID, { status, port }) {
     const updateData = {};
-    if (officer) {
-      updateData.officer = officer;
+    if (status) {
+      updateData.status = status;
     }
-    if (club) {
-      updateData.club = club;
+    if (port) {
+      updateData.port = port;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -66,20 +66,21 @@ class ClubOfficerCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the ClubOfficer instance.
+      // get the ClubAdvisor instance.
       const instance = this;
-      Meteor.publish(clubOfficerPublications.clubOfficerPub, function publish() {
+      // This subscription publishes CLubAdvisors
+      Meteor.publish(portStatusPublications.portStatusPub, function publish() {
         return instance._collection.find({ });
       });
     }
   }
 
   /*
-   * Subscription method for ClubOfficer.
+   * Subscription method for ClubAdvisor.
    */
-  subscribeClubOfficer() {
+  subscribePortStatus() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(clubOfficerPublications.clubOfficerPub);
+      return Meteor.subscribe(portStatusPublications.portStatusPub);
     }
     return null;
   }
@@ -97,45 +98,17 @@ class ClubOfficerCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return { officer, club}
+   * @return {{advisor: *, club: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const officer = doc.officer;
-    const club = doc.club;
-    return { officer, club };
-  }
-
-  /**
-   * Searches for a club with a given officer. If club exists, returns the array of clubs. Else,
-   * there is no club.
-   * @param officer an officer.
-   * @returns { Object } Array of clubs.
-   */
-  getClub(officer) {
-    const clubs = this.find({ officer }).fetch();
-    if (clubs.isEmpty()) {
-      return [];
-    }
-    return clubs;
-  }
-
-  /**
-   * Searches for an officer with a given club. If officer exists, returns the array of officers.
-   * Else, there are no officers.
-   * @param club a club.
-   * @returns { Object } Array of officers.
-   */
-  getOfficer(club) {
-    const officers = this.find({ club }).fetch();
-    if (officers.isEmpty()) {
-      return [];
-    }
-    return officers;
+    const status = doc.status;
+    const port = doc.port;
+    return { status, port };
   }
 }
 
 /*
  * Provides the singleton instance of this class to all other entities.
  */
-export const ClubOfficer = new ClubOfficerCollection();
+export const PortStatus = new PortStatusCollection();

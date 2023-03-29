@@ -3,6 +3,10 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { ClubInterests } from '../clubs/ClubInterests';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
+import { ClubOfficer } from '../clubs/ClubOfficer';
+import { PortStatus } from './PortStatus';
 
 export const portPublications = {
   // will be using "portPub" as acronym for portPublications
@@ -31,6 +35,12 @@ class PortsCollection extends BaseCollection {
       room,
       status,
     });
+    if (interests) {
+      interests.forEach((interest) => ClubInterests.define({ club, interest }));
+    }
+    if (status) {
+      status.forEach((status) => PortStatus.define({ status, name }));
+    }
     return docID;
   }
 
