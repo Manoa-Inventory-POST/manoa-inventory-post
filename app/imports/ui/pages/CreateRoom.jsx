@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import {AutoForm, ErrorsField, SelectField, SubmitField, TextField} from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
@@ -10,8 +10,19 @@ import { Room } from '../../api/room/RoomCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
+import SimpleSchema from "simpl-schema";
 
-const bridge = new SimpleSchema2Bridge(Room._schema);
+const statusValues = ['open', 'occupied', 'maintenance'];
+const buildingValues = ['POST'];
+
+const RoomSchema = new SimpleSchema({
+  room: String,
+  description: String,
+  building: { type: String, allowedValues: buildingValues },
+  status: { type: String, allowedValues: statusValues },
+});
+
+const bridge = new SimpleSchema2Bridge(RoomSchema);
 
 /* Renders the EditStuff page for editing a single document. */
 const CreateRoom = () => {
@@ -48,12 +59,13 @@ const CreateRoom = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Room</h2></Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField name="num" />
+                <TextField name="room" />
                 <TextField name="description" />
-                <TextField name="status" />
+                <SelectField name="building" />
+                <SelectField name="status" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -62,7 +74,7 @@ const CreateRoom = () => {
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner message="Loading Stuff" />);
+  ) : <LoadingSpinner message="Loading" />);
 };
 
 export default CreateRoom;
