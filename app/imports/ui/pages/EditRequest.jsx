@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
@@ -24,11 +25,13 @@ const EditRequest = () => {
     const rdy = subscription.ready();
     // Get the document
     const document = OfficeRequests.find({ _id }).fetch();
+    const requestEdit = document[0];
     return {
-      doc: document,
+      doc: requestEdit,
       ready: rdy,
     };
   }, [_id]);
+  const [redirect, setRedirect] = useState(false);
 
   // On successful submit, insert the data.
   const submit = (data) => {
@@ -38,7 +41,12 @@ const EditRequest = () => {
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Item updated successfully', 'success'));
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return (<Navigate to="/officeRequestHome" />);
+  }
 
   return ready ? (
     <Container id={PAGE_IDS.EDIT_REQUEST} className="py-3">

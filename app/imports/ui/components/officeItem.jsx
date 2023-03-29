@@ -12,7 +12,7 @@ const OfficeItem = ({ officeReq }) => (
     <td>{officeReq.description}</td>
     <td>{officeReq.condition}</td>
     <td>
-      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/edit/${officeReq._id}`}>Edit</Link>
+      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>Edit</Link>
     </td>
   </tr>
 );
