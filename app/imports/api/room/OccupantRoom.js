@@ -109,6 +109,21 @@ class OccupantRoomCollection extends BaseCollection {
     const room = doc.room;
     return { email, room };
   }
+
+  /**
+   * Checks the OccupantRoom collection to see if an inputted room occupant already exists.
+   * @param email
+   * @param room
+   * @return true
+   * @return false
+   */
+  checkExists(email, room) {
+    const instances = this.find({ email, room }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
 }
 
 /**

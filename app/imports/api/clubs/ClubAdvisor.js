@@ -106,6 +106,21 @@ class ClubAdvisorCollection extends BaseCollection {
     const club = doc.club;
     return { advisor, club };
   }
+
+  /**
+   * Checks the ClubAdvisor collection to see if an inputted Club Advisor already exists.
+   * @param advisor
+   * @param club
+   * @return true
+   * @return false
+   */
+  checkExists(advisor, club) {
+    const instances = this.find({ advisor, club }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
 }
 
 /*

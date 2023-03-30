@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Container, Form, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
@@ -51,6 +51,7 @@ const PeopleSearchResultsTable = () => {
       result.firstName = user.firstName;
       result.lastName = user.lastName;
       result.role = user.role;
+      result._id = user._id;
       let roomArr = OccupantRoom.find({ email: user.email }).fetch();
       roomArr = roomArr.map(room => room.room);
       if (roomArr.length === 1) {
