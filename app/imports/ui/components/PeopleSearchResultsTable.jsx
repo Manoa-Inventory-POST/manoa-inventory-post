@@ -55,6 +55,7 @@ const PeopleSearchResultsTable = () => {
       result.firstName = user.firstName;
       result.lastName = user.lastName;
       result.role = user.role;
+      result._id = user._id;
       let roomArr = OccupantRoom.find({ email: user.email }).fetch();
       roomArr = roomArr.map(room => room.room);
       if (roomArr.length === 1) {
