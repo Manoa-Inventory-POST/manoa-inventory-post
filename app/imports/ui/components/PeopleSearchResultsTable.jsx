@@ -18,11 +18,13 @@ const PeopleSearchResultsTable = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [userOfficeBuilding, setUserOfficeBuilding] = useState('');
   const [userRoom, setUserRoom] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userRole, setUserRole] = useState('');
 
+  // eslint-disable-next-line no-unused-vars
   const { ready, users, admins, ITSupport, office, faculty, students } = useTracker(() => {
 
     const subscriptionUser = UserProfiles.subscribe();
@@ -32,6 +34,7 @@ const PeopleSearchResultsTable = () => {
     const subscriptionIT = ITSupportProfiles.subscribe();
     const subscriptionStudent = StudentProfiles.subscribe();
     const subscriptionPhone = Phone.subscribePhone();
+    // eslint-disable-next-line no-unused-vars
     const subscriptionOccRoom = OccupantRoom.subscribeOccupantRoom();
 
     const rdy = subscriptionUser.ready() && subscriptionFaculty.ready() && subscriptionOffice.ready() && subscriptionAdmin.ready() && subscriptionIT.ready() && subscriptionStudent.ready() && subscriptionPhone.ready();
@@ -42,9 +45,10 @@ const PeopleSearchResultsTable = () => {
     const itEntries = ITSupportProfiles.find({}, { sort: { name: 1 } }).fetch();
     const facultyEntries = FacultyProfiles.find({}, { sort: { name: 1 } }).fetch();
     const studentEntries = StudentProfiles.find({}, { sort: { name: 1 } }).fetch();
+    // eslint-disable-next-line no-unused-vars
     const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
 
-    console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
+    // console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
 
     function buildPerson(user, RoomCollection, PhoneCollection) {
       const result = {};
@@ -59,7 +63,7 @@ const PeopleSearchResultsTable = () => {
       } else {
         roomArr = roomArr.join(', ');
       }
-      console.log(roomArr);
+      // console.log(roomArr);
       let phoneArr = PhoneCollection.find({ email: user.email }).fetch();
       phoneArr = phoneArr.map(item => item.phoneNum);
       if (phoneArr.length === 1) {
@@ -67,7 +71,7 @@ const PeopleSearchResultsTable = () => {
       } else {
         phoneArr = phoneArr.join(', ');
       }
-      console.log(phoneArr);
+      // console.log(phoneArr);
       result.room = roomArr;
       result.phones = phoneArr;
       return result;
@@ -78,7 +82,7 @@ const PeopleSearchResultsTable = () => {
     const itObjects = itEntries.map(item => buildPerson(item, Room, Phone));
     const studentObjects = studentEntries.map(item => buildPerson(item, Room, Phone));
     const userObjects = userEntries.map(item => buildPerson(item, Room, Phone));
-    console.log(facultyObjects);
+    // console.log(facultyObjects);
 
     Array.prototype.push.apply(userObjects, adminObjects);
     Array.prototype.push.apply(userObjects, facultyObjects);

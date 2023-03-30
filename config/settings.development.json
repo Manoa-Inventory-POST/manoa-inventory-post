@@ -44,10 +44,10 @@
       "role": "STUDENT" ,
       "firstName": "James",
       "lastName": "White",
-      "TA": false,
+      "TA": true,
       "RA": false,
-      "Graduate": false,
-      "Undergraduate": false,
+      "graduate": true,
+      "undergraduate": false,
       "clubs": [
 
       ],
@@ -575,6 +575,9 @@
       "password": "changeme",
       "role": "FACULTY"
     }
+  ],
+  "defaultRequest": [
+    { "firstName": "Will", "lastName": "Smith", "email": "john@foo.com", "description":"Help!!!!!!!", "condition": "depending" }
   ],
   "public": {
     "development": true

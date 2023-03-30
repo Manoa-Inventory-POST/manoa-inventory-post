@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
-import { Form, Button, FormControl, Container, Row, Col, FormGroup } from 'react-bootstrap';
+import React, {} from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { ErrorsField, SubmitField, TextField, AutoForm } from 'uniforms-bootstrap5';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import SimpleSchema from 'simpl-schema';
+import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
+import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
+
+// Create a schema to specify the structure of the data to appear in the form.
+const formSchema = new SimpleSchema({
+  email: String,
+  firstName: String,
+  lastName: String,
+  description: String,
+});
+
+const bridge = new SimpleSchema2Bridge(formSchema);
 
 const ServiceRequest = () => {
-  const [message, setMessage] = useState('');
-  const [confirmation, setConfirmation] = useState(null);
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
+  // On submit, insert the data.
+  const submit = (data, formRef) => {
+    const { email, firstName, lastName, description } = data;
+    const owner = Meteor.user().username;
+    const collectionName = OfficeRequests.getCollectionName();
+    const definitionData = { owner, email, firstName, lastName, description };
+    defineMethod.callPromise({ collectionName, definitionData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => {
+        swal('Success', 'Item added successfully', 'success');
+        formRef.reset();
+      });
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add code to submit the message to a server or database here
-    const date = new Date().toLocaleString();
-    setConfirmation(`Message submitted successfully at ${date}`);
-
-    setMessage('');
-  };
-
+  let fRef = null;
   return (
     <Container className="py-3">
       <Row>
@@ -25,37 +40,30 @@ const ServiceRequest = () => {
           <h2>Service Request</h2>
         </Col>
       </Row>
-      <FormGroup>
-        <h5>To:</h5>
-        <FormControl
-          type="text"
-          value="Office"
-          readOnly
-          className="mx-auto my-1"
-        />
-        <h5>From:</h5>
-        <FormControl
-          type="text"
-          value="johndoe@hawaii.edu"
-          readOnly
-          className="mx-auto my-1"
-        />
-        <h5>Request</h5>
-        <Form onSubmit={handleSubmit} className="text-center">
-          <FormControl
-            as="textarea"
-            rows="5"
-            placeholder="Enter your request here"
-            value={message}
-            onChange={handleChange}
-            className="mx-auto my-1"
-          />
-          <Button type="submit">Submit</Button>
-        </Form>
-      </FormGroup>
-      {confirmation && (
-        <p className="text-center my-5">{confirmation}</p>
-      )}
+      <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+        <Row>
+          <Col>
+            <TextField name="firstName" placeholder="firstname" />
+          </Col>
+          <Col>
+            <TextField name="lastName" placeholder="lastname" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <TextField name="email" placeholder="request" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <TextField name="description" placeholder="request" />
+          </Col>
+        </Row>
+        <Row>
+          <SubmitField value="Submit" />
+          <ErrorsField />
+        </Row>
+      </AutoForm>
     </Container>
   );
 };
