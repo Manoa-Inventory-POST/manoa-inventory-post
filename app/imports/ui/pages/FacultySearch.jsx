@@ -129,7 +129,7 @@ const FacultySearch = () => {
             <th>Name</th>
             <th>Position</th>
             <th>Contact Info</th>
-            <th>Office</th>
+            <th>Office Hours</th>
           </tr>
         </thead>
         <tbody>
@@ -141,7 +141,7 @@ const FacultySearch = () => {
   );
   return (
     <Container id={PAGE_IDS.FACULTY_SEARCH}>
-      <div className="d-flex justify-content-center">
+      <div className="justify-content-center">
         <Row id="dashboard-screen">
           <Col className="mx-3">
             <Row id="dashboard-filter">{returnFilter()}</Row>

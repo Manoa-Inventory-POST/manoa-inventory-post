@@ -5,6 +5,7 @@ import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { OccupantRoom } from '../room/OccupantRoom';
 import { Phone } from '../room/Phone';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
 
 export const facultyPublications = {
   facultyP: 'facultyP',
@@ -67,10 +68,11 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param docID the id of the UserProfile
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param officeHours new office hours (optional).
    * @param position new position (optional).
    * @param picture new picture (optional).
    */
-  update(docID, { firstName, lastName, position, picture }) {
+  update(docID, { firstName, lastName, email, officeHours, position, picture, phones, phoneIds, clubs, clubAdvisorIds, clubAdvisor, rooms, occupantRoomIds }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -79,11 +81,62 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (lastName) {
       updateData.lastName = lastName;
     }
+    if (officeHours) {
+      updateData.officeHours = officeHours;
+    }
     if (position) {
       updateData.position = position;
     }
     if (picture) {
       updateData.picture = picture;
+    }
+    if (phones) {
+      // remove all
+      phoneIds.forEach(id => {
+        Phone.removeIt(id);
+      });
+      // re-create all phones
+      for (let i = 0; i < phones.length; i++) {
+        // if exists, update
+        const phoneNum = phones[i];
+        if (Phone.checkExists(phoneNum)) {
+          const phoneID = Phone.findDoc({ phoneNum })._id;
+          Phone.update(phoneID, { email });
+          // else, define new phone
+        } else {
+          Phone.define({ email, phoneNum });
+        }
+      }
+    }
+    // remove all clubAdvisor entries
+    clubAdvisorIds.forEach(id => {
+      ClubAdvisor.removeIt(id);
+    });
+    // re-create if clubAdvisor
+    if (clubAdvisor) {
+      // re-create all clubs
+      for (let i = 0; i < clubs.length; i++) {
+        // if exists, update
+        const club = clubs[i];
+        const advisor = `${firstName} ${lastName}`;
+        if (!ClubAdvisor.checkExists(advisor, club)) {
+          ClubAdvisor.define({ advisor, club });
+        }
+      }
+    }
+    if (rooms) {
+      // remove all
+      occupantRoomIds.forEach(id => {
+        OccupantRoom.removeIt(id);
+      });
+      // re-create all rooms
+      for (let i = 0; i < rooms.length; i++) {
+        // if exists, update
+        const room = rooms[i];
+        if (!OccupantRoom.checkExists(email, room)) {
+          OccupantRoom.define({ email, room });
+        }
+      }
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -137,10 +190,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       const instance = this;
       // This subscription publishes only the documents associated with the logged-in user
       Meteor.publish(facultyPublications.facultyP, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
+        return instance._collection.find();
       });
     }
   }

@@ -5,6 +5,12 @@ export const COMPONENT_IDS = {
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
   NAVBAR_CURRENT_USER: 'navbar-current-user',
+  NAVBAR_LOGO_LANDING: 'navbar-logo-landing',
+  NAVBAR_LOGO_STUDENT_HOME: 'navbar-logo-student-home',
+  NAVBAR_LOGO_FACULTY_HOME: 'navbar-logo-faculty-home',
+  NAVBAR_LOGO_OFFICE_HOME: 'navbar-logo-office-home',
+  NAVBAR_LOGO_ITSUPPORT_HOME: 'navbar-logo-itsupport-home',
+  NAVBAR_LOGO_ADMIN_HOME: 'navbar-logo-admin-home',
   NAVBAR_LANDING_PAGE: 'navbar-landing-page',
   NAVBAR_STUDENT_HOME: 'navbar-student-home',
   NAVBAR_FACULTY_HOME: 'navbar-faculty-home',
@@ -42,5 +48,6 @@ export const COMPONENT_IDS = {
   FACULTY_SEARCH_FIRST_NAME: 'faculty-search-first-name',
   FACULTY_SEARCH_LAST_NAME: 'faculty-search-last-name',
   FACULTY_SEARCH_POSITION: 'faculty-search-position',
-  ITSUPPORT_HOME: 'itsupport-home',
+  SIGN_UP_FORM_ROLE: 'sign-up-form-role',
+
 };

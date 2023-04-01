@@ -70,10 +70,7 @@ class ClubAdvisorCollection extends BaseCollection {
       const instance = this;
       // This subscription publishes CLubAdvisors
       Meteor.publish(clubAdvisorPublications.clubAdvisorPub, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
+        return instance._collection.find({ });
       });
     }
   }
@@ -136,6 +133,21 @@ class ClubAdvisorCollection extends BaseCollection {
       return [];
     }
     return advisors;
+  }
+
+  /**
+   * Checks the ClubAdvisor collection to see if an inputted Club Advisor already exists.
+   * @param advisor
+   * @param club
+   * @return true
+   * @return false
+   */
+  checkExists(advisor, club) {
+    const instances = this.find({ advisor, club }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
   }
 }
 

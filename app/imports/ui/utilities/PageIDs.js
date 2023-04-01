@@ -2,11 +2,13 @@
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
   EDIT_STUFF: 'edit-stuff',
+  EDIT_REQUEST: 'edit-request',
   LANDING: 'landing',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
   FACULTY_HOME: 'faculty-home',
   ADMIN_HOME: 'admin-home',
+  ITSUPPORT_HOME: 'itsupport-home',
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
@@ -21,4 +23,5 @@ export const PAGE_IDS = {
   SIGN_IN: 'sign-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
+  Add_Request: 'add-request',
 };

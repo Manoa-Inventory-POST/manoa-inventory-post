@@ -74,10 +74,7 @@ class ClubInterestsCollection extends BaseCollection {
       const instance = this;
       // This subscription publishes ClubInterests.
       Meteor.publish(clubInterestsPublications.clubInterestsPub, function publish() {
-        if (this.userId) {
-          return instance._collection.find({ });
-        }
-        return this.ready();
+        return instance._collection.find({ });
       });
     }
   }
