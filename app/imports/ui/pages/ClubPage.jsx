@@ -12,6 +12,8 @@ import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { UserInterests } from '../../api/clubs/UserInterests';
 import { Interests } from '../../api/clubs/Interests';
+import ClubAdvisorCard from '../components/ClubAdvisorCard';
+import ClubOfficerCard from '../components/ClubOfficerCard';
 
 /**
  * Returns an array of Advisor emails for this club.
@@ -128,9 +130,18 @@ class ClubPage extends React.Component {
         </div>
         <div className="club-admin-margin">
           <Container textAlign="center">
-            <Header as="h1">Admins</Header>
+            <Header as="h1">Advisors</Header>
             <Card.Group centered>
-              {_.map(adminData, (profile, index) => <ClubAdminCard key={index} member={profile} />)}
+              {_.map(advisorData, (profile, index) => <ClubAdvisorCard key={index} member={profile} />)}
+            </Card.Group>
+            <Divider />
+          </Container>
+        </div>
+        <div className="club-admin-margin">
+          <Container textAlign="center">
+            <Header as="h1">Officers</Header>
+            <Card.Group centered>
+              {_.map(officerData, (profile, index) => <ClubOfficerCard key={index} member={profile} />)}
             </Card.Group>
             <Divider />
           </Container>
