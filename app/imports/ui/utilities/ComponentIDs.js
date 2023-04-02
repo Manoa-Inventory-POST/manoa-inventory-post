@@ -21,6 +21,7 @@ export const COMPONENT_IDS = {
   NAVBAR_MAP: 'navbar-map',
   NAVBAR_FACULTY_SEARCH: 'navbar-faculty-search',
   NAVBAR_CLUB_SEARCH: 'navbar-club-search',
+  NAVBAR_STUDENT_SEARCH: 'navbar-student-search',
   NAVBAR_ROOM_AVAILABILITY: 'navbar-room-availability',
   NAVBAR_RESERVE_ROOM: 'navbar-reserve-room',
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',

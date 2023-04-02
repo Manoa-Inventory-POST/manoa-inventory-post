@@ -102,9 +102,9 @@ class StudentProfileCollection extends BaseProfileCollection {
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
-  assertValidRoleForMethod() {
-    // this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
-    return true;
+  assertValidRoleForMethod(userId) {
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.STUDENT, ROLE.FACULTY]);
+    // return true;
   }
 
   /**
