@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import PeopleSearchResultsTable from './PeopleSearchResultsTable';
 import RoomSearchResultsTable from './RoomSearchResultsTable';
+import ClubSearchResultsTable from './ClubSearchResultsTable';
 
 const SearchBox = () => (
   <Accordion defaultActiveKey="0" className="rounded-0">
@@ -53,6 +54,12 @@ const SearchBox = () => (
             Search
           </Button>
         </Form>
+      </Accordion.Body>
+    </Accordion.Item>
+    <Accordion.Item eventKey="3" className="rounded-0">
+      <Accordion.Header className="rounded-0 dashboard-header">Search Clubs</Accordion.Header>
+      <Accordion.Body className="rounded-0">
+        <ClubSearchResultsTable />
       </Accordion.Body>
     </Accordion.Item>
   </Accordion>

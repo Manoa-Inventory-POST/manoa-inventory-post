@@ -17,6 +17,7 @@ export const PAGE_IDS = {
   FACULTY_SEARCH: 'faculty-search',
   FULL_FACULTY_INFO: 'full-faculty-info',
   CLUB_SEARCH: 'club-search',
+  PORT_SEARCH: 'port-search',
   PROFILE: 'profile',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
