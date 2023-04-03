@@ -28,9 +28,9 @@ function createStudent(email, role, firstName, lastName, TA, RA, graduate, under
   }
 }
 
-function createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergency, password, rooms, phones) {
+function createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones) {
   if (role === ROLE.FACULTY) {
-    FacultyProfiles.define({ email, firstName, lastName, officeHours, position, picture, emergency, password, rooms, phones });
+    FacultyProfiles.define({ email, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones });
   }
 }
 
@@ -41,7 +41,8 @@ if (Meteor.users.find().count() === 0) {
     console.log('Creating the default user(s)');
     defaultData.map(({ email, password, role, firstName, lastName }) => createUser(email, role, firstName, lastName, password));
     defaultData.map(({ email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) => createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests));
-    defaultData.map(({ email, role, firstName, lastName, officeHours, position, picture, emergency, password, rooms, phones }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergency, password, rooms, phones));
+    // eslint-disable-next-line max-len
+    defaultData.map(({ email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }
