@@ -72,11 +72,10 @@ const NavBar = () => {
             ]) : ''}
             {isAdmin ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>,
-
+            ]) : ''}
             { isOffice ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ASSIGN_FAC} as={NavLink} to="/assign-faculty" key="navbar-assign-fac">Assign Faculty</Nav.Link>,
-
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             {isAdmin || isITSupport ? '' : ([
