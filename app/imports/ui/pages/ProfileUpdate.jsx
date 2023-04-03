@@ -21,9 +21,9 @@ import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const ProfileUpdate = () => {
 
-  //const _id = Meteor.user()._id;
-  //console.log(_id);
-  const { ready, faculty } = useTracker(() => {
+  const _id = Meteor.user()._id;
+  console.log(_id);
+  const { ready, userProfile } = useTracker(() => {
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
     const subscriptionRooms = Room.subscribeRoom();
@@ -49,11 +49,34 @@ const ProfileUpdate = () => {
     const docStudent = StudentProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docOffice = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docIT = ITSupportProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
+
+    let userProfile;
+
+    if (docUser.length > 0) {
+      userProfile = docUser[0];
+    } else if (docAdmin.length > 0) {
+      userProfile = docAdmin[0];
+    } else if (docFaculty.length !== 0) {
+      userProfile = docFaculty[0];
+      console.log('faculty switch');
+    } else if (docStudent.length > 0) {
+      userProfile = docStudent[0];
+    } else if (docOffice.length > 0) {
+      userProfile = docOffice[0];
+    } else if (docIT.length > 0) {
+      userProfile = docIT[0];
+    } else {
+      console.log('user not found');
+    }
+
     return {
-      //faculty: facultyProfiles,
+      userProfile: userProfile,
       ready: rdy,
     };
   }, []);
+  console.log(userProfile);
+  console.log('sss');
+
 
   const UserProfileSchema = new SimpleSchema({
     email: String,
@@ -88,7 +111,7 @@ const ProfileUpdate = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col className="col-lg-10">
-          <Col className="text-center"><h2>PROFILE</h2></Col>
+          <Col className="text-center"><h2>{ userProfile.firstName }&apos;s PROFILE</h2></Col>
           {/*
            <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
 */}
