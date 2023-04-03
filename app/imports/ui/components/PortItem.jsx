@@ -7,6 +7,8 @@ const PortItem = ({ port }) => (
   <tr>
     <td>{`${port.port}`}</td>
     <td>{port.room}</td>
+    <td>{port.side}</td>
+    <td>{port.idf}</td>
     <td>{port.status}</td>
   </tr>
 );

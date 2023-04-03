@@ -53,7 +53,7 @@ const PortSearch = () => {
       filtered = filtered.filter(function (obj) { return obj.idf.toLowerCase().includes(filteredIDF.toLowerCase()); });
     }
     setFilteredPorts(filtered);
-  }, [filteredName, filteredRoom, filteredStatus]);
+  }, [filteredName, filteredRoom, filteredSide, filteredIDF, filteredStatus]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.CLUB_SEARCH}>
@@ -139,9 +139,10 @@ const PortSearch = () => {
       <Table striped className="border border-2">
         <thead style={{ zIndex: 200 }}>
           <tr>
-            <th> </th>
-            <th>Name</th>
+            <th>Port</th>
             <th>Room</th>
+            <th>Side</th>
+            <th>IDF</th>
             <th>Status</th>
           </tr>
         </thead>
