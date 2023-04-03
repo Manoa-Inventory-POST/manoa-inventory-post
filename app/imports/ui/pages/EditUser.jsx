@@ -218,7 +218,7 @@ const EditUser = () => {
       console.log('STUDENT SWITCH');
       collectionName = StudentProfiles.getCollectionName();
       console.log(interests);
-      updateData = { id: _id, firstName, lastName, TA, RA, graduate, undergraduate };
+      updateData = { id: _id, firstName, lastName, email, TA, RA, graduate, undergraduate };
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {

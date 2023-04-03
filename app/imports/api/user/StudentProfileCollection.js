@@ -60,7 +60,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param undergraduate update undergraduate sub role (optional).
    * @return never
    */
-  update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
+  update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -80,6 +80,31 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (undergraduate) {
       updateData.undergraduate = undergraduate;
+    }
+    // remove all clubs and ids before update
+    if (clubIds) {
+      clubIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (clubs) {
+      clubs.forEach(club => {
+        if (!UserClubs.checkExists(email, club)) {
+          UserClubs.define({ email, club });
+        }
+      });
+    }
+    if (interestIds) {
+      interestIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (interests) {
+      interests.forEach(interest => {
+        if (!UserInterests.checkExists(email, interest)) {
+          UserInterests.define({ email, interest });
+        }
+      });
     }
     this._collection.update(docID, { $set: updateData });
   }
