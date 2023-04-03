@@ -13,8 +13,10 @@ export const portPublications = {
 class PortsCollection extends BaseCollection {
   constructor() {
     super('Ports', new SimpleSchema({
-      name: String,
+      port: String,
       room: String,
+      side: String,
+      idf: String,
       status: { type: String, allowedValues: ['active', 'inactive', 'maintenance'], defaultValue: 'inactive' },
     }));
   }
@@ -26,10 +28,12 @@ class PortsCollection extends BaseCollection {
    * @param room
    * @param status
    */
-  define({ name, room, status }) {
+  define({ port, room, side, idf, status }) {
     const docID = this._collection.insert({
-      name,
+      port,
       room,
+      side,
+      idf,
       status,
     });
     /*
@@ -48,13 +52,19 @@ class PortsCollection extends BaseCollection {
    * @param status the new status (optional).
    * @returns never
    */
-  update(docID, { name, room, status }) {
+  update(docID, { port, room, side, idf, status }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
+    if (port) {
+      updateData.port = port;
     }
     if (room) {
       updateData.room = room;
+    }
+    if (side) {
+      updateData.side = side;
+    }
+    if (idf) {
+      updateData.idf = idf;
     }
     if (status) {
       updateData.status = status;
@@ -67,8 +77,8 @@ class PortsCollection extends BaseCollection {
    * @param { String | Object } name A document or docID in this collection.
    * @returns true
    */
-  removeIt(name) {
-    const doc = this.findDoc(name);
+  removeIt(port) {
+    const doc = this.findDoc(port);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -119,10 +129,12 @@ class PortsCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
+    const port = doc.port;
     const room = doc.room;
+    const side = doc.side;
+    const idf = doc.idf;
     const status = doc.status;
-    return { name, room, status };
+    return { port, room, side, idf, status };
   }
 }
 

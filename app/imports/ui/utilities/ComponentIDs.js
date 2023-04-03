@@ -27,6 +27,7 @@ export const COMPONENT_IDS = {
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   FACULTY_FILTER_OPTIONS: 'faculty-filter-options',
+  PORT_FILTER_OPTIONS: 'port-filter-options',
   CLUB_FILTER_OPTIONS: 'club-filter-options',
   NAVBAR_LOGIN_DROPDOWN: 'navbar-login-dropdown',
   NAVBAR_LOGIN_DROPDOWN_SIGN_IN: 'navbar-login-dropdown-sign-in',

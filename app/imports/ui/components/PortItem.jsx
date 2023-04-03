@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const PortItem = ({ port }) => (
   <tr>
-    <td>{`${port.name}`}</td>
+    <td>{`${port.port}`}</td>
     <td>{port.room}</td>
     <td>{port.status}</td>
   </tr>
@@ -14,10 +14,12 @@ const PortItem = ({ port }) => (
 // Require a document to be passed to this component.
 PortItem.propTypes = {
   port: PropTypes.shape({
-    name: PropTypes.string,
+    port: PropTypes.string,
     _id: PropTypes.string,
     room: PropTypes.string,
     status: PropTypes.string,
+    side: PropTypes.string,
+    idf: PropTypes.string,
   }).isRequired,
 };
 
