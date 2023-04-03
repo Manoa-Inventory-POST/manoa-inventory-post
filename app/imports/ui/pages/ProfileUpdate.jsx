@@ -61,6 +61,8 @@ const ProfileUpdate = () => {
     } else if (docFaculty.length !== 0) {
       userProfile = docFaculty[0];
       console.log('faculty switch');
+      console.log(userProfile);
+
       const email = userProfile.email;
       // attach office
       let roomArr = OccupantRoom.find({ email: email }, {}).fetch();
@@ -182,7 +184,7 @@ const ProfileUpdate = () => {
       break;
 
     case 'FACULTY':
-      updateData = { email, officeHours };
+      updateData = {id: _id, email, officeHours };
       console.log(updateData);
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
@@ -201,7 +203,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, email, phones: phonesArray };
+      updateData = { id: _id, email, phones: phonesArray, interests };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData');
       console.log(updateData);
