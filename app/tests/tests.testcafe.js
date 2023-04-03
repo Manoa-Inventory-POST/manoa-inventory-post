@@ -117,7 +117,7 @@ test('Test that the club search page shows up', async () => {
   await clubSearchPage.isDisplayed();
 });
 
-test.only('Test that the student search page shows up', async () => {
+test('Test that the student search page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
