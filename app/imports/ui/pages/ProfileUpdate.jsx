@@ -130,7 +130,7 @@ const ProfileUpdate = () => {
       ready: rdy,
     };
   }, []);
-  console.log(roomValues, interestNames, clubNames, ready);
+  //console.log(roomValues, interestNames, clubNames, ready);
   const UserProfileSchema = new SimpleSchema({
     email: String,
     firstName: String,
@@ -155,14 +155,17 @@ const ProfileUpdate = () => {
     clubAdvisor: { type: Boolean, defaultValue: false },
     clubs: { type: Array, label: 'Clubs', optional: true },
     'clubs.$': { type: String, allowedValues: clubNames, optional: true },
-    interests: { type: Array, label: 'Interests', optional: true, defaultValue: undefined },
+    interests: { type: Array, label: 'Interests', optional: true },
     'interests.$': { type: String, allowedValues: interestNames, optional: true },
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
 
   const submit = (data) => {
-    const { email, phones, phoneIds, interests, officeHours, role } = data;
+    console.log("data:")
+    console.log(data)
+
+    const { _id, email, phones, phoneIds, interests, officeHours, role } = data;
     const phonesArray = phones.split(', ');
     let collectionName;
     let updateData;
@@ -185,7 +188,7 @@ const ProfileUpdate = () => {
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
+          swal('Success', 'Faculty updated successfully', 'success');
         });
       break;
     case 'USER':
@@ -194,16 +197,18 @@ const ProfileUpdate = () => {
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
+          swal('Success', 'User updated successfully', 'success');
         });
       break;
     case 'STUDENT':
-      updateData = { email, phones: phonesArray };
+      updateData = { id: _id, email, phones: phonesArray };
       collectionName = StudentProfiles.getCollectionName();
+      console.log('updateData');
+      console.log(updateData);
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
+          swal('Success', 'Student updated successfully', 'success');
         });
       break;
     case 'OFFICE':
@@ -212,7 +217,7 @@ const ProfileUpdate = () => {
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
+          swal('Success', 'OFFICE updated successfully', 'success');
         });
       break;
     case 'ITSUPPORT':
@@ -221,7 +226,7 @@ const ProfileUpdate = () => {
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
+          swal('Success', 'ITSUPPORT updated successfully', 'success');
         });
       break;
     }
