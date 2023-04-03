@@ -10,7 +10,8 @@ const FacultyItemOffice = ({ faculty }) => (
     <td>{faculty.position}</td>
     <td>{faculty.email}<br />{faculty.phone}</td>
     <td>{faculty.officeHours}</td>
-    <td>{faculty.emergency}</td>
+    <td>{faculty.emergencyPhone}</td>
+    <td>{faculty.emergencyEmail}</td>
   </tr>
 );
 
@@ -22,7 +23,8 @@ FacultyItemOffice.propTypes = {
     picture: PropTypes.string,
     position: PropTypes.string,
     officeHours: PropTypes.string,
-    emergency: PropTypes.string,
+    emergencyPhone: PropTypes.string,
+    emergencyEmail: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     _id: PropTypes.string,

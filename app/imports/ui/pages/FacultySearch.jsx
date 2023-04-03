@@ -159,7 +159,8 @@ const FacultySearch = () => {
             <th>Contact Info</th>
             <th>Office Hours</th>
             {isAdmin || isOffice ? ([
-              <th>Emergency Contact</th>,
+              <th>Emergency Phone Number</th>,
+              <th>Emergency Email</th>,
             ]) : '' }
           </tr>
         </thead>
