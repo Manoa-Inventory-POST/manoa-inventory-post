@@ -59,6 +59,31 @@ const ProfileUpdate = () => {
     } else if (docFaculty.length !== 0) {
       userProfile = docFaculty[0];
       console.log('faculty switch');
+      const email = userProfile.email;
+      let roomArr = OccupantRoom.find({ email: email }, {}).fetch();
+      const occRoomIdArr = roomArr.map(obj => obj._id);
+      console.log(occRoomIdArr);
+      roomArr = roomArr.map(item => item.room);
+      roomArr = roomArr.map(item => item.split(' '));
+      roomArr = roomArr.map(item => ((item.length > 1) ? item[1] : item[0]));
+      userProfile.office = roomArr;
+      userProfile.occupantRoomIds = occRoomIdArr;
+      console.log(userProfile.office);
+
+      let phoneArr = Phone.find({ email: email }, {}).fetch();
+      console.log(phoneArr);
+      const phoneIdArr = phoneArr.map(item => item._id);
+      phoneArr = phoneArr.map(item => item.phoneNum);
+      console.log(phoneArr);
+      if (phoneArr.length === 1) {
+        phoneArr = phoneArr[0];
+      } else {
+        phoneArr = phoneArr.join(', ');
+      }
+      userProfile.phones = phoneArr;
+      userProfile.phoneIds = phoneIdArr;
+      console.log(userProfile);
+
     } else if (docStudent.length > 0) {
       userProfile = docStudent[0];
     } else if (docOffice.length > 0) {
@@ -74,9 +99,8 @@ const ProfileUpdate = () => {
       ready: rdy,
     };
   }, []);
-  console.log(userProfile);
-  console.log('sss');
-
+  //console.log(userProfile);
+  //console.log('sss');
 
   const UserProfileSchema = new SimpleSchema({
     email: String,
