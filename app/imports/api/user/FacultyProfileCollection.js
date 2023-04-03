@@ -90,11 +90,14 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (picture) {
       updateData.picture = picture;
     }
-    if (phones) {
-      // remove all
+    // remove all phones and re-create as necessary
+    if (phoneIds) {
       phoneIds.forEach(id => {
         Phone.removeIt(id);
       });
+    }
+
+    if (phones) {
       // re-create all phones
       for (let i = 0; i < phones.length; i++) {
         // if exists, update
@@ -109,9 +112,11 @@ class FacultyProfileCollection extends BaseProfileCollection {
       }
     }
     // remove all clubAdvisor entries
-    clubAdvisorIds.forEach(id => {
-      ClubAdvisor.removeIt(id);
-    });
+    if (clubAdvisorIds) {
+      clubAdvisorIds.forEach(id => {
+        ClubAdvisor.removeIt(id);
+      });
+    }
     // re-create if clubAdvisor
     if (clubAdvisor) {
       // re-create all clubs
