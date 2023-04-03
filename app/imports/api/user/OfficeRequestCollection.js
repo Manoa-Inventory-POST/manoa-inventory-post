@@ -5,6 +5,7 @@ import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
+export const requestToConditions = ['Office', 'IT Support'];
 export const officePublications = {
   office: 'office',
 };
@@ -16,6 +17,11 @@ class OfficeRequestCollection extends BaseCollection {
       firstName: String,
       lastName: String,
       description: String,
+      requestTo: {
+        type: String,
+        allowedValues: requestToConditions,
+        defaultValue: 'Office',
+      },
       condition: {
         type: String,
         allowedValues: officeRequestConditions,
@@ -31,15 +37,17 @@ class OfficeRequestCollection extends BaseCollection {
    * @param lastName The last name.
    * @param condition the condition of the item.
    * @param description the description of the request.
+   * @param requestTo the who the request to.
    * @return {String} the docID of the new document.
    */
-  define({ email, firstName, lastName, condition, description }) {
+  define({ email, firstName, lastName, condition, description, requestTo }) {
     const docID = this._collection.insert({
       email,
       firstName,
       lastName,
       condition,
       description,
+      requestTo,
     });
     return docID;
   }
@@ -53,7 +61,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { email, firstName, lastName, condition, description }) {
+  update(docID, { email, firstName, lastName, condition, description, requestTo }) {
     const updateData = {};
     if (email) {
       updateData.email = email;
@@ -66,6 +74,9 @@ class OfficeRequestCollection extends BaseCollection {
     }
     if (condition) {
       updateData.condition = condition;
+    }
+    if (requestTo) {
+      updateData.condition = requestTo;
     }
     if (description) {
       updateData.description = description;
@@ -134,8 +145,9 @@ class OfficeRequestCollection extends BaseCollection {
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const condition = doc.condition;
+    const requestTo = doc.requestTo;
     const description = doc.description;
-    return { email, firstName, lastName, condition, description };
+    return { email, firstName, lastName, condition, description, requestTo };
   }
 }
 
