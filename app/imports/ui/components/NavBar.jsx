@@ -56,21 +56,8 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
-            {isStudent ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student-home">Home</Nav.Link>,
-            ]) : ''}
             {isFaculty ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_HOME} as={NavLink} to="/faculty-home" key="faculty-home">Home</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_LIST} as={NavLink} to="/student-list" key="student-list">Student List</Nav.Link>,
-            ]) : ''}
-            {isITSupport ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ITSUPPORT_HOME} as={NavLink} to="/itsupport-home" key="itsupport-home">Home</Nav.Link>,
-            ]) : ''}
-            {isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office-home">Home</Nav.Link>,
-            ]) : ''}
-            {isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>,
             ]) : ''}
             { isOffice ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
