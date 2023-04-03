@@ -4,12 +4,15 @@ import { Container, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const PortItem = ({ port }) => (
+
   <tr>
     <td>{`${port.port}`}</td>
     <td>{port.room}</td>
     <td>{port.side}</td>
     <td>{port.idf}</td>
-    <td>{port.status}</td>
+    <td>
+      {port.status}
+    </td>
   </tr>
 );
 

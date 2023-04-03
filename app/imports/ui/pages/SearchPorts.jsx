@@ -69,7 +69,7 @@ const PortSearch = () => {
                 <Col className="d-flex justify-content-center">
                   <label htmlFor="Search by name">
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Name
+                      Port
                     </Col>
                     <input
                       type="text"
