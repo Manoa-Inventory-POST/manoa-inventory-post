@@ -21,6 +21,7 @@ FacultyItem.propTypes = {
     picture: PropTypes.string,
     position: PropTypes.string,
     officeHours: PropTypes.string,
+    emergency: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     _id: PropTypes.string,

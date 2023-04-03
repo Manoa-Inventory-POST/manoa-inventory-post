@@ -23,32 +23,32 @@ const NavBar = () => {
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
-        { isStudent || isFaculty || isITSupport || isOffice || isAdmin ? '' : ([
+        {isStudent || isFaculty || isITSupport || isOffice || isAdmin ? '' : ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_LANDING} as={NavLink} to="/">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ])}
-        { isStudent ? ([
+        {isStudent ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_STUDENT_HOME} as={NavLink} to="/student-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isFaculty ? ([
+        {isFaculty ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_FACULTY_HOME} as={NavLink} to="/faculty-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isITSupport ? ([
+        {isITSupport ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ITSUPPORT_HOME} as={NavLink} to="/itsupport-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isOffice ? ([
+        {isOffice ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_OFFICE_HOME} as={NavLink} to="/office-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isAdmin ? ([
+        {isAdmin ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ADMIN_HOME} as={NavLink} to="/admin-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
@@ -56,7 +56,6 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
-
             {isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_HOME} as={NavLink} to="/student-home" key="student-home">Home</Nav.Link>,
             ]) : ''}
@@ -71,14 +70,13 @@ const NavBar = () => {
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-home" key="office-home">Home</Nav.Link>,
             ]) : ''}
             {isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>
-
-            { isOffice ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADMIN_HOME} as={NavLink} to="/admin-home" key="admin-home">Home</Nav.Link>,
+            ]) : ''}
+            {isOffice ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ASSIGN_FAC} as={NavLink} to="/assign-faculty" key="navbar-assign-fac">Assign Faculty</Nav.Link>,
-
             ]) : ''}
-            <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>,
+            <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             {isAdmin || isITSupport ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_SEARCH} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
             ])}
