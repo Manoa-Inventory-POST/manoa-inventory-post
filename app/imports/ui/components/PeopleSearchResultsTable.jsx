@@ -18,11 +18,13 @@ const PeopleSearchResultsTable = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [userOfficeBuilding, setUserOfficeBuilding] = useState('');
   const [userRoom, setUserRoom] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userRole, setUserRole] = useState('');
 
+  // eslint-disable-next-line no-unused-vars
   const { ready, users, admins, ITSupport, office, faculty, students } = useTracker(() => {
 
     const subscriptionUser = UserProfiles.subscribe();
@@ -32,6 +34,7 @@ const PeopleSearchResultsTable = () => {
     const subscriptionIT = ITSupportProfiles.subscribe();
     const subscriptionStudent = StudentProfiles.subscribe();
     const subscriptionPhone = Phone.subscribePhone();
+    // eslint-disable-next-line no-unused-vars
     const subscriptionOccRoom = OccupantRoom.subscribeOccupantRoom();
 
     const rdy = subscriptionUser.ready() && subscriptionFaculty.ready() && subscriptionOffice.ready() && subscriptionAdmin.ready() && subscriptionIT.ready() && subscriptionStudent.ready() && subscriptionPhone.ready();
@@ -42,6 +45,7 @@ const PeopleSearchResultsTable = () => {
     const itEntries = ITSupportProfiles.find({}, { sort: { name: 1 } }).fetch();
     const facultyEntries = FacultyProfiles.find({}, { sort: { name: 1 } }).fetch();
     const studentEntries = StudentProfiles.find({}, { sort: { name: 1 } }).fetch();
+    // eslint-disable-next-line no-unused-vars
     const phoneEntries = Phone.find({}, { sort: { name: 1 } }).fetch();
 
     // console.log(userEntries, adminEntries, officeEntries, facultyEntries, itEntries, studentEntries, phoneEntries, rdy);
@@ -51,6 +55,7 @@ const PeopleSearchResultsTable = () => {
       result.firstName = user.firstName;
       result.lastName = user.lastName;
       result.role = user.role;
+      result._id = user._id;
       let roomArr = OccupantRoom.find({ email: user.email }).fetch();
       roomArr = roomArr.map(room => room.room);
       if (roomArr.length === 1) {
