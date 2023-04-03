@@ -63,22 +63,22 @@ class StudentProfileCollection extends BaseProfileCollection {
   update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (firstName) {
+    if (firstName !== undefined) {
       updateData.firstName = firstName;
     }
-    if (lastName) {
+    if (lastName !== undefined) {
       updateData.lastName = lastName;
     }
-    if (TA) {
+    if (TA !== undefined) {
       updateData.TA = TA;
     }
-    if (RA) {
+    if (RA !== undefined) {
       updateData.RA = RA;
     }
-    if (graduate) {
+    if (graduate !== undefined) {
       updateData.graduate = graduate;
     }
-    if (undergraduate) {
+    if (undergraduate !== undefined) {
       updateData.undergraduate = undergraduate;
     }
     this._collection.update(docID, { $set: updateData });
@@ -150,6 +150,16 @@ class StudentProfileCollection extends BaseProfileCollection {
       return [];
     }
     return profile[0];
+  }
+
+  setTA(studentId, TA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { TA } });
+  }
+
+  setRA(studentId, RA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { RA } });
   }
 
 }
