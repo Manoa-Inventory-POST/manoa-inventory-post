@@ -2,12 +2,6 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Roles } from 'meteor/alanning:roles';
-import { Meteor } from 'meteor/meteor';
-import { ROLE } from '../../api/role/Role';
-
-const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
-const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
 const FacultyItem = ({ faculty }) => (
   <tr>
@@ -16,9 +10,6 @@ const FacultyItem = ({ faculty }) => (
     <td>{faculty.position}</td>
     <td>{faculty.email}<br />{faculty.phone}</td>
     <td>{faculty.officeHours}</td>
-    {isAdmin || isOffice ? ([
-      <td>{faculty.emergency}</td>,
-    ]) : ''}
   </tr>
 );
 
