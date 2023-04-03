@@ -24,6 +24,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { Interests } from '../../api/clubs/Interests';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const CreateUser = () => {
 
@@ -37,31 +38,25 @@ const CreateUser = () => {
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
     console.log(roomEntries, interestEntries, clubEntries, rdy);
-
     return {
       roomNums: roomEntries,
       interestsColl: interestEntries,
       clubsNames: clubEntries,
     };
   });
-
   const roomValues = [];
   for (let i = 0; i < roomNums.length; i++) {
     roomValues[i] = roomNums[i].room;
   }
-
   const clubNames = [];
   for (let i = 0; i < clubsNames.length; i++) {
     clubNames[i] = clubsNames[i].name;
   }
-
   const interestNames = [];
   for (let i = 0; i < interestsColl.length; i++) {
     interestNames[i] = interestsColl[i].interest;
   }
-
   const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT'];
-
   const UserFormSchema = new SimpleSchema({
     email: String,
     firstName: String,
@@ -70,8 +65,7 @@ const CreateUser = () => {
     role: { type: String, allowedValues: profileRoleValues },
     rooms: { type: Array, label: 'Office(s)', optional: true },
     'rooms.$': { type: String, allowedValues: roomValues },
-    phones: { type: Array, label: 'Phone Numbers', optional: true },
-    'phones.$': String,
+    phoneNums: { type: String, label: 'Phone Numbers', optional: true },
     officeHours: { type: String, optional: true },
     picture: { type: String, optional: true },
     position: { type: String, optional: true },
@@ -85,17 +79,16 @@ const CreateUser = () => {
     interests: { type: Array, label: 'Interests' },
     'interests.$': { type: String, allowedValues: interestNames, optional: true },
   });
-
   const bridge = new SimpleSchema2Bridge(UserFormSchema);
-
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, email, password, role, rooms, phones, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
+    const { firstName, lastName, email, password, role, rooms, phoneNums, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
+    const phones = phoneNums.split(',');
+    console.log(typeof phones);
     console.log(data);
     let collectionName;
     let definitionData = { firstName, lastName, password, email };
-
     switch (role) {
     case 'ADMIN':
       console.log('ADMIN SWITCH');
@@ -121,6 +114,21 @@ const CreateUser = () => {
         for (let i = 0; i < clubs.length; i++) {
           const club = clubs[i];
           definitionData = { advisor, club };
+          defineMethod.callPromise({ collectionName, definitionData })
+            .catch(error => swal('Error', error.message, 'error'))
+            .then(() => {
+              swal('Success', 'User added successfully', 'success');
+            });
+        }
+      }
+      if (rooms) {
+        console.log('rooms true');
+        collectionName = OccupantRoom.getCollectionName();
+        console.log(collectionName);
+        for (let i = 0; i < rooms.length; i++) {
+          const room = rooms[i];
+          definitionData = { email, room };
+          console.log(definitionData);
           defineMethod.callPromise({ collectionName, definitionData })
             .catch(error => swal('Error', error.message, 'error'))
             .then(() => {
@@ -176,9 +184,7 @@ const CreateUser = () => {
     default:
       break;
     }
-
   };
-
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -196,7 +202,7 @@ const CreateUser = () => {
                   <SelectField className="col-md-6" name="role" placeholder="select role (required)" />
                 </div>
                 <div className="row">
-                  <TextField className="col-md-6" name="phones" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
+                  <TextField className="col-md-6" name="phoneNums" placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155" />
                   <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
                 </div>
                 <div className="row">
@@ -226,5 +232,4 @@ const CreateUser = () => {
     </Container>
   );
 };
-
 export default CreateUser;

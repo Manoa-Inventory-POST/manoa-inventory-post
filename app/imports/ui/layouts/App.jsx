@@ -42,6 +42,12 @@ import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 
+// import UpdateUser from '../pages/UpdateUser';
+import OfficeRequestHome from '../pages/officeRequestHome';
+import EditRequest from '../pages/EditRequest';
+import AssignFac from '../pages/AssignFac';
+import EditClub from '../pages/EditClub';
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
@@ -74,11 +80,9 @@ const App = () => {
           <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
-          <Route path="/createSpace" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
-          <Route path="/deleteRoom/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
@@ -88,7 +92,10 @@ const App = () => {
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
-
+          <Route path="/assign-faculty" element={<OfficeProtectedRoute><AssignFac /></OfficeProtectedRoute>} />
+          <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
+          <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
+          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

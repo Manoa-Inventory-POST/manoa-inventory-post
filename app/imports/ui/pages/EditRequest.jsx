@@ -1,71 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
-import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
-// import { Users } from '../../api/user/UserCollection';
-import { Room } from '../../api/room/RoomCollection';
+import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
-// import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
-const statusValues = ['open', 'occupied', 'maintenance'];
-const buildingValues = ['POST'];
-
-const RoomSchema = new SimpleSchema({
-  room: String,
-  description: String,
-  building: { type: String, allowedValues: buildingValues },
-  status: { type: String, allowedValues: statusValues },
-});
-
-const bridge = new SimpleSchema2Bridge(RoomSchema);
+const bridge = new SimpleSchema2Bridge(OfficeRequests._schema);
 
 /* Renders the EditStuff page for editing a single document. */
-const EditRoom = () => {
+const EditRequest = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
     // Get access to Stuff documents.
-    const subscription = Room.subscribeRoom();
-    // const subscription = UserProfiles.subscribe();
+    const subscription = OfficeRequests.subscribeOffice();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the document
-    const document = Room.find({ _id }).fetch();
-    const roomToEdit = document[0];
+    const document = OfficeRequests.find({ _id }).fetch();
+    const requestEdit = document[0];
     return {
-      doc: roomToEdit,
+      doc: requestEdit,
       ready: rdy,
     };
   }, [_id]);
+  const [redirect, setRedirect] = useState(false);
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { room, description, building, status } = data;
-    const collectionName = Room.getCollectionName();
-    const updateData = { id: _id, room, description, building, status };
+    const { email, firstName, lastName, description, condition } = data;
+    const collectionName = OfficeRequests.getCollectionName();
+    const updateData = { id: _id, email, firstName, lastName, description, condition };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
-      .then(() => swal('Success', 'User updated successfully', 'success'));
+      .then(() => swal('Success', 'Item updated successfully', 'success'));
+    setRedirect(true);
   };
 
-  return (ready ? (
-    <Container className="py-3">
+  if (redirect) {
+    return (<Navigate to="/officeRequestHome" />);
+  }
+
+  return ready ? (
+    <Container id={PAGE_IDS.EDIT_REQUEST} className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Update Room</h2></Col>
+          <Col className="text-center"><h2>Edit </h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="room" />
+                <TextField name="firstName" />
+                <TextField name="lastName" />
+                <TextField name="email" />
                 <TextField name="description" />
-                <SelectField name="building" />
-                <SelectField name="status" />
+                <SelectField name="condition" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -74,7 +69,7 @@ const EditRoom = () => {
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner message="Loading" />);
+  ) : <LoadingSpinner />;
 };
 
-export default EditRoom;
+export default EditRequest;

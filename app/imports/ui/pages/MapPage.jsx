@@ -1,9 +1,9 @@
 import React from 'react';
-import MapComponent from '../components/MapComponent';
+import MapDataComponent from '../components/MapDataComponent';
 
 /** Render the map of the 3rd floor of POST. */
 const MapPage = () => (
-  <MapComponent />
+  <MapDataComponent />
 );
 
 export default MapPage;

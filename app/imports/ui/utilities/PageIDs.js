@@ -2,6 +2,7 @@
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
   EDIT_STUFF: 'edit-stuff',
+  EDIT_REQUEST: 'edit-request',
   LANDING: 'landing',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
@@ -16,10 +17,12 @@ export const PAGE_IDS = {
   FACULTY_SEARCH: 'faculty-search',
   FULL_FACULTY_INFO: 'full-faculty-info',
   CLUB_SEARCH: 'club-search',
+  PORT_SEARCH: 'port-search',
   PROFILE: 'profile',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
+  Add_Request: 'add-request',
 };
