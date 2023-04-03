@@ -67,8 +67,10 @@ const ProfileUpdate = () => {
       const occRoomIdArr = roomArr.map(obj => obj._id);
       console.log(occRoomIdArr);
       roomArr = roomArr.map(item => item.room);
-     // roomArr = roomArr.map(item => item.split(' '));
-      //roomArr = roomArr.map(item => ((item.length > 1) ? item[1] : item[0]));
+      roomArr = roomArr.map(item => item.split(' '));
+      roomArr = roomArr.map(item => ((item.length > 1) ? item[1] : item[0]));
+      roomArr = roomArr[0];
+
       userProfile.office = roomArr;
       userProfile.occupantRoomIds = occRoomIdArr;
       console.log(userProfile.office);
@@ -153,16 +155,15 @@ const ProfileUpdate = () => {
     clubAdvisor: { type: Boolean, defaultValue: false },
     clubs: { type: Array, label: 'Clubs', optional: true },
     'clubs.$': { type: String, allowedValues: clubNames, optional: true },
-    interests: { type: Array, label: 'Interests', optional: true },
+    interests: { type: Array, label: 'Interests', optional: true, defaultValue: undefined },
     'interests.$': { type: String, allowedValues: interestNames, optional: true },
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
 
   const submit = (data) => {
-    const { email, phones, phoneIds, interests, officeHours, role, office } = data;
+    const { email, phones, phoneIds, interests, officeHours, role } = data;
     const phonesArray = phones.split(', ');
-    office = office.toString();
     let collectionName;
     let updateData;
 
@@ -178,7 +179,8 @@ const ProfileUpdate = () => {
       break;
 
     case 'FACULTY':
-      updateData = { email, phones: phonesArray, officeHours };
+      updateData = { email, officeHours };
+      console.log(updateData);
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -278,7 +280,6 @@ const ProfileUpdate = () => {
                     name="interests"
                     placeholder="Select your interests from the options provided"
                     multiple
-                    readOnly
                   />
                 </div>
                 <div className="my-3">
