@@ -11,13 +11,14 @@ import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 const StudentPositionItem = () => {
   const { _id } = useParams();
+  console.log(_id);
 
   const { doc } = useTracker(() => {
     const subStudent = StudentProfiles.subscribe();
     const rdy = subStudent.ready();
     const docStudent = StudentProfiles.find({ _id }, {}).fetch();
 
-    let userToEdit = docStudent[0];
+    const userToEdit = docStudent[0];
 
     return {
       doc: userToEdit,
@@ -25,6 +26,10 @@ const StudentPositionItem = () => {
   }, [_id]);
 
   const UserFormSchema = new SimpleSchema({
+    email: String,
+    firstName: String,
+    lastName: String,
+    password: String,
     TA: { type: Boolean, label: 'TA', defaultValue: false },
     RA: { type: Boolean, label: 'RA', defaultValue: false },
   });
@@ -34,11 +39,12 @@ const StudentPositionItem = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, TA, RA } = data;
-    let collectionName;
-    let updateData = { id: _id, firstName, lastName };
+    const { TA, RA } = data;
+    console.log(data);
 
-    collectionName = StudentProfiles.getCollectionName();
+    let updateData = { id: _id };
+
+    const collectionName = StudentProfiles.getCollectionName();
     updateData = { id: _id, TA, RA };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))

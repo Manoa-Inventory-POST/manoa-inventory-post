@@ -18,7 +18,7 @@ const SearchStudentItem = ({ student }) => (
     <td>{`${student.firstName} ${student.lastName}`}</td>
     <td>{student.email}</td>
     <td>{classStanding(student)}</td>
-    <td>{StudentPositionItem(student)}</td>
+    <td>{StudentPositionItem(student._id)}</td>
   </tr>
 );
 
