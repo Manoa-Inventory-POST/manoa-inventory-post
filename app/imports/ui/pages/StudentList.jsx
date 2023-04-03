@@ -1,51 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { Container } from 'react-bootstrap';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+import StudentListTable from '../components/StudentListTable';
 
 const StudentList = () => {
-  const [students, setStudents] = useState([]);
+  const [selectedStudents, setSelectedStudents] = useState([]);
 
-  const users = useTracker(() => {
-    Meteor.subscribe('students');
-    return Meteor.users.find({}).fetch();
+  const { studentList, isLoading } = useTracker(() => {
+    const handle = Meteor.subscribe('students');
+    const loading = !handle.ready();
+    const studentList = StudentProfiles.find({}, { fields: { email: 1, firstName: 1, lastName: 1, TA: 1, RA: 1 } }).fetch();
+    return { studentList, isLoading: loading };
   });
 
-  useEffect(() => {
-    const studentsList = users.filter(user => Roles.userIsInRole(user, 'student'));
-    setStudents(studentsList);
-  }, [users]);
+  const handleCheckboxChange = (event) => {
+    const studentId = event.target.value;
+    if (event.target.checked) {
+      setSelectedStudents((prevSelected) => [...prevSelected, studentId]);
+    } else {
+      setSelectedStudents((prevSelected) => prevSelected.filter((id) => id !== studentId));
+    }
+  };
 
-  const setRole = (userId, role) => {
-    Meteor.call('users.setRole', userId, role);
+  const handleUpdateRoles = () => {
+    // Call method to update roles for selected students.
+    Meteor.call('students.updateRoles', selectedStudents);
+    setSelectedStudents([]);
   };
 
   return (
-    <Container>
-      <h1>Student List</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map(student => (
-            <tr key={student._id}>
-              <td>{student.username}</td>
-              <td>{student.emails[0].address}</td>
-              <td>
-                <Button onClick={() => setRole(student._id, 'ta')}>Set as TA</Button>
-                <Button onClick={() => setRole(student._id, 'ra')}>Set as RA</Button>
-              </td>
+    <>
+      <h1 className="text-center">Student List</h1>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Container>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>TA</th>
+              <th>RA</th>
+              {Roles.userIsInRole(Meteor.userId(), 'faculty') && <th>Select</th>}
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+          </thead>
+          <tbody>
+            {studentList.map((student) => (
+              <tr key={student._id}>
+                <td>{student.email}</td>
+                <td>{student.firstName}</td>
+                <td>{student.lastName}</td>
+                <td>{student.TA ? 'Yes' : 'No'}</td>
+                <td>{student.RA ? 'Yes' : 'No'}</td>
+                {Roles.userIsInRole(Meteor.userId(), 'faculty') && (
+                  <td>
+                    <input type="checkbox" value={student._id} onChange={handleCheckboxChange} />
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+          <StudentListTable />
+        </Container>
+      )}
+      {Roles.userIsInRole(Meteor.userId(), 'FACULTY') && (
+        <button type="button" disabled={selectedStudents.length === 0} onClick={handleUpdateRoles}>
+          Update Roles
+        </button>
+      )}
+    </>
   );
 };
 

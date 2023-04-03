@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { MATPCollections } from '../../api/matp/MATPCollections';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
-
 // Call publish for all the collections.
 MATPCollections.collections.forEach(c => c.publish());
 
@@ -19,6 +19,5 @@ Meteor.publish('students', function () {
   if (Roles.userIsInRole(this.userId, 'faculty')) {
     return StudentProfiles.find({}, { fields: { email: 1, firstName: 1, lastName: 1, TA: 1, RA: 1 } });
   }
-  return [];
-
+  return this.ready();
 });

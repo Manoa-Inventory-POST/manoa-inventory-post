@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Roles } from 'meteor/alanning:roles';
 import { StudentProfiles } from './user/StudentProfileCollection';
 
 Meteor.methods({
@@ -7,13 +8,13 @@ Meteor.methods({
     check(studentId, String);
     check(role, String);
 
-    if (!this.userId || !Roles.userIsInRole(this.userId, 'faculty')) {
+    if (!this.userId || !Roles.userIsInRole(this.userId, 'FACULTY')) {
       throw new Meteor.Error('not-authorized');
     }
 
     if (['ta', 'ra'].includes(role)) {
       const update = role === 'ta' ? { TA: true, RA: false } : { TA: false, RA: true };
-      StudentProfiles.update(studentId, { $set: update });
+      StudentProfiles.update(studentId, update);
     } else {
       throw new Meteor.Error('invalid-role');
     }
