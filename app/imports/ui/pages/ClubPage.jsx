@@ -14,6 +14,7 @@ import { UserInterests } from '../../api/clubs/UserInterests';
 import { Interests } from '../../api/clubs/Interests';
 import ClubAdvisorCard from '../components/ClubAdvisorCard';
 import ClubOfficerCard from '../components/ClubOfficerCard';
+import FacultyMySpaces from '../components/FacultyMySpaces';
 
 /**
  * Returns an array of Advisor emails for this club.
@@ -83,9 +84,7 @@ function getClubInterests(clubName) {
 class ClubPage extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  // eslint-disable-next-line react/sort-comp
   render() {
-    // eslint-disable-next-line react/destructuring-assignment
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
@@ -172,3 +171,5 @@ export default withTracker(({ match }) => {
     ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready(),
   };
 })(ClubPage);
+
+export ClubPage;
