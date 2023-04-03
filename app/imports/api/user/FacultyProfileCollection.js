@@ -17,7 +17,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       officeHours: { type: String, optional: true, defaultValue: 'N/A' },
       picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
       position: { type: String, optional: true, defaultValue: 'Other' },
-      emergency: { type: String, optional: true, defaultValue: 'N/A' }
+      emergency: { type: String, optional: true, defaultValue: 'N/A' },
     }));
   }
 
