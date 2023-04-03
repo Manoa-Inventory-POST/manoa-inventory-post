@@ -181,7 +181,9 @@ const EditUser = () => {
     const phonesArray = phones.split(', ');
     console.log(data);
     let collectionName;
-    let updateData = { id: _id, firstName, lastName };
+    let updateData = { firstName, lastName };
+    console.log('updateData1:');
+    console.log(updateData);
 
     switch (role) {
     case 'ADMIN':
@@ -197,6 +199,8 @@ const EditUser = () => {
       console.log('FACULTY SWITCH');
       collectionName = FacultyProfiles.getCollectionName();
       updateData = { id: _id, email, firstName, lastName, officeHours, position, picture, rooms, occupantRoomIds, phones: phonesArray, phoneIds, clubs, clubAdvisorIds, clubAdvisor };
+      console.log('updateData2:');
+      console.log(updateData);
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
