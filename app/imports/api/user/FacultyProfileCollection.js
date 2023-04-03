@@ -92,19 +92,24 @@ class FacultyProfileCollection extends BaseProfileCollection {
     }
     if (phones) {
       // remove all
-      phoneIds.forEach(id => {
-        Phone.removeIt(id);
-      });
+      if (phoneIds.length > 0) {
+        phoneIds.forEach(id => {
+          Phone.removeIt(id);
+        });
+      }
+
       // re-create all phones
-      for (let i = 0; i < phones.length; i++) {
-        // if exists, update
-        const phoneNum = phones[i];
-        if (Phone.checkExists(phoneNum)) {
-          const phoneID = Phone.findDoc({ phoneNum })._id;
-          Phone.update(phoneID, { email });
-          // else, define new phone
-        } else {
-          Phone.define({ email, phoneNum });
+      if (phones.length > 0) {
+        for (let i = 0; i < phones.length; i++) {
+          // if exists, update
+          const phoneNum = phones[i];
+          if (Phone.checkExists(phoneNum)) {
+            const phoneID = Phone.findDoc({ phoneNum })._id;
+            Phone.update(phoneID, { email });
+            // else, define new phone
+          } else {
+            Phone.define({ email, phoneNum });
+          }
         }
       }
     }

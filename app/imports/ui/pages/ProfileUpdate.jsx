@@ -165,7 +165,7 @@ const ProfileUpdate = () => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, phones, officeHours, role } = data;
+    const { _id, email, phones, officeHours, role, phoneIds, clubAdvisorIds } = data;
     //const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
 
     const phonesArray = phones.split(', ');
@@ -175,19 +175,17 @@ const ProfileUpdate = () => {
     switch (role) {
     case 'ADMIN':
       collectionName = AdminProfiles.getCollectionName();
-      updateMethod.callPromise({ id: _id, collectionName, updateData })
+      updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'Admin updated successfully', 'success');
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, email, officeHours, phones: phonesArray };
+      updateData = { id: _id, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
       console.log('updateData:');
       console.log(updateData);
-      console.log(updateData.id);
       collectionName = FacultyProfiles.getCollectionName();
-      console.log(updateData.id);
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
@@ -204,7 +202,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'STUDENT':
-      updateData = { email, phones: phonesArray, interests };
+      updateData = { id: _id, email, phones: phonesArray, phoneIds, clubAdvisorIds };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData:');
       console.log(updateData);
