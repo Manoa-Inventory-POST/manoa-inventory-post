@@ -23,8 +23,8 @@ import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 const ProfileUpdate = () => {
 
-  const _id = Meteor.user()._id;
-  console.log(_id);
+  //const _id = Meteor.user()._id;
+  //console.log(_id);
   const { ready, userProfile, roomValues, interestNames, clubNames } = useTracker(() => {
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
@@ -75,7 +75,7 @@ const ProfileUpdate = () => {
 
       userProfile.office = roomArr;
       userProfile.occupantRoomIds = occRoomIdArr;
-      console.log(userProfile.office);
+      //console.log(userProfile.office);
       // attach phone
       let phoneArr = Phone.find({ email: email }, {}).fetch();
       //console.log(phoneArr);
@@ -98,7 +98,6 @@ const ProfileUpdate = () => {
       userProfile.clubAdvisorIds = clubAdvisorIds;
       //console.log(clubArr);
       clubArr = clubArr.map(item => item.club);
-
       //console.log(clubArr);
       if (clubArr.length > 0) {
         userProfile.clubAdvisor = true;
@@ -106,8 +105,7 @@ const ProfileUpdate = () => {
         userProfile.clubAdvisor = false;
       }
       userProfile.clubs = clubArr;
-      console.log(userProfile.clubs);
-
+      // console.log(userProfile.clubs);
       console.log(userProfile);
 
     } else if (docStudent.length > 0) {
@@ -167,40 +165,29 @@ const ProfileUpdate = () => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, phones, phoneIds, interests, officeHours, role } = data;
-    // const { email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
+    const { _id, email, phones, officeHours, role } = data;
+    //const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
-    // let updateData;
-    let updateData = { email: email, phones: phonesArray };
-    console.log('updateData1:');
-    console.log(updateData);
+    let updateData;
+
     switch (role) {
     case 'ADMIN':
-      // updateData = { email: email, phones: phonesArray };
-      // console.log('updateData:');
-      // console.log(updateData);
-      // collectionName = AdminProfiles.getCollectionName();
-      // updateMethod.callPromise({ collectionName, updateData })
-      //   .catch(error => swal('Error', error.message, 'error'))
-      //   .then(() => {
-      //     swal('Success', 'Admin updated successfully', 'success');
-      //   });
-      // break;
       collectionName = AdminProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
+      updateMethod.callPromise({ id: _id, collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
           swal('Success', 'Admin updated successfully', 'success');
         });
       break;
-
     case 'FACULTY':
-      updateData = { id: _id, email, officeHours };
+      updateData = { id: _id, email, officeHours, phones: phonesArray };
       console.log('updateData:');
       console.log(updateData);
+      console.log(updateData.id);
       collectionName = FacultyProfiles.getCollectionName();
+      console.log(updateData.id);
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
