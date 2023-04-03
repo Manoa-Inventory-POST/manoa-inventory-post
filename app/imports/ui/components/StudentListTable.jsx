@@ -5,16 +5,15 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
 
-const handleTAClick = async (studentId, students, refreshStudentProfiles) => {
+const handleTAClick = async (studentId, students) => {
   const currentStudent = students.find(student => student._id === studentId);
-  const newRole = currentStudent.TA ? 'none' : 'ta';
+  const newRole = !currentStudent.TA ? 'ta' : 'none';
 
   try {
     await new Promise((resolve, reject) => {
       Meteor.call('students.setRole', studentId, newRole, (error) => {
         if (error) reject(error);
         else resolve();
-        refreshStudentProfiles();
       });
     });
   } catch (error) {
@@ -22,16 +21,15 @@ const handleTAClick = async (studentId, students, refreshStudentProfiles) => {
   }
 };
 
-const handleRAClick = async (studentId, students, refreshStudentProfiles) => {
+const handleRAClick = async (studentId, students) => {
   const currentStudent = students.find(student => student._id === studentId);
-  const newRole = currentStudent.RA ? 'none' : 'ra';
+  const newRole = !currentStudent.RA ? 'ra' : 'none';
 
   try {
     await new Promise((resolve, reject) => {
       Meteor.call('students.setRole', studentId, newRole, (error) => {
         if (error) reject(error);
         else resolve();
-        refreshStudentProfiles();
       });
     });
   } catch (error) {
@@ -82,10 +80,6 @@ const StudentListTable = () => {
     }
     setFilteredStudents(filtered);
   }, [studentFirstName, studentLastName, studentEmail, isTA, isRA]);
-
-  const refreshStudentProfiles = () => {
-    StudentProfiles.refresh();
-  };
 
   return (ready ? (
     <Container className="">
@@ -158,14 +152,14 @@ const StudentListTable = () => {
                 <input
                   type="checkbox"
                   checked={student.TA}
-                  onChange={() => handleTAClick(student._id, students, refreshStudentProfiles)}
+                  onChange={() => handleTAClick(student._id, students)}
                 />
               </td>
               <td>
                 <input
                   type="checkbox"
                   checked={student.RA}
-                  onChange={() => handleRAClick(student._id, students, refreshStudentProfiles)}
+                  onChange={() => handleRAClick(student._id, students)}
                 />
               </td>
             </tr>

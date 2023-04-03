@@ -12,11 +12,18 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
-    if (['ta', 'ra'].includes(role)) {
-      const update = role === 'ta' ? { TA: true, RA: false } : { TA: false, RA: true };
-      StudentProfiles.update(studentId, update);
+    let update;
+
+    if (role === 'ta') {
+      update = { TA: true, RA: false };
+    } else if (role === 'ra') {
+      update = { TA: false, RA: true };
+    } else if (role === 'none') {
+      update = { TA: false, RA: false };
     } else {
       throw new Meteor.Error('invalid-role');
     }
+
+    StudentProfiles.update(studentId, update);
   },
 });
