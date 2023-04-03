@@ -40,8 +40,6 @@ import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
-import StudentList from '../pages/StudentList';
-
 // import UpdateUser from '../pages/UpdateUser';
 import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
@@ -88,7 +86,6 @@ const App = () => {
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="/student-home" element={<StudentProtectedRoute><StudentHome /></StudentProtectedRoute>} />
           <Route path="/faculty-home" element={<FacultyProtectedRoute><FacultyHome /></FacultyProtectedRoute>} />
-          <Route path="/student-list" element={<FacultyProtectedRoute><StudentList /></FacultyProtectedRoute>} />
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
