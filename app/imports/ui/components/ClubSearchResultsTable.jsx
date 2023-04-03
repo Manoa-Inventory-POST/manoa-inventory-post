@@ -17,7 +17,7 @@ const ClubSearchResultsTable = () => {
     const rdy = subscription.ready();
     const clubEntries = Clubs.find({}, { sort: { name: 1 } }).fetch();
     return {
-      club: clubEntries,
+      clubs: clubEntries,
       ready: rdy,
     };
   }, []);
@@ -39,6 +39,7 @@ const ClubSearchResultsTable = () => {
     if (clubDescription) {
       filtered = filtered.filter(function (obj) { return obj.description.toLowerCase().includes(clubDescription.toLowerCase()); });
     }
+
     setFilteredClubs(filtered);
   }, [clubName, clubWebsite, clubDescription]);
   return (ready ? (
@@ -86,9 +87,9 @@ const ClubSearchResultsTable = () => {
           </tr>
         </thead>
         <tbody>
+          { filteredClubs && filteredClubs.length === 0 ? (<tr><td>-</td></tr>) : filteredClubs && filteredClubs.map((club) => <ClubSearchResultsTableRow key={club._id} club={club} />)}
         </tbody>
       </Table>
-
     </Container>
   ) : <LoadingSpinner message="Loading Clubs" />);
 };
