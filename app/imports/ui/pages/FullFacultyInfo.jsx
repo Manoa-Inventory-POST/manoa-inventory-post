@@ -5,12 +5,18 @@ import { useTracker } from 'meteor/react-meteor-data';
 import React from 'react';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { ROLE } from '../../api/role/Role';
 
 const FullFacultyInfo = () => {
   const { _id } = useParams();
+
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
   const { ready, faculty } = useTracker(() => {
     const subscription = FacultyProfiles.subscribeFaculty();
@@ -58,6 +64,13 @@ const FullFacultyInfo = () => {
                 <Row lg={2}>&ensp;<h5>{faculty.officeHours}</h5></Row>
               </Col>
             </Row>
+            {isAdmin || isOffice ? ([
+              <Row>
+                <Col>
+                  <h5>Emergency Contact: {faculty.emergency}</h5>
+                </Col>
+              </Row>,
+            ]) : ''}
           </Col>
         </Row>
       </div>
