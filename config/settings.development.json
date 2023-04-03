@@ -24,6 +24,7 @@
       "firstName": "Mary",
       "lastName": "Smith",
       "position": "Other",
+      "emergency": "808-098-7654",
       "rooms": [
         "301",
         "302"
