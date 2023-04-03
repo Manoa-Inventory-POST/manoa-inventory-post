@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import FacultyItem from '../components/FacultyItem';
-import { ROLE } from '../../api/role/Role';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const FacultySearch = () => {
@@ -17,10 +14,6 @@ const FacultySearch = () => {
   const [facultyLastName, setFacultyLastName] = useState('');
   const [facultyPosition, setFacultyPosition] = useState('');
   const [facultyOfficeHours, setFacultyOfficeHours] = useState('');
-  const [facultyEmergency, setFacultyEmergency] = useState('');
-
-  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
-  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
   /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
@@ -55,11 +48,8 @@ const FacultySearch = () => {
     if (facultyOfficeHours) {
       filtered = filtered.filter(function (obj) { return obj.officeHours.toLowerCase().includes(facultyOfficeHours.toLowerCase()); });
     }
-    if (facultyEmergency) {
-      filtered = filtered.filter(function (obj) { return obj.emergency.toLowerCase().includes(facultyEmergency.toLowerCase()); });
-    }
     setFilteredFaculty(filtered);
-  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours, facultyEmergency]);
+  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.FACULTY_SEARCH}>
@@ -122,23 +112,6 @@ const FacultySearch = () => {
                     />
                   </label>
                 </Col>
-                {isAdmin || isOffice ? ([
-                  <Col className="d-flex justify-content-center">
-                    <label htmlFor="Search by emergency">
-                      <Col
-                        className="d-flex justify-content-center mb-1 small"
-                        style={{ color: '#313131' }}
-                      />
-                      Emergency
-                      <input
-                        type="text"
-                        className="shadow-sm"
-                        placeholder="Enter a phone number"
-                        onChange={e => setFacultyEmergency(e.target.value)}
-                      />
-                    </label>
-                  </Col>,
-                ]) : ''}
               </Row>
             </Accordion.Body>
           </Accordion.Item>
@@ -157,9 +130,6 @@ const FacultySearch = () => {
             <th>Position</th>
             <th>Contact Info</th>
             <th>Office Hours</th>
-            {isAdmin || isOffice ? ([
-              <th>Emergency Contact</th>,
-            ]) : '' }
           </tr>
         </thead>
         <tbody>
