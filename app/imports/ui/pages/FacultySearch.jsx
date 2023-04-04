@@ -18,7 +18,8 @@ const FacultySearch = () => {
   const [facultyLastName, setFacultyLastName] = useState('');
   const [facultyPosition, setFacultyPosition] = useState('');
   const [facultyOfficeHours, setFacultyOfficeHours] = useState('');
-  const [facultyEmergency, setFacultyEmergency] = useState('');
+  const [facultyEmergencyPhone, setFacultyEmergencyPhone] = useState('');
+  const [facultyEmergencyEmail, setFacultyEmergencyEmail] = useState('');
 
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
@@ -56,11 +57,14 @@ const FacultySearch = () => {
     if (facultyOfficeHours) {
       filtered = filtered.filter(function (obj) { return obj.officeHours.toLowerCase().includes(facultyOfficeHours.toLowerCase()); });
     }
-    if (facultyEmergency) {
-      filtered = filtered.filter(function (obj) { return obj.emergency.toLowerCase().includes(facultyEmergency.toLowerCase()); });
+    if (facultyEmergencyPhone) {
+      filtered = filtered.filter(function (obj) { return obj.emergencyPhone.toLowerCase().includes(facultyEmergencyPhone.toLowerCase()); });
+    }
+    if (facultyEmergencyEmail) {
+      filtered = filtered.filter(function (obj) { return obj.emergencyEmail.toLowerCase().includes(facultyEmergencyEmail.toLowerCase()); });
     }
     setFilteredFaculty(filtered);
-  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours, facultyEmergency]);
+  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours, facultyEmergencyPhone, facultyEmergencyEmail]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.FACULTY_SEARCH}>
@@ -125,17 +129,32 @@ const FacultySearch = () => {
                 </Col>
                 {isAdmin || isOffice ? ([
                   <Col className="d-flex justify-content-center">
-                    <label htmlFor="Search by emergency">
+                    <label htmlFor="Search by emergency phone">
                       <Col
                         className="d-flex justify-content-center mb-1 small"
                         style={{ color: '#313131' }}
                       />
-                      Emergency
+                      Emergency Phone Number
                       <input
                         type="text"
                         className="shadow-sm"
                         placeholder="Enter a phone number"
-                        onChange={e => setFacultyEmergency(e.target.value)}
+                        onChange={e => setFacultyEmergencyPhone(e.target.value)}
+                      />
+                    </label>
+                  </Col>,
+                  <Col className="d-flex justify-content-center">
+                    <label htmlFor="Search by emergency email">
+                      <Col
+                        className="d-flex justify-content-center mb-1 small"
+                        style={{ color: '#313131' }}
+                      />
+                      Emergency Email
+                      <input
+                        type="text"
+                        className="shadow-sm"
+                        placeholder="Enter an email"
+                        onChange={e => setFacultyEmergencyEmail(e.target.value)}
                       />
                     </label>
                   </Col>,
@@ -172,7 +191,7 @@ const FacultySearch = () => {
           <tbody>
             { filteredFaculty.length === 0 ? (<tr><td>-</td></tr>) : filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}
           </tbody>,
-        ]) }
+        ])}
       </Table>
       { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center pb-2">No faculty found.</div> : '' }
     </div>
