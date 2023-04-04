@@ -28,7 +28,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
@@ -42,6 +42,19 @@ class StudentProfileCollection extends BaseProfileCollection {
       }
       if (interests) {
         interests.forEach((interest) => UserInterests.define({ email, interest }));
+      }
+      if (phones) {
+        // checks if phones exist
+        phones.forEach(phoneNum => {
+          // if exists, update
+          if (Phone.checkExists(phoneNum)) {
+            const phoneID = Phone.findDoc({ phoneNum })._id;
+            Phone.update(phoneID, { email });
+            // else, define new phone
+          } else {
+            Phone.define({ email, phoneNum });
+          }
+        });
       }
       return profileID;
     }
@@ -61,7 +74,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param undergraduate update undergraduate sub role (optional).
    * @return never
    */
-  update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
+  update(docID, { firstName, lastName, email, phones, phoneIds, TA, RA, graduate, undergraduate }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -71,13 +84,13 @@ class StudentProfileCollection extends BaseProfileCollection {
       updateData.lastName = lastName;
     }
     if (phones) {
+      updateData.phones = phones;
       // remove all
-      if (phoneIds.length > 0) {
+      if (phoneIds) {
         phoneIds.forEach(id => {
           Phone.removeIt(id);
         });
       }
-
       // re-create all phones
       if (phones.length > 0) {
         for (let i = 0; i < phones.length; i++) {
@@ -105,6 +118,8 @@ class StudentProfileCollection extends BaseProfileCollection {
     if (undergraduate) {
       updateData.undergraduate = undergraduate;
     }
+    console.log('update DATA:');
+    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 

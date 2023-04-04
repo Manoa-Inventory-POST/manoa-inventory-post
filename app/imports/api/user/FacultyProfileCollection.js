@@ -91,27 +91,27 @@ class FacultyProfileCollection extends BaseProfileCollection {
       updateData.picture = picture;
     }
     if (phones) {
+      updateData.phones = phones;
       // remove all
-      if (phoneIds.length > 0) {
+      if (phoneIds) {
         phoneIds.forEach(id => {
           Phone.removeIt(id);
         });
       }
 
       // re-create all phones
-      if (phones.length > 0) {
-        for (let i = 0; i < phones.length; i++) {
-          // if exists, update
-          const phoneNum = phones[i];
-          if (Phone.checkExists(phoneNum)) {
-            const phoneID = Phone.findDoc({ phoneNum })._id;
-            Phone.update(phoneID, { email });
-            // else, define new phone
-          } else {
-            Phone.define({ email, phoneNum });
-          }
+      for (let i = 0; i < phones.length; i++) {
+        // if exists, update
+        const phoneNum = phones[i];
+        if (Phone.checkExists(phoneNum)) {
+          const phoneID = Phone.findDoc({ phoneNum })._id;
+          Phone.update(phoneID, { email });
+          // else, define new phone
+        } else {
+          Phone.define({ email, phoneNum });
         }
       }
+
     }
     // remove all clubAdvisor entries
     clubAdvisorIds.forEach(id => {
@@ -143,6 +143,8 @@ class FacultyProfileCollection extends BaseProfileCollection {
         }
       }
     }
+    console.log('update DATA:');
+    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 
