@@ -14,6 +14,8 @@ const ClubSchema = new SimpleSchema({
   name: String,
   website: String,
   description: String,
+  picture: String,
+  interests: String,
 });
 
 const bridge = new SimpleSchema2Bridge(ClubSchema);
@@ -39,9 +41,9 @@ const EditClub = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { name, website, description } = data;
+    const { name, website, description, picture, interests } = data;
     const collectionName = Clubs.getCollectionName();
-    const updateData = { id: _id, name, website, description };
+    const updateData = { id: _id, name, website, description, picture, interests };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Club updated successfully', 'success'));
@@ -57,6 +59,8 @@ const EditClub = () => {
               <Card.Body>
                 <TextField readOnly name="name" />
                 <TextField name="website" />
+                <TextField name="picture" />
+                <TextField name="interests" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
