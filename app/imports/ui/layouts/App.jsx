@@ -17,7 +17,7 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
-import ProfileTemplate from '../pages/ProfileTemplate';
+import ProfileUpdate from '../pages/ProfileUpdate';
 import ReservationForm from '../pages/ReservationForm';
 import MapPage from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
@@ -71,7 +71,7 @@ const App = () => {
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />

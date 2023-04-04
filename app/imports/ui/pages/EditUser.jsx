@@ -209,7 +209,9 @@ const EditUser = () => {
     const phonesArray = phones.split(', ');
     console.log(data);
     let collectionName;
-    let updateData = { id: _id, firstName, lastName };
+    let updateData = { firstName, lastName };
+    console.log('updateData1:');
+    console.log(updateData);
 
     switch (role) {
     case 'STUDENT':

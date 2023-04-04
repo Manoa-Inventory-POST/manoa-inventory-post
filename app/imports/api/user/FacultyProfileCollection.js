@@ -96,13 +96,13 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (emergency) {
       updateData.emergency = emergency;
     }
-    // remove all
-    if (phoneIds) {
-      phoneIds.forEach(id => {
-        Phone.removeIt(id);
-      });
-    }
     if (phones) {
+      // remove all
+      if (phoneIds) {
+        phoneIds.forEach(id => {
+          Phone.removeIt(id);
+        });
+      }
       // create all phones
       for (let i = 0; i < phones.length; i++) {
         // if exists, update
@@ -115,6 +115,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
           Phone.define({ email, phoneNum });
         }
       }
+
     }
     // remove all clubAdvisor entries
     if (clubAdvisorIds) {
@@ -150,6 +151,8 @@ class FacultyProfileCollection extends BaseProfileCollection {
         }
       }
     }
+    console.log('update DATA:');
+    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 
