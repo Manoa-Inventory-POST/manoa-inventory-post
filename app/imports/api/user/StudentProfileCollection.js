@@ -60,26 +60,51 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param undergraduate update undergraduate sub role (optional).
    * @return never
    */
-  update(docID, { firstName, lastName, TA, RA, graduate, undergraduate }) {
+  update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (firstName) {
+    if (firstName !== undefined) {
       updateData.firstName = firstName;
     }
-    if (lastName) {
+    if (lastName !== undefined) {
       updateData.lastName = lastName;
     }
-    if (TA) {
+    if (TA !== undefined) {
       updateData.TA = TA;
     }
-    if (RA) {
+    if (RA !== undefined) {
       updateData.RA = RA;
     }
-    if (graduate) {
+    if (graduate !== undefined) {
       updateData.graduate = graduate;
     }
-    if (undergraduate) {
+    if (undergraduate !== undefined) {
       updateData.undergraduate = undergraduate;
+    }
+    // remove all clubs and ids before update
+    if (clubIds) {
+      clubIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (clubs) {
+      clubs.forEach(club => {
+        if (!UserClubs.checkExists(email, club)) {
+          UserClubs.define({ email, club });
+        }
+      });
+    }
+    if (interestIds) {
+      interestIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (interests) {
+      interests.forEach(interest => {
+        if (!UserInterests.checkExists(email, interest)) {
+          UserInterests.define({ email, interest });
+        }
+      });
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -150,6 +175,16 @@ class StudentProfileCollection extends BaseProfileCollection {
       return [];
     }
     return profile[0];
+  }
+
+  setTA(studentId, TA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { TA } });
+  }
+
+  setRA(studentId, RA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { RA } });
   }
 
 }

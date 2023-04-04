@@ -102,12 +102,14 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (emergencyEmail) {
       updateData.emergencyEmail = emergencyEmail;
     }
-    if (phones) {
-      // remove all
+    // remove all
+    if (phoneIds) {
       phoneIds.forEach(id => {
         Phone.removeIt(id);
       });
-      // re-create all phones
+    }
+    if (phones) {
+      // create all phones
       for (let i = 0; i < phones.length; i++) {
         // if exists, update
         const phoneNum = phones[i];
@@ -121,9 +123,11 @@ class FacultyProfileCollection extends BaseProfileCollection {
       }
     }
     // remove all clubAdvisor entries
-    clubAdvisorIds.forEach(id => {
-      ClubAdvisor.removeIt(id);
-    });
+    if (clubAdvisorIds) {
+      clubAdvisorIds.forEach(id => {
+        ClubAdvisor.removeIt(id);
+      });
+    }
     // re-create if clubAdvisor
     if (clubAdvisor) {
       // re-create all clubs
@@ -136,12 +140,14 @@ class FacultyProfileCollection extends BaseProfileCollection {
         }
       }
     }
-    if (rooms) {
-      // remove all
+    // remove all
+    if (occupantRoomIds) {
       occupantRoomIds.forEach(id => {
         OccupantRoom.removeIt(id);
       });
-      // re-create all rooms
+    }
+    if (rooms) {
+      // create all rooms
       for (let i = 0; i < rooms.length; i++) {
         // if exists, update
         const room = rooms[i];
@@ -251,7 +257,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
 }
 
 /**
- * Profides the singleton instance of this class to all other entities.
+ * Provides the singleton instance of this class to all other entities.
  * @type {FacultyProfileCollection}
  */
 export const FacultyProfiles = new FacultyProfileCollection();

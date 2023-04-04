@@ -64,8 +64,78 @@
       "role": "OFFICE" ,
       "firstName": "Emma",
       "lastName": "Jones"
-    }
+    },
+    { "email": "charlie@foo.com",
+      "password": "changeme",
+      "role": "STUDENT" ,
+      "firstName": "Charlie",
+      "lastName": "Brown",
+      "TA": true,
+      "RA": true,
+      "graduate": false,
+      "undergraduate": true,
+      "clubs": [
 
+      ],
+      "interests": [
+        "Art",
+        "Video Games"
+      ]
+    },
+    { "email": "joel@foo.com",
+      "password": "changeme",
+      "role": "STUDENT" ,
+      "firstName": "Joel",
+      "lastName": "Miller",
+      "TA": false,
+      "RA": false,
+      "graduate": true,
+      "undergraduate": false,
+      "clubs": [
+
+      ],
+      "interests": [
+        "Video Games",
+        "Mentor"
+      ]
+    },
+    { "email": "kenobi@foo.com",
+      "password": "changeme",
+      "role": "STUDENT" ,
+      "firstName": "Obi-Wan",
+      "lastName": "Kenobi",
+      "TA": true,
+      "RA": false,
+      "graduate": true,
+      "undergraduate": false,
+      "clubs": [
+
+      ],
+      "interests": [
+        "Professional Development",
+        "Guest Speakers",
+        "Mentoring",
+        "Teaching"
+      ]
+    },
+    { "email": "peter@foo.com",
+      "password": "changeme",
+      "role": "STUDENT" ,
+      "firstName": "Peter",
+      "lastName": "Parker",
+      "TA": false,
+      "RA": true,
+      "graduate": false,
+      "undergraduate": true,
+      "clubs": [
+
+      ],
+      "interests": [
+        "Professional Development",
+        "Technical Workshops",
+        "Algorithms"
+      ]
+    }
   ],
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },

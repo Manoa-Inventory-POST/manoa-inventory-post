@@ -113,6 +113,21 @@ class UserInterestsCollection extends BaseCollection {
     const interest = doc.interest;
     return { email, interest };
   }
+
+  /**
+   * Checks the UserInterests collection to see if an inputted Club Advisor already exists.
+   * @param email
+   * @param interest
+   * @return true
+   * @return false
+   */
+  checkExists(email, interest) {
+    const instances = this.find({ email, interest }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
 }
 
 /**
