@@ -74,52 +74,54 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param undergraduate update undergraduate sub role (optional).
    * @return never
    */
-  update(docID, { firstName, lastName, email, phones, phoneIds, TA, RA, graduate, undergraduate }) {
+
+  update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (firstName) {
+    if (firstName !== undefined) {
       updateData.firstName = firstName;
     }
-    if (lastName) {
+    if (lastName !== undefined) {
       updateData.lastName = lastName;
     }
-    if (phones) {
-      updateData.phones = phones;
-      // remove all
-      if (phoneIds) {
-        phoneIds.forEach(id => {
-          Phone.removeIt(id);
-        });
-      }
-      // re-create all phones
-      if (phones.length > 0) {
-        for (let i = 0; i < phones.length; i++) {
-          // if exists, update
-          const phoneNum = phones[i];
-          if (Phone.checkExists(phoneNum)) {
-            const phoneID = Phone.findDoc({ phoneNum })._id;
-            Phone.update(phoneID, { email });
-            // else, define new phone
-          } else {
-            Phone.define({ email, phoneNum });
-          }
-        }
-      }
-    }
-    if (TA) {
+    if (TA !== undefined) {
       updateData.TA = TA;
     }
-    if (RA) {
+    if (RA !== undefined) {
       updateData.RA = RA;
     }
-    if (graduate) {
+    if (graduate !== undefined) {
       updateData.graduate = graduate;
     }
-    if (undergraduate) {
+    if (undergraduate !== undefined) {
       updateData.undergraduate = undergraduate;
     }
-    console.log('update DATA:');
-    console.log(updateData);
+
+    // remove all clubs and ids before update
+    if (clubIds) {
+      clubIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (clubs) {
+      clubs.forEach(club => {
+        if (!UserClubs.checkExists(email, club)) {
+          UserClubs.define({ email, club });
+        }
+      });
+    }
+    if (interestIds) {
+      interestIds.forEach(id => {
+        UserClubs.removeIt(id);
+      });
+    }
+    if (interests) {
+      interests.forEach(interest => {
+        if (!UserInterests.checkExists(email, interest)) {
+          UserInterests.define({ email, interest });
+        }
+      });
+    }
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -189,6 +191,16 @@ class StudentProfileCollection extends BaseProfileCollection {
       return [];
     }
     return profile[0];
+  }
+
+  setTA(studentId, TA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { TA } });
+  }
+
+  setRA(studentId, RA) {
+    this.assertDefined(studentId);
+    this._collection.update(studentId, { $set: { RA } });
   }
 
 }
