@@ -5,6 +5,7 @@ import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
+import {Phone} from "../room/Phone";
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -68,6 +69,29 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (phones) {
+      // remove all
+      if (phoneIds.length > 0) {
+        phoneIds.forEach(id => {
+          Phone.removeIt(id);
+        });
+      }
+
+      // re-create all phones
+      if (phones.length > 0) {
+        for (let i = 0; i < phones.length; i++) {
+          // if exists, update
+          const phoneNum = phones[i];
+          if (Phone.checkExists(phoneNum)) {
+            const phoneID = Phone.findDoc({ phoneNum })._id;
+            Phone.update(phoneID, { email });
+            // else, define new phone
+          } else {
+            Phone.define({ email, phoneNum });
+          }
+        }
+      }
     }
     if (TA) {
       updateData.TA = TA;
