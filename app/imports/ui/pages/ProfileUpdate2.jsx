@@ -1,13 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
+import { AutoForm, BoolField, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
-import { AutoForm, BoolField, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { Phone } from '../../api/room/Phone';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Room } from '../../api/room/RoomCollection';
@@ -15,17 +13,22 @@ import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OccupantRoom } from '../../api/room/OccupantRoom';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-/* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+
+  // const _id = Meteor.user()._id;
+  // console.log('Meteor.user()._id');
+  // console.log(_id);
+
   const { ready, roomValues, userToUpdate, interestNames, clubNames } = useTracker(() => {
-    // Get access to documents
+
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
     const subscriptionRooms = Room.subscribeRoom();
@@ -48,14 +51,15 @@ const ProfileUpdate = () => {
     console.log(subClubs.ready());
     console.log(subFaculty.ready());
     console.log(subFaculty.ready());
-    console.log('rdy');
-    console.log(rdy);
 
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
+    console.log(docFaculty);
     const docStudent = StudentProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docOffice = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
+    console.log('docOffice:');
+    console.log(docOffice);
     const docIT = ITSupportProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     let userProfile;
 
@@ -131,15 +135,12 @@ const ProfileUpdate = () => {
     } else {
       console.log('user not found');
     }
+
     const roomEntries = Room.find({}, { sort: { num: 1 } }).fetch();
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
-    console.log('roomEntries:');
-    console.log(roomEntries);
 
-    const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
-      faculty: facultyProfiles,
       userToUpdate: userProfile,
       roomValues: roomEntries.map(Item => Item.room),
       interestNames: interestEntries.map(Item => Item.interest),
@@ -147,7 +148,6 @@ const ProfileUpdate = () => {
       ready: rdy,
     };
   }, []);
-
   console.log(roomValues, interestNames, clubNames, ready);
   const UserProfileSchema = new SimpleSchema({
     email: String,
@@ -178,6 +178,7 @@ const ProfileUpdate = () => {
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
+
   const submit = (data) => {
     console.log('data:');
     console.log(data);
@@ -240,7 +241,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'ITSUPPORT':
-      //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
+    //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
       updateData = { id: _id, email, firstName, lastName };
 
       collectionName = ITSupportProfiles.getCollectionName();
@@ -254,7 +255,6 @@ const ProfileUpdate = () => {
       break;
     }
   };
-
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -328,5 +328,4 @@ const ProfileUpdate = () => {
     </Container>
   ) : <LoadingSpinner />);
 };
-
 export default ProfileUpdate;
