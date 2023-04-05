@@ -44,9 +44,10 @@ const ProfileUpdate = () => {
         && subIT.ready() && subOccRoom.ready() && subPhone.ready();
 
     console.log('rdy');
-    console.log(subClubAdvisor.ready());
-    console.log(subInterests.ready());
+    console.log(subscriptionRooms.ready());
+    console.log(subOccRoom.ready());
     console.log(subClubs.ready());
+    console.log(subFaculty.ready());
     console.log(subFaculty.ready());
 
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
@@ -57,8 +58,6 @@ const ProfileUpdate = () => {
     const docOffice = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     console.log('docOffice:');
     console.log(docOffice);
-    console.log('Meteor.user()._id');
-    console.log(Meteor.user()._id);
     const docIT = ITSupportProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     let userProfile;
 
@@ -78,7 +77,6 @@ const ProfileUpdate = () => {
         userProfile.clubAdvisor = false;
       }
     };
-
     const addPhone = () => {
       // attach phone
       let phoneArr = Phone.find({ email: userProfile.email }, {}).fetch();
@@ -114,7 +112,6 @@ const ProfileUpdate = () => {
       addPhone(userProfile);
     } else if (docFaculty.length !== 0) {
       userProfile = docFaculty[0];
-      console.log('faculty switch');
       console.log('facultyProfile:');
       console.log(userProfile);
       addOffice();
