@@ -3,6 +3,8 @@ import React from 'react';
 import { Container, Image, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+const handleStatus = async (portID, portStatus)
+
 const PortItem = ({ port }) => (
 
   <tr key={port._id}>
@@ -11,7 +13,7 @@ const PortItem = ({ port }) => (
     <td>{port.side}</td>
     <td>{port.idf}</td>
     <td>
-      <Form.Select value={port.status}>
+      <Form.Select value={port.status} onChange={() => handleStatus(port._id, portStatus)}>
         <option value="1">Active</option>
         <option value="2">Inactive</option>
         <option value="3">Maintenance</option>
