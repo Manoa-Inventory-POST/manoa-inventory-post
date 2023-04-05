@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Form, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import swal from 'sweetalert';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -16,8 +17,10 @@ const handleTAClick = async (studentId, students) => {
         else resolve();
       });
     });
+    swal('Success', 'TA role updated successfully', 'success');
   } catch (error) {
     console.error(error);
+    swal('Error', error.message, 'error');
   }
 };
 
@@ -32,8 +35,10 @@ const handleRAClick = async (studentId, students) => {
         else resolve();
       });
     });
+    swal('Success', 'RA role updated successfully', 'success');
   } catch (error) {
     console.error(error);
+    swal('Error', error.message, 'error');
   }
 };
 
