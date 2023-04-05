@@ -7,7 +7,7 @@ import LoadingSpinner from './LoadingSpinner';
 
 const handleTAClick = async (studentId, students) => {
   const currentStudent = students.find(student => student._id === studentId);
-  const newRole = !currentStudent.TA ? 'ta' : 'none';
+  const newRole = !currentStudent.TA ? 'ta' : 'ta';
 
   try {
     await new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ const handleTAClick = async (studentId, students) => {
 
 const handleRAClick = async (studentId, students) => {
   const currentStudent = students.find(student => student._id === studentId);
-  const newRole = !currentStudent.RA ? 'ra' : 'none';
+  const newRole = !currentStudent.RA ? 'ra' : 'ra';
 
   try {
     await new Promise((resolve, reject) => {
