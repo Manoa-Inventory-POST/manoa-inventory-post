@@ -13,7 +13,7 @@ export const officePublications = {
 class OfficeRequestCollection extends BaseCollection {
   constructor() {
     super('OfficeRequest', new SimpleSchema({
-      email: String,
+      title: String,
       firstName: String,
       lastName: String,
       description: String,
@@ -32,7 +32,7 @@ class OfficeRequestCollection extends BaseCollection {
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
-   * @param email The email associated with this profile. Will be the username.
+   * @param title The title associated with this profile. Will be the username.
    * @param firstName The first name.
    * @param lastName The last name.
    * @param condition the condition of the item.
@@ -40,9 +40,9 @@ class OfficeRequestCollection extends BaseCollection {
    * @param requestTo the who the request to.
    * @return {String} the docID of the new document.
    */
-  define({ email, firstName, lastName, condition, description, requestTo }) {
+  define({ title, firstName, lastName, condition, description, requestTo }) {
     const docID = this._collection.insert({
-      email,
+      title,
       firstName,
       lastName,
       condition,
@@ -53,18 +53,18 @@ class OfficeRequestCollection extends BaseCollection {
   }
 
   /**
-   * Updates the UserProfile. You cannot change the email or role.
+   * Updates the UserProfile. You cannot change the title or role.
    * @param docID the id of the UserProfile
-   * @param email new email (optional).
+   * @param title new title (optional).
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { email, firstName, lastName, condition, description, requestTo }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo }) {
     const updateData = {};
-    if (email) {
-      updateData.email = email;
+    if (title) {
+      updateData.title = title;
     }
     if (firstName) {
       updateData.firstName = firstName;
@@ -89,8 +89,8 @@ class OfficeRequestCollection extends BaseCollection {
    * Also removes this user from Meteor Accounts.
    * @param profileID The ID for this profile object.
    */
-  removeIt(email) {
-    const doc = this.findDoc(email);
+  removeIt(title) {
+    const doc = this.findDoc(title);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -141,13 +141,13 @@ class OfficeRequestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const email = doc.email;
+    const title = doc.title;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const condition = doc.condition;
     const requestTo = doc.requestTo;
     const description = doc.description;
-    return { email, firstName, lastName, condition, description, requestTo };
+    return { title, firstName, lastName, condition, description, requestTo };
   }
 }
 

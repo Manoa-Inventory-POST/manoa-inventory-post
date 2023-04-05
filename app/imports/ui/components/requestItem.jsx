@@ -1,22 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, Col } from 'react-bootstrap';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/* Component for layout out a Project Card. */
 const OfficeItemF = ({ officeReqF }) => (
-  <tr>
-    <td>{officeReqF.email}</td>
-    <td>{officeReqF.firstName}</td>
-    <td>{officeReqF.lastName}</td>
-    <td>{officeReqF.description}</td>
-    <td>{officeReqF.condition}</td>
-    <td>{officeReqF.requestTo}</td>
-  </tr>
+  <Col>
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src="https://www.smartsheet.com/sites/default/files/ic-og-ApprovalProcessWorkflow-FacebookLinkedIn.jpg" />
+      <Card.Body>
+        <Card.Title style={{ marginTop: '0px' }}>{officeReqF.title}</Card.Title>
+        <Card.Subtitle>{officeReqF.firstName} {officeReqF.lastName}</Card.Subtitle>
+        <Card.Body>
+          {officeReqF.description}
+        </Card.Body>
+      </Card.Body>
+      <Card.Footer style={{ textAlign: 'center' }}>
+        {officeReqF.condition}
+      </Card.Footer>
+    </Card>
+  </Col>
 );
 
 // Require a document to be passed to this component.
 OfficeItemF.propTypes = {
-  officeReq: PropTypes.shape({
-    email: PropTypes.string,
+  officeReqF: PropTypes.shape({
+    title: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     description: PropTypes.string,

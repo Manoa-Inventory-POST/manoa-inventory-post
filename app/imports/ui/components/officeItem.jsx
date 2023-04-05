@@ -1,27 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+/* Component for layout out a Project Card. */
 const OfficeItem = ({ officeReq }) => (
-  <tr>
-    <td>{officeReq.email}</td>
-    <td>{officeReq.firstName}</td>
-    <td>{officeReq.lastName}</td>
-    <td>{officeReq.description}</td>
-    <td>{officeReq.condition}</td>
-    <td>{officeReq.requestTo}</td>
-    <td>
-      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>Edit</Link>
-    </td>
-  </tr>
+  <Col>
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src="https://www.smartsheet.com/sites/default/files/ic-og-ApprovalProcessWorkflow-FacebookLinkedIn.jpg" />
+      <Card.Body>
+        <Card.Title style={{ marginTop: '0px' }}>{officeReq.title}</Card.Title>
+        <Card.Subtitle>{officeReq.firstName} {officeReq.lastName}</Card.Subtitle>
+        <Card.Body>
+          {officeReq.description}
+        </Card.Body>
+      </Card.Body>
+      <Card.Footer style={{ textAlign: 'center' }}>
+        {officeReq.condition}
+      </Card.Footer>
+      <Button variant="outline-info">
+        <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>
+      </Button>
+    </Card>
+  </Col>
 );
 
 // Require a document to be passed to this component.
 OfficeItem.propTypes = {
   officeReq: PropTypes.shape({
-    email: PropTypes.string,
+    title: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     description: PropTypes.string,

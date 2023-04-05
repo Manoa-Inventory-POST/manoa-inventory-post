@@ -10,7 +10,7 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  email: String,
+  title: String,
   firstName: String,
   lastName: String,
   description: String,
@@ -55,7 +55,7 @@ const ServiceRequest = () => {
         </Row>
         <Row>
           <Col>
-            <TextField name="email" placeholder="your email" />
+            <TextField name="title" placeholder="What is your request about?" />
           </Col>
         </Row>
         <Row>

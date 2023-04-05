@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
 import OfficeItemF from '../components/requestItem';
@@ -21,30 +21,12 @@ const ListRequest = () => {
       ready: rdy,
     };
   }, []);
-
+  const divStyle = { textAlign: 'center' };
   return (ready ? (
     <Container id={PAGE_IDS.Add_Request} className="py-3">
-      <Row className="justify-content-center">
-        <Col md={7}>
-          <Col className="text-center">
-            <h2>Request List</h2>
-          </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Student Email</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Description</th>
-                <th>Condition</th>
-                <th>Request To</th>
-              </tr>
-            </thead>
-            <tbody>
-              {offices.map((officeReqF) => <OfficeItemF key={officeReqF._id} officeReqF={officeReqF} />)}
-            </tbody>
-          </Table>
-        </Col>
+      <h1 style={divStyle}>Request List</h1>
+      <Row xs={1} md={2} lg={4} className="g-2">
+        {offices.map((officeReqF) => <OfficeItemF key={officeReqF._id} officeReqF={officeReqF} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner message="Loading Requests" />);

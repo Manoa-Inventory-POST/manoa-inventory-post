@@ -734,7 +734,7 @@
     { "port": "25406", "room": "POST 303G", "side": "N/A", "idf": "POST 329", "status": "inactive" }
   ],
   "defaultRequest": [
-    { "email": "john@foo.com", "firstName": "Will", "lastName": "Smith", "requestTo": "Office","description":"Help!!!!!!!", "condition": "depending" }
+    { "title": "Chair", "firstName": "Will", "lastName": "Smith", "requestTo": "Office","description":"Need 6 more chairs", "condition": "depending" }
   ],
   "public": {
     "development": true
