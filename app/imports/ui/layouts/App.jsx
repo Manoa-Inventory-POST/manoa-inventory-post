@@ -45,6 +45,7 @@ import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
 import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
+import RequestList from '../pages/RequestList';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/map" element={<MapPage />} />
+          <Route path="/requestList" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
