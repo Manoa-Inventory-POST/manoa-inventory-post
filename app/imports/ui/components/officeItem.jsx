@@ -5,7 +5,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const OfficeItem = ({ officeReq }) => (
-  <card>
+  <tr>
     <td>{officeReq.email}</td>
     <td>{officeReq.firstName}</td>
     <td>{officeReq.lastName}</td>
@@ -15,7 +15,7 @@ const OfficeItem = ({ officeReq }) => (
     <td>
       <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>Edit</Link>
     </td>
-  </card>
+  </tr>
 );
 
 // Require a document to be passed to this component.
