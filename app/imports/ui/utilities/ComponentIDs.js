@@ -19,6 +19,7 @@ export const COMPONENT_IDS = {
   NAVBAR_ITSUPPORT_HOME: 'navbar-itsupport-home',
   NAVBAR_ADMIN_HOME: 'navbar-admin-home',
   NAVBAR_MAP: 'navbar-map',
+  NAVBAR_ASSIGN_FAC: 'navbar-assign-fac',
   NAVBAR_FACULTY_SEARCH: 'navbar-faculty-search',
   NAVBAR_CLUB_SEARCH: 'navbar-club-search',
   NAVBAR_ROOM_AVAILABILITY: 'navbar-room-availability',
@@ -26,6 +27,7 @@ export const COMPONENT_IDS = {
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   FACULTY_FILTER_OPTIONS: 'faculty-filter-options',
+  PORT_FILTER_OPTIONS: 'port-filter-options',
   CLUB_FILTER_OPTIONS: 'club-filter-options',
   NAVBAR_LOGIN_DROPDOWN: 'navbar-login-dropdown',
   NAVBAR_LOGIN_DROPDOWN_SIGN_IN: 'navbar-login-dropdown-sign-in',
@@ -48,6 +50,6 @@ export const COMPONENT_IDS = {
   FACULTY_SEARCH_FIRST_NAME: 'faculty-search-first-name',
   FACULTY_SEARCH_LAST_NAME: 'faculty-search-last-name',
   FACULTY_SEARCH_POSITION: 'faculty-search-position',
+  NAVBAR_STUDENT_SEARCH: 'navbar-student-search',
   SIGN_UP_FORM_ROLE: 'sign-up-form-role',
-
 };

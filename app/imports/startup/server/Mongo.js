@@ -5,6 +5,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { Interests } from '../../api/clubs/Interests';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
+import { Ports } from '../../api/room/Ports';
 
 // Initialize the database with a default data document.
 function addData(data) {
@@ -36,6 +37,11 @@ function addClub(data) {
 function addFaculty(data) {
   console.log(`  Adding: ${data.email}`);
   FacultyProfiles.define(data);
+}
+
+function addPort(data) {
+  console.log(`  Adding: ${data.port} (${data.room}) ${data.side} ${data.idf} ${data.status}`);
+  Ports.define(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -81,5 +87,12 @@ if (OfficeRequests.count() === 0) {
   if (Meteor.settings.defaultRequest) {
     console.log('Creating default request data.');
     Meteor.settings.defaultRequest.map(data => addRequest(data));
+  }
+}
+
+if (Ports.count() === 0) {
+  if (Meteor.settings.defaultPorts) {
+    console.log('Creating default Port Data.');
+    Meteor.settings.defaultPorts.map(data => addPort(data));
   }
 }
