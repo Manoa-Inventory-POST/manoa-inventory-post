@@ -35,9 +35,9 @@ const EditRequest = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { email, firstName, lastName, description, condition } = data;
+    const { condition, description } = data;
     const collectionName = OfficeRequests.getCollectionName();
-    const updateData = { id: _id, email, firstName, lastName, description, condition };
+    const updateData = { id: _id, condition, description };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Item updated successfully', 'success'));
@@ -56,9 +56,6 @@ const EditRequest = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" />
-                <TextField name="lastName" />
-                <TextField name="email" />
                 <TextField name="description" />
                 <SelectField name="condition" />
                 <SubmitField value="Submit" />

@@ -25,6 +25,7 @@ export const COMPONENT_IDS = {
   NAVBAR_ROOM_AVAILABILITY: 'navbar-room-availability',
   NAVBAR_RESERVE_ROOM: 'navbar-reserve-room',
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',
+  NAVBAR_SERVICE_REQUEST_List: 'navbar-service-request-list',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   FACULTY_FILTER_OPTIONS: 'faculty-filter-options',
   PORT_FILTER_OPTIONS: 'port-filter-options',
@@ -50,6 +51,6 @@ export const COMPONENT_IDS = {
   FACULTY_SEARCH_FIRST_NAME: 'faculty-search-first-name',
   FACULTY_SEARCH_LAST_NAME: 'faculty-search-last-name',
   FACULTY_SEARCH_POSITION: 'faculty-search-position',
+  NAVBAR_STUDENT_SEARCH: 'navbar-student-search',
   SIGN_UP_FORM_ROLE: 'sign-up-form-role',
-
 };

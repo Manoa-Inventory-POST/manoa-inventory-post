@@ -107,6 +107,21 @@ class UserClubsCollection extends BaseCollection {
     const club = doc.club;
     return { email, club };
   }
+
+  /**
+   * Checks the UserClubs collection to see if an inputted Club Advisor already exists.
+   * @param email
+   * @param club
+   * @return true
+   * @return false
+   */
+  checkExists(email, club) {
+    const instances = this.find({ email, club }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
+  }
 }
 
 /*

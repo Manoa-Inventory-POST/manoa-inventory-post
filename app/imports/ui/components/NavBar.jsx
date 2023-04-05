@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
-import { BoxArrowRight, CloudDownload, PersonFill, PersonPlusFill, Person } from 'react-bootstrap-icons';
+import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { BoxArrowRight, CloudDownload, Person, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
@@ -23,32 +23,32 @@ const NavBar = () => {
   return (
     <Navbar expand="lg" style={{ menuStyle, backgroundColor: '#75ABCF' }}>
       <Container>
-        { isStudent || isFaculty || isITSupport || isOffice || isAdmin ? '' : ([
+        {isStudent || isFaculty || isITSupport || isOffice || isAdmin ? '' : ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_LANDING} as={NavLink} to="/">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ])}
-        { isStudent ? ([
+        {isStudent ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_STUDENT_HOME} as={NavLink} to="/student-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isFaculty ? ([
+        {isFaculty ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_FACULTY_HOME} as={NavLink} to="/faculty-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isITSupport ? ([
+        {isITSupport ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ITSUPPORT_HOME} as={NavLink} to="/itsupport-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isOffice ? ([
+        {isOffice ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_OFFICE_HOME} as={NavLink} to="/office-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
         ]) : ''}
-        { isAdmin ? ([
+        {isAdmin ? ([
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LOGO_ADMIN_HOME} as={NavLink} to="/admin-home">
             <span style={{ fontWeight: 700, fontSize: '18px' }}><Image src="/images/logo.png" width={50} style={{ marginBottom: 3 }} />Manoa Inventory</span>
           </Nav.Link>,
@@ -57,28 +57,36 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ASSIGN_FAC} as={NavLink} to="/assign-faculty" key="navbar-assign-fac">Assign Faculty</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
-            { isAdmin || isITSupport ? '' : ([
+            {isFaculty ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_SEARCH} as={NavLink} to="/student-list" key="student-list">Student List</Nav.Link>,
+            ]) : ''}
+            {isAdmin || isITSupport ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_SEARCH} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
             ])}
-            { isAdmin || isITSupport || isOffice ? '' : ([
+            {isAdmin || isITSupport || isOffice ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_CLUB_SEARCH} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
             ])}
-            { isITSupport ? ([
+            {isITSupport ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_PORTS} as={NavLink} to="/ports" key="ports">Ports</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_EQUIPMENT} as={NavLink} to="/equipment" key="equipment">Equipment</Nav.Link>,
             ]) : ''}
-            { isOffice || isITSupport || isFaculty || isStudent ? ([
+            {isOffice || isITSupport || isFaculty || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
             ]) : ''}
-            { isOffice || isFaculty || isStudent ? ([
+            {isOffice || isFaculty || isStudent || isITSupport || isAdmin ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
             ]) : ''}
-            { isAdmin ? ([
+            {isOffice || isITSupport || isAdmin ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
+            ]) : ''}
+            {isFaculty ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_ListE} as={NavLink} to="/requestList" key="navbar-service-request-list">Request List</Nav.Link>,
+            ]) : ''}
+            {isAdmin ? ([
               <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
               </NavDropdown>,

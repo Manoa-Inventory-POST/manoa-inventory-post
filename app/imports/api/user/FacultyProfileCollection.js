@@ -17,6 +17,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
       officeHours: { type: String, optional: true, defaultValue: 'N/A' },
       picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
       position: { type: String, optional: true, defaultValue: 'Other' },
+      emergency: { type: String, optional: true, defaultValue: 'N/A' },
     }));
   }
 
@@ -30,15 +31,16 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param lastName The last name.
    * @param room An array of rooms.
    * @param phone An array of phone numbers.
+   * @param emergency The emergency phone number.
    */
-  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones }) {
+  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones, emergency }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture });
+    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture, emergency });
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role, emergency });
       if (rooms) {
         rooms.forEach((room) => OccupantRoom.define({ email, room }));
       }
@@ -71,8 +73,9 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param officeHours new office hours (optional).
    * @param position new position (optional).
    * @param picture new picture (optional).
+   * @param emergency new emergency num (optional).
    */
-  update(docID, { firstName, lastName, email, officeHours, position, picture, phones, phoneIds, clubs, clubAdvisorIds, clubAdvisor, rooms, occupantRoomIds }) {
+  update(docID, { firstName, lastName, email, officeHours, position, picture, emergency, phones, phoneIds, clubs, clubAdvisorIds, clubAdvisor, rooms, occupantRoomIds }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -90,12 +93,17 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (picture) {
       updateData.picture = picture;
     }
-    if (phones) {
-      // remove all
+    if (emergency) {
+      updateData.emergency = emergency;
+    }
+    // remove all
+    if (phoneIds) {
       phoneIds.forEach(id => {
         Phone.removeIt(id);
       });
-      // re-create all phones
+    }
+    if (phones) {
+      // create all phones
       for (let i = 0; i < phones.length; i++) {
         // if exists, update
         const phoneNum = phones[i];
@@ -109,9 +117,11 @@ class FacultyProfileCollection extends BaseProfileCollection {
       }
     }
     // remove all clubAdvisor entries
-    clubAdvisorIds.forEach(id => {
-      ClubAdvisor.removeIt(id);
-    });
+    if (clubAdvisorIds) {
+      clubAdvisorIds.forEach(id => {
+        ClubAdvisor.removeIt(id);
+      });
+    }
     // re-create if clubAdvisor
     if (clubAdvisor) {
       // re-create all clubs
@@ -124,12 +134,14 @@ class FacultyProfileCollection extends BaseProfileCollection {
         }
       }
     }
-    if (rooms) {
-      // remove all
+    // remove all
+    if (occupantRoomIds) {
       occupantRoomIds.forEach(id => {
         OccupantRoom.removeIt(id);
       });
-      // re-create all rooms
+    }
+    if (rooms) {
+      // create all rooms
       for (let i = 0; i < rooms.length; i++) {
         // if exists, update
         const room = rooms[i];
@@ -217,7 +229,9 @@ class FacultyProfileCollection extends BaseProfileCollection {
     const lastName = doc.lastName;
     const position = doc.position;
     const picture = doc.picture;
-    return { email, firstName, lastName, position, picture }; // CAM this is not enough for the define method. We lose the password.
+    const emergency = doc.emergency;
+    return { email, firstName, lastName, position, picture, emergency }; // CAM this is not enough
+    // for the define method. We lose the password.
   }
 
   /**
@@ -235,7 +249,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
 }
 
 /**
- * Profides the singleton instance of this class to all other entities.
+ * Provides the singleton instance of this class to all other entities.
  * @type {FacultyProfileCollection}
  */
 export const FacultyProfiles = new FacultyProfileCollection();
