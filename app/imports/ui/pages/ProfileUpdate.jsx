@@ -125,8 +125,6 @@ const ProfileUpdate = () => {
     const roomEntries = Room.find({}, { sort: { num: 1 } }).fetch();
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
-    console.log('roomEntries:');
-    console.log(roomEntries);
 
     const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {

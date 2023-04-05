@@ -46,7 +46,9 @@ class UserProfileCollection extends BaseProfileCollection {
     if (lastName) {
       updateData.lastName = lastName;
     }
-    this._collection.update(docID, { $set: updateData });
+    if (updateData.length > 0) {
+      this._collection.update(docID, { $set: updateData });
+    }
   }
 
   /**
