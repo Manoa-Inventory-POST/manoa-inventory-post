@@ -1,11 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { AutoForm, BoolField, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
+import { AutoForm, BoolField, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { Phone } from '../../api/room/Phone';
 import { Clubs } from '../../api/clubs/Clubs';
 import { Room } from '../../api/room/RoomCollection';
@@ -13,20 +15,17 @@ import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
-import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OccupantRoom } from '../../api/room/OccupantRoom';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 
+/* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
-
-  const _id = Meteor.user()._id;
-  console.log('Meteor.user()._id');
-  console.log(_id);
-
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, roomValues, userToUpdate, interestNames, clubNames } = useTracker(() => {
+    // Get access to documents
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
     const subscriptionRooms = Room.subscribeRoom();
@@ -43,18 +42,11 @@ const ProfileUpdate = () => {
         && subUser.ready() && subAdmin.ready() && subFaculty.ready() && subStudent.ready() && subOffice.ready()
         && subIT.ready() && subOccRoom.ready() && subPhone.ready();
 
-    console.log('rdy');
-    console.log(rdy);
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
-    console.log(docFaculty);
     const docStudent = StudentProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docOffice = OfficeProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
-    console.log('docOffice:');
-    console.log(docOffice);
-    console.log('Meteor.user()._id');
-    console.log(Meteor.user()._id);
     const docIT = ITSupportProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     let userProfile;
 
@@ -74,20 +66,6 @@ const ProfileUpdate = () => {
         userProfile.clubAdvisor = false;
       }
     };
-
-    // function addPhone( ) {
-    //   // attach phone
-    //   let phoneArr = Phone.find({ email: userProfile.email }, {}).fetch();
-    //   const phoneIdArr = phoneArr.map(item => item._id);
-    //   phoneArr = phoneArr.map(item => item.phoneNum);
-    //   if (phoneArr.length === 1) {
-    //     phoneArr = phoneArr[0];
-    //   } else {
-    //     phoneArr = phoneArr.join(', ');
-    //   }
-    //   userProfile.phones = phoneArr;
-    //   userProfile.phoneIds = phoneIdArr;
-    // };
     const addPhone = () => {
       // attach phone
       let phoneArr = Phone.find({ email: userProfile.email }, {}).fetch();
@@ -123,7 +101,6 @@ const ProfileUpdate = () => {
       addPhone(userProfile);
     } else if (docFaculty.length !== 0) {
       userProfile = docFaculty[0];
-      console.log('faculty switch');
       console.log('facultyProfile:');
       console.log(userProfile);
       addOffice();
@@ -145,12 +122,13 @@ const ProfileUpdate = () => {
     } else {
       console.log('user not found');
     }
-
     const roomEntries = Room.find({}, { sort: { num: 1 } }).fetch();
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
 
+    const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
+      faculty: facultyProfiles,
       userToUpdate: userProfile,
       roomValues: roomEntries.map(Item => Item.room),
       interestNames: interestEntries.map(Item => Item.interest),
@@ -158,6 +136,7 @@ const ProfileUpdate = () => {
       ready: rdy,
     };
   }, []);
+
   console.log(roomValues, interestNames, clubNames, ready);
   const UserProfileSchema = new SimpleSchema({
     email: String,
@@ -188,7 +167,6 @@ const ProfileUpdate = () => {
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
-
   const submit = (data) => {
     console.log('data:');
     console.log(data);
@@ -202,7 +180,7 @@ const ProfileUpdate = () => {
 
     switch (role) {
     case 'ADMIN':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = AdminProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -211,9 +189,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
-      console.log('updateData:');
-      console.log(updateData);
+      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -222,7 +198,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'USER':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = UserProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -231,7 +207,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData:');
       console.log(updateData);
@@ -242,7 +218,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'OFFICE':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = OfficeProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -251,9 +227,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'ITSUPPORT':
-    //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
-      updateData = { id: _id, email, firstName, lastName };
-
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = ITSupportProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -265,7 +239,8 @@ const ProfileUpdate = () => {
       break;
     }
   };
-  return (
+
+  return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col className="col-lg-10">
@@ -336,7 +311,7 @@ const ProfileUpdate = () => {
         </Col>
       </Row>
     </Container>
-  );
-
+  ) : <LoadingSpinner />);
 };
+
 export default ProfileUpdate;

@@ -86,9 +86,6 @@ class OfficeProfileCollection extends BaseProfileCollection {
         }
       }
     }
-
-    console.log('update DATA:');
-    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 
