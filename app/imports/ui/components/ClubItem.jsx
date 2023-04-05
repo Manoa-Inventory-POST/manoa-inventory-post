@@ -2,11 +2,12 @@ import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { Container, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ClubItem = ({ club }) => (
   <tr>
     <td><Image alt="" src={club.picture} width="180" height="180" /></td>
-    <td>{`${club.name}`}</td>
+    <td><Link to={`/clubinfo/${club._id}`}>{`${club.name}`}</Link></td>
     <td>
       <a href={club.website}>{club.website}</a>
     </td>
