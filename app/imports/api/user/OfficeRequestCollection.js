@@ -6,6 +6,7 @@ import { ROLE } from '../role/Role';
 
 export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
 export const requestToConditions = ['Office', 'IT Support'];
+export const imageOption = ['/images/carry.png', '/images/Chair.png', '/images/helpme.png', '/images/ithelp.png', '/images/table.png'];
 export const officePublications = {
   office: 'office',
 };
@@ -17,6 +18,12 @@ class OfficeRequestCollection extends BaseCollection {
       firstName: String,
       lastName: String,
       description: String,
+      picture: {
+        type: String,
+        allowedValues: imageOption,
+        optional: true,
+        defaultValue: '/images/helpme.png',
+      },
       requestTo: {
         type: String,
         allowedValues: requestToConditions,
@@ -38,9 +45,10 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition of the item.
    * @param description the description of the request.
    * @param requestTo the who the request to.
+   * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ title, firstName, lastName, condition, description, requestTo }) {
+  define({ title, firstName, lastName, condition, description, requestTo, picture }) {
     const docID = this._collection.insert({
       title,
       firstName,
@@ -48,6 +56,7 @@ class OfficeRequestCollection extends BaseCollection {
       condition,
       description,
       requestTo,
+      picture,
     });
     return docID;
   }
@@ -61,7 +70,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { title, firstName, lastName, condition, description, requestTo }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo, picture }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -80,6 +89,9 @@ class OfficeRequestCollection extends BaseCollection {
     }
     if (description) {
       updateData.description = description;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -147,7 +159,8 @@ class OfficeRequestCollection extends BaseCollection {
     const condition = doc.condition;
     const requestTo = doc.requestTo;
     const description = doc.description;
-    return { title, firstName, lastName, condition, description, requestTo };
+    const picture = doc.picture;
+    return { title, firstName, lastName, condition, description, requestTo, picture };
   }
 }
 

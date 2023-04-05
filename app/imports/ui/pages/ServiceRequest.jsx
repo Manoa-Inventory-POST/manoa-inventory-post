@@ -5,7 +5,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { OfficeRequests, requestToConditions } from '../../api/user/OfficeRequestCollection';
+import { imageOption, OfficeRequests, requestToConditions } from '../../api/user/OfficeRequestCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -18,6 +18,11 @@ const formSchema = new SimpleSchema({
     type: String,
     allowedValues: requestToConditions,
   },
+  picture: {
+    type: String,
+    optional: true,
+    allowedValues: imageOption,
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -25,10 +30,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const ServiceRequest = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { email, firstName, lastName, description, requestTo } = data;
+    const { title, firstName, lastName, description, requestTo, picture } = data;
     const owner = Meteor.user().username;
     const collectionName = OfficeRequests.getCollectionName();
-    const definitionData = { owner, email, firstName, lastName, description, requestTo };
+    const definitionData = { owner, title, firstName, lastName, description, requestTo, picture };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
@@ -56,6 +61,11 @@ const ServiceRequest = () => {
         <Row>
           <Col>
             <TextField name="title" placeholder="What is your request about?" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SelectField name="picture" placeholder="choose an option" />
           </Col>
         </Row>
         <Row>

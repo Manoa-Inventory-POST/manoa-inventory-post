@@ -8,7 +8,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 const OfficeItem = ({ officeReq }) => (
   <Col>
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://www.smartsheet.com/sites/default/files/ic-og-ApprovalProcessWorkflow-FacebookLinkedIn.jpg" />
+      <Card.Img variant="top" src={officeReq.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReq.title}</Card.Title>
         <Card.Subtitle>{officeReq.firstName} {officeReq.lastName}</Card.Subtitle>
@@ -35,6 +35,7 @@ OfficeItem.propTypes = {
     description: PropTypes.string,
     condition: PropTypes.string,
     requestTo: PropTypes.string,
+    picture: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

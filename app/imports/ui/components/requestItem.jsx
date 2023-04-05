@@ -6,7 +6,7 @@ import { Card, Col } from 'react-bootstrap';
 const OfficeItemF = ({ officeReqF }) => (
   <Col>
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://www.smartsheet.com/sites/default/files/ic-og-ApprovalProcessWorkflow-FacebookLinkedIn.jpg" />
+      <Card.Img variant="top" src={officeReqF.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReqF.title}</Card.Title>
         <Card.Subtitle>{officeReqF.firstName} {officeReqF.lastName}</Card.Subtitle>
@@ -24,6 +24,7 @@ const OfficeItemF = ({ officeReqF }) => (
 // Require a document to be passed to this component.
 OfficeItemF.propTypes = {
   officeReqF: PropTypes.shape({
+    picture: PropTypes.string,
     title: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,

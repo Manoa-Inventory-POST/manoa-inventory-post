@@ -734,7 +734,33 @@
     { "port": "25406", "room": "POST 303G", "side": "N/A", "idf": "POST 329", "status": "inactive" }
   ],
   "defaultRequest": [
-    { "title": "Chair", "firstName": "Will", "lastName": "Smith", "requestTo": "Office","description":"Need 6 more chairs", "condition": "depending" }
+    {
+      "title": "Chair",
+      "picture": "/images/Chair.png",
+      "firstName": "Will",
+      "lastName": "Smith",
+      "requestTo": "Office",
+      "description":"Need 6 more chairs",
+      "condition": "depending"
+    },
+    {
+      "title": "Moving",
+      "picture": "/images/carry.png",
+      "firstName": "John",
+      "lastName": "Will",
+      "requestTo": "Office",
+      "description":"Moving out unused items",
+      "condition": "depending"
+    },
+    {
+      "title": "Broken access",
+      "picture": "/images/ithelp.png",
+      "firstName": "John",
+      "lastName": "Will",
+      "requestTo": "IT Support",
+      "description":"Moving out unused items",
+      "condition": "depending"
+    }
   ],
   "public": {
     "development": true
