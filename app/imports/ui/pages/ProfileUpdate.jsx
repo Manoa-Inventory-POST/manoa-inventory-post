@@ -189,9 +189,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id,firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
-      console.log('updateData:');
-      console.log(updateData);
+      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -229,9 +227,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'ITSUPPORT':
-      //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
-      updateData = { id: _id, firstName, lastName, email };
-
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = ITSupportProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
