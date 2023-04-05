@@ -180,7 +180,7 @@ const ProfileUpdate = () => {
 
     switch (role) {
     case 'ADMIN':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = AdminProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -189,7 +189,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
+      updateData = { id: _id,firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
       console.log('updateData:');
       console.log(updateData);
       collectionName = FacultyProfiles.getCollectionName();
@@ -200,7 +200,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'USER':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = UserProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -209,7 +209,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData:');
       console.log(updateData);
@@ -220,7 +220,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'OFFICE':
-      updateData = { id: _id, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
       collectionName = OfficeProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -230,7 +230,7 @@ const ProfileUpdate = () => {
       break;
     case 'ITSUPPORT':
       //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
-      updateData = { id: _id, email, firstName, lastName };
+      updateData = { id: _id, firstName, lastName, email };
 
       collectionName = ITSupportProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })

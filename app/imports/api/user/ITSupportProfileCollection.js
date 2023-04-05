@@ -84,9 +84,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
         }
       }
     }
-    if (updateData.length > 0) {
-      this._collection.update(docID, { $set: updateData });
-    }
+    this._collection.update(docID, { $set: updateData });
   }
 
   /**
