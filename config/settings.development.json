@@ -734,7 +734,7 @@
     { "port": "25406", "room": "POST 303G", "side": "N/A", "idf": "POST 329", "status": "inactive" }
   ],
   "defaultRequest": [
-    { "firstName": "Will", "lastName": "Smith", "email": "john@foo.com", "description":"Help!!!!!!!", "condition": "depending" }
+    { "email": "john@foo.com", "firstName": "Will", "lastName": "Smith", "requestTo": "Office","description":"Help!!!!!!!", "condition": "depending" }
   ],
   "public": {
     "development": true

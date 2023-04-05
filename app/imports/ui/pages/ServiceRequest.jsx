@@ -1,11 +1,11 @@
 import React, {} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ErrorsField, SubmitField, TextField, AutoForm } from 'uniforms-bootstrap5';
+import { ErrorsField, SubmitField, TextField, AutoForm, SelectField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
+import { OfficeRequests, requestToConditions } from '../../api/user/OfficeRequestCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -14,6 +14,10 @@ const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
   description: String,
+  requestTo: {
+    type: String,
+    allowedValues: requestToConditions,
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -21,10 +25,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const ServiceRequest = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { email, firstName, lastName, description } = data;
+    const { email, firstName, lastName, description, requestTo } = data;
     const owner = Meteor.user().username;
     const collectionName = OfficeRequests.getCollectionName();
-    const definitionData = { owner, email, firstName, lastName, description };
+    const definitionData = { owner, email, firstName, lastName, description, requestTo };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
@@ -51,7 +55,12 @@ const ServiceRequest = () => {
         </Row>
         <Row>
           <Col>
-            <TextField name="email" placeholder="request" />
+            <TextField name="email" placeholder="your email" />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SelectField name="requestTo" placeholder="Office or It support" />
           </Col>
         </Row>
         <Row>
