@@ -25,6 +25,7 @@ export const COMPONENT_IDS = {
   NAVBAR_ROOM_AVAILABILITY: 'navbar-room-availability',
   NAVBAR_RESERVE_ROOM: 'navbar-reserve-room',
   NAVBAR_SERVICE_REQUEST: 'navbar-service-request',
+  NAVBAR_SERVICE_REQUEST_List: 'navbar-service-request-list',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   FACULTY_FILTER_OPTIONS: 'faculty-filter-options',
   PORT_FILTER_OPTIONS: 'port-filter-options',

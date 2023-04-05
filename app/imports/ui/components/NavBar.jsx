@@ -57,7 +57,6 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ASSIGN_FAC} as={NavLink} to="/assign-faculty" key="navbar-assign-fac">Assign Faculty</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
@@ -78,8 +77,14 @@ const NavBar = () => {
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
             ]) : ''}
-            {isOffice || isFaculty || isStudent ? ([
+            {isOffice || isFaculty || isStudent || isITSupport || isAdmin ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
+            ]) : ''}
+            {isOffice || isITSupport || isAdmin ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
+            ]) : ''}
+            {isFaculty ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_ListE} as={NavLink} to="/requestList" key="navbar-service-request-list">Request List</Nav.Link>,
             ]) : ''}
             {isAdmin ? ([
               <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
