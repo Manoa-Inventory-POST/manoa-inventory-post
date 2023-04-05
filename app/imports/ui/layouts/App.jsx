@@ -17,7 +17,7 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
-import ProfileUpdate from '../pages/ProfileUpdate';
+import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
 import MapPage from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
@@ -41,12 +41,11 @@ import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
-
-// import UpdateUser from '../pages/UpdateUser';
 import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
 import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
+import RequestList from '../pages/RequestList';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -66,12 +65,13 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/map" element={<MapPage />} />
+          <Route path="/requestList" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
