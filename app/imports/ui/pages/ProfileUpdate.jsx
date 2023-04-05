@@ -42,15 +42,6 @@ const ProfileUpdate = () => {
         && subUser.ready() && subAdmin.ready() && subFaculty.ready() && subStudent.ready() && subOffice.ready()
         && subIT.ready() && subOccRoom.ready() && subPhone.ready();
 
-    console.log('rdy');
-    console.log(subscriptionRooms.ready());
-    console.log(subOccRoom.ready());
-    console.log(subClubs.ready());
-    console.log(subFaculty.ready());
-    console.log(subFaculty.ready());
-    console.log('rdy');
-    console.log(rdy);
-
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
