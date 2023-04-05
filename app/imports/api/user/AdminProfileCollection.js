@@ -65,6 +65,7 @@ class AdminProfileCollection extends BaseProfileCollection {
       updateData.lastName = lastName;
     }
     if (phones) {
+      updateData.phones = phones;
       // remove all
       if (phoneIds) {
         phoneIds.forEach(id => {
@@ -85,9 +86,7 @@ class AdminProfileCollection extends BaseProfileCollection {
         }
       }
     }
-    if (updateData.length > 0) {
-      this._collection.update(docID, { $set: updateData });
-    }
+    this._collection.update(docID, { $set: updateData });
   }
 
   /**
