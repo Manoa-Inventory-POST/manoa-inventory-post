@@ -3,7 +3,6 @@ import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import {Phone} from "../room/Phone";
 
 class ITSupportProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -17,7 +16,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, phones, password }) {
+  define({ email, firstName, lastName, password }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
@@ -25,19 +24,6 @@ class ITSupportProfileCollection extends BaseProfileCollection {
       const role = ROLE.ITSUPPORT;
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
-      if (phones) {
-        // checks if phones exist
-        phones.forEach(phoneNum => {
-          // if exists, update
-          if (Phone.checkExists(phoneNum)) {
-            const phoneID = Phone.findDoc({ phoneNum })._id;
-            Phone.update(phoneID, { email });
-            // else, define new phone
-          } else {
-            Phone.define({ email, phoneNum });
-          }
-        });
-      }
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
@@ -52,7 +38,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { firstName, lastName, email, phones, phoneIds }) {
+  update(docID, { firstName, lastName }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -61,33 +47,6 @@ class ITSupportProfileCollection extends BaseProfileCollection {
     if (lastName) {
       updateData.lastName = lastName;
     }
-    if (phones) {
-      updateData.phones = phones;
-      // remove all
-      if (phoneIds) {
-        phoneIds.forEach(id => {
-          Phone.removeIt(id);
-        });
-      }
-      // re-create all phones
-      if (phones.length > 0) {
-        for (let i = 0; i < phones.length; i++) {
-          // if exists, update
-          const phoneNum = phones[i];
-          if (Phone.checkExists(phoneNum)) {
-            const phoneID = Phone.findDoc({ phoneNum })._id;
-            Phone.update(phoneID, { email });
-            updateData.phones = lastName;
-            // else, define new phone
-          } else {
-            Phone.define({ email, phoneNum });
-          }
-        }
-      }
-    }
-
-    console.log('update DATA:');
-    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 

@@ -5,7 +5,6 @@ import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
-import {Phone} from "../room/Phone";
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -28,7 +27,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
@@ -42,19 +41,6 @@ class StudentProfileCollection extends BaseProfileCollection {
       }
       if (interests) {
         interests.forEach((interest) => UserInterests.define({ email, interest }));
-      }
-      if (phones) {
-        // checks if phones exist
-        phones.forEach(phoneNum => {
-          // if exists, update
-          if (Phone.checkExists(phoneNum)) {
-            const phoneID = Phone.findDoc({ phoneNum })._id;
-            Phone.update(phoneID, { email });
-            // else, define new phone
-          } else {
-            Phone.define({ email, phoneNum });
-          }
-        });
       }
       return profileID;
     }
@@ -74,7 +60,6 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param undergraduate update undergraduate sub role (optional).
    * @return never
    */
-
   update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds }) {
     this.assertDefined(docID);
     const updateData = {};
@@ -96,7 +81,6 @@ class StudentProfileCollection extends BaseProfileCollection {
     if (undergraduate !== undefined) {
       updateData.undergraduate = undergraduate;
     }
-
     // remove all clubs and ids before update
     if (clubIds) {
       clubIds.forEach(id => {
