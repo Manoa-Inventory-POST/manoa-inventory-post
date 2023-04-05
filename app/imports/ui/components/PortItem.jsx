@@ -1,17 +1,21 @@
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { Container, Image } from 'react-bootstrap';
+import { Container, Image, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const PortItem = ({ port }) => (
 
-  <tr>
+  <tr key={port._id}>
     <td>{`${port.port}`}</td>
     <td>{port.room}</td>
     <td>{port.side}</td>
     <td>{port.idf}</td>
     <td>
-      {port.status}
+      <Form.Select value={port.status}>
+        <option value="1">Active</option>
+        <option value="2">Inactive</option>
+        <option value="3">Maintenance</option>
+      </Form.Select>
     </td>
   </tr>
 );
