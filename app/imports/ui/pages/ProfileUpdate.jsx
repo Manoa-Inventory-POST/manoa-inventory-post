@@ -245,7 +245,7 @@ const ProfileUpdate = () => {
       break;
     case 'ITSUPPORT':
     //  updateData = { id: _id, email, phones: phonesArray, phoneIds };
-      updateData = { id: _id, email, fisrtName, lastName };
+      updateData = { id: _id, email, firstName, lastName };
 
       collectionName = ITSupportProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
