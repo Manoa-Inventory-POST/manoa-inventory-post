@@ -63,6 +63,7 @@ class OfficeProfileCollection extends BaseProfileCollection {
       updateData.lastName = lastName;
     }
     if (phones) {
+      updateData.phones = phones;
       // remove all
       if (phoneIds) {
         phoneIds.forEach(id => {
@@ -85,6 +86,9 @@ class OfficeProfileCollection extends BaseProfileCollection {
         }
       }
     }
+
+    console.log('update DATA:');
+    console.log(updateData);
     this._collection.update(docID, { $set: updateData });
   }
 

@@ -62,6 +62,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
       updateData.lastName = lastName;
     }
     if (phones) {
+      updateData.phones = phones;
       // remove all
       if (phoneIds) {
         phoneIds.forEach(id => {
@@ -84,6 +85,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
         }
       }
     }
+
     this._collection.update(docID, { $set: updateData });
   }
 
