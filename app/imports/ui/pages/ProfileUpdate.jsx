@@ -22,9 +22,9 @@ import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 const ProfileUpdate = () => {
 
-  const _id = Meteor.user()._id;
-  console.log('Meteor.user()._id');
-  console.log(_id);
+  // const _id = Meteor.user()._id;
+  // console.log('Meteor.user()._id');
+  // console.log(_id);
 
   const { ready, roomValues, userToUpdate, interestNames, clubNames } = useTracker(() => {
     const subPhone = Phone.subscribePhone();
@@ -44,7 +44,11 @@ const ProfileUpdate = () => {
         && subIT.ready() && subOccRoom.ready() && subPhone.ready();
 
     console.log('rdy');
-    console.log(rdy);
+    console.log(subClubAdvisor.ready());
+    console.log(subInterests.ready());
+    console.log(subClubs.ready());
+    console.log(subFaculty.ready());
+
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
@@ -75,19 +79,6 @@ const ProfileUpdate = () => {
       }
     };
 
-    // function addPhone( ) {
-    //   // attach phone
-    //   let phoneArr = Phone.find({ email: userProfile.email }, {}).fetch();
-    //   const phoneIdArr = phoneArr.map(item => item._id);
-    //   phoneArr = phoneArr.map(item => item.phoneNum);
-    //   if (phoneArr.length === 1) {
-    //     phoneArr = phoneArr[0];
-    //   } else {
-    //     phoneArr = phoneArr.join(', ');
-    //   }
-    //   userProfile.phones = phoneArr;
-    //   userProfile.phoneIds = phoneIdArr;
-    // };
     const addPhone = () => {
       // attach phone
       let phoneArr = Phone.find({ email: userProfile.email }, {}).fetch();
