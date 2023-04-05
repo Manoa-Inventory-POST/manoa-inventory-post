@@ -12,14 +12,13 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
+    const currentStudent = StudentProfiles.findOne(studentId);
     let update;
 
     if (role === 'ta') {
-      update = { TA: true, RA: false };
+      update = { TA: !currentStudent.TA, RA: currentStudent.RA };
     } else if (role === 'ra') {
-      update = { TA: false, RA: true };
-    } else if (role === 'none') {
-      update = { TA: false, RA: false };
+      update = { TA: currentStudent.TA, RA: !currentStudent.RA };
     } else {
       throw new Meteor.Error('invalid-role');
     }

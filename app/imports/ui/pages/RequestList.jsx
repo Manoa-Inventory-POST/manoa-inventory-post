@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
-import OfficeItem from '../components/officeItem';
+import OfficeItemF from '../components/requestItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
@@ -26,7 +26,7 @@ const ListRequest = () => {
     <Container id={PAGE_IDS.Add_Request} className="py-3">
       <h1 style={divStyle}>Request List</h1>
       <Row xs={1} md={2} lg={4} className="g-2">
-        {offices.map((officeReq) => <OfficeItem key={officeReq._id} officeReq={officeReq} />)}
+        {offices.map((officeReqF) => <OfficeItemF key={officeReqF._id} officeReqF={officeReqF} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner message="Loading Requests" />);
