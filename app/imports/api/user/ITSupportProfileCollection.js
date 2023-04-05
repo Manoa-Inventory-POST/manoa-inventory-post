@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import {Phone} from "../room/Phone";
+import { Phone } from '../room/Phone';
 
 class ITSupportProfileCollection extends BaseProfileCollection {
   constructor() {

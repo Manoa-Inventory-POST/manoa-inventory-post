@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import {Phone} from "../room/Phone";
+import { Phone } from '../room/Phone';
 
 class OfficeProfileCollection extends BaseProfileCollection {
   constructor() {

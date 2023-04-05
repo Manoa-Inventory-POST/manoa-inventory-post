@@ -5,7 +5,7 @@ import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 import { UserClubs } from '../clubs/UserClubs';
 import { UserInterests } from '../clubs/UserInterests';
-import {Phone} from "../room/Phone";
+import { Phone } from '../room/Phone';
 
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
