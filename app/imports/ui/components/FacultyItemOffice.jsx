@@ -10,6 +10,8 @@ const FacultyItem = ({ faculty }) => (
     <td>{faculty.position}</td>
     <td>{faculty.email}<br />{faculty.phone}</td>
     <td>{faculty.officeHours}</td>
+    <td>{faculty.emergencyPhone}</td>
+    <td>{faculty.emergencyEmail}</td>
   </tr>
 );
 
@@ -21,6 +23,8 @@ FacultyItem.propTypes = {
     picture: PropTypes.string,
     position: PropTypes.string,
     officeHours: PropTypes.string,
+    emergencyPhone: PropTypes.string,
+    emergencyEmail: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     _id: PropTypes.string,
