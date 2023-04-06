@@ -86,9 +86,6 @@ const NavBar = () => {
             {isFaculty ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_ListE} as={NavLink} to="/requestList" key="navbar-service-request-list">Request List</Nav.Link>,
             ]) : ''}
-            {currentUser !== '' ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILE_UPDATE} as={NavLink} to="/profileUpdate" key="navbar-service-request-list">Profile Update</Nav.Link>,
-            ]) : ''}
             {isAdmin ? ([
               <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
