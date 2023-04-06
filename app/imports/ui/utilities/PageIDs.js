@@ -20,6 +20,7 @@ export const PAGE_IDS = {
   CLUB_SEARCH: 'club-search',
   PORT_SEARCH: 'port-search',
   PROFILE: 'profile',
+  PROFILE_UPDATE: 'profile-update',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',

@@ -20,6 +20,7 @@ import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OccupantRoom } from '../../api/room/OccupantRoom';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
@@ -241,7 +242,7 @@ const ProfileUpdate = () => {
   };
 
   return (ready ? (
-    <Container className="py-3">
+    <Container className="py-3" id={PAGE_IDS.PROFILE_UPDATE}>
       <Row className="justify-content-center">
         <Col className="col-lg-16">
           <hr />
