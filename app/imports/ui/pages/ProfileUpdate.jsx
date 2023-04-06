@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
@@ -243,71 +243,82 @@ const ProfileUpdate = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col className="col-lg-10">
-          <Col className="text-center"><h2>{ userToUpdate.firstName }&apos;s Profile</h2></Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={userToUpdate}>
-            <Card>
-              <Card.Body>
-                <div className="row">
-                  <TextField
-                    className="col-md-6"
-                    name="firstName"
-                    placeholder="Your first name (required)"
-                    readOnly
-                  />
-                  <TextField
-                    className="col-md-6"
-                    name="lastName"
-                    placeholder="Your last name (required)"
-                    readOnly
-                  />
-                </div>
-                <div className="row">
-                  <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
-                  <TextField
-                    className="col-md-6"
-                    name="phones"
-                    placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155"
-                  />
-                </div>
-                <div className="row">
-                  <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
-                  <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
-                </div>
-                <div className="row">
-                  <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
-                  <TextField className="col" name="position" placeholder="Your position" readOnly />
-                </div>
+        <Col className="col-lg-16">
+          <hr />
+          <Row className="text-center"><h2>{ userToUpdate.firstName }&apos;s Profile</h2></Row>
+          <hr />
+          <br />
+          <Row>
+            <Col className="col-lg-3">
+              <td><Image alt="" src={userToUpdate.picture} width="180" height="180" /></td>
+            </Col>
+            <Col className="col-lg-8">
+              <AutoForm schema={bridge} onSubmit={data => submit(data)} model={userToUpdate}>
+                <Card>
+                  <Card.Body>
+                    <div className="row">
+                      <TextField
+                        className="col-md-6"
+                        name="firstName"
+                        placeholder="Your first name (required)"
+                        readOnly
+                      />
+                      <TextField
+                        className="col-md-6"
+                        name="lastName"
+                        placeholder="Your last name (required)"
+                        readOnly
+                      />
+                    </div>
+                    <div className="row">
+                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
+                      <TextField
+                        className="col-md-6"
+                        name="phones"
+                        placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155"
+                      />
+                    </div>
+                    <div className="row">
+                      <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
+                      <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
+                    </div>
+                    <div className="row">
+                      <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
+                      <TextField className="col" name="position" placeholder="Your position" readOnly />
+                    </div>
 
-                <div className="row">
-                  <SelectField
-                    className="col-md-6"
-                    name="clubs"
-                    placeholder="Select any clubs you are the advisor for"
-                    multiple
-                  />
-                  <SelectField
-                    className="col-md-6"
-                    name="interests"
-                    placeholder="Select your interests from the options provided"
-                    multiple
-                  />
-                </div>
-                <div className="my-3">
-                  <BoolField className="d-md-inline" name="TA" inline />
-                  <BoolField className="d-md-inline" name="RA" inline />
-                  <BoolField className="d-md-inline" name="undergraduate" inline />
-                  <BoolField className="d-md-inline" name="graduate" inline />
-                  <BoolField className="d-md-inline" name="clubAdvisor" inline />
-                </div>
-                <HiddenField name="password" value="changeme" />
-                <HiddenField name="clubAdvisorIds" />
-                <HiddenField name="phoneIds" />
-                <SubmitField value="Save" />
-                <ErrorsField />
-              </Card.Body>
-            </Card>
-          </AutoForm>
+                    <div className="row">
+                      <SelectField
+                        className="col-md-6"
+                        name="clubs"
+                        placeholder="Select any clubs you are the advisor for"
+                        multiple
+                      />
+                      <SelectField
+                        className="col-md-6"
+                        name="interests"
+                        placeholder="Select your interests from the options provided"
+                        multiple
+                      />
+                    </div>
+                    <div className="my-3">
+                      <BoolField className="d-md-inline" name="TA" inline />
+                      <BoolField className="d-md-inline" name="RA" inline />
+                      <BoolField className="d-md-inline" name="undergraduate" inline />
+                      <BoolField className="d-md-inline" name="graduate" inline />
+                      <BoolField className="d-md-inline" name="clubAdvisor" inline />
+                    </div>
+                    <HiddenField name="password" value="changeme" />
+                    <HiddenField name="clubAdvisorIds" />
+                    <HiddenField name="phoneIds" />
+                    <SubmitField value="Save" />
+                    <ErrorsField />
+                  </Card.Body>
+                </Card>
+              </AutoForm>
+            </Col>
+
+          </Row>
         </Col>
       </Row>
     </Container>
