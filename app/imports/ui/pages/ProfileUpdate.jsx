@@ -127,9 +127,7 @@ const ProfileUpdate = () => {
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
 
-    const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {
-      faculty: facultyProfiles,
       userToUpdate: userProfile,
       roomValues: roomEntries.map(Item => Item.room),
       interestNames: interestEntries.map(Item => Item.interest),
