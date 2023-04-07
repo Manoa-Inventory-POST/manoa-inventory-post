@@ -21,6 +21,7 @@ import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OccupantRoom } from '../../api/room/OccupantRoom';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
@@ -272,6 +273,7 @@ const ProfileUpdate = () => {
                     <div className="row">
                       <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
                       <TextField
+                        id={COMPONENT_IDS.PROFILE_FORM_PHONE}
                         className="col-md-6"
                         name="phones"
                         placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155"
@@ -310,7 +312,7 @@ const ProfileUpdate = () => {
                     <HiddenField name="password" value="changeme" />
                     <HiddenField name="clubAdvisorIds" />
                     <HiddenField name="phoneIds" />
-                    <SubmitField value="Save" />
+                    <SubmitField id={COMPONENT_IDS.PROFILE_FORM_SAVE} value="Save" />
                     <ErrorsField />
                   </Card.Body>
                 </Card>

@@ -21,6 +21,7 @@ export const PAGE_IDS = {
   PORT_SEARCH: 'port-search',
   PROFILE: 'profile',
   PROFILE_UPDATE: 'profile-update',
+  RESERVE_ROOM: 'reserve-room',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',
