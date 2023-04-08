@@ -25,10 +25,10 @@ const RoomSearchResultsTable = () => {
   }, []);
 
   useEffect(() => {
-    if (ready) {
+    if (rooms && ready) {
       setFilteredRooms(rooms);
     }
-  }, [ready]);
+  }, [rooms, ready]);
 
   useEffect(() => {
     let filtered = rooms;

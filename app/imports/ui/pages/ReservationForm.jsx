@@ -18,6 +18,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 // import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { ReservationForm } from '../../api/reserveform/ReservationCollection';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -69,7 +70,7 @@ const AddReservationForm = () => {
   /* Display the reserve form. */
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container className="py-3" id={PAGE_IDS.RESERVE_ROOM}>
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center">
