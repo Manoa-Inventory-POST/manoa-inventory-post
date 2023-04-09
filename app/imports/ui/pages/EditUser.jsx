@@ -68,7 +68,6 @@ const EditUser = () => {
       userToEdit = docAdmin[0];
     } else if (docFaculty.length !== 0) {
       console.log('faculty switch');
-
       userToEdit = docFaculty[0];
       const email = userToEdit.email;
       let roomArr = OccupantRoom.find({ email: email }, {}).fetch();
