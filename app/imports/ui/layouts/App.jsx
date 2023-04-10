@@ -46,6 +46,7 @@ import EditRequest from '../pages/EditRequest';
 import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
+import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
 import FullClubInfo from '../pages/FullClubInfo';
 
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
+          <Route path="/editPort/:_id" element={<ProtectedRoute><EditPort /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
