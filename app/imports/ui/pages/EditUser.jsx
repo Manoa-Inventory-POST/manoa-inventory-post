@@ -68,7 +68,6 @@ const EditUser = () => {
       userToEdit = docAdmin[0];
     } else if (docFaculty.length !== 0) {
       console.log('faculty switch');
-
       userToEdit = docFaculty[0];
       const email = userToEdit.email;
       let roomArr = OccupantRoom.find({ email: email }, {}).fetch();
@@ -206,10 +205,10 @@ const EditUser = () => {
     console.log('submit');
     const { firstName, lastName, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds, clubIds, interestIds } = data;
     console.log(data);
-    const phonesArray = phones.split(', ');
-    console.log(data);
+    let phonesArray;
     let collectionName;
     let updateData = { id: _id, firstName, lastName };
+    console.log(role);
 
     switch (role) {
     case 'STUDENT':
@@ -234,6 +233,7 @@ const EditUser = () => {
       break;
     case 'FACULTY':
       console.log('FACULTY SWITCH');
+      phonesArray = phones ? phones.split(', ') : null;
       collectionName = FacultyProfiles.getCollectionName();
       updateData = { id: _id, email, firstName, lastName, officeHours, position, picture, rooms, occupantRoomIds, phones: phonesArray, phoneIds, clubs, clubIds, clubAdvisorIds, clubAdvisor };
       updateMethod.callPromise({ collectionName, updateData })
