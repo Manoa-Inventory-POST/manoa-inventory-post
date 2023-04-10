@@ -8,9 +8,11 @@ import { useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Clubs } from '../../api/clubs/Clubs';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
+import ClubAdvisorCard from '../components/ClubAdvisorCard';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { ClubInterests } from '../../api/clubs/ClubInterests';
 
 const FullClubInfo = () => {
   const { _id } = useParams();
@@ -20,11 +22,11 @@ const FullClubInfo = () => {
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
     const sub4 = Interests.subscribeInterests();
+    const sub5 = FacultyProfiles.subscribeFaculty();
     // Determine if the subscription is ready
-    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
     // Get the document
     const clubItem = Clubs.findOne(_id);
-    console.log(clubItem);
     // Get interests
     let clubInterests = ClubInterests.find({ club: `${clubItem.name}` }).fetch();
     clubInterests = clubInterests.map(clubInt => clubInt.interest);
@@ -39,12 +41,12 @@ const FullClubInfo = () => {
     clubAdvisors = clubAdvisors.map(item => item.advisor);
     if (clubAdvisors.length === 1) {
       clubAdvisors = clubAdvisors[0];
-    } else if (clubAdvisors.length === 0) {
-      clubAdvisors = 'No advisors currently listed.';
     } else {
       clubAdvisors = clubAdvisors.join(', ');
     }
     console.log(clubAdvisors);
+    const clubAdvisorInfo = FacultyProfiles.find({ email: `${clubAdvisors}` }).fetch();
+    console.log(clubAdvisorInfo);
     /*
     // Get interests and admin info
     function buildClubInfo(clubs, ClubInterestsColl, ClubAdvisorColl) {
@@ -83,7 +85,7 @@ const FullClubInfo = () => {
       ready: rdy,
       club: clubItem,
       interests: clubInterests,
-      advisors: clubAdvisors,
+      advisors: clubAdvisorInfo,
     };
   }, []);
 
@@ -96,7 +98,7 @@ const FullClubInfo = () => {
               <h2>{club.name}</h2>
             </Row>
             <Row className="justify-content-center py-2">
-              <Image alt="" src={club.picture} style={{ maxWidth: '15%' }} />
+              <Image alt="" src={club.picture} style={{ maxWidth: '20%' }} />
             </Row>
             <Row>
               <h6>{club.description}</h6>
@@ -108,7 +110,7 @@ const FullClubInfo = () => {
             </Row>
             <Row>
               <h4>Advisors</h4>
-              <h6>{advisors}</h6>
+              <h6 style={{ alignSelf: 'center' }}>{ advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}</h6>
             </Row>
           </Col>
         </Row>

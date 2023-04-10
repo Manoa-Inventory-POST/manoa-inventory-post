@@ -1,17 +1,17 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import CardHeader from 'react-bootstrap/CardHeader';
+import { Link } from 'react-router-dom';
 
 /* Renders a single ClubAdvisorard. */
 const ClubAdvisorCard = ({ advisor }) => (
-  <Card>
-    <Image src={advisor.picture} wrapped ui={false} />
-    <Card.Content>
-      <Card.Header>{advisor.firstName} {advisor.lastName}</Card.Header>
-      <Card.Meta>
-        <span className="email">{advisor.email}</span>
-      </Card.Meta>
-    </Card.Content>
+  <Card style={{ width: '15rem' }}>
+    <Link to={`/facultyinfo/${advisor._id}`}>
+      <Image src={advisor.picture} />
+      <CardHeader>{advisor.firstName} {advisor.lastName}</CardHeader>
+      <span className="email">{advisor.email}</span>
+    </Link>
   </Card>
 );
 
@@ -22,6 +22,7 @@ ClubAdvisorCard.propTypes = {
     lastName: PropTypes.string,
     email: PropTypes.string,
     picture: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 
