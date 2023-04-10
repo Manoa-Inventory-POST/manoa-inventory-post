@@ -39,9 +39,6 @@ class PortsCollection extends BaseCollection {
       idf,
       status,
     });
-    if (interests) {
-      interests.forEach((interest) => ClubInterests.define({ club, interest }));
-    }
     if (status) {
       status.forEach((status) => PortStatus.define({ status, name }));
     }
