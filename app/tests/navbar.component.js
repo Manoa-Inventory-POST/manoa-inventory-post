@@ -30,6 +30,14 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CLUB_SEARCH}`);
   }
 
+  async gotoStudentSearchPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_STUDENT_SEARCH}`);
+  }
+
+  async gotoReserveRoomPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_RESERVE_ROOM}`);
+  }
+
   /* Check that the specified user is currently logged in. */
   async isLoggedIn(username) {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
@@ -94,6 +102,17 @@ class NavBar {
 
   /* Go to the student profile page. */
   async gotoStudentProfilePage() {
+    const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
+    if (!visible) {
+      await t.click('button.navbar-toggler');
+    }
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_PROFILE}`);
+  }
+
+  /* Go to the faculty profile page. */
+  async gotoFacultyProfilePage() {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
     if (!visible) {
       await t.click('button.navbar-toggler');

@@ -11,7 +11,8 @@ const roomData = [
 ];
 
 const AssignFac = () => {
-  const [occupant, setOccupant] = useState('');
+  // const [occupant, setOccupant] = useState('');
+  const [setOccupant] = useState('');
 
   const handleOccupantChange = (event) => {
     setOccupant(event.target.value);

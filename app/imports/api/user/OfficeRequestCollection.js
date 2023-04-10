@@ -5,6 +5,8 @@ import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
+export const requestToConditions = ['Office', 'IT Support'];
+export const imageOption = ['/images/carry.png', '/images/Chair.png', '/images/helpme.png', '/images/ithelp.png', '/images/table.png'];
 export const officePublications = {
   office: 'office',
 };
@@ -12,10 +14,21 @@ export const officePublications = {
 class OfficeRequestCollection extends BaseCollection {
   constructor() {
     super('OfficeRequest', new SimpleSchema({
-      email: String,
+      title: String,
       firstName: String,
       lastName: String,
       description: String,
+      picture: {
+        type: String,
+        allowedValues: imageOption,
+        optional: true,
+        defaultValue: '/images/helpme.png',
+      },
+      requestTo: {
+        type: String,
+        allowedValues: requestToConditions,
+        defaultValue: 'Office',
+      },
       condition: {
         type: String,
         allowedValues: officeRequestConditions,
@@ -26,37 +39,41 @@ class OfficeRequestCollection extends BaseCollection {
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
-   * @param email The email associated with this profile. Will be the username.
+   * @param title The title associated with this profile. Will be the username.
    * @param firstName The first name.
    * @param lastName The last name.
    * @param condition the condition of the item.
    * @param description the description of the request.
+   * @param requestTo the who the request to.
+   * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ email, firstName, lastName, condition, description }) {
+  define({ title, firstName, lastName, condition, description, requestTo, picture }) {
     const docID = this._collection.insert({
-      email,
+      title,
       firstName,
       lastName,
       condition,
       description,
+      requestTo,
+      picture,
     });
     return docID;
   }
 
   /**
-   * Updates the UserProfile. You cannot change the email or role.
+   * Updates the UserProfile. You cannot change the title or role.
    * @param docID the id of the UserProfile
-   * @param email new email (optional).
+   * @param title new title (optional).
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { email, firstName, lastName, condition, description }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo, picture }) {
     const updateData = {};
-    if (email) {
-      updateData.email = email;
+    if (title) {
+      updateData.title = title;
     }
     if (firstName) {
       updateData.firstName = firstName;
@@ -67,8 +84,14 @@ class OfficeRequestCollection extends BaseCollection {
     if (condition) {
       updateData.condition = condition;
     }
+    if (requestTo) {
+      updateData.condition = requestTo;
+    }
     if (description) {
       updateData.description = description;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -78,8 +101,8 @@ class OfficeRequestCollection extends BaseCollection {
    * Also removes this user from Meteor Accounts.
    * @param profileID The ID for this profile object.
    */
-  removeIt(email) {
-    const doc = this.findDoc(email);
+  removeIt(title) {
+    const doc = this.findDoc(title);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -130,12 +153,14 @@ class OfficeRequestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const email = doc.email;
+    const title = doc.title;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const condition = doc.condition;
+    const requestTo = doc.requestTo;
     const description = doc.description;
-    return { email, firstName, lastName, condition, description };
+    const picture = doc.picture;
+    return { title, firstName, lastName, condition, description, requestTo, picture };
   }
 }
 

@@ -11,6 +11,9 @@ import { adminhomePage } from './adminhome.page';
 import { facultySearchPage } from './facultysearch.page';
 import { fullFacultyInfoPage } from './fullfacultyinfo.page';
 import { clubSearchPage } from './clubsearch.page';
+import { studentSearchPage } from './studentsearch.page';
+import { reserveRoomPage } from './reserveroom.page';
+import { facultyProfilePage } from './facultyprofile.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -20,6 +23,7 @@ const studentCredentials = { username: 'student@foo.com', password: 'changeme' }
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
+const profileInfo = { phone: '808-1680-0000' };
 
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
@@ -100,11 +104,14 @@ test('Test that faculty search and faculty info pages show up', async () => {
   await fullFacultyInfoPage.isDisplayed();
 });
 
-test('Test that faculty home page shows up', async () => {
+test('Test that faculty home page shows up and profile modification works', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
   await navBar.isLoggedIn(facultyCredentials.username);
   await facultyhomePage.isDisplayed();
+  await navBar.gotoFacultyProfilePage();
+  await facultyProfilePage.isDisplayed();
+  await facultyProfilePage.updateProfile(profileInfo.phone);
 });
 
 test('Test that the club search page shows up', async () => {
@@ -116,9 +123,27 @@ test('Test that the club search page shows up', async () => {
   await clubSearchPage.isDisplayed();
 });
 
+test('Test that the student search page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
+  await navBar.isLoggedIn(facultyCredentials.username);
+  await facultyhomePage.isDisplayed();
+  await navBar.gotoStudentSearchPage();
+  await studentSearchPage.isDisplayed();
+});
+
 test('Test that admin home page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
   await adminhomePage.isDisplayed();
+});
+
+test('Test that room reserve page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
+  await navBar.isLoggedIn(facultyCredentials.username);
+  await facultyhomePage.isDisplayed();
+  await navBar.gotoReserveRoomPage();
+  await reserveRoomPage.isDisplayed();
 });
