@@ -3,7 +3,7 @@ import { PAGE_IDS } from '../imports/ui/utilities/PageIDs';
 
 class StudentProfilePage {
   constructor() {
-    this.pageId = `#${PAGE_IDS.PROFILE}`;
+    this.pageId = `#${PAGE_IDS.PROFILE_UPDATE}`;
     this.pageSelector = Selector(this.pageId);
   }
 

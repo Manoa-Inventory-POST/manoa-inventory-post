@@ -85,7 +85,6 @@ class ITSupportProfileCollection extends BaseProfileCollection {
         }
       }
     }
-
     this._collection.update(docID, { $set: updateData });
   }
 
