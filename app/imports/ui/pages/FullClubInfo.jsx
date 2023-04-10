@@ -98,7 +98,7 @@ const FullClubInfo = () => {
               <h2>{club.name}</h2>
             </Row>
             <Row className="justify-content-center py-2">
-              <Image alt="" src={club.picture} style={{ maxWidth: '20%' }} />
+              <Image alt="" src={club.picture} style={{ width: '300px' }} />
             </Row>
             <Row>
               <h6>{club.description}</h6>
@@ -110,7 +110,9 @@ const FullClubInfo = () => {
             </Row>
             <Row>
               <h4>Advisors</h4>
-              <h6 style={{ alignSelf: 'center' }}>{ advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}</h6>
+              <h6 className="align-content-center text-center justify-content-center">
+                { advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <Col className="col-sm-3"><ClubAdvisorCard key={adv._id} advisor={adv} /></Col>)}
+              </h6>
             </Row>
           </Col>
         </Row>
