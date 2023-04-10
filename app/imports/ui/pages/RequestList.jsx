@@ -25,6 +25,7 @@ const ListRequest = () => {
   return (ready ? (
     <Container id={PAGE_IDS.Add_Request} className="py-3">
       <h1 style={divStyle}>Request List</h1>
+      <hr />
       <Row xs={1} md={2} lg={4} className="g-2">
         {offices.map((officeReqF) => <OfficeItemF key={officeReqF._id} officeReqF={officeReqF} />)}
       </Row>

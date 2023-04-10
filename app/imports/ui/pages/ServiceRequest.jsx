@@ -43,31 +43,29 @@ const ServiceRequest = () => {
   };
   let fRef = null;
   return (
-    <div>
-      <Container className="py-3">
-        <Row>
-          <Col className="text-center">
-            <h2>Service Request</h2>
-          </Col>
-          <hr />
-        </Row>
-        <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
-          <TextField name="title" placeholder="What is your request about?" />
-          <AutoField name="firstName" />
-          <ErrorField name="firstName">
-            <span>You have to provide your last name!</span>
-          </ErrorField>
-          <AutoField name="lastName" />
-          <ErrorField name="lastName">
-            <span>You have to provide your last name!</span>
-          </ErrorField>
-          <AutoField name="description" />
-          <SelectField name="picture" placeholder="choose an option" />
-          <SelectField name="requestTo" placeholder="Office or It support" />
-          <SubmitField value="Submit" />
-        </AutoForm>
-      </Container>
-    </div>
+    <Container className="py-3">
+      <Row>
+        <Col className="text-center">
+          <h2>Service Request</h2>
+        </Col>
+        <hr />
+      </Row>
+      <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+        <TextField name="title" placeholder="What is your request about?" />
+        <AutoField name="firstName" />
+        <ErrorField name="firstName">
+          <span>You have to provide your last name!</span>
+        </ErrorField>
+        <AutoField name="lastName" />
+        <ErrorField name="lastName">
+          <span>You have to provide your last name!</span>
+        </ErrorField>
+        <AutoField name="description" />
+        <SelectField name="picture" placeholder="choose an option" />
+        <SelectField name="requestTo" placeholder="Office or It support" />
+        <SubmitField value="Submit" />
+      </AutoForm>
+    </Container>
   );
 };
 
