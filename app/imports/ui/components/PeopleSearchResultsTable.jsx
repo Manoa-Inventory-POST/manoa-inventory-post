@@ -97,10 +97,10 @@ const PeopleSearchResultsTable = () => {
   }, []);
 
   useEffect(() => {
-    if (ready) {
+    if (ready && users) {
       setFilteredUsers(users);
     }
-  }, [ready]);
+  }, [ready, users]);
 
   useEffect(() => {
     let filtered = users;
