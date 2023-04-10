@@ -1,6 +1,6 @@
 import React, {} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ErrorsField, SubmitField, TextField, AutoForm, SelectField } from 'uniforms-bootstrap5';
+import { ErrorField, SubmitField, TextField, AutoField, SelectField, AutoForm } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import swal from 'sweetalert';
@@ -43,47 +43,31 @@ const ServiceRequest = () => {
   };
   let fRef = null;
   return (
-    <Container className="py-3">
-      <Row>
-        <Col className="text-center">
-          <h2>Service Request</h2>
-        </Col>
-      </Row>
-      <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+    <div>
+      <Container className="py-3">
         <Row>
-          <Col>
-            <TextField name="firstName" placeholder="firstname" />
+          <Col className="text-center">
+            <h2>Service Request</h2>
           </Col>
-          <Col>
-            <TextField name="lastName" placeholder="lastname" />
-          </Col>
+          <hr />
         </Row>
-        <Row>
-          <Col>
-            <TextField name="title" placeholder="What is your request about?" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField name="picture" placeholder="choose an option" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField name="requestTo" placeholder="Office or It support" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <TextField name="description" placeholder="request" />
-          </Col>
-        </Row>
-        <Row>
+        <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <TextField name="title" placeholder="What is your request about?" />
+          <AutoField name="firstName" />
+          <ErrorField name="firstName">
+            <span>You have to provide your last name!</span>
+          </ErrorField>
+          <AutoField name="lastName" />
+          <ErrorField name="lastName">
+            <span>You have to provide your last name!</span>
+          </ErrorField>
+          <AutoField name="description" />
+          <SelectField name="picture" placeholder="choose an option" />
+          <SelectField name="requestTo" placeholder="Office or It support" />
           <SubmitField value="Submit" />
-          <ErrorsField />
-        </Row>
-      </AutoForm>
-    </Container>
+        </AutoForm>
+      </Container>
+    </div>
   );
 };
 
