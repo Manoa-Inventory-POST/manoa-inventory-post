@@ -6,65 +6,68 @@ import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
-// import { Users } from '../../api/user/UserCollection';
-import { Room } from '../../api/room/RoomCollection';
+import { Ports } from '../../api/room/Ports';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
-import LoadingSpinner from '../components/LoadingSpinner';
-// import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { Room } from '../../api/room/RoomCollection';
 
-const statusValues = ['open', 'occupied', 'maintenance'];
-const buildingValues = ['POST'];
-
-const RoomSchema = new SimpleSchema({
-  room: String,
-  description: String,
-  building: { type: String, allowedValues: buildingValues },
-  status: { type: String, allowedValues: statusValues },
-});
-
-const bridge = new SimpleSchema2Bridge(RoomSchema);
-
-/* Renders the EditStuff page for editing a single document. */
-const EditRoom = () => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+const EditPort = () => {
   const { _id } = useParams();
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready } = useTracker(() => {
-    // Get access to Stuff documents.
-    const subscription = Room.subscribeRoom();
-    // const subscription = UserProfiles.subscribe();
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const subscription = Ports.subscribePorts();
+    const subRooms = Room.subscribeRoom();
+    const rdy = subscription.ready() && subRooms.ready();
     // Get the document
-    const document = Room.find({ _id }).fetch();
-    const roomToEdit = document[0];
+    const document = Ports.find({ _id }, {}).fetch();
+    console.log(document);
+    const portToEdit = document[0];
+    console.log(portToEdit);
     return {
-      doc: roomToEdit,
+      doc: portToEdit,
       ready: rdy,
     };
   }, [_id]);
 
-  // On successful submit, insert the data.
+  const statusValues = ['active', 'inactive', 'maintenance'];
+  const sideValues = ['N/A', 'Makai', 'DH', 'Ewa', 'Mauka Wall'];
+  const buildingValues = ['POST'];
+  let roomValues = Room.find({}, { sort: { num: 1 } }).fetch();
+  console.log(roomValues);
+  roomValues = roomValues.map(room => room.room);
+  console.log(roomValues);
+
+  const PortSchema = new SimpleSchema({
+    port: String,
+    building: { type: String, allowedValues: buildingValues },
+    room: { type: String, allowedValues: roomValues },
+    side: { type: String, allowedValues: sideValues },
+    idf: { type: String, allowedValues: roomValues },
+    status: { type: String, allowedValues: statusValues },
+  });
+
+  const bridge = new SimpleSchema2Bridge(PortSchema);
+
   const submit = (data) => {
-    const { room, description, building, status } = data;
-    const collectionName = Room.getCollectionName();
-    const updateData = { id: _id, room, description, building, status };
+    const { port, room, side, idf, status } = data;
+    const collectionName = Ports.getCollectionName();
+    const updateData = { id: _id, port, room, side, idf, status };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'User updated successfully', 'success'));
   };
 
-  return (ready ? (
+  return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Update Room</h2></Col>
+          <Col className="text-center"><h2>Update Port</h2></Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
             <Card>
               <Card.Body>
-                <TextField name="room" />
-                <TextField name="description" />
+                <TextField name="port" />
+                <SelectField name="room" />
                 <SelectField name="building" />
+                <SelectField name="side" />
+                <SelectField name="idf" />
                 <SelectField name="status" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
@@ -74,7 +77,7 @@ const EditRoom = () => {
         </Col>
       </Row>
     </Container>
-  ) : <LoadingSpinner message="Loading" />);
+  );
 };
 
-export default EditRoom;
+export default EditPort;
