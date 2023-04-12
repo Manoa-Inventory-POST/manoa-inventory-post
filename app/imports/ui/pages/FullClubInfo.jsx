@@ -35,52 +35,15 @@ const FullClubInfo = () => {
     } else {
       clubInterests = clubInterests.join(', ');
     }
-    console.log(clubInterests);
     // Get advisors
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
-    if (clubAdvisors.length === 1) {
-      clubAdvisors = clubAdvisors[0];
-    } else {
-      clubAdvisors = clubAdvisors.join(', ');
-    }
     console.log(clubAdvisors);
-    const clubAdvisorInfo = FacultyProfiles.find({ email: `${clubAdvisors}` }).fetch();
+    let clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
+    if (clubAdvisors.length === 1) {
+      clubAdvisorInfo = clubAdvisorInfo[0];
+    }
     console.log(clubAdvisorInfo);
-    /*
-    // Get interests and admin info
-    function buildClubInfo(clubs, ClubInterestsColl, ClubAdvisorColl) {
-      const result = {};
-      result.name = clubs.name;
-      let clubInterestsArray = ClubInterestsColl.find({ club: clubs.name }, {}).fetch();
-      clubInterestsArray = clubInterestsArray.map(clubInt => clubInt.interest);
-      if (clubInterestsArray.length === 1) {
-        clubInterestsArray = clubInterestsArray[0];
-      } else {
-        clubInterestsArray = clubInterestsArray.join(', ');
-      }
-
-      let clubAdvisorsArray = ClubAdvisorColl.find({ club: clubs.name }, {}).fetch();
-      clubAdvisorsArray = clubAdvisorsArray.map(item => item.advisor);
-      if (clubAdvisorsArray.length === 1) {
-        clubAdvisorsArray = clubAdvisorsArray[0];
-      } else {
-        clubAdvisorsArray = clubAdvisorsArray.join(', ');
-      }
-
-      result.interests = clubInterestsArray;
-      result.advisor = clubAdvisorsArray;
-      return result;
-    }
-    const clubInfoObjects = clubItem.map(item => buildClubInfo(item, ClubInterests, ClubAdvisor));
-
-    clubInterests = clubInterests.map(clubInt => clubInt.interest);
-    if (clubInterests.length === 1) {
-      clubInterests = clubInterests[0];
-    } else {
-      clubInterests = clubInterests.join(', ');
-    }
-    */
     return {
       ready: rdy,
       club: clubItem,
@@ -111,7 +74,7 @@ const FullClubInfo = () => {
             <Row>
               <h4>Advisors</h4>
               <h6 className="align-content-center text-center justify-content-center">
-                { advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <Col className="col-sm-3"><ClubAdvisorCard key={adv._id} advisor={adv} /></Col>)}
+                { advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}
               </h6>
             </Row>
           </Col>

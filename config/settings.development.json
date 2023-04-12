@@ -256,7 +256,8 @@
         "Video Games",
         "Game Design"
       ],
-      "picture": "https://acmanoa.github.io/assets/img/logos/gamedev.png" },
+      "picture": "https://acmanoa.github.io/assets/img/logos/gamedev.png",
+      "advisors": ["guylaine@hawaii.edu"] },
     { "name": "ICSpark",
       "website": "https://icspark.github.io/index.html",
       "description": "ICSpark is a Registered Independent Organization (RIO) at the University of Hawaii. We are a group of students who offer free coding classes every Saturday for students through the 6th - 12th grade.",
@@ -266,7 +267,7 @@
         "Teaching"
       ],
       "picture": "https://acmanoa.github.io/assets/img/logos/icspark.PNG",
-      "advisors":  ["shackfor@hawaii.edu"] },
+      "advisors":  ["shackfor@hawaii.edu", "itoga@hawaii.edu"] },
     { "name": "Supporting Women in Technology Computing Hawaii (SWITCH)",
       "website": "https://switch-uhm.github.io/",
       "description": "SWITCH (Supporting Women in Technology Computing Hawaii) is the culmination of efforts of the awesome students, faculty, and working professionals supporting social change in the ICS department. We strive to provide useful resources from these organizations to improve your professional, technical, and personal development.",
