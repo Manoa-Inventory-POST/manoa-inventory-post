@@ -17,9 +17,9 @@ const FacultySearch = () => {
   const [facultyFirstName, setFacultyFirstName] = useState('');
   const [facultyLastName, setFacultyLastName] = useState('');
   const [facultyPosition, setFacultyPosition] = useState('');
-  const [facultyOfficeHours, setFacultyOfficeHours] = useState('');
-  const [facultyEmergencyPhone, setFacultyEmergencyPhone] = useState('');
-  const [facultyEmergencyEmail, setFacultyEmergencyEmail] = useState('');
+  const [facultyOfficeHours] = useState('');
+  const [facultyEmergencyPhone] = useState('');
+  const [facultyEmergencyEmail] = useState('');
 
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
@@ -115,36 +115,6 @@ const FacultySearch = () => {
                   </label>
                 </Col>
               </Row>
-              {isAdmin || isOffice ? ([
-                <Row>
-                  <Col className="d-flex justify-content-center">
-                    <label htmlFor="Search by emergency phone">
-                      <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                        Emergency Phone Number
-                      </Col>
-                      <input
-                        type="text"
-                        className="shadow-sm"
-                        placeholder="Enter a phone number"
-                        onChange={e => setFacultyEmergencyPhone(e.target.value)}
-                      />
-                    </label>
-                  </Col>
-                  <Col className="d-flex justify-content-center">
-                    <label htmlFor="Search by emergency email">
-                      <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                        Emergency Email
-                      </Col>
-                      <input
-                        type="text"
-                        className="shadow-sm"
-                        placeholder="Enter an email"
-                        onChange={e => setFacultyEmergencyEmail(e.target.value)}
-                      />
-                    </label>
-                  </Col>
-                </Row>,
-              ]) : '' }
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
