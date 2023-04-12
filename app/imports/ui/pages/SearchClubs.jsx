@@ -4,6 +4,8 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Row, Table, Container, Accordion } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import AccordionBody from 'react-bootstrap/AccordionBody';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -12,6 +14,10 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
+import { ROLE } from '../../api/role/Role';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const ClubSearch = () => {
@@ -19,6 +25,7 @@ const ClubSearch = () => {
   const [filteredName, setFilteredName] = useState('');
   const [filteredInterests, setFilteredInterests] = useState('');
   const [filteredAdmins, setFilteredAdmins] = useState('');
+
 
   const { ready, clubProfiles } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
