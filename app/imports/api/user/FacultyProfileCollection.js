@@ -15,7 +15,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
     super('FacultyProfile', new SimpleSchema({
       officeHours: { type: String, optional: true, defaultValue: 'N/A' },
-      picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
       position: { type: String, optional: true, defaultValue: 'Other' },
       emergencyPhone: { type: String, optional: true, defaultValue: 'N/A' },
       emergencyEmail: { type: String, optional: true, defaultValue: 'N/A' },
