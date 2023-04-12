@@ -24,6 +24,7 @@ const PortSearchResultsTableRow = ({ port }) => {
   return (
     <tr>
       <td>{port.port}</td>
+      <td>{port.building}</td>
       <td>{port.room}</td>
       <td>{port.side}</td>
       <td>{port.status}</td>
@@ -39,6 +40,7 @@ const PortSearchResultsTableRow = ({ port }) => {
 PortSearchResultsTableRow.propTypes = {
   port: PropTypes.shape({
     port: PropTypes.string,
+    building: PropTypes.string,
     room: PropTypes.string,
     side: PropTypes.string,
     idf: PropTypes.string,

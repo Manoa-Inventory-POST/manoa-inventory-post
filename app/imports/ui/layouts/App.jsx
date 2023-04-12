@@ -49,6 +49,7 @@ import RequestList from '../pages/RequestList';
 import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
 import FullClubInfo from '../pages/FullClubInfo';
+import CreatePort from '../pages/CreatePort';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
+          <Route path="/createPort" element={<ProtectedRoute><CreatePort /></ProtectedRoute>} />
           <Route path="/editPort/:_id" element={<ProtectedRoute><EditPort /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />

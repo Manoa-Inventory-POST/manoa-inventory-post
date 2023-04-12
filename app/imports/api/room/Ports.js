@@ -14,6 +14,7 @@ class PortsCollection extends BaseCollection {
   constructor() {
     super('Ports', new SimpleSchema({
       port: String,
+      building: String,
       room: String,
       side: String,
       idf: String,
@@ -28,9 +29,10 @@ class PortsCollection extends BaseCollection {
    * @param room
    * @param status
    */
-  define({ port, room, side, idf, status }) {
+  define({ port, building, room, side, idf, status }) {
     const docID = this._collection.insert({
       port,
+      building,
       room,
       side,
       idf,
@@ -52,10 +54,13 @@ class PortsCollection extends BaseCollection {
    * @param status the new status (optional).
    * @returns never
    */
-  update(docID, { port, room, side, idf, status }) {
+  update(docID, { port, building, room, side, idf, status }) {
     const updateData = {};
     if (port) {
       updateData.port = port;
+    }
+    if (building) {
+      updateData.building = building;
     }
     if (room) {
       updateData.room = room;
@@ -130,11 +135,12 @@ class PortsCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const port = doc.port;
+    const building = doc.building;
     const room = doc.room;
     const side = doc.side;
     const idf = doc.idf;
     const status = doc.status;
-    return { port, room, side, idf, status };
+    return { port, building, room, side, idf, status };
   }
 }
 
