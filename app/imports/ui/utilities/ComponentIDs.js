@@ -53,4 +53,6 @@ export const COMPONENT_IDS = {
   FACULTY_SEARCH_POSITION: 'faculty-search-position',
   NAVBAR_STUDENT_SEARCH: 'navbar-student-search',
   SIGN_UP_FORM_ROLE: 'sign-up-form-role',
+  PROFILE_FORM_PHONE: 'profile-form-phone',
+  PROFILE_FORM_SAVE: 'profile-form-save',
 };

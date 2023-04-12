@@ -37,25 +37,13 @@ const InfoBar = () => {
       </Card.Header>
       <ListGroup className="list-group-flush rounded-0">
         <ListGroup.Item>
-          Bulk upload:
-          <Card.Link className="ms-2" href="#">rooms</Card.Link>
-          <Card.Link href="#">people</Card.Link>
-          <Card.Link href="#">schedules</Card.Link>
-        </ListGroup.Item>
-        <ListGroup.Item>
           Add one:
           <Card.Link className="ms-2" href="/createRoom">room</Card.Link>
           <Card.Link href="/createUser">person</Card.Link>
-          <Card.Link href="/createSchedule">schedule</Card.Link>
+          <Card.Link href="/createPort">port</Card.Link>
         </ListGroup.Item>
         <ListGroup.Item>
-          Search:
-          <Card.Link className="ms-2" href="#">rooms</Card.Link>
-          <Card.Link href="#">people</Card.Link>
-          <Card.Link href="#">schedules</Card.Link>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Card.Link href="#">View campus map</Card.Link>
+          <Card.Link href="/map">View campus map</Card.Link>
         </ListGroup.Item>
       </ListGroup>
     </Card>

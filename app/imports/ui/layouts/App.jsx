@@ -17,7 +17,6 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
-import ProfileTemplate from '../pages/ProfileTemplate';
 import ReservationForm from '../pages/ReservationForm';
 import MapPage from '../pages/MapPage';
 import EditUser from '../pages/EditUser';
@@ -46,6 +45,9 @@ import EditRequest from '../pages/EditRequest';
 import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
+import EditPort from '../pages/EditPort';
+import ProfileUpdate from '../pages/ProfileUpdate';
+import CreatePort from '../pages/CreatePort';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -71,7 +73,7 @@ const App = () => {
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
           <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfileTemplate /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
@@ -83,6 +85,8 @@ const App = () => {
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
+          <Route path="/createPort" element={<ProtectedRoute><CreatePort /></ProtectedRoute>} />
+          <Route path="/editPort/:_id" element={<ProtectedRoute><EditPort /></ProtectedRoute>} />
           <Route path="/createRoom" element={<ProtectedRoute><CreateRoom /></ProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
