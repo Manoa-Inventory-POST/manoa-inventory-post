@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row, Table, Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import FacultyItem from '../components/FacultyItem';
+import FacultyItemOffice from '../components/FacultyItemOffice';
+import { ROLE } from '../../api/role/Role';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const FacultySearch = () => {
@@ -13,7 +17,12 @@ const FacultySearch = () => {
   const [facultyFirstName, setFacultyFirstName] = useState('');
   const [facultyLastName, setFacultyLastName] = useState('');
   const [facultyPosition, setFacultyPosition] = useState('');
-  const [facultyOfficeHours, setFacultyOfficeHours] = useState('');
+  const [facultyOfficeHours] = useState('');
+  const [facultyEmergencyPhone] = useState('');
+  const [facultyEmergencyEmail] = useState('');
+
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
   /* Connecting with default */
   const { ready, faculty } = useTracker(() => {
@@ -48,8 +57,14 @@ const FacultySearch = () => {
     if (facultyOfficeHours) {
       filtered = filtered.filter(function (obj) { return obj.officeHours.toLowerCase().includes(facultyOfficeHours.toLowerCase()); });
     }
+    if (facultyEmergencyPhone) {
+      filtered = filtered.filter(function (obj) { return obj.emergencyPhone.toLowerCase().includes(facultyEmergencyPhone.toLowerCase()); });
+    }
+    if (facultyEmergencyEmail) {
+      filtered = filtered.filter(function (obj) { return obj.emergencyEmail.toLowerCase().includes(facultyEmergencyEmail.toLowerCase()); });
+    }
     setFilteredFaculty(filtered);
-  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours]);
+  }, [facultyFirstName, facultyLastName, facultyPosition, facultyOfficeHours, facultyEmergencyPhone, facultyEmergencyEmail]);
 
   const returnFilter = () => (
     <div className="pb-3" id={PAGE_IDS.FACULTY_SEARCH}>
@@ -99,19 +114,6 @@ const FacultySearch = () => {
                     />
                   </label>
                 </Col>
-                <Col className="d-flex justify-content-center">
-                  <label htmlFor="Search by room">
-                    <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
-                      Office
-                    </Col>
-                    <input
-                      type="text"
-                      className="shadow-sm"
-                      placeholder="Enter a room number"
-                      onChange={e => setFacultyOfficeHours(e.target.value)}
-                    />
-                  </label>
-                </Col>
               </Row>
             </Accordion.Body>
           </Accordion.Item>
@@ -130,11 +132,21 @@ const FacultySearch = () => {
             <th>Position</th>
             <th>Contact Info</th>
             <th>Office Hours</th>
+            {isAdmin || isOffice ? ([
+              <th>Emergency Phone</th>,
+              <th>Emergency Email</th>,
+            ]) : ''}
           </tr>
         </thead>
-        <tbody>
-          { filteredFaculty.length === 0 ? (<tr><td>-</td></tr>) : filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}
-        </tbody>
+        {isAdmin || isOffice ? ([
+          <tbody>
+            { filteredFaculty.length === 0 ? (<tr><td>-</td></tr>) : filteredFaculty.map((members) => <FacultyItemOffice key={members._id} faculty={members} />)}
+          </tbody>,
+        ]) : ([
+          <tbody>
+            { filteredFaculty.length === 0 ? (<tr><td>-</td></tr>) : filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}
+          </tbody>,
+        ])}
       </Table>
       { filteredFaculty.length === 0 ? <div className="d-flex justify-content-center pb-2">No faculty found.</div> : '' }
     </div>

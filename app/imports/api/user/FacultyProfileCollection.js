@@ -15,9 +15,10 @@ class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
     super('FacultyProfile', new SimpleSchema({
       officeHours: { type: String, optional: true, defaultValue: 'N/A' },
-      picture: { type: String, optional: true, defaultValue: 'https://icemhh.pbrc.hawaii.edu/wp-content/uploads/2021/11/UHM.png' },
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
       position: { type: String, optional: true, defaultValue: 'Other' },
-      emergency: { type: String, optional: true, defaultValue: 'N/A' },
+      emergencyPhone: { type: String, optional: true, defaultValue: 'N/A' },
+      emergencyEmail: { type: String, optional: true, defaultValue: 'N/A' },
     }));
   }
 
@@ -31,16 +32,17 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param lastName The last name.
    * @param room An array of rooms.
    * @param phone An array of phone numbers.
-   * @param emergency The emergency phone number.
+   * @param emergencyPhone The emergency phone number.
+   * @param emergencyEmail The emergency email.
    */
-  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones, emergency }) {
+  define({ email, firstName, lastName, officeHours, position, picture, password, rooms, phones, emergencyPhone, emergencyEmail }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture, emergency });
+    const user = this.findOne({ email, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail });
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role, emergency });
+      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role, emergencyPhone, emergencyEmail});
       if (rooms) {
         rooms.forEach((room) => OccupantRoom.define({ email, room }));
       }
@@ -75,7 +77,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
    * @param picture new picture (optional).
    * @param emergency new emergency num (optional).
    */
-  update(docID, { firstName, lastName, email, officeHours, position, picture, emergency, phones, phoneIds, clubs, clubAdvisorIds, clubAdvisor, rooms, occupantRoomIds }) {
+  update(docID, { firstName, lastName, email, officeHours, position, picture, emergencyPhone, emergencyEmail, phones, phoneIds, clubs, clubAdvisorIds, clubAdvisor, rooms, occupantRoomIds }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -93,8 +95,11 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (picture) {
       updateData.picture = picture;
     }
-    if (emergency) {
-      updateData.emergency = emergency;
+    if (emergencyPhone) {
+      updateData.emergencyPhone = emergencyPhone;
+    }
+    if (emergencyEmail) {
+      updateData.emergencyEmail = emergencyEmail;
     }
     // remove all
     if (phoneIds) {
