@@ -9,6 +9,7 @@ const PortSearchResultsTable = () => {
 
   const [filteredPorts, setFilteredPorts] = useState([]);
   const [roomNum, setRoomNum] = useState('');
+  const [building, setBuilding] = useState('');
   const [portNumber, setPortNumber] = useState('');
   const [side, setSide] = useState('');
   const [idf, setIdf] = useState('');
@@ -36,6 +37,9 @@ const PortSearchResultsTable = () => {
     if (roomNum) {
       filtered = filtered.filter(function (obj) { return obj.room.toLowerCase().includes(roomNum.toLowerCase()); });
     }
+    if (building) {
+      filtered = filtered.filter(function (obj) { return obj.building.toLowerCase().includes(building.toLowerCase()); });
+    }
     if (portNumber) {
       filtered = filtered.filter(function (obj) { return obj.port.includes(portNumber); });
     }
@@ -55,7 +59,7 @@ const PortSearchResultsTable = () => {
     <Container className="py-3 search-results">
       <Form className="">
         <div className="row mb-2">
-          <Form.Group className="col-lg-6">
+          <Form.Group className="col-lg-4">
             <Form.Label htmlFor="Search by port number">Port Number</Form.Label>
             <Form.Control
               type="text"
@@ -64,7 +68,16 @@ const PortSearchResultsTable = () => {
               onChange={e => setPortNumber(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="col-lg-6">
+          <Form.Group className="col-lg-4">
+            <Form.Label htmlFor="Search by building">Building</Form.Label>
+            <Form.Control
+              type="text"
+              className="shadow-sm"
+              placeholder="enter building"
+              onChange={e => setBuilding(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="col-lg-4">
             <Form.Label htmlFor="Search by room">Room</Form.Label>
             <Form.Control
               type="text"
@@ -108,6 +121,7 @@ const PortSearchResultsTable = () => {
         <thead className="search-results-table-header">
           <tr>
             <th>Port Number</th>
+            <th>Building</th>
             <th>Room</th>
             <th>Side</th>
             <th>Status</th>
