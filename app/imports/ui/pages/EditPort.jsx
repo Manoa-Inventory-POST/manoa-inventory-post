@@ -6,9 +6,12 @@ import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Ports } from '../../api/room/Ports';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { Room } from '../../api/room/RoomCollection';
+import { ROLE } from '../../api/role/Role';
 
 const EditPort = () => {
   const { _id } = useParams();
@@ -55,6 +58,34 @@ const EditPort = () => {
       .then(() => swal('Success', 'User updated successfully', 'success'));
   };
 
+  const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]);
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
+
+  if (isITSupport || isOffice) {
+    return (
+      <Container className="py-3">
+        <Row className="justify-content-center">
+          <Col xs={5}>
+            <Col className="text-center"><h2>Update Port</h2></Col>
+            <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+              <Card>
+                <Card.Body>
+                  <TextField disabled name="port" />
+                  <SelectField disabled name="room" />
+                  <SelectField disabled name="building" />
+                  <SelectField disabled name="side" />
+                  <SelectField disabled name="idf" />
+                  <SelectField name="status" />
+                  <SubmitField value="Submit" />
+                  <ErrorsField />
+                </Card.Body>
+              </Card>
+            </AutoForm>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -78,6 +109,7 @@ const EditPort = () => {
       </Row>
     </Container>
   );
+
 };
 
 export default EditPort;
