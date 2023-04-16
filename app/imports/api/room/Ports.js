@@ -41,9 +41,6 @@ class PortsCollection extends BaseCollection {
       idf,
       status,
     });
-    if (status) {
-      status.forEach((status) => PortStatus.define({ status, name }));
-    }
     return docID;
   }
 
