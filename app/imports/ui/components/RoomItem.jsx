@@ -6,6 +6,7 @@ const RoomItem = ({ room }) => (
   <tr>
     <td>{room.room}</td>
     <td>{room.description}</td>
+    <td>{room.status}</td>
   </tr>
 );
 
@@ -14,6 +15,8 @@ RoomItem.propTypes = {
   room: PropTypes.shape({
     room: PropTypes.string,
     description: PropTypes.string,
+    building: PropTypes.string,
+    status: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
