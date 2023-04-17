@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-
-const roomData = [
-  { room: '303A', occupant: '' },
-  { room: '303B', occupant: '' },
-  { room: '303C', occupant: '' },
-  { room: '303D', occupant: '' },
-  // add more rooms and occupants as needed
-];
+import { useTracker } from 'meteor/react-meteor-data';
+import { useParams } from 'react-router';
+import swal from 'sweetalert';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Room } from '../../api/room/RoomCollection';
+import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 const AssignFac = () => {
+  const { _id } = useParams();
+  const { ready, rooms } = useTracker(() => {
+    // Note that this subscription will get cleaned up
+    // when your component is unmounted or deps change.
+    // Get access to Room documents.
+    const subscription = Room.subscribeRoom();
+    // Determine if the subscription is ready
+    const rdy = subscription.ready();
+    // Get the Room documents
+    const roomItems = Room.find({}).fetch();
+    return {
+      rooms: roomItems,
+      ready: rdy,
+    };
+  }, []);
   // const [occupant, setOccupant] = useState('');
   const [setOccupant] = useState('');
 
   const handleOccupantChange = (event) => {
-    setOccupant(event.target.value);
+    const { room, status } = event;
+    const collectionName = Room.getCollectionName();
+    const updateData = { id: _id, room, status };
+    updateMethod.callPromise({ collectionName, updateData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => swal('Success', 'User updated successfully', 'success'));
   };
 
-  return (
+  return (ready ? (
     <div className="container">
       <h1 className="text-center">Room Occupancy</h1>
       <Table striped bordered hover responsive>
@@ -29,7 +47,7 @@ const AssignFac = () => {
           </tr>
         </thead>
         <tbody>
-          {roomData.map((room, index) => (
+          {rooms.map((room, index) => (
             <tr key={index}>
               <td>{room.room}</td>
               <td>
@@ -50,7 +68,7 @@ const AssignFac = () => {
         </tbody>
       </Table>
     </div>
-  );
+  ) : <LoadingSpinner message="Loading Rooms" />);
 };
 
 export default AssignFac;

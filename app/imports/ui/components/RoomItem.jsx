@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { ROLE } from '../../api/role/Role';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+
 const RoomItem = ({ room }) => (
   <tr>
     <td>{room.room}</td>
     <td>{room.description}</td>
-    <td>{room.status}</td>
   </tr>
 );
 

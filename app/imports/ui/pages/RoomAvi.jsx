@@ -5,6 +5,8 @@ import { Room } from '../../api/room/RoomCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import RoomItem from '../components/RoomItem';
+import { ROLE } from '../../api/role/Role';
+import { Link } from 'react-router-dom';
 
 /* Renders a table containing all of the Room documents. Use <RoomItem> to render each row. */
 const RoomAvi = () => {
@@ -23,6 +25,7 @@ const RoomAvi = () => {
       ready: rdy,
     };
   }, []);
+
   return (ready ? (
     <Container id={PAGE_IDS.Room_Avi} className="py-3">
       <Row className="justify-content-center">
