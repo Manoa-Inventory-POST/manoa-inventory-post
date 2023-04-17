@@ -67,7 +67,12 @@ const FullFacultyInfo = () => {
             {isAdmin || isOffice ? ([
               <Row>
                 <Col>
-                  <h5>Emergency Contact: {faculty.emergency}</h5>
+                  <h5>Emergency Phone Number: {faculty.emergencyPhone}</h5>
+                </Col>
+              </Row>,
+              <Row>
+                <Col>
+                  <h5>Emergency Email: {faculty.emergencyEmail}</h5>
                 </Col>
               </Row>,
             ]) : ''}

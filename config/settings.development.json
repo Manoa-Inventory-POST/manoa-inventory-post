@@ -24,7 +24,8 @@
       "firstName": "Mary",
       "lastName": "Smith",
       "position": "Other",
-      "emergency": "808-098-7654",
+      "emergencyPhone": "808-098-7654",
+      "emergencyEmail": "emergency@foo.com",
       "rooms": [
         "301",
         "302"
@@ -429,7 +430,9 @@
       "rooms": ["POST 307B"],
       "phones": ["808-956-6920"],
       "password": "changeme",
-      "role": "FACULTY"
+      "role": "FACULTY",
+      "emergencyPhone": "test phone",
+      "emergencyEmail": "test email"
     },
     {
       "firstName": "Ravi",
