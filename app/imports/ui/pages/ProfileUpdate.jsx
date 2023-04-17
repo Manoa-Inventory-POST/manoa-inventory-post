@@ -159,6 +159,8 @@ const ProfileUpdate = () => {
     RA: { type: Boolean, label: 'RA', defaultValue: false },
     graduate: { type: Boolean, defaultValue: false },
     undergraduate: { type: Boolean, defaultValue: false },
+    emergencyPhone: { type: String, defaultValue: 'N/A/' },
+    emergencyEmail: { type: String, defaultValue: 'N/A' },
     clubAdvisor: { type: Boolean, defaultValue: false },
     clubs: { type: Array, label: 'Clubs', optional: true },
     'clubs.$': { type: String, allowedValues: clubNames, optional: true },
@@ -171,7 +173,7 @@ const ProfileUpdate = () => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds } = data;
+    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, emergencyPhone, emergencyEmail } = data;
     // const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
 
     const phonesArray = phones.split(', ');
@@ -189,7 +191,7 @@ const ProfileUpdate = () => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
+      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds, emergencyPhone, emergencyEmail };
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -261,13 +263,13 @@ const ProfileUpdate = () => {
                         className="col-md-6"
                         name="firstName"
                         placeholder="Your first name (required)"
-                        readOnly
+
                       />
                       <TextField
                         className="col-md-6"
                         name="lastName"
                         placeholder="Your last name (required)"
-                        readOnly
+
                       />
                     </div>
                     <div className="row">
