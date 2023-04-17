@@ -17,7 +17,7 @@ import { ClubInterests } from '../../api/clubs/ClubInterests';
 const FullClubInfo = () => {
   const { _id } = useParams();
 
-  const { ready, club, interests, advisors } = useTracker(() => {
+  const { ready, club, interests, advCount, advisors } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
@@ -39,18 +39,43 @@ const FullClubInfo = () => {
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
     console.log(clubAdvisors);
-    let clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
+    const clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
+    /*
     if (clubAdvisors.length === 1) {
       clubAdvisorInfo = clubAdvisorInfo[0];
+    } else {
+      clubAdvisorInfo.forEach((adv) => console.log(adv));
     }
+    */
     console.log(clubAdvisorInfo);
     return {
       ready: rdy,
       club: clubItem,
       interests: clubInterests,
+      advCount: clubAdvisors,
       advisors: clubAdvisorInfo,
     };
   }, []);
+
+  const countAdv = (count, adv) => {
+    let result = {};
+    /*
+    const result = Object.create(Object.getPrototypeOf(adv));
+    const propNames = Object.getOwnPropertyNames(adv);
+    propNames.forEach((name) => {
+      const desc = Object.getOwnPropertyDescriptor(adv, name);
+      Object.defineProperty(result, name, desc);
+    });
+    */
+    if (count.length === 1) {
+      result = adv[0];
+    }
+    if (count.length > 1) {
+      result = adv.forEach((a) => console.log(a));
+    }
+    console.log(result);
+    return result;
+  };
 
   return (ready ? (
     <Container className="py-3" id={PAGE_IDS.FULL_CLUB_INFO}>
@@ -74,7 +99,7 @@ const FullClubInfo = () => {
             <Row>
               <h4>Advisors</h4>
               <h6 className="align-content-center text-center justify-content-center">
-                { advisors.length === 0 ? ('No advisors currently listed.') : advisors.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}
+                { advisors.length === 0 ? ('No advisors currently listed.') : countAdv(advCount, advisors).map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}
               </h6>
             </Row>
           </Col>

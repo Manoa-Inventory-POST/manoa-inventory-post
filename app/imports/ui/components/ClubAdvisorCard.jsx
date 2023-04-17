@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 /* Renders a single ClubAdvisorard. */
 const ClubAdvisorCard = ({ advisor }) => (
   <Card style={{ width: '12rem' }}>
-    <Link to={`/facultyinfo/${advisor._id}`}>
-      <Image style={{ width: '10rem' }} src={advisor.picture} />
+    <Link to={`/facultyinfo/${advisor._id}`} style={{ textDecoration: 'none' }}>
+      <Image style={{ width: '12rem' }} src={advisor.picture} />
       <CardHeader className="py-2">{advisor.firstName} {advisor.lastName}</CardHeader>
       <p className="email pt-2">{advisor.email}</p>
     </Link>
