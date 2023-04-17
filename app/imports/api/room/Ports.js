@@ -3,7 +3,10 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
-// import { PortStatus } from './PortStatus';
+import { ClubInterests } from '../clubs/ClubInterests';
+import { ClubAdvisor } from '../clubs/ClubAdvisor';
+import { ClubOfficer } from '../clubs/ClubOfficer';
+import { PortStatus } from './PortStatus';
 
 export const portPublications = {
   // will be using "portPub" as acronym for portPublications
@@ -38,11 +41,6 @@ class PortsCollection extends BaseCollection {
       idf,
       status,
     });
-    /*
-    if (status) {
-      status.forEach((status) => PortStatus.define({ status, name }));
-    }
-    */
     return docID;
   }
 

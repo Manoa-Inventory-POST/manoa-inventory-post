@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 const FacultyMySpaces = () => (
   /** something to do with room collections here */
@@ -35,7 +35,7 @@ const FacultyMySpaces = () => (
       </Card.Body>
     </Card>
     <Card.Footer>
-      <a href="#" className="btn btn-primary">Go somewhere</a>
+      <a href="/faculty-home" className="btn btn-primary">Go somewhere</a>
     </Card.Footer>
   </Card>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { Container, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const PortItem = ({ port }) => (
   <tr>
@@ -10,6 +11,7 @@ const PortItem = ({ port }) => (
     <td>{port.side}</td>
     <td>{port.idf}</td>
     <td>{port.status}</td>
+    <Link className="btn btn-dashboard text-white me-2 d-inline" to={`/editPort/${port._id}`}>Edit</Link>
   </tr>
 );
 
