@@ -56,7 +56,7 @@ const FullClubInfo = () => {
     };
   }, []);
 
-  const countAdv = (count, advs) => {
+  function countAdv (count, advs) {
     let result = [];
     if (count.length === 1) {
       result = advs[0];
@@ -65,10 +65,11 @@ const FullClubInfo = () => {
       advs.forEach((a) => {
         result = a;
         console.log(result);
+        // result.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />);
       });
     }
     return result;
-  };
+  }
 
   return (ready ? (
     <Container className="py-3" id={PAGE_IDS.FULL_CLUB_INFO}>
