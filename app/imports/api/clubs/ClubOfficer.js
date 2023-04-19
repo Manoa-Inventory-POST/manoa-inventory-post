@@ -105,6 +105,22 @@ class ClubOfficerCollection extends BaseCollection {
     const club = doc.club;
     return { officer, club };
   }
+
+  /**
+   * Checks the ClubOfficer collection to see if an inputted Club Officer already exists.
+   * @param officer
+   * @param club
+   * @return true
+   * @return false
+   */
+  checkExists(officer) {
+    const instances = this.find({ officer }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    console.log("true!");
+    return true;
+  }
 }
 
 /*

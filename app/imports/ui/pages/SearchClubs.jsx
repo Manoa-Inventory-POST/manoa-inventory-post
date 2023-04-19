@@ -26,14 +26,38 @@ const ClubSearch = () => {
   const [filteredInterests, setFilteredInterests] = useState('');
   const [filteredAdmins, setFilteredAdmins] = useState('');
 
+  let canEdit = false;
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+  const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
+  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+  if (isAdmin) {
+    canEdit = true;
+    console.log("can edit!");
+  }
+
 
   const { ready, clubProfiles } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
-    const sub4 = Interests.subscribeInterests();
+    const sub4 = ClubOfficer.subscribeClubOfficer();
+    const sub5 = Interests.subscribeInterests();
     const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
     const clubItems = Clubs.find({}, {}).fetch();
+
+    if (isFaculty) {
+      const advisor = FacultyProfiles.getData().email;
+      if (ClubAdvisor.checkExists({ advisor })) {
+        canEdit = true;
+        console.log("can edit!");
+      }
+    } else if (isStudent) {
+      const officer = StudentProfiles.getData().email;
+      if (ClubOfficer.checkExists({ officer })) {
+        canEdit = true;
+        console.log("can edit!");
+      }
+    }
 
     function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
       const result = {};
@@ -156,6 +180,7 @@ const ClubSearch = () => {
             <th>Description</th>
             <th>Interests</th>
             <th>Advisor</th>
+            {canEdit ? ([<th>Edit</th>]) : ''}
           </tr>
         </thead>
         <tbody>
