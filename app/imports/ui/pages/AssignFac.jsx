@@ -14,7 +14,7 @@ import { OccupantRoom } from '../../api/room/OccupantRoom';
 const AssignFac = () => {
   const [filteredFaculty, setFilteredFaculty] = useState([]);
   const { _id } = useParams();
-  const { ready, rooms } = useTracker(() => {
+  const { ready, rooms, faculty, occ } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Room documents.
@@ -51,6 +51,9 @@ const AssignFac = () => {
       .then(() => swal('Success', 'User updated successfully', 'success'));
   };
 
+  /* need to change to just names */
+  const facNames = filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />);
+
   return (ready ? (
     <div className="container">
       <h1 className="text-center">Room Occupancy</h1>
@@ -71,7 +74,7 @@ const AssignFac = () => {
                   value={room.occupant}
                   onChange={handleOccupantChange}
                 >
-                  <option value="">{ filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}</option>
+                  <option value="">{facNames}</option>
                 </Form.Select>
               </td>
             </tr>
