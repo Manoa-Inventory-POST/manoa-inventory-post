@@ -105,6 +105,34 @@ class ClubOfficerCollection extends BaseCollection {
     const club = doc.club;
     return { officer, club };
   }
+
+  /**
+   * Searches for a club with a given officer. If club exists, returns the array of clubs. Else,
+   * there is no club.
+   * @param officer an officer.
+   * @returns { Object } Array of clubs.
+   */
+  getClub(officer) {
+    const clubs = this.find({ officer }).fetch();
+    if (clubs.isEmpty()) {
+      return [];
+    }
+    return clubs;
+  }
+
+  /**
+   * Searches for an officer with a given club. If officer exists, returns the array of officers.
+   * Else, there are no officers.
+   * @param club a club.
+   * @returns { Object } Array of officers.
+   */
+  getOfficer(club) {
+    const officers = this.find({ club }).fetch();
+    if (officers.isEmpty()) {
+      return [];
+    }
+    return officers;
+  }
 }
 
 /*

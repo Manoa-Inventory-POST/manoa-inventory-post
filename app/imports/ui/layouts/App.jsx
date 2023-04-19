@@ -34,6 +34,7 @@ import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
 import ClubSearch from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
+// import ClubPage from '../pages/ClubPage';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 import OfficeRequestHome from '../pages/officeRequestHome';
@@ -43,6 +44,7 @@ import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
 import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
+import FullClubInfo from '../pages/FullClubInfo';
 import CreatePort from '../pages/CreatePort';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -68,6 +70,8 @@ const App = () => {
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<ClubSearch />} />
+          <Route path="/clubinfo/:_id" element={<FullClubInfo />} />
+          <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
           <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
