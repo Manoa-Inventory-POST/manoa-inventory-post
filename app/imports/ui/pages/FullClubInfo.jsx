@@ -38,7 +38,6 @@ const FullClubInfo = () => {
     // Get advisors
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
-    console.log(clubAdvisors);
     const clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
     /*
     if (clubAdvisors.length === 1) {
@@ -47,7 +46,7 @@ const FullClubInfo = () => {
       clubAdvisorInfo.forEach((adv) => console.log(adv));
     }
     */
-    console.log(clubAdvisorInfo);
+    // console.log(clubAdvisorInfo);
     return {
       ready: rdy,
       club: clubItem,
@@ -57,23 +56,17 @@ const FullClubInfo = () => {
     };
   }, []);
 
-  const countAdv = (count, adv) => {
-    let result = {};
-    /*
-    const result = Object.create(Object.getPrototypeOf(adv));
-    const propNames = Object.getOwnPropertyNames(adv);
-    propNames.forEach((name) => {
-      const desc = Object.getOwnPropertyDescriptor(adv, name);
-      Object.defineProperty(result, name, desc);
-    });
-    */
+  const countAdv = (count, advs) => {
+    let result = [];
     if (count.length === 1) {
-      result = adv[0];
+      result = advs[0];
     }
     if (count.length > 1) {
-      result = adv.forEach((a) => console.log(a));
+      advs.forEach((a) => {
+        result = a;
+        console.log(result);
+      });
     }
-    console.log(result);
     return result;
   };
 
@@ -99,7 +92,7 @@ const FullClubInfo = () => {
             <Row>
               <h4>Advisors</h4>
               <h6 className="align-content-center text-center justify-content-center">
-                { advisors.length === 0 ? ('No advisors currently listed.') : countAdv(advCount, advisors).map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />)}
+                { advisors.length === 0 ? ('No advisors currently listed.') : countAdv(advCount, advisors).map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />) }
               </h6>
             </Row>
           </Col>
