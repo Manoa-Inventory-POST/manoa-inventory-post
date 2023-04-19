@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -7,25 +7,40 @@ import swal from 'sweetalert';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Room } from '../../api/room/RoomCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
+import FacultyItem from '../components/FacultyItem';
+import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const AssignFac = () => {
+  const [filteredFaculty, setFilteredFaculty] = useState([]);
   const { _id } = useParams();
   const { ready, rooms } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Room documents.
-    const subscription = Room.subscribeRoom();
+    const roomSubscription = Room.subscribeRoom();
+    const facultySub = FacultyProfiles.subscribeFaculty();
+    const occSub = OccupantRoom.subscribeOccupantRoom();
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = roomSubscription.ready() && facultySub.ready() && occSub.ready();
     // Get the Room documents
     const roomItems = Room.find({}).fetch();
+    const facItems = FacultyProfiles.find({}).fetch();
+    const occItems = OccupantRoom.find({}).fetch();
     return {
+      occ: occItems,
+      faculty: facItems,
       rooms: roomItems,
       ready: rdy,
     };
   }, []);
-  // const [occupant, setOccupant] = useState('');
-  const [setOccupant] = useState('');
+
+  // set faculty in filteredFaculty when finished loading
+  useEffect(() => {
+    if (ready) {
+      setFilteredFaculty(faculty);
+    }
+  }, [ready]);
 
   const handleOccupantChange = (event) => {
     const { room, status } = event;
@@ -56,11 +71,7 @@ const AssignFac = () => {
                   value={room.occupant}
                   onChange={handleOccupantChange}
                 >
-                  <option value="">Choose Occupant</option>
-                  <option value="John Doe">John Doe</option>
-                  <option value="Jane Smith">Jane Smith</option>
-                  <option value="Bob Johnson">Bob Johnson</option>
-                  <option value="Sarah Lee">Sarah Lee</option>
+                  <option value="">{ filteredFaculty.map((members) => <FacultyItem key={members._id} faculty={members} />)}</option>
                 </Form.Select>
               </td>
             </tr>
