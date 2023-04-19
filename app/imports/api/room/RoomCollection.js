@@ -88,7 +88,7 @@ class RoomCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for admin and just the room associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
@@ -105,7 +105,7 @@ class RoomCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for stuff owned by the current user.
+   * Subscription method for room owned by the current user.
    */
   subscribeRoom() {
     if (Meteor.isClient) {

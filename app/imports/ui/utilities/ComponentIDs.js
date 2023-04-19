@@ -1,9 +1,5 @@
 export const COMPONENT_IDS = {
   Room_List: 'room-list',
-  LIST_STUFF_EDIT: 'list-stuff-edit',
-  NAVBAR_ADD_STUFF: 'navbar-add-stuff',
-  NAVBAR_LIST_STUFF: 'navbar-list-stuff',
-  NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
   NAVBAR_CURRENT_USER: 'navbar-current-user',
   NAVBAR_LOGO_LANDING: 'navbar-logo-landing',
   NAVBAR_LOGO_STUDENT_HOME: 'navbar-logo-student-home',

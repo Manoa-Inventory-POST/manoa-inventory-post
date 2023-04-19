@@ -9,7 +9,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Ports } from '../../api/room/Ports';
 import PortItem from '../components/PortItem';
-import { ROLE } from '../../api/role/Role';
+// import { ROLE } from '../../api/role/Role';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const PortSearch = () => {
