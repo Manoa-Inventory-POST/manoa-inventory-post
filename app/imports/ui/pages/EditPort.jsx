@@ -12,6 +12,7 @@ import { Ports } from '../../api/room/Ports';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { Room } from '../../api/room/RoomCollection';
 import { ROLE } from '../../api/role/Role';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const EditPort = () => {
   const { _id } = useParams();
@@ -86,7 +87,7 @@ const EditPort = () => {
       </Container>
     );
   }
-  return (
+  return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
@@ -108,7 +109,7 @@ const EditPort = () => {
         </Col>
       </Row>
     </Container>
-  );
+  ) : <LoadingSpinner message="Loading" />);
 
 };
 
