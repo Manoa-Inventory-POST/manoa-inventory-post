@@ -56,7 +56,7 @@ const FullClubInfo = () => {
     };
   }, []);
 
-  function countAdv (count, advs) {
+  function countAdv(count, advs) {
     let result = [];
     if (count.length === 1) {
       result = advs[0];
