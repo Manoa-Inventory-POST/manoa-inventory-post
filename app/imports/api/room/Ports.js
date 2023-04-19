@@ -3,10 +3,10 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
-import { ClubInterests } from '../clubs/ClubInterests';
-import { ClubAdvisor } from '../clubs/ClubAdvisor';
-import { ClubOfficer } from '../clubs/ClubOfficer';
-import { PortStatus } from './PortStatus';
+// import { ClubInterests } from '../clubs/ClubInterests';
+// import { ClubAdvisor } from '../clubs/ClubAdvisor';
+// import { ClubOfficer } from '../clubs/ClubOfficer';
+// import { PortStatus } from './PortStatus';
 
 export const portPublications = {
   // will be using "portPub" as acronym for portPublications
@@ -89,7 +89,7 @@ class PortsCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for admin and just the port associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
@@ -106,7 +106,7 @@ class PortsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for stuff owned by the current user.
+   * Subscription method for port owned by the current user.
    */
   subscribePorts() {
     if (Meteor.isClient) {

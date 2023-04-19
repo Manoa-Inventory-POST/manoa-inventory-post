@@ -1,10 +1,6 @@
 /** Define ids for each page. */
 export const PAGE_IDS = {
-  ADD_STUFF: 'add-stuff',
-  EDIT_STUFF: 'edit-stuff',
   LANDING: 'landing',
-  LIST_STUFF: 'list-stuff',
-  LIST_STUFF_ADMIN: 'list-stuff-admin',
   FACULTY_HOME: 'faculty-home',
   ADMIN_HOME: 'admin-home',
   ITSUPPORT_HOME: 'itsupport-home',

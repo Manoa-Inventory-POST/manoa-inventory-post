@@ -68,7 +68,7 @@ class PhoneCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for admin and just the phone associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
@@ -85,7 +85,7 @@ class PhoneCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for stuff owned by the current user.
+   * Subscription method for phone owned by the current user.
    */
   subscribePhone() {
     if (Meteor.isClient) {

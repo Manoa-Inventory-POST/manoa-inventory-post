@@ -91,7 +91,7 @@ class ReservationsCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
+   * It publishes the entire collection for admin and just the reservation associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
