@@ -14,6 +14,7 @@ import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
 import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
+import { itsupporthomePage } from './itsupporthome.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -21,6 +22,7 @@ import { facultyProfilePage } from './facultyprofile.page';
 /** Credentials for one of the sample users defined in settings.development.json. */
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
+const itSupportCredentials = { username: 'itsupport@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 const profileInfo = { phone: '808-1680-0000' };
@@ -130,6 +132,13 @@ test('Test that the student search page shows up', async () => {
   await facultyhomePage.isDisplayed();
   await navBar.gotoStudentSearchPage();
   await studentSearchPage.isDisplayed();
+});
+
+test.only('Test that the IT support home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(itSupportCredentials.username, itSupportCredentials.password);
+  await navBar.isLoggedIn(itSupportCredentials.username);
+  await itsupporthomePage.isDisplayed();
 });
 
 test('Test that admin home page shows up', async () => {
