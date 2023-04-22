@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { imageOption, OfficeRequests, requestToConditions } from '../../api/user/OfficeRequestCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -43,7 +44,7 @@ const ServiceRequest = () => {
   };
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container className="py-3" id={PAGE_IDS.SERVICE_REQUEST}>
       <Row>
         <Col className="text-center">
           <h2>Service Request</h2>
