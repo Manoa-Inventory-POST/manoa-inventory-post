@@ -147,7 +147,7 @@
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
   "defaultRoomData": [
-    { "room": "301", "description": "Sink", "building": "POST", "phones": ["808-808-8080"] },
+    { "room": "301", "description": "Sink", "building": "POST", "phones": ["808-808-8080"], "image": "images/classroom.png" },
     { "room": "302", "description": "conference", "building": "POST" },
     { "room": "303A", "description": "offices", "building": "POST" },
     { "room": "303B", "description": "offices", "building": "POST" },
