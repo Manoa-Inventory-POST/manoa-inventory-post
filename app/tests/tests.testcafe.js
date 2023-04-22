@@ -15,6 +15,7 @@ import { studentSearchPage } from './studentsearch.page';
 import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
+import { serviceRequestPage } from './servicerequest.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -134,11 +135,19 @@ test('Test that the student search page shows up', async () => {
   await studentSearchPage.isDisplayed();
 });
 
-test.only('Test that the IT support home page shows up', async () => {
+test('Test that the IT support home page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(itSupportCredentials.username, itSupportCredentials.password);
   await navBar.isLoggedIn(itSupportCredentials.username);
   await itsupporthomePage.isDisplayed();
+});
+
+test('Test that the service request page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await navBar.gotoServiceRequestPage();
+  await serviceRequestPage.isDisplayed();
 });
 
 test('Test that admin home page shows up', async () => {
