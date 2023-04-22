@@ -64,7 +64,7 @@ const FullClubInfo = () => {
     if (count.length > 1) {
       advs.forEach((a) => {
         result = a;
-        console.log(result);
+        // console.log(result);
         // result.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />);
       });
     }

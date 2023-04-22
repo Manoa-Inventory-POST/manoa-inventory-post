@@ -16,6 +16,7 @@ import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
 import { serviceRequestPage } from './servicerequest.page';
+import { fullClubInfoPage } from './fullclubinfo.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -107,6 +108,18 @@ test('Test that faculty search and faculty info pages show up', async () => {
   await fullFacultyInfoPage.isDisplayed();
 });
 
+test('Test that the club search and club info pages show up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
+  await navBar.gotoClubSearchPage();
+  await clubSearchPage.isDisplayed();
+  const ACM = Selector('a').withText('Association for Computing Machinery (ACM)');
+  await t.click(ACM);
+  await fullClubInfoPage.isDisplayed();
+});
+
 test('Test that faculty home page shows up and profile modification works', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
@@ -115,15 +128,6 @@ test('Test that faculty home page shows up and profile modification works', asyn
   await navBar.gotoFacultyProfilePage();
   await facultyProfilePage.isDisplayed();
   await facultyProfilePage.updateProfile(profileInfo.phone);
-});
-
-test('Test that the club search page shows up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(studentCredentials.username, studentCredentials.password);
-  await navBar.isLoggedIn(studentCredentials.username);
-  await studenthomePage.isDisplayed();
-  await navBar.gotoClubSearchPage();
-  await clubSearchPage.isDisplayed();
 });
 
 test('Test that the student search page shows up', async () => {
