@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
+import crypto from 'crypto';
+import { Accounts } from 'meteor/accounts-base';
 import { StudentProfiles } from './user/StudentProfileCollection';
 
 Meteor.methods({
@@ -24,5 +26,52 @@ Meteor.methods({
     }
 
     StudentProfiles.update(studentId, update);
+  },
+
+  'users.generateResetToken'(email, securityQuestion, securityAnswer) {
+    check(email, String);
+    check(securityQuestion, String);
+    check(securityAnswer, String);
+    const user = Accounts.findUserByEmail(email);
+
+    if (!user) {
+      throw new Meteor.Error('User not found');
+    }
+
+    if (user.profile.securityQuestion !== securityQuestion || user.profile.securityAnswer !== securityAnswer) {
+      throw new Meteor.Error('Invalid security question or answer');
+    }
+
+    // Generate a token and store it in the user's document
+    const token = crypto.randomBytes(16).toString('hex');
+    Meteor.users.update(user._id, { $set: { 'services.password.resetToken': token } });
+
+    return token;
+  },
+  'users.verifySecurityQuestion'(email, securityQuestion, securityAnswer) {
+    check(email, String);
+    check(securityQuestion, String);
+    check(securityAnswer, String);
+    const user = Accounts.findUserByEmail(email);
+
+    if (!user) {
+      throw new Meteor.Error('User not found');
+    }
+
+    if (user.profile.securityQuestion !== securityQuestion || user.profile.securityAnswer !== securityAnswer) {
+      throw new Meteor.Error('Invalid security question or answer');
+    }
+  },
+  'users.resetPasswordWithToken'(token, newPassword) {
+    check(token, String);
+    check(newPassword, String);
+    const user = Meteor.users.findOne({ 'services.password.resetToken': token });
+
+    if (!user) {
+      throw new Meteor.Error('Invalid token');
+    }
+
+    Accounts.setPassword(user._id, newPassword);
+    Meteor.users.update(user._id, { $unset: { 'services.password.resetToken': '' } });
   },
 });
