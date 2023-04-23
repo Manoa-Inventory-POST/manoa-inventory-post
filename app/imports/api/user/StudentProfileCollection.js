@@ -14,6 +14,10 @@ class StudentProfileCollection extends BaseProfileCollection {
       RA: { type: Boolean, defaultValue: false },
       graduate: { type: Boolean, defaultValue: false },
       undergraduate: { type: Boolean, defaultValue: false },
+      securityQuestions: { type: Array },
+      'securityQuestions.$': { type: Object },
+      'securityQuestions.$.question': { type: String },
+      'securityQuestions.$.answer': { type: String },
     }));
   }
 
@@ -28,7 +32,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests, securityQuestions }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
@@ -36,7 +40,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });
       // const clubs = UserClubs.define({ email, Clubs.dumpOne().name});
-      const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role, securityQuestions });
       if (clubs) {
         clubs.forEach((club) => UserClubs.define({ email, club }));
       }
