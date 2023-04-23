@@ -35,7 +35,6 @@ const RoomSearchResultsTableRow = ({ room }) => {
         <td>{room.status}</td>
         <td className="d-flex">
           <Link className="btn btn-dashboard text-white me-2 d-inline" to={`/editRoom/${room._id}`}>Edit</Link>
-          <Button className="btn btn-danger btn-delete d-inline" onClick={deleteRoom}>Delete</Button>
         </td>
       </tr>
     );
