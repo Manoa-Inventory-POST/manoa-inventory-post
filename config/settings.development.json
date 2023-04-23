@@ -1,26 +1,30 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com",
+    {
+      "email": "admin@foo.com",
       "password": "changeme",
       "role": "ADMIN",
       "firstName": "John",
       "lastName": "Doe"
     },
-    { "email": "john@foo.com",
+    {
+      "email": "john@foo.com",
       "password": "changeme",
-      "role": "USER" ,
+      "role": "USER",
       "firstName": "John",
       "lastName": "Doe"
     },
-    { "email": "lydia@foo.com",
+    {
+      "email": "lydia@foo.com",
       "password": "changeme",
-      "role": "ADMIN" ,
+      "role": "ADMIN",
       "firstName": "Lydia",
       "lastName": "Sollis"
     },
-    { "email": "faculty@foo.com",
+    {
+      "email": "faculty@foo.com",
       "password": "changeme",
-      "role": "FACULTY" ,
+      "role": "FACULTY",
       "firstName": "Mary",
       "lastName": "Smith",
       "position": "Other",
@@ -35,15 +39,17 @@
         "808-123-4567"
       ]
     },
-    { "email": "itsupport@foo.com",
+    {
+      "email": "itsupport@foo.com",
       "password": "changeme",
-      "role": "ITSUPPORT" ,
+      "role": "ITSUPPORT",
       "firstName": "Will",
       "lastName": "Brown"
     },
-    { "email": "student@foo.com",
+    {
+      "email": "student@foo.com",
       "password": "changeme",
-      "role": "STUDENT" ,
+      "role": "STUDENT",
       "firstName": "James",
       "lastName": "White",
       "TA": true,
@@ -51,23 +57,34 @@
       "graduate": true,
       "undergraduate": false,
       "clubs": [
-
       ],
       "interests": [
         "Mockup",
         "Testing",
         "Video Games"
+      ],
+      "securityQuestions": [
+        {
+          "question": "What is the name of your first pet?",
+          "answer": "dog"
+        },
+        {
+          "question": "What is the name of the city where you were born?",
+          "answer": "honolulu"
+        }
       ]
     },
-    { "email": "office@foo.com",
+    {
+      "email": "office@foo.com",
       "password": "changeme",
-      "role": "OFFICE" ,
+      "role": "OFFICE",
       "firstName": "Emma",
       "lastName": "Jones"
     },
-    { "email": "charlie@foo.com",
+    {
+      "email": "charlie@foo.com",
       "password": "changeme",
-      "role": "STUDENT" ,
+      "role": "STUDENT",
       "firstName": "Charlie",
       "lastName": "Brown",
       "TA": true,
@@ -75,16 +92,26 @@
       "graduate": false,
       "undergraduate": true,
       "clubs": [
-
       ],
       "interests": [
         "Art",
         "Video Games"
+      ],
+      "securityQuestions": [
+        {
+          "question": "What is the name of your first pet?",
+          "answer": "dog"
+        },
+        {
+          "question": "What is the name of the city where you were born?",
+          "answer": "honolulu"
+        }
       ]
     },
-    { "email": "joel@foo.com",
+    {
+      "email": "joel@foo.com",
       "password": "changeme",
-      "role": "STUDENT" ,
+      "role": "STUDENT",
       "firstName": "Joel",
       "lastName": "Miller",
       "TA": false,
@@ -92,16 +119,26 @@
       "graduate": true,
       "undergraduate": false,
       "clubs": [
-
       ],
       "interests": [
         "Video Games",
         "Mentor"
+      ],
+      "securityQuestions": [
+        {
+          "question": "What is the name of your first pet?",
+          "answer": "dog"
+        },
+        {
+          "question": "What is the name of the city where you were born?",
+          "answer": "honolulu"
+        }
       ]
     },
-    { "email": "kenobi@foo.com",
+    {
+      "email": "kenobi@foo.com",
       "password": "changeme",
-      "role": "STUDENT" ,
+      "role": "STUDENT",
       "firstName": "Obi-Wan",
       "lastName": "Kenobi",
       "TA": true,
@@ -109,18 +146,28 @@
       "graduate": true,
       "undergraduate": false,
       "clubs": [
-
       ],
       "interests": [
         "Professional Development",
         "Guest Speakers",
         "Mentoring",
         "Teaching"
+      ],
+      "securityQuestions": [
+        {
+          "question": "What is the name of your first pet?",
+          "answer": "dog"
+        },
+        {
+          "question": "What is the name of the city where you were born?",
+          "answer": "honolulu"
+        }
       ]
     },
-    { "email": "peter@foo.com",
+    {
+      "email": "peter@foo.com",
       "password": "changeme",
-      "role": "STUDENT" ,
+      "role": "STUDENT",
       "firstName": "Peter",
       "lastName": "Parker",
       "TA": false,
@@ -128,97 +175,421 @@
       "graduate": false,
       "undergraduate": true,
       "clubs": [
-
       ],
       "interests": [
         "Professional Development",
         "Technical Workshops",
         "Algorithms"
+      ],
+      "securityQuestions": [
+        {
+          "question": "What is the name of your first pet?",
+          "answer": "dog"
+        },
+        {
+          "question": "What is the name of the city where you were born?",
+          "answer": "honolulu"
+        }
       ]
     }
   ],
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Apple", "quantity": 2, "owner": "student@foo.com", "condition": "poor" },
-    { "name": "Chair", "quantity": 2, "owner": "itsupport@foo.com", "condition": "poor" },
-    { "name": "TV", "quantity": 2, "owner": "faculty@foo.com", "condition": "excellent" },
-    { "name": "Table", "quantity": 2, "owner": "rooms@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    {
+      "name": "Basket",
+      "quantity": 3,
+      "owner": "john@foo.com",
+      "condition": "excellent"
+    },
+    {
+      "name": "Apple",
+      "quantity": 2,
+      "owner": "student@foo.com",
+      "condition": "poor"
+    },
+    {
+      "name": "Chair",
+      "quantity": 2,
+      "owner": "itsupport@foo.com",
+      "condition": "poor"
+    },
+    {
+      "name": "TV",
+      "quantity": 2,
+      "owner": "faculty@foo.com",
+      "condition": "excellent"
+    },
+    {
+      "name": "Table",
+      "quantity": 2,
+      "owner": "rooms@foo.com",
+      "condition": "poor"
+    },
+    {
+      "name": "Banana",
+      "quantity": 2,
+      "owner": "admin@foo.com",
+      "condition": "good"
+    },
+    {
+      "name": "Boogie Board",
+      "quantity": 2,
+      "owner": "admin@foo.com",
+      "condition": "excellent"
+    }
   ],
   "defaultRoomData": [
-    { "room": "301", "description": "Sink", "building": "POST", "phones": ["808-808-8080"] },
-    { "room": "302", "description": "conference", "building": "POST" },
-    { "room": "303A", "description": "offices", "building": "POST" },
-    { "room": "303B", "description": "offices", "building": "POST" },
-    { "room": "303C", "description": "offices", "building": "POST" },
-    { "room": "303D", "description": "offices", "building": "POST" },
-    { "room": "303E", "description": "offices", "building": "POST" },
-    { "room": "303F", "description": "offices", "building": "POST" },
-    { "room": "303G", "description": "offices", "building": "POST" },
-    { "room": "303-1", "description": "cubicles", "building": "POST" },
-    { "room": "303-5", "description": "cubicles", "building": "POST" },
-    { "room": "304", "description": "mechanical", "building": "POST" },
-    { "room": "305A", "description": "offices", "building": "POST" },
-    { "room": "305B", "description": "offices", "building": "POST" },
-    { "room": "305C", "description": "offices", "building": "POST" },
-    { "room": "305D", "description": "offices", "building": "POST" },
-    { "room": "305E", "description": "offices", "building": "POST" },
-    { "room": "305F", "description": "offices", "building": "POST" },
-    { "room": "305G", "description": "offices", "building": "POST" },
-    { "room": "306A", "description": "offices", "building": "POST" },
-    { "room": "306B", "description": "offices", "building": "POST" },
-    { "room": "306C", "description": "offices", "building": "POST" },
-    { "room": "306D", "description": "offices", "building": "POST" },
-    { "room": "307A", "description": "offices", "building": "POST" },
-    { "room": "307B", "description": "offices", "building": "POST" },
-    { "room": "307C", "description": "offices", "building": "POST" },
-    { "room": "308", "description": "mechanical", "building": "POST" },
-    { "room": "309A", "description": "offices", "building": "POST" },
-    { "room": "309B", "description": "offices", "building": "POST" },
-    { "room": "309C", "description": "offices", "building": "POST" },
-    { "room": "309D", "description": "offices", "building": "POST" },
-    { "room": "310A", "description": "offices", "building": "POST" },
-    { "room": "310B", "description": "offices", "building": "POST" },
-    { "room": "310C", "description": "offices", "building": "POST" },
-    { "room": "311", "description": "asecolab", "building": "POST" },
-    { "room": "312A", "description": "offices", "building": "POST" },
-    { "room": "312B", "description": "offices", "building": "POST" },
-    { "room": "312C", "description": "offices", "building": "POST" },
-    { "room": "313", "description": "mechanical", "building": "POST" },
-    { "room": "314A", "description": "offices", "building": "POST" },
-    { "room": "314B", "description": "offices", "building": "POST" },
-    { "room": "314C", "description": "offices", "building": "POST" },
-    { "room": "314D", "description": "offices", "building": "POST" },
-    { "room": "314E", "description": "offices", "building": "POST" },
-    { "room": "314F", "description": "offices", "building": "POST" },
-    { "room": "314G", "description": "offices", "building": "POST" },
-    { "room": "314H", "description": "offices", "building": "POST" },
-    { "room": "314I", "description": "offices", "building": "POST" },
-    { "room": "314-1", "description": "cubicles", "building": "POST" },
-    { "room": "314-10", "description": "cubicles", "building": "POST" },
-    { "room": "315", "description": "rooms", "building": "POST" },
-    { "room": "316", "description": "mail", "building": "POST" },
-    { "room": "317", "description": "main rooms", "building": "POST" },
-    { "room": "318A", "description": "lab", "building": "POST" },
-    { "room": "318B", "description": "ICSpace", "building": "POST" },
-    { "room": "319", "description": "lab", "building": "POST" },
-    { "room": "320", "description": "telephone", "building": "POST" },
-    { "room": "321", "description": "women", "building": "POST" },
-    { "room": "322", "description": "janitor", "building": "POST" },
-    { "room": "323", "description": "men", "building": "POST" },
-    { "room": "324", "description": "electrical", "building": "POST" },
-    { "room": "325", "description": "EE", "building": "POST" },
-    { "room": "326", "description": "storage", "building": "POST" },
-    { "room": "327", "description": "Todd's and Charlie's office", "building": "POST" },
-    { "room": "328", "description": "ICS IT", "building": "POST" },
-    { "room": "329", "description": "telephone", "building": "POST" },
-    { "room": "330", "description": "men", "building": "POST" },
-    { "room": "331", "description": "women", "building": "POST" },
-    { "room": "331", "description": "utility", "building": "POST" }
+    {
+      "room": "301",
+      "description": "Sink",
+      "building": "POST",
+      "phones": [
+        "808-808-8080"
+      ]
+    },
+    {
+      "room": "302",
+      "description": "conference",
+      "building": "POST"
+    },
+    {
+      "room": "303A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303D",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303E",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303F",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303G",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "303-1",
+      "description": "cubicles",
+      "building": "POST"
+    },
+    {
+      "room": "303-5",
+      "description": "cubicles",
+      "building": "POST"
+    },
+    {
+      "room": "304",
+      "description": "mechanical",
+      "building": "POST"
+    },
+    {
+      "room": "305A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305D",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305E",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305F",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "305G",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "306A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "306B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "306C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "306D",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "307A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "307B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "307C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "308",
+      "description": "mechanical",
+      "building": "POST"
+    },
+    {
+      "room": "309A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "309B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "309C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "309D",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "310A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "310B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "310C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "311",
+      "description": "asecolab",
+      "building": "POST"
+    },
+    {
+      "room": "312A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "312B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "312C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "313",
+      "description": "mechanical",
+      "building": "POST"
+    },
+    {
+      "room": "314A",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314B",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314C",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314D",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314E",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314F",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314G",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314H",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314I",
+      "description": "offices",
+      "building": "POST"
+    },
+    {
+      "room": "314-1",
+      "description": "cubicles",
+      "building": "POST"
+    },
+    {
+      "room": "314-10",
+      "description": "cubicles",
+      "building": "POST"
+    },
+    {
+      "room": "315",
+      "description": "rooms",
+      "building": "POST"
+    },
+    {
+      "room": "316",
+      "description": "mail",
+      "building": "POST"
+    },
+    {
+      "room": "317",
+      "description": "main rooms",
+      "building": "POST"
+    },
+    {
+      "room": "318A",
+      "description": "lab",
+      "building": "POST"
+    },
+    {
+      "room": "318B",
+      "description": "ICSpace",
+      "building": "POST"
+    },
+    {
+      "room": "319",
+      "description": "lab",
+      "building": "POST"
+    },
+    {
+      "room": "320",
+      "description": "telephone",
+      "building": "POST"
+    },
+    {
+      "room": "321",
+      "description": "women",
+      "building": "POST"
+    },
+    {
+      "room": "322",
+      "description": "janitor",
+      "building": "POST"
+    },
+    {
+      "room": "323",
+      "description": "men",
+      "building": "POST"
+    },
+    {
+      "room": "324",
+      "description": "electrical",
+      "building": "POST"
+    },
+    {
+      "room": "325",
+      "description": "EE",
+      "building": "POST"
+    },
+    {
+      "room": "326",
+      "description": "storage",
+      "building": "POST"
+    },
+    {
+      "room": "327",
+      "description": "Todd's and Charlie's office",
+      "building": "POST"
+    },
+    {
+      "room": "328",
+      "description": "ICS IT",
+      "building": "POST"
+    },
+    {
+      "room": "329",
+      "description": "telephone",
+      "building": "POST"
+    },
+    {
+      "room": "330",
+      "description": "men",
+      "building": "POST"
+    },
+    {
+      "room": "331",
+      "description": "women",
+      "building": "POST"
+    },
+    {
+      "room": "331",
+      "description": "utility",
+      "building": "POST"
+    }
   ],
   "defaultClubs": [
-    { "name": "Association for Computing Machinery (ACM)",
+    {
+      "name": "Association for Computing Machinery (ACM)",
       "website": "https://acmanoa.github.io/",
       "description": "We are a registered student chapter of the Association for Computing Machinery as well as a recognized student-chartered registered independent organization (RIO) at the University of Hawaii at Manoa. We welcome students of all different backgrounds, interests, and skill levels to join our community and share our passion for computer science.",
       "interests": [
@@ -227,8 +598,10 @@
         "Professional Development",
         "Technical Workshops"
       ],
-      "picture": "https://acmanoa.github.io/assets/img/officers/placehold.png"},
-    { "name": "Programming AND Algorithms (PANDA)",
+      "picture": "https://acmanoa.github.io/assets/img/officers/placehold.png"
+    },
+    {
+      "name": "Programming AND Algorithms (PANDA)",
       "website": "https://acmanoa.github.io/panda/",
       "description": "PANDA (Programming AND Algorithms) is a special interest group of ACM Manoa dedicated to studying and applying algorithms. We aim to help students develop the algorithmic problem solving skills needed to succeed in the field of computer science.",
       "interests": [
@@ -236,8 +609,10 @@
         "Algorithms",
         "Technical Workshops"
       ],
-      "picture": "https://acmanoa.github.io/assets/img/logos/Panda.png" },
-    { "name": "Grey Hats",
+      "picture": "https://acmanoa.github.io/assets/img/logos/Panda.png"
+    },
+    {
+      "name": "Grey Hats",
       "website": "https://acmanoa.github.io/greyhats/",
       "description": "The Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, attack and defend systems, and to network with others interested in modern security issues.",
       "interests": [
@@ -246,8 +621,10 @@
         "Networking",
         "Competitions"
       ],
-      "picture": "https://acmanoa.github.io/assets/img/logos/greyhats.png" },
-    { "name": "Game Dev",
+      "picture": "https://acmanoa.github.io/assets/img/logos/greyhats.png"
+    },
+    {
+      "name": "Game Dev",
       "website": "https://acmanoa.github.io/gamedev/",
       "description": "We are a group dedicated to designing, building, and demoing video games using Unity and other various tools.",
       "interests": [
@@ -258,8 +635,12 @@
         "Game Design"
       ],
       "picture": "https://acmanoa.github.io/assets/img/logos/gamedev.png",
-      "advisors": ["guylaine@hawaii.edu"] },
-    { "name": "ICSpark",
+      "advisors": [
+        "guylaine@hawaii.edu"
+      ]
+    },
+    {
+      "name": "ICSpark",
       "website": "https://icspark.github.io/index.html",
       "description": "ICSpark is a Registered Independent Organization (RIO) at the University of Hawaii. We are a group of students who offer free coding classes every Saturday for students through the 6th - 12th grade.",
       "interests": [
@@ -268,8 +649,13 @@
         "Teaching"
       ],
       "picture": "https://acmanoa.github.io/assets/img/logos/icspark.PNG",
-      "advisors":  ["shackfor@hawaii.edu", "itoga@hawaii.edu"] },
-    { "name": "Supporting Women in Technology Computing Hawaii (SWITCH)",
+      "advisors": [
+        "shackfor@hawaii.edu",
+        "itoga@hawaii.edu"
+      ]
+    },
+    {
+      "name": "Supporting Women in Technology Computing Hawaii (SWITCH)",
       "website": "https://switch-uhm.github.io/",
       "description": "SWITCH (Supporting Women in Technology Computing Hawaii) is the culmination of efforts of the awesome students, faculty, and working professionals supporting social change in the ICS department. We strive to provide useful resources from these organizations to improve your professional, technical, and personal development.",
       "interests": [
@@ -278,14 +664,25 @@
         "Guest Speakers",
         "Career Opportunities"
       ],
-      "picture": "https://acmanoa.github.io/assets/img/logos/switchlogo.png" }
+      "picture": "https://acmanoa.github.io/assets/img/logos/switchlogo.png"
+    }
   ],
   "defaultInterests": [
-    { "interest": "RIO" },
-    { "interest": "SIG" },
-    { "interest": "Animation" },
-    { "interest": "Networking" },
-    { "interest": "Algorithms" }
+    {
+      "interest": "RIO"
+    },
+    {
+      "interest": "SIG"
+    },
+    {
+      "interest": "Animation"
+    },
+    {
+      "interest": "Networking"
+    },
+    {
+      "interest": "Algorithms"
+    }
   ],
   "defaultFacultys": [
     {
@@ -295,8 +692,12 @@
       "picture": "/images/KyungimB.jpeg",
       "email": "kyungim@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303F"],
-      "phones": ["808-956-8560"],
+      "rooms": [
+        "POST 303F"
+      ],
+      "phones": [
+        "808-956-8560"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -307,8 +708,12 @@
       "picture": "/images/mahdiB.png",
       "email": "mahdi@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 306B"],
-      "phones": ["808-956-6049"],
+      "rooms": [
+        "POST 306B"
+      ],
+      "phones": [
+        "808-956-6049"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -319,8 +724,12 @@
       "picture": "/images/edoB.jpeg",
       "email": "esb@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 305F"],
-      "phones": ["808-956-3891"],
+      "rooms": [
+        "POST 305F"
+      ],
+      "phones": [
+        "808-956-3891"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -331,8 +740,12 @@
       "picture": "/images/kimB.jpeg",
       "email": "binsted@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303D"],
-      "phones": ["808-956-6107"],
+      "rooms": [
+        "POST 303D"
+      ],
+      "phones": [
+        "808-956-6107"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -343,8 +756,12 @@
       "picture": "/images/henri-casanova.jpg",
       "email": "henric@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 310C"],
-      "phones": ["808-956-2649"],
+      "rooms": [
+        "POST 310C"
+      ],
+      "phones": [
+        "808-956-2649"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -355,8 +772,12 @@
       "picture": "/images/marthaC.jpeg",
       "email": "crosby@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 305D"],
-      "phones": ["808-956-3493"],
+      "rooms": [
+        "POST 305D"
+      ],
+      "phones": [
+        "808-956-3493"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -391,8 +812,12 @@
       "picture": "/images/johnsonP.jpeg",
       "email": "johnson@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 307A"],
-      "phones": ["808-956-3489"],
+      "rooms": [
+        "POST 307A"
+      ],
+      "phones": [
+        "808-956-3489"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -403,8 +828,12 @@
       "picture": "/images/jason-leigh.jpg",
       "email": "leighj@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["Keller 102A"],
-      "phones": ["808-956-9164"],
+      "rooms": [
+        "Keller 102A"
+      ],
+      "phones": [
+        "808-956-9164"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -415,8 +844,12 @@
       "picture": "/images/DepengL.jpeg",
       "email": "depengli@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 314D"],
-      "phones": ["808-956-3973"],
+      "rooms": [
+        "POST 314D"
+      ],
+      "phones": [
+        "808-956-3973"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -427,8 +860,12 @@
       "picture": "/images/cam-moore.jpg",
       "email": "cmoore@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 307B"],
-      "phones": ["808-956-6920"],
+      "rooms": [
+        "POST 307B"
+      ],
+      "phones": [
+        "808-956-6920"
+      ],
       "password": "changeme",
       "role": "FACULTY",
       "emergencyPhone": "test phone",
@@ -441,7 +878,9 @@
       "picture": "/images/RaviN.jpeg",
       "email": "rnarayan@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 314A"],
+      "rooms": [
+        "POST 314A"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -453,8 +892,12 @@
       "picture": "/images/MBO.jpeg",
       "email": "ogawam@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 314B"],
-      "phones": ["808-956-5069"],
+      "rooms": [
+        "POST 314B"
+      ],
+      "phones": [
+        "808-956-5069"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -465,8 +908,12 @@
       "picture": "/images/DuskoE.jpeg",
       "email": "dusko@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 311B"],
-      "phones": ["808-956-9639"],
+      "rooms": [
+        "POST 311B"
+      ],
+      "phones": [
+        "808-956-9639"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -477,7 +924,9 @@
       "picture": "/images/AnthonyP.jpeg",
       "email": "peruma@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 310B"],
+      "rooms": [
+        "POST 310B"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -489,8 +938,12 @@
       "picture": "/images/GuylaineP.jpeg",
       "email": "guylaine@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303C"],
-      "phones": ["808-956-3496"],
+      "rooms": [
+        "POST 303C"
+      ],
+      "phones": [
+        "808-956-3496"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -501,8 +954,12 @@
       "picture": "/images/ScottR.jpeg",
       "email": "scottpr@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 317"],
-      "phones": ["808-956-3500"],
+      "rooms": [
+        "POST 317"
+      ],
+      "phones": [
+        "808-956-3500"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -513,8 +970,12 @@
       "picture": "/images/PeterS.jpeg",
       "email": "psadow@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 306C"],
-      "phones": ["808-956-2023"],
+      "rooms": [
+        "POST 306C"
+      ],
+      "phones": [
+        "808-956-2023"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -525,8 +986,12 @@
       "picture": "/images/PeterMS.jpeg",
       "email": "pseidel@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 311A"],
-      "phones": ["808-956-6068"],
+      "rooms": [
+        "POST 311A"
+      ],
+      "phones": [
+        "808-956-6068"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -537,8 +1002,12 @@
       "picture": "/images/NodariS.jpeg",
       "email": "nodari@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 309C"],
-      "phones": ["808-956-3581"],
+      "rooms": [
+        "POST 309C"
+      ],
+      "phones": [
+        "808-956-3581"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -549,8 +1018,12 @@
       "picture": "/images/DanS.jpeg",
       "email": "suthers@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 309B"],
-      "phones": ["808-956-3890"],
+      "rooms": [
+        "POST 309B"
+      ],
+      "phones": [
+        "808-956-3890"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -561,7 +1034,9 @@
       "picture": "/images/PeterW.png",
       "email": "pyw@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 312B"],
+      "rooms": [
+        "POST 312B"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -573,7 +1048,9 @@
       "picture": "/images/DavidC.jpeg",
       "email": "chin@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303G"],
+      "rooms": [
+        "POST 303G"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -585,7 +1062,9 @@
       "picture": "/images/StephenI.jpeg",
       "email": "itoga@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303G"],
+      "rooms": [
+        "POST 303G"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -597,7 +1076,9 @@
       "picture": "/images/DavidP.jpeg",
       "email": "N/A",
       "officeHours": "N/A",
-      "rooms": ["POST 303G"],
+      "rooms": [
+        "POST 303G"
+      ],
       "phones": [],
       "password": "changeme",
       "role": "FACULTY"
@@ -609,8 +1090,12 @@
       "picture": "/images/KennyQ.png",
       "email": "kennydq@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303A"],
-      "phones": ["808-956-5428"],
+      "rooms": [
+        "POST 303A"
+      ],
+      "phones": [
+        "808-956-5428"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -621,8 +1106,12 @@
       "picture": "/images/WesleyS.jpeg",
       "email": "wesleysu@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 303B"],
-      "phones": ["808-956-8249"],
+      "rooms": [
+        "POST 303B"
+      ],
+      "phones": [
+        "808-956-8249"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -633,8 +1122,12 @@
       "picture": "/images/ICSLogo.jpeg",
       "email": "toddtt@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 327"],
-      "phones": ["808-956-7639"],
+      "rooms": [
+        "POST 327"
+      ],
+      "phones": [
+        "808-956-7639"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     },
@@ -645,97 +1138,689 @@
       "picture": "/images/ICSLogo.jpeg",
       "email": "shackfor@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": ["POST 327"],
-      "phones": ["808-956-4989"],
+      "rooms": [
+        "POST 327"
+      ],
+      "phones": [
+        "808-956-4989"
+      ],
       "password": "changeme",
       "role": "FACULTY"
     }
   ],
   "defaultPorts": [
-    { "port": "16561", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16562", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16563", "building": "POST", "room": "309", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16564", "building": "POST", "room": "309A", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16565", "building": "POST", "room": "309B", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16566", "building": "POST", "room": "309C", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16567", "building": "POST", "room": "310", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16568", "building": "POST", "room": "310", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16569", "building": "POST", "room": "310", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16570", "building": "POST", "room": "310A", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16571", "building": "POST", "room": "310B", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16572", "building": "POST", "room": "310B", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16573", "building": "POST", "room": "310C", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16574", "building": "POST", "room": "310C", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16575", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16576", "building": "POST", "room": "311", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16577", "building": "POST", "room": "311", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16578", "building": "POST", "room": "311", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16579", "building": "POST", "room": "311A", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16580", "building": "POST", "room": "311A", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16581", "building": "POST", "room": "311B", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16582", "building": "POST", "room": "311B", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16583", "building": "POST", "room": "312", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16584", "building": "POST", "room": "312", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16585", "building": "POST", "room": "312A", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16586", "building": "POST", "room": "312A", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16587", "building": "POST", "room": "312B", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16588", "building": "POST", "room": "312B", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16589", "building": "POST", "room": "312C", "side": "Makai", "idf": "320", "status": "inactive" },
-    { "port": "16590", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16591", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16592", "building": "POST", "room": "314", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16593", "building": "POST", "room": "314", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16594", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16595", "building": "POST", "room": "314B", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16596", "building": "POST", "room": "314C", "side": "Ewa", "idf": "320", "status": "inactive" },
-    { "port": "16597", "building": "POST", "room": "314D", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16598", "building": "POST", "room": "314E", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16599", "building": "POST", "room": "314F", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16600", "building": "POST", "room": "314G", "side": "Makai Wall", "idf": "320", "status": "inactive" },
-    { "port": "16601", "building": "POST", "room": "314H", "side": "Mauka Wall", "idf": "320", "status": "inactive" },
-    { "port": "16602", "building": "POST", "room": "314I", "side": "Makai Wall", "idf": "320", "status": "inactive" },
-    { "port": "16603", "building": "POST", "room": "315", "side": "DH", "idf": "320", "status": "inactive" },
-    { "port": "16604", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16605", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16606", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16607", "building": "POST", "room": "N/A", "side": "N/A", "idf": "320", "status": "inactive" },
-    { "port": "16608", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16609", "building": "POST", "room": "303", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16610", "building": "POST", "room": "303-1", "side": "Makai Wall", "idf": "329", "status": "inactive" },
-    { "port": "16611", "building": "POST", "room": "303A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16612", "building": "POST", "room": "303B", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16613", "building": "POST", "room": "303C", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16614", "building": "POST", "room": "303D", "side": "Ewa", "idf": "329", "status": "inactive" },
-    { "port": "16615", "building": "POST", "room": "303E", "side": "Ewa", "idf": "329", "status": "inactive" },
-    { "port": "16616", "building": "POST", "room": "303F", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16617", "building": "POST", "room": "303G", "side": "Ewa", "idf": "329", "status": "inactive" },
-    { "port": "16618", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16619", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16620", "building": "POST", "room": "318B", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16621", "building": "POST", "room": "305A", "side": "Mauka Wall", "idf": "329", "status": "inactive" },
-    { "port": "16622", "building": "POST", "room": "305B", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16623", "building": "POST", "room": "305C", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16624", "building": "POST", "room": "305D", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16625", "building": "POST", "room": "305E", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16626", "building": "POST", "room": "305F", "side": "Ewa", "idf": "329", "status": "inactive" },
-    { "port": "16627", "building": "POST", "room": "306A", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16628", "building": "POST", "room": "306B", "side": "Ewa", "idf": "329", "status": "inactive" },
-    { "port": "16629", "building": "POST", "room": "306B", "side": "Makai Wall", "idf": "329", "status": "inactive" },
-    { "port": "16630", "building": "POST", "room": "306", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16631", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16632", "building": "POST", "room": "306D", "side": "Makai Wall", "idf": "329", "status": "inactive" },
-    { "port": "16633", "building": "POST", "room": "306D", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "16634", "building": "POST", "room": "307", "side": "Ewa Wall", "idf": "329", "status": "inactive" },
-    { "port": "16635", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16636", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16637", "building": "POST", "room": "307A", "side": "Ewa Wall", "idf": "329", "status": "inactive" },
-    { "port": "16638", "building": "POST", "room": "307B", "side": "Ewa Wall", "idf": "329", "status": "inactive" },
-    { "port": "16639", "building": "POST", "room": "307C", "side": "Ewa Wall", "idf": "329", "status": "inactive" },
-    { "port": "16640", "building": "POST", "room": "327", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16641", "building": "POST", "room": "N/A", "side": "N/A", "idf": "329", "status": "inactive" },
-    { "port": "16646", "building": "POST", "room": "314I", "side": "Mauka Wall", "idf": "329", "status": "inactive" },
-    { "port": "25602", "building": "POST", "room": "303A", "side": "DH", "idf": "329", "status": "inactive" },
-    { "port": "25406", "building": "POST", "room": "303G", "side": "N/A", "idf": "329", "status": "inactive" }
+    {
+      "port": "16561",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16562",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16563",
+      "building": "POST",
+      "room": "309",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16564",
+      "building": "POST",
+      "room": "309A",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16565",
+      "building": "POST",
+      "room": "309B",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16566",
+      "building": "POST",
+      "room": "309C",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16567",
+      "building": "POST",
+      "room": "310",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16568",
+      "building": "POST",
+      "room": "310",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16569",
+      "building": "POST",
+      "room": "310",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16570",
+      "building": "POST",
+      "room": "310A",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16571",
+      "building": "POST",
+      "room": "310B",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16572",
+      "building": "POST",
+      "room": "310B",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16573",
+      "building": "POST",
+      "room": "310C",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16574",
+      "building": "POST",
+      "room": "310C",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16575",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16576",
+      "building": "POST",
+      "room": "311",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16577",
+      "building": "POST",
+      "room": "311",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16578",
+      "building": "POST",
+      "room": "311",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16579",
+      "building": "POST",
+      "room": "311A",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16580",
+      "building": "POST",
+      "room": "311A",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16581",
+      "building": "POST",
+      "room": "311B",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16582",
+      "building": "POST",
+      "room": "311B",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16583",
+      "building": "POST",
+      "room": "312",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16584",
+      "building": "POST",
+      "room": "312",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16585",
+      "building": "POST",
+      "room": "312A",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16586",
+      "building": "POST",
+      "room": "312A",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16587",
+      "building": "POST",
+      "room": "312B",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16588",
+      "building": "POST",
+      "room": "312B",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16589",
+      "building": "POST",
+      "room": "312C",
+      "side": "Makai",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16590",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16591",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16592",
+      "building": "POST",
+      "room": "314",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16593",
+      "building": "POST",
+      "room": "314",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16594",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16595",
+      "building": "POST",
+      "room": "314B",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16596",
+      "building": "POST",
+      "room": "314C",
+      "side": "Ewa",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16597",
+      "building": "POST",
+      "room": "314D",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16598",
+      "building": "POST",
+      "room": "314E",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16599",
+      "building": "POST",
+      "room": "314F",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16600",
+      "building": "POST",
+      "room": "314G",
+      "side": "Makai Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16601",
+      "building": "POST",
+      "room": "314H",
+      "side": "Mauka Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16602",
+      "building": "POST",
+      "room": "314I",
+      "side": "Makai Wall",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16603",
+      "building": "POST",
+      "room": "315",
+      "side": "DH",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16604",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16605",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16606",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16607",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "320",
+      "status": "inactive"
+    },
+    {
+      "port": "16608",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16609",
+      "building": "POST",
+      "room": "303",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16610",
+      "building": "POST",
+      "room": "303-1",
+      "side": "Makai Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16611",
+      "building": "POST",
+      "room": "303A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16612",
+      "building": "POST",
+      "room": "303B",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16613",
+      "building": "POST",
+      "room": "303C",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16614",
+      "building": "POST",
+      "room": "303D",
+      "side": "Ewa",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16615",
+      "building": "POST",
+      "room": "303E",
+      "side": "Ewa",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16616",
+      "building": "POST",
+      "room": "303F",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16617",
+      "building": "POST",
+      "room": "303G",
+      "side": "Ewa",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16618",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16619",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16620",
+      "building": "POST",
+      "room": "318B",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16621",
+      "building": "POST",
+      "room": "305A",
+      "side": "Mauka Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16622",
+      "building": "POST",
+      "room": "305B",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16623",
+      "building": "POST",
+      "room": "305C",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16624",
+      "building": "POST",
+      "room": "305D",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16625",
+      "building": "POST",
+      "room": "305E",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16626",
+      "building": "POST",
+      "room": "305F",
+      "side": "Ewa",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16627",
+      "building": "POST",
+      "room": "306A",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16628",
+      "building": "POST",
+      "room": "306B",
+      "side": "Ewa",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16629",
+      "building": "POST",
+      "room": "306B",
+      "side": "Makai Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16630",
+      "building": "POST",
+      "room": "306",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16631",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16632",
+      "building": "POST",
+      "room": "306D",
+      "side": "Makai Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16633",
+      "building": "POST",
+      "room": "306D",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16634",
+      "building": "POST",
+      "room": "307",
+      "side": "Ewa Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16635",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16636",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16637",
+      "building": "POST",
+      "room": "307A",
+      "side": "Ewa Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16638",
+      "building": "POST",
+      "room": "307B",
+      "side": "Ewa Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16639",
+      "building": "POST",
+      "room": "307C",
+      "side": "Ewa Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16640",
+      "building": "POST",
+      "room": "327",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16641",
+      "building": "POST",
+      "room": "N/A",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "16646",
+      "building": "POST",
+      "room": "314I",
+      "side": "Mauka Wall",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "25602",
+      "building": "POST",
+      "room": "303A",
+      "side": "DH",
+      "idf": "329",
+      "status": "inactive"
+    },
+    {
+      "port": "25406",
+      "building": "POST",
+      "room": "303G",
+      "side": "N/A",
+      "idf": "329",
+      "status": "inactive"
+    }
   ],
   "defaultRequest": [
     {
@@ -744,7 +1829,7 @@
       "firstName": "Will",
       "lastName": "Smith",
       "requestTo": "Office",
-      "description":"Need 6 more chairs",
+      "description": "Need 6 more chairs",
       "condition": "depending"
     },
     {
@@ -753,7 +1838,7 @@
       "firstName": "John",
       "lastName": "Will",
       "requestTo": "Office",
-      "description":"Moving out unused items",
+      "description": "Moving out unused items",
       "condition": "depending"
     },
     {
@@ -762,7 +1847,7 @@
       "firstName": "John",
       "lastName": "Will",
       "requestTo": "IT Support",
-      "description":"Moving out unused items",
+      "description": "Moving out unused items",
       "condition": "depending"
     }
   ],
