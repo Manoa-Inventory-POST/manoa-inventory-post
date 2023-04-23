@@ -46,6 +46,7 @@ import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
 import FullClubInfo from '../pages/FullClubInfo';
 import CreatePort from '../pages/CreatePort';
+import RoomSearch from '../pages/RoomSearch';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -90,6 +91,7 @@ const App = () => {
           <Route path="/student-list" element={<FacultyProtectedRoute><StudentList /></FacultyProtectedRoute>} />
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
+          <Route path="/search-rooms" element={<ProtectedRoute><RoomSearch /></ProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
