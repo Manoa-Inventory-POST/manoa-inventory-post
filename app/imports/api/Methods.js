@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
+import { Accounts } from 'meteor/accounts-base';
+import crypto from 'crypto';
 import { StudentProfiles } from './user/StudentProfileCollection';
 
 Meteor.methods({
