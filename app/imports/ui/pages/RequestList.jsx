@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
-import OfficeItemF from '../components/requestItem';
+import OfficeItemF from '../components/RequestItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
