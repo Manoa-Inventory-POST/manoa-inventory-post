@@ -43,12 +43,11 @@ const FullClubInfo = () => {
     // Get advisors
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
-    console.log(clubAdvisors);
+    console.log(`Club Advisors: ${clubAdvisors}`);
     let clubOfficers = ClubOfficer.find({ club: `${clubItem.name}` }).fetch();
     clubOfficers = clubOfficers.map(item => item.officer);
-    // console.log(clubAdvisors);
+    console.log(`Club Officers: ${clubOfficers}`);
     const clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
-    console.log(clubAdvisorInfo);
     /*
     if (clubAdvisors.length === 1) {
       clubAdvisorInfo = clubAdvisorInfo[0];
@@ -59,24 +58,30 @@ const FullClubInfo = () => {
     // console.log(clubAdvisorInfo);
 
     let edit = false;
+    console.log(1);
     const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+    console.log(2);
     const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
+    console.log(3);
     const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+    console.log(4);
     if (isAdmin) {
+      console.log('IS ADMIN!!!');
       edit = true;
-    } else if (isFaculty) {
-      const profile = FacultyProfiles.getData();
-      const email = profile.email;
+    } else if (isFaculty && clubAdvisors.length() !== 0) {
+      console.log('IS FACULTY!!!');
+      const email = FacultyProfiles.find({ userID: Meteor.userID }).fetch()[0].email;
       if (clubAdvisors.includes(email)) {
         edit = true;
       }
-    } else if (isStudent) {
-      const profile = StudentProfiles.getData();
-      const email = profile.email;
+    } else if (isStudent && clubOfficers.length() !== 0) {
+      console.log('IS STUDENT!!!');
+      const email = StudentProfiles.find({ userID: Meteor.userID }).fetch()[0].email;
       if (clubOfficers.includes(email)) {
         edit = true;
       }
     }
+    console.log(5);
 
     return {
       ready: rdy,
