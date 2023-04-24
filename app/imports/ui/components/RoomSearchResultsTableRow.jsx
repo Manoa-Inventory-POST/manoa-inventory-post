@@ -25,8 +25,9 @@ const RoomSearchResultsTableRow = ({ room }) => {
   };
 
   const isITSupport = Roles.userIsInRole(Meteor.userId(), [ROLE.ITSUPPORT]);
+  const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
-  if (isITSupport) {
+  if (isITSupport || isOffice) {
     return (
       <tr>
         <td>{room.building}</td>
