@@ -1,7 +1,4 @@
-// import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-// import { Roles } from 'meteor/alanning:roles';
-// import { Link } from 'react-router-dom';
 import React from 'react';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router';
@@ -38,6 +35,7 @@ const FullClubInfo = () => {
     // Get advisors
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
+    // console.log(clubAdvisors);
     const clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
     /*
     if (clubAdvisors.length === 1) {
@@ -60,12 +58,14 @@ const FullClubInfo = () => {
     let result = [];
     if (count.length === 1) {
       result = advs[0];
+      // console.log(result);
+      // result.map((item) => <ClubAdvisorCard key={item._id} advisor={item} />);
     }
     if (count.length > 1) {
       advs.forEach((a) => {
         result = a;
-        console.log(result);
-        // result.map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />);
+        // console.log(result);
+        // result.map((item) => <ClubAdvisorCard key={item._id} advisor={item} />);
       });
     }
     return result;
