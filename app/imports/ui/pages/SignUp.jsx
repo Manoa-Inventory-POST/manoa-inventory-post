@@ -15,12 +15,14 @@ import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { ROLE } from '../../api/role/Role';
+import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
  */
 const roleOptions = [
   { label: 'Student', value: 'STUDENT' },
+  // { label: 'Admin', value: 'ADMIN' },
   // { label: 'Faculty', value: 'FACULTY' },
   // { label: 'ITSupport', value: 'ITSUPPORT' },
   // { label: 'Office', value: 'OFFICE' },
@@ -75,6 +77,9 @@ const SignUp = () => {
       break;
     case 'ITSUPPORT':
       collectionName = ITSupportProfiles.getCollectionName();
+      break;
+    case 'ADMIN':
+      collectionName = AdminProfiles.getCollectionName();
       break;
     default:
       collectionName = UserProfiles.getCollectionName();
