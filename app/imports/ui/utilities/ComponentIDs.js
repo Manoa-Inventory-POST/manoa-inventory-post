@@ -33,6 +33,8 @@ export const COMPONENT_IDS = {
   NAVBAR_MANAGE_DROPDOWN_DATABASE: 'navbar-manage-dropdown-database',
   NAVBAR_PROFILE: 'navbar-profile',
   NAVBAR_SEARCH_PORTS: 'navbar-search-ports',
+  NAVBAR_SEARCH_ROOMS: 'navbar-search-rooms',
+  NAVBAR_SEARCH_EQUIPMENT: 'navbar-search-equipment',
   NAVBAR_SIGN_OUT: 'navbar-sign-out',
   SIGN_OUT_RETURN: 'sign-out-return',
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',
