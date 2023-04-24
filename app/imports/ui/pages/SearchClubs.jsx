@@ -4,8 +4,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Row, Table, Container, Accordion } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import AccordionBody from 'react-bootstrap/AccordionBody';
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -14,10 +12,6 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
-import { ROLE } from '../../api/role/Role';
-import { StudentProfiles } from '../../api/user/StudentProfileCollection';
-import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
-import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
 const SearchClubs = () => {
@@ -26,38 +20,13 @@ const SearchClubs = () => {
   const [filteredInterests, setFilteredInterests] = useState('');
   const [filteredAdmins, setFilteredAdmins] = useState('');
 
-  let canEdit = false;
-  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
-  const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
-  const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-  if (isAdmin) {
-    canEdit = true;
-    console.log("can edit!");
-  }
-
-
   const { ready, clubProfiles } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
-    const sub4 = ClubOfficer.subscribeClubOfficer();
-    const sub5 = Interests.subscribeInterests();
+    const sub4 = Interests.subscribeInterests();
     const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
     const clubItems = Clubs.find({}, {}).fetch();
-
-    if (isFaculty) {
-      const advisor = FacultyProfiles.getData().email;
-      if (ClubAdvisor.checkExists({ advisor })) {
-        canEdit = true;
-        console.log("can edit!");
-      }
-    } else if (isStudent) {
-      const officer = StudentProfiles.getData().email;
-      if (ClubOfficer.checkExists({ officer })) {
-        canEdit = true;
-        console.log("can edit!");
-      }
-    }
 
     function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
       const result = {};
@@ -181,7 +150,6 @@ const SearchClubs = () => {
             <th>Description</th>
             <th>Interests</th>
             <th>Advisor</th>
-            {canEdit ? ([<th>Edit</th>]) : ''}
           </tr>
         </thead>
         <tbody>

@@ -147,7 +147,6 @@ class ClubAdvisorCollection extends BaseCollection {
     if (instances === 0) {
       return false;
     }
-    console.log("true!");
     return true;
   }
 }
