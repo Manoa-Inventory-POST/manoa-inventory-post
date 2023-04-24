@@ -9,16 +9,16 @@ import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
 /* eslint-disable no-console */
 
-function createUser(email, role, firstName, lastName, password) {
+function createUser(email, role, firstName, lastName, password, securityQuestions) {
   console.log(`  Creating user ${email} with role ${role}.`);
   if (role === ROLE.ADMIN) {
-    AdminProfiles.define({ email, firstName, lastName, password });
+    AdminProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role === ROLE.ITSUPPORT) {
-    ITSupportProfiles.define({ email, firstName, lastName, password });
+    ITSupportProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role === ROLE.OFFICE) {
-    OfficeProfiles.define({ email, firstName, lastName, password });
+    OfficeProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role !== ROLE.STUDENT && role !== ROLE.FACULTY) { // everyone else is just a user.
-    UserProfiles.define({ email, firstName, lastName, password });
+    UserProfiles.define({ email, firstName, lastName, password, securityQuestions });
   }
 }
 
@@ -68,7 +68,8 @@ if (Meteor.users.find().count() === 0) {
       password,
       rooms,
       phones,
-    }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones));
+      securityQuestions,
+    }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones, securityQuestions));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }
