@@ -89,6 +89,16 @@ class UserCollection {
   }
 
   /**
+   * Returns true if user is referenced by other "public" entities. Specifically user owns Stuff.
+   * Used to determine if user can be deleted.
+   * @param user
+   * @return {boolean}
+   */
+  isReferenced() {
+    return false;
+  }
+
+  /**
    * Returns true if user is a defined userID or username.
    * @param user The user.
    * @returns { boolean } True if user is defined, false otherwise.
