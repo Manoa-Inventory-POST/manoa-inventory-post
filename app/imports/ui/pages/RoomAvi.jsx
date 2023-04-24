@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Room } from '../../api/room/RoomCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -25,23 +25,12 @@ const RoomAvi = () => {
   }, []);
   return (ready ? (
     <Container id={PAGE_IDS.Room_Avi} className="py-3">
-      <Row className="justify-content-center">
-        <Col md={7}>
-          <Col className="text-center">
-            <h2>Post 3rd Floor</h2>
-          </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Room number</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rooms.map((room) => <RoomItem key={room._id} room={room} />)}
-            </tbody>
-          </Table>
-        </Col>
+      <Col className="text-center">
+        <h2>Post 3rd Floor</h2>
+      </Col>
+      <hr />
+      <Row xs={1} md={2} lg={4} className="g-2">
+        {rooms.map((room) => <RoomItem key={room._id} room={room} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner message="Loading Rooms" />);

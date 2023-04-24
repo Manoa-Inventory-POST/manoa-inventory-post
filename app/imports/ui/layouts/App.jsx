@@ -45,6 +45,8 @@ import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
 import FullClubInfo from '../pages/FullClubInfo';
 import CreatePort from '../pages/CreatePort';
+import ForgotPassword from '../pages/ForgetPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -63,6 +65,8 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/requestList" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />

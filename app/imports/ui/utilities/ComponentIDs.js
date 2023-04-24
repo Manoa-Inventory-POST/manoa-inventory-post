@@ -52,4 +52,8 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_ROLE: 'sign-up-form-role',
   PROFILE_FORM_PHONE: 'profile-form-phone',
   PROFILE_FORM_SAVE: 'profile-form-save',
+  SIGN_UP_FORM_SECURITY_QUESTION_1: 'sign-up-form-security-question-1',
+  SIGN_UP_FORM_SECURITY_ANSWER_1: 'sign-up-form-security-answers-1',
+  SIGN_UP_FORM_SECURITY_QUESTION_2: 'sign-up-form-security-question-2',
+  SIGN_UP_FORM_SECURITY_ANSWER_2: 'sign-up-form-security-answers-2',
 };
