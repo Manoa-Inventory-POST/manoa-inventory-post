@@ -26,6 +26,12 @@ const roleOptions = [
   // { label: 'Office', value: 'OFFICE' },
 ];
 
+const securityQuestionOptions = [
+  { label: 'What was the name of your first pet?', value: 'What was the name of your first pet?' },
+  { label: 'What is your favorite food?', value: 'What is your favorite food?' },
+  { label: 'What city were you born in?', value: 'What city were you born in?' },
+];
+
 const SignUp = () => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
@@ -38,6 +44,18 @@ const SignUp = () => {
     role: {
       type: String,
       defaultValue: roleOptions[0].value,
+    },
+    securityQuestions: {
+      type: Array,
+    },
+    'securityQuestions.$': {
+      type: Object,
+    },
+    'securityQuestions.$.question': {
+      type: String,
+    },
+    'securityQuestions.$.answer': {
+      type: String,
     },
   });
   const bridge = new SimpleSchema2Bridge(schema);
@@ -63,6 +81,7 @@ const SignUp = () => {
     }
     const definitionData = doc;
     definitionData.role = doc.role;
+    definitionData.securityQuestions = doc.securityQuestions;
     // create the new UserProfile
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
@@ -117,6 +136,10 @@ const SignUp = () => {
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
                 <SelectField id={COMPONENT_IDS.SIGN_UP_FORM_ROLE} name="role" options={roleOptions} />
+                <SelectField id={COMPONENT_IDS.SIGN_UP_FORM_SECURITY_QUESTION_1} name="securityQuestions.0.question" options={securityQuestionOptions} />
+                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_SECURITY_ANSWER_1} name="securityQuestions.0.answer" placeholder="Security Answer 1" />
+                <SelectField id={COMPONENT_IDS.SIGN_UP_FORM_SECURITY_QUESTION_2} name="securityQuestions.1.question" options={securityQuestionOptions} />
+                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_SECURITY_ANSWER_2} name="securityQuestions.1.answer" placeholder="Security Answer 2" />
                 <ErrorsField />
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
               </Card.Body>
