@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -9,35 +9,52 @@ import { useParams } from 'react-router';
 import { Clubs } from '../../api/clubs/Clubs';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
-
-const ClubSchema = new SimpleSchema({
-  name: String,
-  website: String,
-  description: String,
-  picture: String,
-  interests: String,
-});
-
-const bridge = new SimpleSchema2Bridge(ClubSchema);
+import { ClubInterests } from '../../api/clubs/ClubInterests';
+import { Interests } from '../../api/clubs/Interests';
 
 /* Renders the EditStuff page for editing a single document. */
 const EditClub = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { doc, ready } = useTracker(() => {
+  const { doc, ready, interestsValues } = useTracker(() => {
     // Get access to Stuff documents.
     const subscription = Clubs.subscribeClubs();
+    const subClubInterests = ClubInterests.subscribeClubInterests();
+    const subInterests = Interests.subscribeInterests();
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = subscription.ready() && subClubInterests.ready() && subInterests.ready();
     // Get the document
-    const document = Clubs.find({ _id }).fetch();
+    const document = Clubs.find({ _id }, {}).fetch();
     const clubToEdit = document[0];
+    // console.log(clubToEdit);
+    const club = clubToEdit.name;
+    // console.log(club);
+    let clubInterests = ClubInterests.find({ club }, {}).fetch();
+    // console.log(clubInterests);
+    clubInterests = clubInterests.map(item => item.interest);
+    clubToEdit.interests = clubInterests;
+    // console.log(clubToEdit.interests);
+    let interests = Interests.find({ }, {}).fetch();
+    interests = interests.map(item => item.interest);
+    // console.log(interests);
     return {
       doc: clubToEdit,
+      interestsValues: interests,
       ready: rdy,
     };
   }, [_id]);
+
+  const ClubSchema = new SimpleSchema({
+    name: String,
+    website: String,
+    description: String,
+    picture: String,
+    interests: { type: Array, label: 'Interests', optional: true },
+    'interests.$': { type: String, allowedValues: interestsValues, optional: true },
+  });
+
+  const bridge = new SimpleSchema2Bridge(ClubSchema);
 
   // On successful submit, insert the data.
   const submit = (data) => {
@@ -60,7 +77,7 @@ const EditClub = () => {
                 <TextField readOnly name="name" />
                 <TextField name="website" />
                 <TextField name="picture" />
-                <TextField name="interests" />
+                <SelectField name="interests" multiple />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
