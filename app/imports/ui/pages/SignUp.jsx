@@ -107,9 +107,9 @@ const SignUp = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2 className="mb-3">Register your account</h2>
+            <h2>Register your account</h2>
           </Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)} className="mb-3">
+          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="firstName" placeholder="First name" />
