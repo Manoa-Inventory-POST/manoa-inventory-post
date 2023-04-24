@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
+import { Accounts } from 'meteor/accounts-base';
+import crypto from 'crypto';
 import { StudentProfiles } from './user/StudentProfileCollection';
 
 Meteor.methods({
@@ -25,8 +27,6 @@ Meteor.methods({
 
     StudentProfiles.update(studentId, update);
   },
-
-  /*
   'users.generateResetToken'(email, securityQuestion, securityAnswer) {
     check(email, String);
     check(securityQuestion, String);
@@ -76,5 +76,4 @@ Meteor.methods({
     Accounts.setPassword(user._id, newPassword);
     Meteor.users.update(user._id, { $unset: { 'services.password.resetToken': '' } });
   },
-   */
 });
