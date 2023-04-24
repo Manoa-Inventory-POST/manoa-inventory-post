@@ -48,7 +48,6 @@ import ForgotPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
 import RoomSearch from '../pages/RoomSearch';
 
-
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {

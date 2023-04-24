@@ -57,6 +57,7 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             { isOffice ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_ROOMS} as={NavLink} to="/ports" key="rooms">Rooms</Nav.Link>,
             ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             {isFaculty ? ([
