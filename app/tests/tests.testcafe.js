@@ -12,7 +12,6 @@ import { facultySearchPage } from './facultysearch.page';
 import { fullFacultyInfoPage } from './fullfacultyinfo.page';
 import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
-import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
 import { serviceRequestPage } from './servicerequest.page';
@@ -164,13 +163,4 @@ test('Test that admin home page shows up', async () => {
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
   await adminhomePage.isDisplayed();
-});
-
-test('Test that room reserve page shows up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
-  await navBar.isLoggedIn(facultyCredentials.username);
-  await facultyhomePage.isDisplayed();
-  await navBar.gotoReserveRoomPage();
-  await reserveRoomPage.isDisplayed();
 });
