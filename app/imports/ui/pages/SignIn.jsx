@@ -79,6 +79,9 @@ const SignIn = () => {
           <Alert variant="secondary">
             Don&apos;t have an account? <Link to="/signup">Signup</Link>
           </Alert>
+          <Alert variant="secondary">
+            Forget your password? <Link to="/forgot-password">Reset</Link>
+          </Alert>
           {error === '' ? (
             ''
           ) : (

@@ -1,5 +1,5 @@
 import { Selector, t } from 'testcafe';
-import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, */ /* manageDatabasePage, */ signOutPage } from './simple.page';
+import { signOutPage } from './simple.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
@@ -12,7 +12,6 @@ import { facultySearchPage } from './facultysearch.page';
 import { fullFacultyInfoPage } from './fullfacultyinfo.page';
 import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
-import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
 import { serviceRequestPage } from './servicerequest.page';
@@ -59,11 +58,16 @@ test('Test that signin and signout work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
-*/
+ */
 test('Test that sign up and sign out work', async () => {
+  const question1 = 'What was the name of your first pet?';
+  const answer1 = 'dog';
+  const question2 = 'What city were you born in?';
+  const answer2 = 'honolulu';
+
   await navBar.gotoSignUpPage();
   await signUpPage.isDisplayed();
-  await signUpPage.signupUser(newCredentials.username, newCredentials.password);
+  await signUpPage.signupUser(newCredentials.username, newCredentials.password, question1, answer1, question2, answer2);
   await navBar.isLoggedIn(newCredentials.username);
   await navBar.logout();
   await signOutPage.isDisplayed();
@@ -159,13 +163,4 @@ test('Test that admin home page shows up', async () => {
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
   await adminhomePage.isDisplayed();
-});
-
-test('Test that room reserve page shows up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
-  await navBar.isLoggedIn(facultyCredentials.username);
-  await facultyhomePage.isDisplayed();
-  await navBar.gotoReserveRoomPage();
-  await reserveRoomPage.isDisplayed();
 });

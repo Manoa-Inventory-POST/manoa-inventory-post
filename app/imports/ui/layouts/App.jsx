@@ -21,7 +21,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
-import FacultySearch from '../pages/FacultySearch';
+import SearchFaculty from '../pages/SearchFaculty';
 import CreateUser from '../pages/CreateUser';
 import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -32,9 +32,8 @@ import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
 import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
-import ClubSearch from '../pages/SearchClubs';
+import SearchClubs from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
-// import ClubPage from '../pages/ClubPage';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 import OfficeRequestHome from '../pages/officeRequestHome';
@@ -45,6 +44,8 @@ import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
 import FullClubInfo from '../pages/FullClubInfo';
 import CreatePort from '../pages/CreatePort';
+import ForgotPassword from '../pages/ForgetPassword';
+import ResetPassword from '../pages/ResetPassword';
 import RoomSearch from '../pages/RoomSearch';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -64,12 +65,14 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
-          <Route path="/requestList" element={<RequestList />} />
+          <Route path="/request-list" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />
-          <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/faculty" element={<SearchFaculty />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
-          <Route path="/clubs" element={<ClubSearch />} />
+          <Route path="/clubs" element={<SearchClubs />} />
           <Route path="/clubinfo/:_id" element={<FullClubInfo />} />
           <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
@@ -94,7 +97,7 @@ const App = () => {
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
-          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
+          <Route path="/office-request-home" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
