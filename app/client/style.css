@@ -117,3 +117,7 @@ body {
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
 
+.ui.club-edit-button.button {
+  background-color: #75abcf !important;
+  color: white !important;
+}

@@ -1,27 +1,35 @@
 import { useTracker } from 'meteor/react-meteor-data';
 import React from 'react';
-import { Container, Image, Row, Col } from 'react-bootstrap';
+import { Container, Image, Row, Col, Button } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
+import { Link, NavLink } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Clubs } from '../../api/clubs/Clubs';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
+import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 import { Interests } from '../../api/clubs/Interests';
 import ClubAdvisorCard from '../components/ClubAdvisorCard';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
+import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
+import { ROLE } from '../../api/role/Role';
 
 const FullClubInfo = () => {
   const { _id } = useParams();
 
-  const { ready, club, interests, advCount, advisors } = useTracker(() => {
+  const { ready, club, interests, advCount, advisors, canEdit } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
     const sub4 = Interests.subscribeInterests();
     const sub5 = FacultyProfiles.subscribeFaculty();
+    const sub6 = ClubOfficer.subscribeClubOfficer();
+    const sub7 = StudentProfiles.subscribe();
     // Determine if the subscription is ready
-    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready() && sub7.ready();
     // Get the document
     const clubItem = Clubs.findOne(_id);
     // Get interests
@@ -35,8 +43,12 @@ const FullClubInfo = () => {
     // Get advisors
     let clubAdvisors = ClubAdvisor.find({ club: `${clubItem.name}` }).fetch();
     clubAdvisors = clubAdvisors.map(item => item.advisor);
+    console.log(clubAdvisors);
+    let clubOfficers = ClubOfficer.find({ club: `${clubItem.name}` }).fetch();
+    clubOfficers = clubOfficers.map(item => item.officer);
     // console.log(clubAdvisors);
     const clubAdvisorInfo = clubAdvisors.map(person => FacultyProfiles.find({ email: `${person}` }).fetch());
+    console.log(clubAdvisorInfo);
     /*
     if (clubAdvisors.length === 1) {
       clubAdvisorInfo = clubAdvisorInfo[0];
@@ -45,12 +57,34 @@ const FullClubInfo = () => {
     }
     */
     // console.log(clubAdvisorInfo);
+
+    let edit = false;
+    const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+    const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
+    const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
+    if (isAdmin) {
+      edit = true;
+    } else if (isFaculty) {
+      const profile = FacultyProfiles.getData();
+      const email = profile.email;
+      if (clubAdvisors.includes(email)) {
+        edit = true;
+      }
+    } else if (isStudent) {
+      const profile = StudentProfiles.getData();
+      const email = profile.email;
+      if (clubOfficers.includes(email)) {
+        edit = true;
+      }
+    }
+
     return {
       ready: rdy,
       club: clubItem,
       interests: clubInterests,
       advCount: clubAdvisors,
       advisors: clubAdvisorInfo,
+      canEdit: edit,
     };
   }, []);
 
@@ -95,6 +129,18 @@ const FullClubInfo = () => {
               <h6 className="align-content-center text-center justify-content-center">
                 { advisors.length === 0 ? ('No advisors currently listed.') : countAdv(advCount, advisors).map((adv) => <ClubAdvisorCard key={adv._id} advisor={adv} />) }
               </h6>
+              {canEdit ? ([
+                <Button
+                  fluid
+                  className="club-edit-button"
+                  as={NavLink}
+                  activeClassName="active"
+                  exact
+                  style={{ border: 'none' }}
+                  to={`/editClub/${club._id}`}
+                >Edit Club
+                </Button>,
+              ]) : ''}
             </Row>
           </Col>
         </Row>
