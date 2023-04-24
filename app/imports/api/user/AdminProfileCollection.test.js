@@ -29,9 +29,9 @@ if (Meteor.isServer) {
         fc.property(
           fc.lorem({ maxCount: 1 }),
           fc.lorem({ maxCount: 1 }),
-          (firstName, lastName) => {
+          (firstName, lastName, password, phones) => {
             const email = faker.internet.email();
-            const definitionData = { email, firstName, lastName };
+            const definitionData = { email, firstName, lastName, password, phones };
             testDefine(collection, definitionData);
           },
         ),
