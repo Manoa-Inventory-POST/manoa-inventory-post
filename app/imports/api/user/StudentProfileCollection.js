@@ -32,7 +32,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests, securityQuestions }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests, securityQuestions = [] }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});

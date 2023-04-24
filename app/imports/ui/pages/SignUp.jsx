@@ -111,7 +111,7 @@ const SignUp = () => {
       return (<Navigate to="/admin-home" />);
     }
     if (Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
-      return (<Navigate to="/home" />);
+      return (<Navigate to="/" />);
     }
     if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
       return (<Navigate to="/student-home" />);

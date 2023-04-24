@@ -39,7 +39,7 @@ if (Meteor.users.find().count() === 0) {
   const defaultData = Meteor.settings.defaultAccounts;
   if (defaultData) {
     console.log('Creating the default user(s)');
-    defaultData.map(({ email, password, role, firstName, lastName }) => createUser(email, role, firstName, lastName, password));
+    defaultData.map(({ email, password, role, firstName, lastName, securityQuestions }) => createUser(email, role, firstName, lastName, password, securityQuestions));
     defaultData.map(({
       email,
       role,
