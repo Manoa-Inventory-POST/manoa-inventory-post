@@ -12,9 +12,8 @@ rolesToCollectionNames[ROLE.STUDENT] = 'StudentProfileCollection';
 rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
 rolesToCollectionNames[ROLE.OFFICE] = 'OfficeProfileCollection';
 rolesToCollectionNames[ROLE.ITSUPPORT] = 'ITSupportProfileCollection';
-rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
 
-const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT', 'ADVISOR'];
+const profileRoleValues = ['ADMIN', 'USER', 'STUDENT', 'FACULTY', 'OFFICE', 'ITSUPPORT'];
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
