@@ -25,8 +25,6 @@ Meteor.methods({
 
     StudentProfiles.update(studentId, update);
   },
-
-  /*
   'users.generateResetToken'(email, securityQuestion, securityAnswer) {
     check(email, String);
     check(securityQuestion, String);
@@ -76,5 +74,4 @@ Meteor.methods({
     Accounts.setPassword(user._id, newPassword);
     Meteor.users.update(user._id, { $unset: { 'services.password.resetToken': '' } });
   },
-   */
 });
