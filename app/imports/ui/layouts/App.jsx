@@ -32,9 +32,8 @@ import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
 import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
-import ClubSearch from '../pages/SearchClubs';
+import SearchClubs from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
-// import ClubPage from '../pages/ClubPage';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 import OfficeRequestHome from '../pages/officeRequestHome';
@@ -69,7 +68,7 @@ const App = () => {
           <Route path="/availability" element={<RoomAvi />} />
           <Route path="/faculty" element={<FacultySearch />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
-          <Route path="/clubs" element={<ClubSearch />} />
+          <Route path="/clubs" element={<SearchClubs />} />
           <Route path="/clubinfo/:_id" element={<FullClubInfo />} />
           <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />

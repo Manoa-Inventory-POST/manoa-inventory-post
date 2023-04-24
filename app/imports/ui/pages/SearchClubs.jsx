@@ -14,7 +14,7 @@ import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
 import { Interests } from '../../api/clubs/Interests';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
-const ClubSearch = () => {
+const SearchClubs = () => {
   const [filteredClubs, setFilteredClubs] = useState([]);
   const [filteredName, setFilteredName] = useState('');
   const [filteredInterests, setFilteredInterests] = useState('');
@@ -178,4 +178,4 @@ const ClubSearch = () => {
     </Container>
   );
 };
-export default ClubSearch;
+export default SearchClubs;
