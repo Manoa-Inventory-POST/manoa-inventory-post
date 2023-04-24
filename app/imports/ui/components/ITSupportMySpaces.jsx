@@ -37,7 +37,7 @@ const FacultyMySpaces = () => (
     <Card.Footer className="card-body">
       <Row className="text-center">
         <Col><a href="/ports" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Ports</a></Col>
-        <Col><a href="/search-rooms" className="btn" style={{backgroundColor: '#75ABCF', color: 'white' }}>Search Rooms</a></Col>
+        <Col><a href="/search-rooms" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Rooms</a></Col>
       </Row>
     </Card.Footer>
   </Card>

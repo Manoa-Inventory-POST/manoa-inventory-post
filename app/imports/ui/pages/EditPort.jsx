@@ -40,9 +40,9 @@ const EditPort = () => {
   const PortSchema = new SimpleSchema({
     port: String,
     building: { type: String, allowedValues: buildingValues },
-    room: { type: String, allowedValues: roomValues},
+    room: { type: String, allowedValues: roomValues },
     side: { type: String, allowedValues: sideValues },
-    idf: { type: String, allowedValues: idfValues},
+    idf: { type: String, allowedValues: idfValues },
     status: { type: String, allowedValues: statusValues },
   });
 

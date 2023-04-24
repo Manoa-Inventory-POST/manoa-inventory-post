@@ -39,7 +39,6 @@ import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
-import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
 import EditPort from '../pages/EditPort';
