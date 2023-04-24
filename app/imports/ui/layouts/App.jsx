@@ -21,7 +21,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
-import FacultySearch from '../pages/FacultySearch';
+import SearchFaculty from '../pages/SearchFaculty';
 import CreateUser from '../pages/CreateUser';
 import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -68,9 +68,9 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
-          <Route path="/requestList" element={<RequestList />} />
+          <Route path="/request-list" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />
-          <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/faculty" element={<SearchFaculty />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<SearchClubs />} />
           <Route path="/clubinfo/:_id" element={<FullClubInfo />} />
@@ -97,7 +97,7 @@ const App = () => {
           <Route path="/assign-faculty" element={<OfficeProtectedRoute><AssignFac /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
-          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
+          <Route path="/office-request-home" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

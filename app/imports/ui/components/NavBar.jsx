@@ -71,20 +71,18 @@ const NavBar = () => {
             ])}
             {isITSupport ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_PORTS} as={NavLink} to="/ports" key="ports">Ports</Nav.Link>,
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_EQUIPMENT} as={NavLink} to="/equipment" key="equipment">Equipment</Nav.Link>,
             ]) : ''}
             {isOffice || isITSupport || isFaculty || isStudent ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY} as={NavLink} to="/availability" key="availability">Room Availability</Nav.Link>,
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_RESERVE_ROOM} as={NavLink} to="/reserve" key="reserve">Reserve Room</Nav.Link>,
             ]) : ''}
             {isOffice || isFaculty || isStudent || isITSupport || isAdmin ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST} as={NavLink} to="/service" key="service">Service Request</Nav.Link>,
             ]) : ''}
             {isOffice || isITSupport || isAdmin ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/officeRequestHome" key="office-request">Request List</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_OFFICE_HOME} as={NavLink} to="/office-request-home" key="office-request">Request List</Nav.Link>,
             ]) : ''}
             {isFaculty ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_ListE} as={NavLink} to="/requestList" key="navbar-service-request-list">Request List</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_LIST} as={NavLink} to="/request-list" key="navbar-service-request-list">Request List</Nav.Link>,
             ]) : ''}
             {isAdmin ? ([
               <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">

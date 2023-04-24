@@ -12,7 +12,7 @@ import FacultyItemOffice from '../components/FacultyItemOffice';
 import { ROLE } from '../../api/role/Role';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
-const FacultySearch = () => {
+const SearchFaculty = () => {
   const [filteredFaculty, setFilteredFaculty] = useState([]);
   const [facultyFirstName, setFacultyFirstName] = useState('');
   const [facultyLastName, setFacultyLastName] = useState('');
@@ -25,12 +25,20 @@ const FacultySearch = () => {
   const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
   /* Connecting with default */
-  const { ready, faculty } = useTracker(() => {
+  const { ready, faculty, positions } = useTracker(() => {
     const subscription = FacultyProfiles.subscribeFaculty();
     const rdy = subscription.ready();
     const facultyItems = FacultyProfiles.find({}).fetch();
+    const uniqPositions = [];
+    facultyItems.map(item => {
+      if (uniqPositions.indexOf(item.position) === -1) {
+        uniqPositions.push(item.position);
+      }
+      return uniqPositions;
+    });
     return {
       faculty: facultyItems,
+      positions: uniqPositions,
       ready: rdy,
     };
   }, []);
@@ -106,12 +114,12 @@ const FacultySearch = () => {
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
                       Position
                     </Col>
-                    <input
-                      type="text"
-                      className="shadow-sm"
-                      placeholder="Professor"
-                      onChange={e => setFacultyPosition(e.target.value)}
-                    />
+                    <select type="text" className="shadow-sm" onChange={e => setFacultyPosition(e.target.value)}>
+                      <option> </option>
+                      { positions.map((item) => (
+                        <option>{item}</option>
+                      ))}
+                    </select>
                   </label>
                 </Col>
               </Row>
@@ -166,4 +174,4 @@ const FacultySearch = () => {
   );
 };
 
-export default FacultySearch;
+export default SearchFaculty;
