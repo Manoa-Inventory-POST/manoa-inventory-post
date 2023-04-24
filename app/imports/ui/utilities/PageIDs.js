@@ -18,6 +18,7 @@ export const PAGE_IDS = {
   PROFILE: 'profile',
   PROFILE_UPDATE: 'profile-update',
   RESERVE_ROOM: 'reserve-room',
+  SERVICE_REQUEST: 'service-request',
   STUDENT_HOME: 'student-home',
   USER_PROFILE: 'user-profile',
   SIGN_IN: 'sign-in',

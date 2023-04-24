@@ -34,7 +34,7 @@ class RoomCollection extends BaseCollection {
         if (Phone.checkExists(phoneNum)) {
           const phoneID = Phone.findDoc({ phoneNum })._id;
           Phone.update(phoneID, { room });
-        // else, define new phone
+          // else, define new phone
         } else {
           Phone.define({ room, phoneNum });
         }

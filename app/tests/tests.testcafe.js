@@ -14,6 +14,9 @@ import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
 import { reserveRoomPage } from './reserveroom.page';
 import { facultyProfilePage } from './facultyprofile.page';
+import { itsupporthomePage } from './itsupporthome.page';
+import { serviceRequestPage } from './servicerequest.page';
+import { fullClubInfoPage } from './fullclubinfo.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -21,6 +24,7 @@ import { facultyProfilePage } from './facultyprofile.page';
 /** Credentials for one of the sample users defined in settings.development.json. */
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
+const itSupportCredentials = { username: 'itsupport@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 const profileInfo = { phone: '808-1680-0000' };
@@ -104,6 +108,18 @@ test('Test that faculty search and faculty info pages show up', async () => {
   await fullFacultyInfoPage.isDisplayed();
 });
 
+test('Test that the club search and club info pages show up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await studenthomePage.isDisplayed();
+  await navBar.gotoClubSearchPage();
+  await clubSearchPage.isDisplayed();
+  const ACM = Selector('a').withText('Association for Computing Machinery (ACM)');
+  await t.click(ACM);
+  await fullClubInfoPage.isDisplayed();
+});
+
 test('Test that faculty home page shows up and profile modification works', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
@@ -114,15 +130,6 @@ test('Test that faculty home page shows up and profile modification works', asyn
   await facultyProfilePage.updateProfile(profileInfo.phone);
 });
 
-test('Test that the club search page shows up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(studentCredentials.username, studentCredentials.password);
-  await navBar.isLoggedIn(studentCredentials.username);
-  await studenthomePage.isDisplayed();
-  await navBar.gotoClubSearchPage();
-  await clubSearchPage.isDisplayed();
-});
-
 test('Test that the student search page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(facultyCredentials.username, facultyCredentials.password);
@@ -130,6 +137,21 @@ test('Test that the student search page shows up', async () => {
   await facultyhomePage.isDisplayed();
   await navBar.gotoStudentSearchPage();
   await studentSearchPage.isDisplayed();
+});
+
+test('Test that the IT support home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(itSupportCredentials.username, itSupportCredentials.password);
+  await navBar.isLoggedIn(itSupportCredentials.username);
+  await itsupporthomePage.isDisplayed();
+});
+
+test('Test that the service request page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(studentCredentials.username, studentCredentials.password);
+  await navBar.isLoggedIn(studentCredentials.username);
+  await navBar.gotoServiceRequestPage();
+  await serviceRequestPage.isDisplayed();
 });
 
 test('Test that admin home page shows up', async () => {

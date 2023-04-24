@@ -238,354 +238,75 @@
     }
   ],
   "defaultRoomData": [
-    {
-      "room": "301",
-      "description": "Sink",
-      "building": "POST",
-      "phones": [
-        "808-808-8080"
-      ]
-    },
-    {
-      "room": "302",
-      "description": "conference",
-      "building": "POST"
-    },
-    {
-      "room": "303A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303D",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303E",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303F",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303G",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "303-1",
-      "description": "cubicles",
-      "building": "POST"
-    },
-    {
-      "room": "303-5",
-      "description": "cubicles",
-      "building": "POST"
-    },
-    {
-      "room": "304",
-      "description": "mechanical",
-      "building": "POST"
-    },
-    {
-      "room": "305A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305D",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305E",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305F",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "305G",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "306A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "306B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "306C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "306D",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "307A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "307B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "307C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "308",
-      "description": "mechanical",
-      "building": "POST"
-    },
-    {
-      "room": "309A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "309B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "309C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "309D",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "310A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "310B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "310C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "311",
-      "description": "asecolab",
-      "building": "POST"
-    },
-    {
-      "room": "312A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "312B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "312C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "313",
-      "description": "mechanical",
-      "building": "POST"
-    },
-    {
-      "room": "314A",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314B",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314C",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314D",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314E",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314F",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314G",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314H",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314I",
-      "description": "offices",
-      "building": "POST"
-    },
-    {
-      "room": "314-1",
-      "description": "cubicles",
-      "building": "POST"
-    },
-    {
-      "room": "314-10",
-      "description": "cubicles",
-      "building": "POST"
-    },
-    {
-      "room": "315",
-      "description": "rooms",
-      "building": "POST"
-    },
-    {
-      "room": "316",
-      "description": "mail",
-      "building": "POST"
-    },
-    {
-      "room": "317",
-      "description": "main rooms",
-      "building": "POST"
-    },
-    {
-      "room": "318A",
-      "description": "lab",
-      "building": "POST"
-    },
-    {
-      "room": "318B",
-      "description": "ICSpace",
-      "building": "POST"
-    },
-    {
-      "room": "319",
-      "description": "lab",
-      "building": "POST"
-    },
-    {
-      "room": "320",
-      "description": "telephone",
-      "building": "POST"
-    },
-    {
-      "room": "321",
-      "description": "women",
-      "building": "POST"
-    },
-    {
-      "room": "322",
-      "description": "janitor",
-      "building": "POST"
-    },
-    {
-      "room": "323",
-      "description": "men",
-      "building": "POST"
-    },
-    {
-      "room": "324",
-      "description": "electrical",
-      "building": "POST"
-    },
-    {
-      "room": "325",
-      "description": "EE",
-      "building": "POST"
-    },
-    {
-      "room": "326",
-      "description": "storage",
-      "building": "POST"
-    },
-    {
-      "room": "327",
-      "description": "Todd's and Charlie's office",
-      "building": "POST"
-    },
-    {
-      "room": "328",
-      "description": "ICS IT",
-      "building": "POST"
-    },
-    {
-      "room": "329",
-      "description": "telephone",
-      "building": "POST"
-    },
-    {
-      "room": "330",
-      "description": "men",
-      "building": "POST"
-    },
-    {
-      "room": "331",
-      "description": "women",
-      "building": "POST"
-    },
-    {
-      "room": "331",
-      "description": "utility",
-      "building": "POST"
-    }
+    { "room": "301", "description": "Sink", "building": "POST", "phones": ["808-808-8080"], "image": "images/classroom.png" },
+    { "room": "302", "description": "conference", "building": "POST" },
+    { "room": "303A", "description": "offices", "building": "POST" },
+    { "room": "303B", "description": "offices", "building": "POST" },
+    { "room": "303C", "description": "offices", "building": "POST" },
+    { "room": "303D", "description": "offices", "building": "POST" },
+    { "room": "303E", "description": "offices", "building": "POST" },
+    { "room": "303F", "description": "offices", "building": "POST" },
+    { "room": "303G", "description": "offices", "building": "POST" },
+    { "room": "303-1", "description": "cubicles", "building": "POST" },
+    { "room": "303-5", "description": "cubicles", "building": "POST" },
+    { "room": "304", "description": "mechanical", "building": "POST" },
+    { "room": "305A", "description": "offices", "building": "POST" },
+    { "room": "305B", "description": "offices", "building": "POST" },
+    { "room": "305C", "description": "offices", "building": "POST" },
+    { "room": "305D", "description": "offices", "building": "POST" },
+    { "room": "305E", "description": "offices", "building": "POST" },
+    { "room": "305F", "description": "offices", "building": "POST" },
+    { "room": "305G", "description": "offices", "building": "POST" },
+    { "room": "306A", "description": "offices", "building": "POST" },
+    { "room": "306B", "description": "offices", "building": "POST" },
+    { "room": "306C", "description": "offices", "building": "POST" },
+    { "room": "306D", "description": "offices", "building": "POST" },
+    { "room": "307A", "description": "offices", "building": "POST" },
+    { "room": "307B", "description": "offices", "building": "POST" },
+    { "room": "307C", "description": "offices", "building": "POST" },
+    { "room": "308", "description": "mechanical", "building": "POST" },
+    { "room": "309A", "description": "offices", "building": "POST" },
+    { "room": "309B", "description": "offices", "building": "POST" },
+    { "room": "309C", "description": "offices", "building": "POST" },
+    { "room": "309D", "description": "offices", "building": "POST" },
+    { "room": "310A", "description": "offices", "building": "POST" },
+    { "room": "310B", "description": "offices", "building": "POST" },
+    { "room": "310C", "description": "offices", "building": "POST" },
+    { "room": "311", "description": "asecolab", "building": "POST" },
+    { "room": "312A", "description": "offices", "building": "POST" },
+    { "room": "312B", "description": "offices", "building": "POST" },
+    { "room": "312C", "description": "offices", "building": "POST" },
+    { "room": "313", "description": "mechanical", "building": "POST" },
+    { "room": "314A", "description": "offices", "building": "POST" },
+    { "room": "314B", "description": "offices", "building": "POST" },
+    { "room": "314C", "description": "offices", "building": "POST" },
+    { "room": "314D", "description": "offices", "building": "POST" },
+    { "room": "314E", "description": "offices", "building": "POST" },
+    { "room": "314F", "description": "offices", "building": "POST" },
+    { "room": "314G", "description": "offices", "building": "POST" },
+    { "room": "314H", "description": "offices", "building": "POST" },
+    { "room": "314I", "description": "offices", "building": "POST" },
+    { "room": "314-1", "description": "cubicles", "building": "POST" },
+    { "room": "314-10", "description": "cubicles", "building": "POST" },
+    { "room": "315", "description": "rooms", "building": "POST" },
+    { "room": "316", "description": "mail", "building": "POST" },
+    { "room": "317", "description": "main rooms", "building": "POST" },
+    { "room": "318A", "description": "lab", "building": "POST" },
+    { "room": "318B", "description": "ICSpace", "building": "POST" },
+    { "room": "319", "description": "lab", "building": "POST" },
+    { "room": "320", "description": "telephone", "building": "POST" },
+    { "room": "321", "description": "women", "building": "POST" },
+    { "room": "322", "description": "janitor", "building": "POST" },
+    { "room": "323", "description": "men", "building": "POST" },
+    { "room": "324", "description": "electrical", "building": "POST" },
+    { "room": "325", "description": "EE", "building": "POST" },
+    { "room": "326", "description": "storage", "building": "POST" },
+    { "room": "327", "description": "Todd's and Charlie's office", "building": "POST" },
+    { "room": "328", "description": "ICS IT", "building": "POST" },
+    { "room": "329", "description": "telephone", "building": "POST" },
+    { "room": "330", "description": "men", "building": "POST" },
+    { "room": "331", "description": "women", "building": "POST" },
+    { "room": "331", "description": "utility", "building": "POST" }
   ],
   "defaultClubs": [
     {
