@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Table } from 'react-bootstrap';
+import { Container, Form, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from './LoadingSpinner';
 import { Room } from '../../api/room/RoomCollection';

@@ -107,19 +107,31 @@ class ClubOfficerCollection extends BaseCollection {
   }
 
   /**
-   * Checks the ClubOfficer collection to see if an inputted Club Officer already exists.
-   * @param officer
-   * @param club
-   * @return true
-   * @return false
+   * Searches for a club with a given officer. If club exists, returns the array of clubs. Else,
+   * there is no club.
+   * @param officer an officer.
+   * @returns { Object } Array of clubs.
    */
-  checkExists(officer) {
-    const instances = this.find({ officer }, {}).count();
-    if (instances === 0) {
-      return false;
+  getClub(officer) {
+    const clubs = this.find({ officer }).fetch();
+    if (clubs.isEmpty()) {
+      return [];
     }
-    console.log("true!");
-    return true;
+    return clubs;
+  }
+
+  /**
+   * Searches for an officer with a given club. If officer exists, returns the array of officers.
+   * Else, there are no officers.
+   * @param club a club.
+   * @returns { Object } Array of officers.
+   */
+  getOfficer(club) {
+    const officers = this.find({ club }).fetch();
+    if (officers.isEmpty()) {
+      return [];
+    }
+    return officers;
   }
 }
 

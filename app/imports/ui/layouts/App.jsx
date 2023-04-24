@@ -6,10 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
 import AdminHome from '../pages/AdminHome';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -24,8 +21,7 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 // import { Test } from '../pages/Test';
 import ConfirmEditUser from '../pages/ConfirmEditUser';
 import ServiceRequest from '../pages/ServiceRequest';
-import FacultySearch from '../pages/FacultySearch';
-import HomeTemplate from '../pages/HomeTemplate';
+import SearchFaculty from '../pages/SearchFaculty';
 import CreateUser from '../pages/CreateUser';
 import ConfirmCreateUser from '../pages/ConfirmCreateUser';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -36,18 +32,21 @@ import StudentHome from '../pages/StudentHome';
 import FacultyHome from '../pages/FacultyHome';
 import ITSupportHome from '../pages/ITSupportHome';
 import OfficeHome from '../pages/OfficeHome';
-import ClubSearch from '../pages/SearchClubs';
+import SearchClubs from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
 import OfficeRequestHome from '../pages/officeRequestHome';
 import EditRequest from '../pages/EditRequest';
-import AssignFac from '../pages/AssignFac';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
 import EditPort from '../pages/EditPort';
 import ProfileUpdate from '../pages/ProfileUpdate';
+import FullClubInfo from '../pages/FullClubInfo';
 import CreatePort from '../pages/CreatePort';
+import ForgotPassword from '../pages/ForgetPassword';
+import ResetPassword from '../pages/ResetPassword';
+import RoomSearch from '../pages/RoomSearch';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -66,19 +65,18 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
-          <Route path="/requestList" element={<RequestList />} />
+          <Route path="/request-list" element={<RequestList />} />
           <Route path="/availability" element={<RoomAvi />} />
-          <Route path="/faculty" element={<FacultySearch />} />
+          <Route path="/faculty" element={<SearchFaculty />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
-          <Route path="/clubs" element={<ClubSearch />} />
-          <Route path="/home" element={<ProtectedRoute><HomeTemplate /></ProtectedRoute>} />
+          <Route path="/clubs" element={<SearchClubs />} />
+          <Route path="/clubinfo/:_id" element={<FullClubInfo />} />
           <Route path="/profile" element={<ProtectedRoute><ProfileUpdate /></ProtectedRoute>} />
           <Route path="/reserve" element={<ProtectedRoute><ReservationForm /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/service" element={<ProtectedRoute><ServiceRequest /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
@@ -95,11 +93,11 @@ const App = () => {
           <Route path="/student-list" element={<FacultyProtectedRoute><StudentList /></FacultyProtectedRoute>} />
           <Route path="/itsupport-home" element={<ITSupportProtectedRoute><ITSupportHome /></ITSupportProtectedRoute>} />
           <Route path="/ports" element={<ITSupportProtectedRoute><PortSearch /></ITSupportProtectedRoute>} />
+          <Route path="/search-rooms" element={<ProtectedRoute><RoomSearch /></ProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
-          <Route path="/assign-faculty" element={<OfficeProtectedRoute><AssignFac /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
-          <Route path="/officeRequestHome" element={<OfficeRequestHome />} />
+          <Route path="/office-request-home" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

@@ -42,7 +42,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
     if (!user) {
       const role = ROLE.FACULTY;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role, emergencyPhone, emergencyEmail});
+      const profileID = this._collection.insert({ email, firstName, lastName, officeHours, position, picture, userID, role, emergencyPhone, emergencyEmail });
       if (rooms) {
         rooms.forEach((room) => OccupantRoom.define({ email, room }));
       }
@@ -213,7 +213,7 @@ class FacultyProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Subscription method for stuff owned by the current user.
+   * Subscription method for faculty owned by the current user.
    */
   subscribeFaculty() {
     if (Meteor.isClient) {
@@ -251,6 +251,17 @@ class FacultyProfileCollection extends BaseProfileCollection {
     return profile[0];
   }
 
+  /**
+   * Searches for an email. If email exists, returns the User Object. Else, there is no profile.
+   * @returns { Object } A profile.
+   */
+  checkEmail(email) {
+    const profile = this.find({ email }).fetch();
+    if (profile.isEmpty()) {
+      return [];
+    }
+    return profile[0];
+  }
 }
 
 /**

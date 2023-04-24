@@ -9,7 +9,7 @@ import { Roles } from 'meteor/alanning:roles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import ClubItem from '../components/ClubItem';
+import SearchClubItem from '../components/SearchClubItem';
 import { Clubs } from '../../api/clubs/Clubs';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { ClubAdvisor } from '../../api/clubs/ClubAdvisor';
@@ -20,7 +20,7 @@ import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { ClubOfficer } from '../../api/clubs/ClubOfficer';
 
 /* Renders a table containing all of the Faculty documents. Use <FacultyItem> to render each row. */
-const ClubSearch = () => {
+const SearchClubs = () => {
   const [filteredClubs, setFilteredClubs] = useState([]);
   const [filteredName, setFilteredName] = useState('');
   const [filteredInterests, setFilteredInterests] = useState('');
@@ -65,6 +65,7 @@ const ClubSearch = () => {
       result.website = club.website;
       result.description = club.description;
       result.picture = club.picture;
+      result._id = club._id;
       let clubInterestsArray = ClubInterestsColl.find({ club: club.name }, {}).fetch();
       clubInterestsArray = clubInterestsArray.map(clubInt => clubInt.interest);
       if (clubInterestsArray.length === 1) {
@@ -188,7 +189,7 @@ const ClubSearch = () => {
             <tr>
               <td>-</td>
             </tr>
-          ) : filteredClubs.map((clubs) => <ClubItem key={clubs._id} club={clubs} />)}
+          ) : filteredClubs.map((item) => <SearchClubItem key={item._id} club={item} />)}
         </tbody>
       </Table>
       {filteredClubs.length === 0 ? <div className="d-flex justify-content-center pb-2"> No club found. </div> : ''}
@@ -209,4 +210,4 @@ const ClubSearch = () => {
     </Container>
   );
 };
-export default ClubSearch;
+export default SearchClubs;

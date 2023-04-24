@@ -9,22 +9,22 @@ import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 
 /* eslint-disable no-console */
 
-function createUser(email, role, firstName, lastName, password) {
+function createUser(email, role, firstName, lastName, password, securityQuestions) {
   console.log(`  Creating user ${email} with role ${role}.`);
   if (role === ROLE.ADMIN) {
-    AdminProfiles.define({ email, firstName, lastName, password });
+    AdminProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role === ROLE.ITSUPPORT) {
-    ITSupportProfiles.define({ email, firstName, lastName, password });
+    ITSupportProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role === ROLE.OFFICE) {
-    OfficeProfiles.define({ email, firstName, lastName, password });
+    OfficeProfiles.define({ email, firstName, lastName, password, securityQuestions });
   } else if (role !== ROLE.STUDENT && role !== ROLE.FACULTY) { // everyone else is just a user.
-    UserProfiles.define({ email, firstName, lastName, password });
+    UserProfiles.define({ email, firstName, lastName, password, securityQuestions });
   }
 }
 
-function createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests) {
+function createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests, securityQuestions) {
   if (role === ROLE.STUDENT) {
-    StudentProfiles.define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests });
+    StudentProfiles.define({ email, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests, securityQuestions });
   }
 }
 
@@ -39,10 +39,37 @@ if (Meteor.users.find().count() === 0) {
   const defaultData = Meteor.settings.defaultAccounts;
   if (defaultData) {
     console.log('Creating the default user(s)');
-    defaultData.map(({ email, password, role, firstName, lastName }) => createUser(email, role, firstName, lastName, password));
-    defaultData.map(({ email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests }) => createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests));
+    defaultData.map(({ email, password, role, firstName, lastName, securityQuestions }) => createUser(email, role, firstName, lastName, password, securityQuestions));
+    defaultData.map(({
+      email,
+      role,
+      firstName,
+      lastName,
+      TA,
+      RA,
+      graduate,
+      undergraduate,
+      password,
+      clubs,
+      interests,
+      securityQuestions,
+    }) => createStudent(email, role, firstName, lastName, TA, RA, graduate, undergraduate, password, clubs, interests, securityQuestions));
     // eslint-disable-next-line max-len
-    defaultData.map(({ email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones));
+    defaultData.map(({
+      email,
+      role,
+      firstName,
+      lastName,
+      officeHours,
+      position,
+      picture,
+      emergencyPhone,
+      emergencyEmail,
+      password,
+      rooms,
+      phones,
+      securityQuestions,
+    }) => createFaculty(email, role, firstName, lastName, officeHours, position, picture, emergencyPhone, emergencyEmail, password, rooms, phones, securityQuestions));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }

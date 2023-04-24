@@ -110,6 +110,34 @@ class ClubInterestsCollection extends BaseCollection {
     const club = doc.club;
     return { interest, club };
   }
+
+  /**
+   * Searches for a club with a given interest. If club exists, returns the array of clubs. Else,
+   * there is no club.
+   * @param interest an interest.
+   * @returns { Object } Array of clubs.
+   */
+  getClub(interest) {
+    const clubs = this.find({ interest }).fetch();
+    if (clubs.isEmpty()) {
+      return [];
+    }
+    return clubs;
+  }
+
+  /**
+   * Searches for an interest with a given club. If interest exists, returns the array of interests.
+   * Else, there are no interests.
+   * @param club a club.
+   * @returns { Object } Array of interests.
+   */
+  getInterest(club) {
+    const interests = this.find({ club }).fetch();
+    if (interests.isEmpty()) {
+      return [];
+    }
+    return interests;
+  }
 }
 
 /**
