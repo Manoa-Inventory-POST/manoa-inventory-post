@@ -744,7 +744,7 @@
       "email": "kyungim@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303F"
+        "303F"
       ],
       "phones": [
         "808-956-8560"
@@ -760,7 +760,7 @@
       "email": "mahdi@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 306B"
+        "306B"
       ],
       "phones": [
         "808-956-6049"
@@ -776,7 +776,7 @@
       "email": "esb@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 305F"
+        "305F"
       ],
       "phones": [
         "808-956-3891"
@@ -792,7 +792,7 @@
       "email": "binsted@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303D"
+        "303D"
       ],
       "phones": [
         "808-956-6107"
@@ -808,7 +808,7 @@
       "email": "henric@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 310C"
+        "310C"
       ],
       "phones": [
         "808-956-2649"
@@ -824,7 +824,7 @@
       "email": "crosby@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 305D"
+        "305D"
       ],
       "phones": [
         "808-956-3493"
@@ -864,7 +864,7 @@
       "email": "johnson@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 307A"
+        "307A"
       ],
       "phones": [
         "808-956-3489"
@@ -879,9 +879,7 @@
       "picture": "/images/jason-leigh.jpg",
       "email": "leighj@hawaii.edu",
       "officeHours": "N/A",
-      "rooms": [
-        "Keller 102A"
-      ],
+      "rooms": [],
       "phones": [
         "808-956-9164"
       ],
@@ -896,7 +894,7 @@
       "email": "depengli@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 314D"
+        "314D"
       ],
       "phones": [
         "808-956-3973"
@@ -912,7 +910,7 @@
       "email": "cmoore@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 307B"
+        "307B"
       ],
       "phones": [
         "808-956-6920"
@@ -930,7 +928,7 @@
       "email": "rnarayan@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 314A"
+        "314A"
       ],
       "phones": [],
       "password": "changeme",
@@ -944,7 +942,7 @@
       "email": "ogawam@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 314B"
+        "314B"
       ],
       "phones": [
         "808-956-5069"
@@ -960,7 +958,7 @@
       "email": "dusko@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 311B"
+        "311B"
       ],
       "phones": [
         "808-956-9639"
@@ -976,7 +974,7 @@
       "email": "peruma@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 310B"
+        "310B"
       ],
       "phones": [],
       "password": "changeme",
@@ -990,7 +988,7 @@
       "email": "guylaine@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303C"
+        "303C"
       ],
       "phones": [
         "808-956-3496"
@@ -1006,7 +1004,7 @@
       "email": "scottpr@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 317"
+        "317"
       ],
       "phones": [
         "808-956-3500"
@@ -1022,7 +1020,7 @@
       "email": "psadow@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 306C"
+        "306C"
       ],
       "phones": [
         "808-956-2023"
@@ -1038,7 +1036,7 @@
       "email": "pseidel@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 311A"
+        "311A"
       ],
       "phones": [
         "808-956-6068"
@@ -1054,7 +1052,7 @@
       "email": "nodari@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 309C"
+        "309C"
       ],
       "phones": [
         "808-956-3581"
@@ -1070,7 +1068,7 @@
       "email": "suthers@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 309B"
+        "309B"
       ],
       "phones": [
         "808-956-3890"
@@ -1086,7 +1084,7 @@
       "email": "pyw@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 312B"
+        "312B"
       ],
       "phones": [],
       "password": "changeme",
@@ -1100,7 +1098,7 @@
       "email": "chin@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1114,7 +1112,7 @@
       "email": "itoga@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1128,7 +1126,7 @@
       "email": "N/A",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1142,7 +1140,7 @@
       "email": "kennydq@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303A"
+        "303A"
       ],
       "phones": [
         "808-956-5428"
@@ -1158,7 +1156,7 @@
       "email": "wesleysu@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303B"
+        "303B"
       ],
       "phones": [
         "808-956-8249"
@@ -1174,7 +1172,7 @@
       "email": "toddtt@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 327"
+        "327"
       ],
       "phones": [
         "808-956-7639"
@@ -1190,7 +1188,7 @@
       "email": "shackfor@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 327"
+        "327"
       ],
       "phones": [
         "808-956-4989"
