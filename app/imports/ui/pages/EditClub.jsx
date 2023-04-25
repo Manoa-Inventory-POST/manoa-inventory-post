@@ -20,13 +20,13 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { Interests } from '../../api/clubs/Interests';
 
-/* Renders the EditStuff page for editing a single document. */
+/* Renders the EditClub page for editing a single document. */
 const EditClub = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { doc, ready, interestsValues } = useTracker(() => {
-    // Get access to Stuff documents.
+    // Get access to Club documents.
     const subscription = Clubs.subscribeClubs();
     const subClubInterests = ClubInterests.subscribeClubInterests();
     const subInterests = Interests.subscribeInterests();
