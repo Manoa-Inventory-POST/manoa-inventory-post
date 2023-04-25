@@ -167,11 +167,11 @@ const ProfileUpdate = () => {
 
   switch (userToUpdate.role) {
   case 'FACULTY':
-    return ready ? (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
+    return (ready ? (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
   case 'STUDENT':
-    return ready ? (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
+    return (ready ? (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
   default:
-    return ready ? (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
+    return (ready ? (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
   }
 };
 
