@@ -10,10 +10,10 @@ const ClubSearchResultsTableRow = ({ club }) => {
 
   const deleteClub = () => {
     const collectionName = Clubs.getCollectionName();
-    console.log(collectionName);
-    console.log(club);
+    // console.log(collectionName);
+    // console.log(club);
     const clubId = club._id;
-    console.log(clubId);
+    // console.log(clubId);
     removeItMethod.callPromise({ collectionName, instance: clubId })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {

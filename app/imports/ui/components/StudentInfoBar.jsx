@@ -40,6 +40,11 @@ const StudentInfoBar = () => {
         <Card.Text>Email: { currentUser.email }</Card.Text>
         <Card.Text>Role(s): {displayRoles(currentUser).map((position) => `[${position}] `)}</Card.Text>
       </Card.Body>
+      <ListGroup className="list-group-flush rounded-0">
+        <ListGroup.Item>
+          <Card.Link href="/map">View campus map</Card.Link>
+        </ListGroup.Item>
+      </ListGroup>
     </Card>
   );
 };

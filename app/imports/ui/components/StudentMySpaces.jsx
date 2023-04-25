@@ -34,7 +34,7 @@ const StudentMySpaces = () => (
       <Row className="text-center">
         <Col><a href="/faculty" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Faculty</a></Col>
         <Col><a href="/clubs" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Clubs</a></Col>
-        <Col><a href="/map" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>View Campus Map</a></Col>
+        <Col><a href="/search-spaces" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Spaces</a></Col>
       </Row>
     </Card.Footer>
   </Card>

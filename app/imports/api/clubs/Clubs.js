@@ -57,7 +57,7 @@ class ClubsCollection extends BaseCollection {
    * @param picture the new picture (optional).
    * @returns never
    */
-  update(docID, { description, website, picture }) {
+  update(docID, { description, website, picture, interests, name, clubInterestIds }) {
     const updateData = {};
     if (description) {
       updateData.description = description;
@@ -67,6 +67,22 @@ class ClubsCollection extends BaseCollection {
     }
     if (picture) {
       updateData.picture = picture;
+    }
+    if (clubInterestIds) {
+      clubInterestIds.forEach(id => {
+        ClubInterests.removeIt(id);
+      });
+    }
+    if (interests) {
+      for (let i = 0; i < interests.length; i++) {
+        const interest = interests[i];
+        if (ClubInterests.checkExists({ club: name, interest })) {
+          const clubInterestId = ClubInterests.findDoc({ club: name, interest });
+          ClubInterests.update(clubInterestId, { club: name, interest });
+        } else {
+          ClubInterests.define({ club: name, interest });
+        }
+      }
     }
     this._collection.update(docID, { $set: updateData });
   }

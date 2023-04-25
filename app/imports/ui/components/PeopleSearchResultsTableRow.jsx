@@ -43,7 +43,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       removeItMethod.callPromise({ collectionName, instance: docId })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Faculty removed successfully', 'success');
+          swal('Success', 'Admin removed successfully', 'success');
         });
       break;
     case 'USER':
@@ -57,7 +57,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       removeItMethod.callPromise({ collectionName, instance: docId })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'User removed successfully', 'success');
+          swal('Success', 'Admin removed successfully', 'success');
         });
       break;
     case 'STUDENT':
@@ -71,7 +71,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       removeItMethod.callPromise({ collectionName, instance: docId })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Student removed successfully', 'success');
+          swal('Success', 'Admin removed successfully', 'success');
         });
       break;
     case 'OFFICE':
@@ -85,7 +85,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       removeItMethod.callPromise({ collectionName, instance: docId })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'Office worker removed successfully', 'success');
+          swal('Success', 'Admin removed successfully', 'success');
         });
       break;
     case 'ITSUPPORT':
@@ -99,7 +99,7 @@ const PeopleSearchResultsTableRow = ({ user }) => {
       removeItMethod.callPromise({ collectionName, instance: docId })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
-          swal('Success', 'ITSupport removed successfully', 'success');
+          swal('Success', 'Admin removed successfully', 'success');
         });
       break;
     default:
