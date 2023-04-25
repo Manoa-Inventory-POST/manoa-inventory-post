@@ -41,6 +41,7 @@ const InfoBar = () => {
           <Card.Link className="ms-2" href="/createRoom">room</Card.Link>
           <Card.Link href="/createUser">person</Card.Link>
           <Card.Link href="/createPort">port</Card.Link>
+          <Card.Link href="/createClub">club</Card.Link>
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Link href="/map">View campus map</Card.Link>
