@@ -47,6 +47,7 @@ import CreatePort from '../pages/CreatePort';
 import ForgotPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
 import RoomSearch from '../pages/RoomSearch';
+import CreateClub from '../pages/CreateClub';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -80,6 +81,7 @@ const App = () => {
           <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+          <Route path="/createClub" element={<ProtectedRoute><CreateClub /></ProtectedRoute>} />
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
