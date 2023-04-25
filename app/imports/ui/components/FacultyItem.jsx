@@ -20,6 +20,7 @@ FacultyItem.propTypes = {
     lastName: PropTypes.string,
     picture: PropTypes.string,
     position: PropTypes.string,
+    rooms: PropTypes.string,
     officeHours: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
