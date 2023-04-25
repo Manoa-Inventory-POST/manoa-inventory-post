@@ -14,6 +14,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       RA: { type: Boolean, defaultValue: false },
       graduate: { type: Boolean, defaultValue: false },
       undergraduate: { type: Boolean, defaultValue: false },
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
       securityQuestions: { type: Array },
       'securityQuestions.$': { type: Object },
       'securityQuestions.$.question': { type: String },
@@ -32,15 +33,15 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param graduate True if graduate student, default is false.
    * @param undergraduate True if undergraduate student, default is false.
    */
-  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, phones, password, clubs, interests, securityQuestions = [] }) {
+  define({ email, firstName, lastName, TA, RA, graduate, undergraduate, picture, phones, password, clubs, interests, securityQuestions = [] }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, TA, RA, graduate, undergraduate }, {});
+    const user = this.findOne({ email, firstName, lastName, picture, TA, RA, graduate, undergraduate }, {});
     if (!user) {
       const role = ROLE.STUDENT;
       const userID = Users.define({ username, role, password });
       // const clubs = UserClubs.define({ email, Clubs.dumpOne().name});
-      const profileID = this._collection.insert({ email, firstName, lastName, TA, RA, graduate, undergraduate, userID, role, securityQuestions });
+      const profileID = this._collection.insert({ email, firstName, lastName, picture, TA, RA, graduate, undergraduate, userID, role, securityQuestions });
       if (clubs) {
         clubs.forEach((club) => UserClubs.define({ email, club }));
       }
@@ -79,7 +80,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @return never
    */
 
-  update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds }) {
+  update(docID, { firstName, lastName, email, TA, RA, graduate, undergraduate, clubs, clubIds, interests, interestIds, picture }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName !== undefined) {
@@ -87,6 +88,9 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (lastName !== undefined) {
       updateData.lastName = lastName;
+    }
+    if (picture !== undefined) {
+      updateData.picture = picture;
     }
     if (TA !== undefined) {
       updateData.TA = TA;
@@ -178,11 +182,12 @@ class StudentProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
+    const picture = doc.picture;
     const TA = doc.TA;
     const RA = doc.RA;
     const graduate = doc.graduate;
     const undergraduate = doc.undergraduate;
-    return { email, firstName, lastName, TA, RA, graduate, undergraduate }; // CAM this is not enough for the define method. We lose the password.
+    return { email, firstName, lastName, TA, RA, graduate, undergraduate, picture }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**

@@ -23,8 +23,7 @@ const ProfileCard = (props) => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds } = data;
-    // const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
+    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
@@ -32,7 +31,7 @@ const ProfileCard = (props) => {
 
     switch (role) {
     case 'ADMIN':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
       collectionName = AdminProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -41,7 +40,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
+      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds, picture };
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -50,7 +49,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'USER':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
       collectionName = UserProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -59,7 +58,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData:');
       console.log(updateData);
@@ -70,7 +69,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'OFFICE':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
       collectionName = OfficeProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -79,7 +78,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'ITSUPPORT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
       collectionName = ITSupportProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -121,7 +120,7 @@ const ProfileCard = (props) => {
                       />
                     </div>
                     <div className="row">
-                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
+                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" readOnly />
                       <TextField
                         id={COMPONENT_IDS.PROFILE_FORM_PHONE}
                         className="col-md-6"
@@ -132,6 +131,9 @@ const ProfileCard = (props) => {
                     <div className="row">
                       <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
                       <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
+                    </div>
+                    <div className="row">
+                      <TextField className="col-md-6" name="picture" placeholder="Your pic" />
                     </div>
                     <div className="row">
                       <SelectField

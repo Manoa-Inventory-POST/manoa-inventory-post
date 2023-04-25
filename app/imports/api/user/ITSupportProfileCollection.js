@@ -7,7 +7,10 @@ import { Phone } from '../room/Phone';
 
 class ITSupportProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('ITSupportProfile', new SimpleSchema({}));
+    super('ITSupportProfile', new SimpleSchema({
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
+    }));
+
   }
 
   /**
@@ -17,14 +20,14 @@ class ITSupportProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, phones, password }) {
+  define({ email, firstName, lastName, picture, phones, password }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName });
+    const user = this.findOne({ email, firstName, lastName, picture });
     if (!user) {
       const role = ROLE.ITSUPPORT;
-      const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const userID = Users.define({ username, role, password, picture });
+      const profileID = this._collection.insert({ email, firstName, lastName, userID, role, picture });
       if (phones) {
         // checks if phones exist
         phones.forEach(phoneNum => {
@@ -52,7 +55,7 @@ class ITSupportProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { firstName, lastName, email, phones, phoneIds }) {
+  update(docID, { firstName, lastName, email, phones, phoneIds, picture }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -60,6 +63,9 @@ class ITSupportProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     if (phones) {
       updateData.phones = phones;
@@ -135,9 +141,10 @@ class ITSupportProfileCollection extends BaseProfileCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
+    const picture = doc.picture;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    return { email, firstName, lastName, picture }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**

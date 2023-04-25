@@ -7,7 +7,9 @@ import { Phone } from '../room/Phone';
 
 class OfficeProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('OfficeProfile', new SimpleSchema({}));
+    super('OfficeProfile', new SimpleSchema({
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
+    }));
   }
 
   /**
@@ -17,14 +19,14 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, phones, password }) {
+  define({ email, firstName, lastName, phones, password, picture }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName });
+    const user = this.findOne({ email, firstName, lastName, picture });
     if (!user) {
       const role = ROLE.OFFICE;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, userID, role, picture });
       if (phones) {
         // checks if phones exist
         phones.forEach(phoneNum => {
@@ -53,7 +55,7 @@ class OfficeProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { firstName, lastName, email, phones, phoneIds }) {
+  update(docID, { firstName, lastName, email, phones, phoneIds, picture }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -61,6 +63,9 @@ class OfficeProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     if (phones) {
       updateData.phones = phones;
@@ -138,7 +143,8 @@ class OfficeProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const picture = doc.picture;
+    return { email, firstName, lastName, picture }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**

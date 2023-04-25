@@ -168,15 +168,16 @@ const ProfileUpdate = () => {
   if (ready) {
     switch (userToUpdate.role) {
     case 'FACULTY':
-      return (ready ? (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+      return (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />);
     case 'STUDENT':
-      return (ready ? (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+      return (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />);
     default:
-      return (ready ? (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+      return (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />);
     }
   } else {
     return <LoadingSpinner />;
   }
+
 };
 
 export default ProfileUpdate;

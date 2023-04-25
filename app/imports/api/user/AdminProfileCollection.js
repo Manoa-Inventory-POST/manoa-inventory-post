@@ -7,7 +7,9 @@ import { Phone } from '../room/Phone';
 
 class AdminProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('AdminProfile', new SimpleSchema({}));
+    super('AdminProfile', new SimpleSchema({
+      picture: { type: String, optional: true, defaultValue: 'https://www.ics.hawaii.edu/wp-content/uploads/2021/04/ICS-Logo-for-dark-150x150-1.png' },
+    }));
   }
 
   /**
@@ -17,14 +19,14 @@ class AdminProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, password, phones }) {
+  define({ email, firstName, lastName, password, phones, picture }) {
     if (Meteor.isServer) {
       // console.log('define', email, firstName, lastName, password);
       const username = email;
-      const user = this.findOne({ email, firstName, lastName });
+      const user = this.findOne({ email, firstName, lastName, picture });
       if (!user) {
         const role = ROLE.ADMIN;
-        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role });
+        const profileID = this._collection.insert({ email, firstName, lastName, picture, userID: this.getFakeUserId(), role });
         const userID = Users.define({ username, role, password });
         this._collection.update(profileID, { $set: { userID } });
         if (phones) {
@@ -54,7 +56,7 @@ class AdminProfileCollection extends BaseProfileCollection {
    * @param lastName new last name (optional).
    */
   // update(docID, { firstName, lastName }) {
-  update(docID, { firstName, lastName, email, phones, phoneIds }) {
+  update(docID, { firstName, lastName, email, phones, phoneIds, picture }) {
 
     this.assertDefined(docID);
     const updateData = {};
@@ -63,6 +65,9 @@ class AdminProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (picture) {
+      updateData.picture = picture;
     }
     if (phones) {
       updateData.phones = phones;
@@ -137,7 +142,8 @@ class AdminProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const picture = doc.picture;
+    return { email, firstName, lastName, picture }; // CAM this is not enough for the define method. We lose the password.
   }
 
   /**
