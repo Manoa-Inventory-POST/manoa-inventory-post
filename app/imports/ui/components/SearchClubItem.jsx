@@ -9,7 +9,7 @@ const SearchClubItem = ({ club }) => (
     <td><Image alt="" src={club.picture} width="180" height="180" /></td>
     <td><Link to={`/clubinfo/${club._id}`}>{`${club.name}`}</Link></td>
     <td>
-      <a href={club.website}>{club.website}</a>
+      <a href={club.website} target="_blank" rel="noreferrer">{club.website}</a>
     </td>
     <td>{club.description}</td>
     <td>{club.interests}</td>

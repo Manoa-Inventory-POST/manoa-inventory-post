@@ -20,14 +20,10 @@ const ProfileCard = (props) => {
   const { userToUpdate, bridge } = props;
 
   console.log(userToUpdate);
-  console.log(bridge);
+
   const submit = (data) => {
-    console.log('data:');
-    console.log(data);
 
     const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds } = data;
-    // const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
-
     const phonesArray = phones.split(', ');
     let collectionName;
     let updateData;
@@ -123,7 +119,7 @@ const ProfileCard = (props) => {
                       />
                     </div>
                     <div className="row">
-                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
+                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" readOnly />
                       <TextField
                         id={COMPONENT_IDS.PROFILE_FORM_PHONE}
                         className="col-md-6"
@@ -135,6 +131,10 @@ const ProfileCard = (props) => {
                       <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
                       <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
                     </div>
+                    <div className="row">
+                      <TextField className="col-md-6" name="picture" placeholder="Your pic" />
+                    </div>
+                    <TextField className="col-md-6" name="picture" plplaceholderaceholder="Your pic" />
                     <HiddenField name="password" value="changeme" />
                     <HiddenField name="clubAdvisorIds" />
                     <HiddenField name="phoneIds" />
