@@ -165,13 +165,17 @@ const ProfileUpdate = () => {
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
 
-  switch (userToUpdate.role) {
-  case 'FACULTY':
-    return ready ? (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
-  case 'STUDENT':
-    return ready ? (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
-  default:
-    return ready ? (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />;
+  if (ready) {
+    switch (userToUpdate.role) {
+    case 'FACULTY':
+      return (ready ? (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+    case 'STUDENT':
+      return (ready ? (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+    default:
+      return (ready ? (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />) : <LoadingSpinner />);
+    }
+  } else {
+    return <LoadingSpinner />;
   }
 };
 
