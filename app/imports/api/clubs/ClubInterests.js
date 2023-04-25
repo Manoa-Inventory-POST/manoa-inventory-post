@@ -118,7 +118,7 @@ class ClubInterestsCollection extends BaseCollection {
    * @returns { Object } Array of clubs.
    */
   getClub(interest) {
-    const clubs = this.find({ interest }).fetch();
+    const clubs = this.find({ interest }, {}).fetch();
     if (clubs.isEmpty()) {
       return [];
     }
@@ -137,6 +137,21 @@ class ClubInterestsCollection extends BaseCollection {
       return [];
     }
     return interests;
+  }
+
+  /**
+   * Checks the ClubInterests collection to see if an inputted Phone already exists.
+   * @param club
+   * @param interest
+   * @return true
+   * @return false
+   */
+  checkExists({ club, interest }) {
+    const instances = this.find({ club, interest }, {}).count();
+    if (instances === 0) {
+      return false;
+    }
+    return true;
   }
 }
 
