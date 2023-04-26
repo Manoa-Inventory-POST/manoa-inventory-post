@@ -24,7 +24,7 @@ const RoomAvi = () => {
     };
   }, []);
   return (ready ? (
-    <Container id={PAGE_IDS.Room_Avi} className="py-3">
+    <Container id={PAGE_IDS.ROOM_AVAILABILITY} className="py-3">
       <Col className="text-center">
         <h2>Post 3rd Floor</h2>
       </Col>

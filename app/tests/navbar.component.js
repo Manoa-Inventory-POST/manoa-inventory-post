@@ -34,12 +34,12 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_STUDENT_SEARCH}`);
   }
 
-  async gotoReserveRoomPage() {
-    await t.click(`#${COMPONENT_IDS.NAVBAR_RESERVE_ROOM}`);
-  }
-
   async gotoServiceRequestPage() {
     await t.click(`#${COMPONENT_IDS.NAVBAR_SERVICE_REQUEST}`);
+  }
+
+  async gotoRoomAvailabilityPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ROOM_AVAILABILITY}`);
   }
 
   /* Check that the specified user is currently logged in. */

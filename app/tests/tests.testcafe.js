@@ -17,6 +17,7 @@ import { itsupporthomePage } from './itsupporthome.page';
 import { officehomePage } from './officehome.page';
 import { serviceRequestPage } from './servicerequest.page';
 import { fullClubInfoPage } from './fullclubinfo.page';
+import { roomAvailabilityPage } from './roomavailability.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -159,12 +160,14 @@ test('Test that the office worker home page shows up', async () => {
   await officehomePage.isDisplayed();
 });
 
-test('Test that the service request page shows up', async () => {
+test('Test that the room availability and service request pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
   await navBar.isLoggedIn(studentCredentials.username);
   await navBar.gotoServiceRequestPage();
   await serviceRequestPage.isDisplayed();
+  await navBar.gotoRoomAvailabilityPage();
+  await roomAvailabilityPage.isDisplayed();
 });
 
 test('Test that admin home page shows up', async () => {
