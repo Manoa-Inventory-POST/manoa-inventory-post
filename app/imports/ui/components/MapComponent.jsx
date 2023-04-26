@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Image, Modal, Button } from 'react-bootstrap';
-import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { Room } from '../../api/room/RoomCollection';
 
 /** Render the map of the 3rd floor of POST. */
 const MapComponent = () => {
@@ -10,17 +8,6 @@ const MapComponent = () => {
   // const [descriptionToShow, setDescription] = useState(null);
 
   const handleModalClose = () => setModalToShow(null);
-
-  const { rooms } = useTracker((selector, options) => {
-    const subscription = Room.subscribe();
-    const rdy = subscription.ready();
-    const roomProfiles = Room.find({}, options).fetch();
-    return {
-      rooms: roomProfiles,
-      ready: rdy,
-    };
-  }, []);
-
   const handleClick = (room) => {
     setModalToShow(room);
   };
@@ -605,7 +592,7 @@ const MapComponent = () => {
         <Modal.Body>
           <h3>Room Information</h3>
           <p>Building Location: POST</p>
-          <p>Description: {rooms.description}</p>
+          <p>Description: </p>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           <p>Room Image: </p>
           {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
