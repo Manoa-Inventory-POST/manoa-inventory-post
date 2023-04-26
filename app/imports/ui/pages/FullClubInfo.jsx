@@ -58,37 +58,26 @@ const FullClubInfo = () => {
     // console.log(clubAdvisorInfo);
 
     let edit = false;
-    console.log(1);
     const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
-    console.log(2);
     const isFaculty = Roles.userIsInRole(Meteor.userId(), [ROLE.FACULTY]);
-    console.log(3);
     const isStudent = Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT]);
-    console.log(4);
     if (isAdmin) {
-      console.log('IS ADMIN!!!');
       edit = true;
     } else if (isFaculty && clubAdvisors) {
-      console.log('IS FACULTY!!!');
       const profile = FacultyProfiles.find({ userID: Meteor.userID }).fetch()[0];
       if (profile) {
         if (clubAdvisors.includes(profile.email)) {
-          console.log(6);
           edit = true;
         }
       }
     } else if (isStudent && clubOfficers) {
-      console.log('IS STUDENT!!!');
       const profile = StudentProfiles.find({ userID: Meteor.userID }).fetch()[0];
-      console.log(5);
       if (profile) {
         if (clubOfficers.includes(profile.email)) {
-          console.log(6);
           edit = true;
         }
       }
     }
-    console.log(7);
 
     return {
       ready: rdy,
