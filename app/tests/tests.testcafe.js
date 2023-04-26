@@ -75,25 +75,7 @@ test('Test that sign up and sign out work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
-/*
-test('Test that admin pages show up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(adminCredentials.username, adminCredentials.password);
-  await navBar.isLoggedIn(adminCredentials.username);
-  // await navBar.gotoAddStuffPage();
-  // await addStuffPage.isDisplayed();
-  // await navBar.gotoListStuffPage();
-  // await listStuffPage.isDisplayed();
-  // want to see if we can get to the editStuffPage
-  // const editLinks = await Selector(`.${COMPONENT_IDS.LIST_STUFF_EDIT}`);
-  // await t.click(editLinks.nth(0));
-  // await editStuffPage.isDisplayed();
-  // await navBar.gotoListStuffAdminPage();
-  // await listStuffAdminPage.isDisplayed();
-  // await navBar.gotoManageDatabasePage();
-  // await manageDatabasePage.isDisplayed();
-});
-*/
+
 test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
