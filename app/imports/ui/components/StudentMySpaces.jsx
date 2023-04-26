@@ -1,42 +1,42 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { Card, Row, Col } from 'react-bootstrap';
 
-const StudentMySpaces = ({ request }) => (
-  <Card style={{ width: '20rem' }}>
-    <Card.Img variant="top" src={request.picture} />
-    <Card.Body>
-      <Card.Title style={{ marginTop: '0px' }}>{request.title}</Card.Title>
-      <Card.Subtitle>To: {request.requestTo} </Card.Subtitle>
+const StudentMySpaces = () => (
+  /** something to do with room collections here */
+
+  <Card className="rounded-0">
+    <Card.Header className="rounded-0 dashboard-header">
+      <Card.Title><h1>My Courses</h1></Card.Title>
+    </Card.Header>
+    <Card>
       <Card.Body>
-        {request.description}
+        <Card.Img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" className="shadow-4 float-start m-4" style={{ width: '150px' }} />
+        <Card.Title>ICS 211</Card.Title>
+        <Card.Text>
+          Date/Time Scheduled: MWF at 10:00 AM<br />
+          Building/Room: POST 319<br />
+          Professor Name: John Smith<br />
+        </Card.Text>
       </Card.Body>
-    </Card.Body>
-    <Card.Footer style={{ textAlign: 'center' }}>
-      Status: {request.condition}
-      <br />
-      <hr />
-      {request.comment}
+    </Card>
+    <Card>
+      <Card.Body>
+        <Card.Img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" className="shadow-4 float-start m-4" style={{ width: '150px' }} />
+        <Card.Title>ICS 215</Card.Title>
+        <Card.Text>
+          Date/Time Scheduled: MWF at 2:00 PM<br />
+          Building/Room: POST 319<br />
+          Professor Name: John Doe<br />
+        </Card.Text>
+      </Card.Body>
+    </Card>
+    <Card.Footer className="card-body">
+      <Row className="text-center">
+        <Col><a href="/faculty" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Faculty</a></Col>
+        <Col><a href="/clubs" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Clubs</a></Col>
+      </Row>
     </Card.Footer>
-    <Button variant="outline-info">
-      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editCom/${request._id}`}>Add Comment</Link>
-    </Button>
   </Card>
 );
-
-StudentMySpaces.propTypes = {
-  request: PropTypes.shape({
-    owner: PropTypes.string,
-    title: PropTypes.string,
-    picture: PropTypes.string,
-    requestTo: PropTypes.string,
-    description: PropTypes.string,
-    condition: PropTypes.string,
-    comment: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
-};
 
 export default StudentMySpaces;
