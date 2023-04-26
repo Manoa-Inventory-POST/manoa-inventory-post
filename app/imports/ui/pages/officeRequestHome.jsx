@@ -35,7 +35,7 @@ const ListRequest = () => {
       <h1 style={divStyle}>Request List</h1>
       <hr />
       <Form.Group as={Row} controlId="formCondition">
-        <Form.Label column sm={2}>Filter by Condition:</Form.Label>
+        <Form.Label column sm={2}>Filter by Status:</Form.Label>
         <Col sm={10}>
           <Form.Control
             as="select"
