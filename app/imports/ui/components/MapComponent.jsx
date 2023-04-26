@@ -5,7 +5,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { Room } from '../../api/room/RoomCollection';
 
 /** Render the map of the 3rd floor of POST. */
-const MapDataComponent = () => {
+const MapComponent = () => {
   const [modalToShow, setModalToShow] = useState(null);
   // const [descriptionToShow, setDescription] = useState(null);
 
@@ -620,4 +620,4 @@ const MapDataComponent = () => {
   );
 };
 
-export default MapDataComponent;
+export default MapComponent;
