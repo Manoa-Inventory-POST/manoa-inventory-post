@@ -18,12 +18,14 @@ const OfficeItem = ({ officeReq }) => (
         <Card.Body>
           {officeReq.description}
         </Card.Body>
+        <p style={{ paddingLeft: '200px' }}>{officeReq.timeByPoster}</p>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
         Status: {officeReq.condition}
         <br />
         <hr />
         {officeReq.comment}
+        <p style={{ paddingRight: '10px' }}>{officeReq.timeByReviwer}</p>
       </Card.Footer>
       <Button variant="outline-info">
         <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>
@@ -43,6 +45,8 @@ OfficeItem.propTypes = {
     requestTo: PropTypes.string,
     picture: PropTypes.string,
     comment: PropTypes.string,
+    timeByPoster: PropTypes.string,
+    timeByReviwer: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
