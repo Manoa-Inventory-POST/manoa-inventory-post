@@ -56,9 +56,6 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
-            { isOffice ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_ROOMS} as={NavLink} to="/ports" key="rooms">Rooms</Nav.Link>,
-            ]) : ''}
             <Nav.Link id={COMPONENT_IDS.NAVBAR_MAP} as={NavLink} to="/map" key="map">Map</Nav.Link>
             {isFaculty ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_STUDENT_SEARCH} as={NavLink} to="/student-list" key="student-list">Student List</Nav.Link>,
@@ -66,6 +63,9 @@ const NavBar = () => {
             {isAdmin || isITSupport ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FACULTY_SEARCH} as={NavLink} to="/faculty" key="faculty">Faculty</Nav.Link>,
             ])}
+            { isOffice ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_SEARCH_ROOMS} as={NavLink} to="/search-rooms" key="rooms">Rooms</Nav.Link>,
+            ]) : ''}
             {isAdmin || isITSupport || isOffice ? '' : ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_CLUB_SEARCH} as={NavLink} to="/clubs" key="club">Clubs</Nav.Link>,
             ])}
