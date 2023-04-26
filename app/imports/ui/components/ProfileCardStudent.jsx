@@ -23,7 +23,7 @@ const ProfileCard = (props) => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture, interests, interestIds, clubs, clubIds } = data;
+    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture, interests, interestIds, clubs, clubIds, TA, RA, undergraduate, graduate } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
@@ -58,7 +58,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture, interests, interestIds, clubs, clubIds };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture, interests, interestIds, clubs, clubIds, TA, RA, undergraduate, graduate };
       collectionName = StudentProfiles.getCollectionName();
       console.log('updateData:==========');
       console.log(updateData);
@@ -121,19 +121,11 @@ const ProfileCard = (props) => {
                     </div>
                     <div className="row">
                       <TextField className="col-md-6" name="email" placeholder="Your email (required)" readOnly />
-                      <TextField
-                        id={COMPONENT_IDS.PROFILE_FORM_PHONE}
-                        className="col-md-6"
-                        name="phones"
-                        placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155"
-                      />
-                    </div>
-                    <div className="row">
                       <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
-                      <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
                     </div>
                     <div className="row">
                       <TextField className="col-md-6" name="picture" placeholder="Your pic" />
+                      <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
                     </div>
                     <div className="row">
                       <SelectField

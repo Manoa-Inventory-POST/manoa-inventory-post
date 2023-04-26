@@ -24,7 +24,6 @@ const ProfileCard = (props) => {
     console.log(data);
 
     const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture } = data;
-    // const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
