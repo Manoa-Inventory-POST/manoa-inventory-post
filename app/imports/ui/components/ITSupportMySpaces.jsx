@@ -2,8 +2,6 @@ import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
 const FacultyMySpaces = () => (
-  /** something to do with room collections here */
-
   <Card className="rounded-0">
     <Card.Header className="rounded-0 dashboard-header">
       <Card.Title><h2>Upcoming Activity in My Spaces</h2></Card.Title>

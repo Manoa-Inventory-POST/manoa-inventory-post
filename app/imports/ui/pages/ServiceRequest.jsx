@@ -36,7 +36,7 @@ const ServiceRequest = () => {
     const owner = Meteor.user().username;
     const collectionName = OfficeRequests.getCollectionName();
     const definitionData = { owner, title, firstName, lastName, description, requestTo, picture, time };
-    defineMethod.callPromise({ collectionName, definitionData })
+    defineMethod.callPromise({ owner, collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
         swal('Success', 'Item added successfully', 'success');
