@@ -11,7 +11,10 @@ const OfficeItem = ({ officeReq }) => (
       <Card.Img variant="top" src={officeReq.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReq.title}</Card.Title>
-        <Card.Subtitle>{officeReq.firstName} {officeReq.lastName}</Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Form: {officeReq.firstName} {officeReq.lastName}
+        </Card.Subtitle>
+        <Card.Subtitle>To: {officeReq.requestTo} </Card.Subtitle>
         <Card.Body>
           {officeReq.description}
         </Card.Body>
@@ -26,7 +29,6 @@ const OfficeItem = ({ officeReq }) => (
         <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>
       </Button>
     </Card>
-    <p>  Request To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{officeReq.requestTo} </p>
   </Col>
 );
 
