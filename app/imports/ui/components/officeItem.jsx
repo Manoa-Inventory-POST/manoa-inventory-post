@@ -15,7 +15,7 @@ const OfficeItem = ({ officeReq }) => (
           Form: {officeReq.firstName} {officeReq.lastName}
         </Card.Subtitle>
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
-          Time: {officeReq.timeByPoster}
+          Time: {officeReq.time}
         </Card.Subtitle>
         <Card.Subtitle>To: {officeReq.requestTo} </Card.Subtitle>
         <Card.Body>
@@ -46,7 +46,7 @@ OfficeItem.propTypes = {
     requestTo: PropTypes.string,
     picture: PropTypes.string,
     comment: PropTypes.string,
-    timeByPoster: PropTypes.string,
+    time: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

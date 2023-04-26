@@ -14,7 +14,9 @@ const OfficeItemF = ({ officeReqF }) => (
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
           Form: {officeReqF.firstName} {officeReqF.lastName}
         </Card.Subtitle>
-        <Card.Subtitle>To: {officeReqF.requestTo} </Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          To: {officeReqF.requestTo}
+        </Card.Subtitle>
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
           Time: {officeReqF.time}
         </Card.Subtitle>
@@ -46,7 +48,7 @@ OfficeItemF.propTypes = {
     condition: PropTypes.string,
     requestTo: PropTypes.string,
     comment: PropTypes.string,
-    timeByPoster: PropTypes.string,
+    time: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
