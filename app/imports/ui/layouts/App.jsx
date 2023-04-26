@@ -71,7 +71,7 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/request-list" element={<RequestList />} />
-          <Route path="/availability" element={<RoomAvi />} />
+          <Route path="/availability" element={<ProtectedRoute><RoomAvi /></ProtectedRoute>} />
           <Route path="/faculty" element={<SearchFaculty />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<SearchClubs />} />
