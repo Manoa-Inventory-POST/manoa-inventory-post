@@ -23,7 +23,7 @@ const ProfileCard = (props) => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture } = data;
+    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture, interests, interestIds, clubs, clubIds } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
@@ -58,9 +58,9 @@ const ProfileCard = (props) => {
         });
       break;
     case 'STUDENT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture };
+      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds, picture, interests, interestIds, clubs, clubIds };
       collectionName = StudentProfiles.getCollectionName();
-      console.log('updateData:');
+      console.log('updateData:==========');
       console.log(updateData);
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -193,6 +193,8 @@ ProfileCard.propTypes = {
     clubAdvisor: PropTypes.bool,
     clubs: PropTypes.arrayOf(PropTypes.string),
     interests: PropTypes.arrayOf(PropTypes.string),
+    clubIds: PropTypes.arrayOf(PropTypes.string),
+    interestIds: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   bridge: PropTypes.shape().isRequired,
 };
