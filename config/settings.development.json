@@ -1893,7 +1893,7 @@
       "lastName": "Will",
       "requestTo": "Office",
       "description": "Moving out unused items",
-      "condition": "pending"
+      "condition": "approved"
     },
     {
       "title": "Broken access",
@@ -1902,7 +1902,17 @@
       "lastName": "Will",
       "requestTo": "IT Support",
       "description": "Moving out unused items",
-      "condition": "pending"
+      "condition": "approved"
+    },
+    {
+      "title": "Room reserve",
+      "picture": "/images/ithelp.png",
+      "firstName": "Peter",
+      "lastName": "Lee",
+      "requestTo": "Office",
+      "description": "4/26 POST 319 at 11",
+      "condition": "denied",
+      "comment": "There is a class at that time. So the room can't reserve the room for you."
     }
   ],
   "public": {
