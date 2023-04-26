@@ -9,13 +9,20 @@ const OfficeItemF = ({ officeReqF }) => (
       <Card.Img variant="top" src={officeReqF.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReqF.title}</Card.Title>
-        <Card.Subtitle>{officeReqF.firstName} {officeReqF.lastName}</Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Form: {officeReqF.firstName} {officeReqF.lastName}
+        </Card.Subtitle>
+        <Card.Subtitle>To: {officeReqF.requestTo} </Card.Subtitle>
         <Card.Body>
           {officeReqF.description}
         </Card.Body>
+        <p style={{ paddingLeft: '200px' }}>{officeReqF.timeByPoster}</p>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
-        {officeReqF.condition}
+        Status: {officeReqF.condition}
+        <br />
+        <hr />
+        {officeReqF.comment}
       </Card.Footer>
     </Card>
   </Col>
@@ -31,6 +38,8 @@ OfficeItemF.propTypes = {
     description: PropTypes.string,
     condition: PropTypes.string,
     requestTo: PropTypes.string,
+    comment: PropTypes.string,
+    timeByPoster: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

@@ -46,7 +46,6 @@ OfficeItem.propTypes = {
     picture: PropTypes.string,
     comment: PropTypes.string,
     timeByPoster: PropTypes.string,
-    timeByReviwer: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
