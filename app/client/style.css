@@ -117,13 +117,14 @@ body {
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
 
-.map-area {
-  /* Default style */
-  outline: none;
-  border: 2px solid transparent;
+.my-button:hover {
+  background-color: #28a745; /* Green shade */
+  border-color: #28a745; /* Green shade */
 }
 
-.map-area:hover {
-  /* Hover style */
-  border-color: red;
+.map_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
