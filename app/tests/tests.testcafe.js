@@ -14,8 +14,10 @@ import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
+import { officehomePage } from './officehome.page';
 import { serviceRequestPage } from './servicerequest.page';
 import { fullClubInfoPage } from './fullclubinfo.page';
+import { roomAvailabilityPage } from './roomavailability.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
 /* global fixture:false, test:false */
@@ -24,6 +26,7 @@ import { fullClubInfoPage } from './fullclubinfo.page';
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const itSupportCredentials = { username: 'itsupport@foo.com', password: 'changeme' };
+const officeCredentials = { username: 'office@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 const profileInfo = { phone: '808-1680-0000' };
@@ -72,25 +75,7 @@ test('Test that sign up and sign out work', async () => {
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
-/*
-test('Test that admin pages show up', async () => {
-  await navBar.gotoSignInPage();
-  await signInPage.signin(adminCredentials.username, adminCredentials.password);
-  await navBar.isLoggedIn(adminCredentials.username);
-  // await navBar.gotoAddStuffPage();
-  // await addStuffPage.isDisplayed();
-  // await navBar.gotoListStuffPage();
-  // await listStuffPage.isDisplayed();
-  // want to see if we can get to the editStuffPage
-  // const editLinks = await Selector(`.${COMPONENT_IDS.LIST_STUFF_EDIT}`);
-  // await t.click(editLinks.nth(0));
-  // await editStuffPage.isDisplayed();
-  // await navBar.gotoListStuffAdminPage();
-  // await listStuffAdminPage.isDisplayed();
-  // await navBar.gotoManageDatabasePage();
-  // await manageDatabasePage.isDisplayed();
-});
-*/
+
 test('Test that student home and profile pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
@@ -150,12 +135,21 @@ test('Test that the IT support home page shows up', async () => {
   await itsupporthomePage.isDisplayed();
 });
 
-test('Test that the service request page shows up', async () => {
+test('Test that the office worker home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(officeCredentials.username, officeCredentials.password);
+  await navBar.isLoggedIn(officeCredentials.username);
+  await officehomePage.isDisplayed();
+});
+
+test('Test that the room availability and service request pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(studentCredentials.username, studentCredentials.password);
   await navBar.isLoggedIn(studentCredentials.username);
   await navBar.gotoServiceRequestPage();
   await serviceRequestPage.isDisplayed();
+  await navBar.gotoRoomAvailabilityPage();
+  await roomAvailabilityPage.isDisplayed();
 });
 
 test('Test that admin home page shows up', async () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 
 const StudentMySpaces = () => (
   /** something to do with room collections here */
@@ -34,9 +34,9 @@ const StudentMySpaces = () => (
       <Row className="text-center">
         <Col><a href="/faculty" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Faculty</a></Col>
         <Col><a href="/clubs" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Search Clubs</a></Col>
-        <Col><a href="/map" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>View Campus Map</a></Col>
       </Row>
     </Card.Footer>
   </Card>
 );
+
 export default StudentMySpaces;

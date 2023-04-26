@@ -1,11 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import swal from 'sweetalert';
-import { AutoForm, BoolField, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { Phone } from '../../api/room/Phone';
@@ -19,20 +16,24 @@ import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { OfficeProfiles } from '../../api/user/OfficeProfileCollection';
 import { ITSupportProfiles } from '../../api/user/ITSupportProfileCollection';
 import { OccupantRoom } from '../../api/room/OccupantRoom';
-import { updateMethod } from '../../api/base/BaseCollection.methods';
-import { PAGE_IDS } from '../utilities/PageIDs';
-import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import ProfileCard from '../components/ProfileCard';
+import ProfileCardStudent from '../components/ProfileCardStudent';
+import ProfileCardFaculty from '../components/ProfileCardFaculty';
+import { UserInterests } from '../../api/clubs/UserInterests';
+import { UserClubs } from '../../api/clubs/UserClubs';
 
 /* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, roomValues, userToUpdate, interestNames, clubNames } = useTracker(() => {
+  const { ready, roomValues, userToUpdate, interestNames, clubNames, clubIDs } = useTracker(() => {
     // Get access to documents
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
     const subscriptionRooms = Room.subscribeRoom();
     const subClubAdvisor = ClubAdvisor.subscribeClubAdvisor();
     const subInterests = Interests.subscribeInterests();
+    const subUserInterests = UserInterests.subscribeUserInterests();
+    const subUserClubs = UserClubs.subscribeUserClubs();
     const subUser = UserProfiles.subscribe();
     const subAdmin = AdminProfiles.subscribe();
     const subFaculty = FacultyProfiles.subscribeFaculty();
@@ -42,8 +43,7 @@ const ProfileUpdate = () => {
     const subOccRoom = OccupantRoom.subscribeOccupantRoom();
     const rdy = subscriptionRooms.ready() && subClubAdvisor.ready() && subInterests.ready() && subClubs.ready()
         && subUser.ready() && subAdmin.ready() && subFaculty.ready() && subStudent.ready() && subOffice.ready()
-        && subIT.ready() && subOccRoom.ready() && subPhone.ready();
-
+        && subIT.ready() && subOccRoom.ready() && subPhone.ready() && subUserInterests.ready() && subUserClubs.ready();
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
@@ -94,6 +94,25 @@ const ProfileUpdate = () => {
       userProfile.occupantRoomIds = occRoomIdArr;
       // console.log(userProfile.office);
     };
+    const addInterest = () => {
+      let interestsArr = UserInterests.find({ email: userProfile.email }, {}).fetch();
+      // console.log(interestsArr);
+      const interestsIdArr = interestsArr.map(item => item._id);
+      interestsArr = interestsArr.map(item => item.interest);
+      // console.log(interestsArr);
+      userProfile.interests = interestsArr;
+      userProfile.interestIds = interestsIdArr;
+    };
+
+    const addClub = () => {
+      let clubsArr = UserClubs.find({ email: userProfile.email }, {}).fetch();
+      // console.log(clubsArr);
+      const clubsIdArr = clubsArr.map(item => item._id);
+      clubsArr = clubsArr.map(item => item.club);
+      // console.log(clubsArr);
+      userProfile.clubs = clubsArr;
+      userProfile.clubIds = clubsIdArr;
+    };
 
     if (docUser.length > 0) {
       userProfile = docUser[0];
@@ -110,6 +129,8 @@ const ProfileUpdate = () => {
       addAdvisor();
     } else if (docStudent.length > 0) {
       userProfile = docStudent[0];
+      addInterest();
+      addClub();
       addPhone();
       console.log('studentProfile:');
       console.log(userProfile);
@@ -128,16 +149,19 @@ const ProfileUpdate = () => {
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
 
+    console.log(clubEntries);
     return {
       userToUpdate: userProfile,
       roomValues: roomEntries.map(Item => Item.room),
       interestNames: interestEntries.map(Item => Item.interest),
       clubNames: clubEntries.map(Item => Item.name),
+      clubIDs: clubEntries.map(Item => Item._id),
+
       ready: rdy,
     };
   }, []);
 
-  console.log(roomValues, interestNames, clubNames, ready);
+  console.log(roomValues, interestNames, clubNames, ready, clubIDs);
   const UserProfileSchema = new SimpleSchema({
     email: String,
     firstName: String,
@@ -162,168 +186,28 @@ const ProfileUpdate = () => {
     clubAdvisor: { type: Boolean, defaultValue: false },
     clubs: { type: Array, label: 'Clubs', optional: true },
     'clubs.$': { type: String, allowedValues: clubNames, optional: true },
+    clubIds: { type: Array, optional: true },
+    'clubIds.$': { type: String, optional: true },
     interests: { type: Array, label: 'Interests', optional: true },
     'interests.$': { type: String, allowedValues: interestNames, optional: true },
+    interestIds: { type: Array, optional: true },
+    'interestIds.$': { type: String, optional: true },
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
-  const submit = (data) => {
-    console.log('data:');
-    console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds } = data;
-    // const { _id, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds } = data;
-
-    const phonesArray = phones.split(', ');
-    let collectionName;
-    let updateData;
-
-    switch (role) {
-    case 'ADMIN':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
-      collectionName = AdminProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'Admin updated successfully', 'success');
-        });
-      break;
+  if (ready) {
+    switch (userToUpdate.role) {
     case 'FACULTY':
-      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds };
-      collectionName = FacultyProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'Faculty updated successfully', 'success');
-        });
-      break;
-    case 'USER':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
-      collectionName = UserProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'User updated successfully', 'success');
-        });
-      break;
+      return (<ProfileCardFaculty userToUpdate={userToUpdate} bridge={bridge} />);
     case 'STUDENT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
-      collectionName = StudentProfiles.getCollectionName();
-      console.log('updateData:');
-      console.log(updateData);
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'Student updated successfully', 'success');
-        });
-      break;
-    case 'OFFICE':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
-      collectionName = OfficeProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'OFFICE updated successfully', 'success');
-        });
-      break;
-    case 'ITSUPPORT':
-      updateData = { id: _id, firstName, lastName, email, phones: phonesArray, phoneIds };
-      collectionName = ITSupportProfiles.getCollectionName();
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'ITSUPPORT updated successfully', 'success');
-        });
-      break;
+      return (<ProfileCardStudent userToUpdate={userToUpdate} bridge={bridge} />);
     default:
-      break;
+      return (<ProfileCard userToUpdate={userToUpdate} bridge={bridge} />);
     }
-  };
-
-  return (ready ? (
-    <Container className="py-3" id={PAGE_IDS.PROFILE_UPDATE}>
-      <Row className="justify-content-center">
-        <Col className="col-lg-16">
-          <hr />
-          <Row className="text-center"><h2>{ userToUpdate.firstName }&apos;s Profile</h2></Row>
-          <hr />
-          <br />
-          <Row>
-            <Col className="col-lg-3">
-              <td><Image alt="" src={userToUpdate.picture} width="180" height="180" /></td>
-            </Col>
-            <Col className="col-lg-8">
-              <AutoForm schema={bridge} onSubmit={data => submit(data)} model={userToUpdate}>
-                <Card>
-                  <Card.Body>
-                    <div className="row">
-                      <TextField
-                        className="col-md-6"
-                        name="firstName"
-                        placeholder="Your first name (required)"
-                        readOnly
-                      />
-                      <TextField
-                        className="col-md-6"
-                        name="lastName"
-                        placeholder="Your last name (required)"
-                        readOnly
-                      />
-                    </div>
-                    <div className="row">
-                      <TextField className="col-md-6" name="email" placeholder="Your email (required)" />
-                      <TextField
-                        id={COMPONENT_IDS.PROFILE_FORM_PHONE}
-                        className="col-md-6"
-                        name="phones"
-                        placeholder="Enter one or more phone numbers as digits only, separated by a comma, ex: 8081334137,9155452155"
-                      />
-                    </div>
-                    <div className="row">
-                      <TextField className="col-md-6" name="office" placeholder="Your office rooms" readOnly />
-                      <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
-                    </div>
-                    <div className="row">
-                      <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
-                      <TextField className="col" name="position" placeholder="Your position" readOnly />
-                    </div>
-
-                    <div className="row">
-                      <SelectField
-                        className="col-md-6"
-                        name="clubs"
-                        placeholder="Select any clubs you are the advisor for"
-                        multiple
-                      />
-                      <SelectField
-                        className="col-md-6"
-                        name="interests"
-                        placeholder="Select your interests from the options provided"
-                        multiple
-                      />
-                    </div>
-                    <div className="my-3">
-                      <BoolField className="d-md-inline" name="TA" inline />
-                      <BoolField className="d-md-inline" name="RA" inline />
-                      <BoolField className="d-md-inline" name="undergraduate" inline />
-                      <BoolField className="d-md-inline" name="graduate" inline />
-                      <BoolField className="d-md-inline" name="clubAdvisor" inline />
-                    </div>
-                    <HiddenField name="password" value="changeme" />
-                    <HiddenField name="clubAdvisorIds" />
-                    <HiddenField name="phoneIds" />
-                    <SubmitField id={COMPONENT_IDS.PROFILE_FORM_SAVE} value="Save" />
-                    <ErrorsField />
-                  </Card.Body>
-                </Card>
-              </AutoForm>
-            </Col>
-
-          </Row>
-        </Col>
-      </Row>
-    </Container>
-  ) : <LoadingSpinner />);
+  } else {
+    return <LoadingSpinner />;
+  }
 };
 
 export default ProfileUpdate;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
@@ -14,7 +14,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const bridge = new SimpleSchema2Bridge(OfficeRequests._schema);
 
 /* Renders the EditStuff page for editing a single document. */
-const EditRequest = () => {
+const AddComment = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -35,9 +35,9 @@ const EditRequest = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { condition, description, comment } = data;
+    const { description, comment } = data;
     const collectionName = OfficeRequests.getCollectionName();
-    const updateData = { id: _id, condition, description, comment };
+    const updateData = { id: _id, description, comment };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Item updated successfully', 'success'));
@@ -58,7 +58,6 @@ const EditRequest = () => {
               <Card.Body>
                 <TextField name="description" />
                 <TextField name="comment" />
-                <SelectField name="condition" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -70,4 +69,4 @@ const EditRequest = () => {
   ) : <LoadingSpinner />;
 };
 
-export default EditRequest;
+export default AddComment;

@@ -64,7 +64,6 @@ const PortSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="enter port number"
               onChange={e => setPortNumber(e.target.value)}
             />
           </Form.Group>
@@ -73,7 +72,6 @@ const PortSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="enter building"
               onChange={e => setBuilding(e.target.value)}
             />
           </Form.Group>
@@ -82,7 +80,6 @@ const PortSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="enter room"
               onChange={e => setRoomNum(e.target.value)}
             />
           </Form.Group>
@@ -93,18 +90,17 @@ const PortSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="enter side"
               onChange={e => setSide(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="col-lg-4">
             <Form.Label htmlFor="Search by port status">Status</Form.Label>
-            <Form.Control
-              type="text"
-              className="shadow-sm"
-              placeholder="enter port status"
-              onChange={e => setStatus(e.target.value)}
-            />
+            <select className="form-select shadow-sm" onChange={e => setStatus(e.target.value)}>
+              <option selected> </option>
+              <option value="active">active</option>
+              <option value="inactive">inactive</option>
+              <option value="maintenance">maintenance</option>
+            </select>
           </Form.Group>
           <Form.Group className="col-lg-4">
             <Form.Label htmlFor="Search by idf">IDF</Form.Label>

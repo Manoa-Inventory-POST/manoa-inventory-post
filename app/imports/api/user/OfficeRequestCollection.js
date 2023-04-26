@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
+export const officeRequestConditions = ['approved', 'denied', 'pending'];
 export const requestToConditions = ['Office', 'IT Support'];
 export const imageOption = ['/images/carry.png', '/images/Chair.png', '/images/helpme.png', '/images/ithelp.png', '/images/table.png'];
 export const officePublications = {
@@ -14,10 +14,19 @@ export const officePublications = {
 class OfficeRequestCollection extends BaseCollection {
   constructor() {
     super('OfficeRequest', new SimpleSchema({
+      owner: String,
       title: String,
       firstName: String,
       lastName: String,
       description: String,
+      comment: {
+        type: String,
+        optional: true,
+      },
+      date: {
+        type: String,
+        optional: true,
+      },
       picture: {
         type: String,
         allowedValues: imageOption,
@@ -32,13 +41,14 @@ class OfficeRequestCollection extends BaseCollection {
       condition: {
         type: String,
         allowedValues: officeRequestConditions,
-        defaultValue: 'depending',
+        defaultValue: 'pending',
       },
     }));
   }
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
+   * @param owner The email of the user making the request
    * @param title The title associated with this profile. Will be the username.
    * @param firstName The first name.
    * @param lastName The last name.
@@ -48,8 +58,9 @@ class OfficeRequestCollection extends BaseCollection {
    * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ title, firstName, lastName, condition, description, requestTo, picture }) {
+  define({ owner, title, firstName, lastName, condition, description, requestTo, picture, comment, time }) {
     const docID = this._collection.insert({
+      owner,
       title,
       firstName,
       lastName,
@@ -57,6 +68,8 @@ class OfficeRequestCollection extends BaseCollection {
       description,
       requestTo,
       picture,
+      comment,
+      time,
     });
     return docID;
   }
@@ -70,7 +83,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { title, firstName, lastName, condition, description, requestTo, picture }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo, picture, time, comment }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -92,6 +105,12 @@ class OfficeRequestCollection extends BaseCollection {
     }
     if (picture) {
       updateData.picture = picture;
+    }
+    if (comment) {
+      updateData.comment = comment;
+    }
+    if (time) {
+      updateData.time = time;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -153,6 +172,7 @@ class OfficeRequestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    const owner = doc.owner;
     const title = doc.title;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
@@ -160,7 +180,9 @@ class OfficeRequestCollection extends BaseCollection {
     const requestTo = doc.requestTo;
     const description = doc.description;
     const picture = doc.picture;
-    return { title, firstName, lastName, condition, description, requestTo, picture };
+    const comment = doc.comment;
+    const time = doc.comment;
+    return { owner, title, firstName, lastName, condition, description, requestTo, picture, comment, time };
   }
 }
 

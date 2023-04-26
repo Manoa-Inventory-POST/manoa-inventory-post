@@ -36,7 +36,7 @@ import SearchClubs from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
-import OfficeRequestHome from '../pages/officeRequestHome';
+import OfficeRequestHome from '../pages/OfficeRequestHome';
 import EditRequest from '../pages/EditRequest';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';
@@ -47,6 +47,8 @@ import CreatePort from '../pages/CreatePort';
 import ForgotPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
 import RoomSearch from '../pages/RoomSearch';
+import CreateClub from '../pages/CreateClub';
+import AddComment from '../pages/AddComment';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -69,7 +71,7 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/request-list" element={<RequestList />} />
-          <Route path="/availability" element={<RoomAvi />} />
+          <Route path="/availability" element={<ProtectedRoute><RoomAvi /></ProtectedRoute>} />
           <Route path="/faculty" element={<SearchFaculty />} />
           <Route path="/facultyinfo/:_id" element={<FullFacultyInfo />} />
           <Route path="/clubs" element={<SearchClubs />} />
@@ -80,6 +82,7 @@ const App = () => {
           <Route path="/editUser/:_id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
           <Route path="/editSpace/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
           <Route path="/createUser" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+          <Route path="/createClub" element={<ProtectedRoute><CreateClub /></ProtectedRoute>} />
           <Route path="/editUser/confirmEdit/:_id" element={<ProtectedRoute><ConfirmEditUser /></ProtectedRoute>} />
           <Route path="/createUser/confirmCreate/:_id" element={<ProtectedRoute><ConfirmCreateUser /></ProtectedRoute>} />
           <Route path="/editRoom/:_id" element={<ProtectedRoute><EditRoom /></ProtectedRoute>} />
@@ -96,6 +99,7 @@ const App = () => {
           <Route path="/search-rooms" element={<ProtectedRoute><RoomSearch /></ProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
+          <Route path="/editCom/:_id" element={<ProtectedRoute><AddComment /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
           <Route path="/office-request-home" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />

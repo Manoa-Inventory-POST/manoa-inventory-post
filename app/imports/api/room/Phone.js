@@ -124,7 +124,7 @@ class PhoneCollection extends BaseCollection {
    * @return false
    */
   checkExists(phoneNum) {
-    const instances = this.find({ phoneNum }).count();
+    const instances = this.find({ phoneNum }, {}).count();
     if (instances === 0) {
       return false;
     }

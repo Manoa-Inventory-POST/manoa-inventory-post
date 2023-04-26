@@ -11,13 +11,22 @@ const OfficeItem = ({ officeReq }) => (
       <Card.Img variant="top" src={officeReq.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReq.title}</Card.Title>
-        <Card.Subtitle>{officeReq.firstName} {officeReq.lastName}</Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Form: {officeReq.firstName} {officeReq.lastName}
+        </Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Time: {officeReq.time}
+        </Card.Subtitle>
+        <Card.Subtitle>To: {officeReq.requestTo} </Card.Subtitle>
         <Card.Body>
           {officeReq.description}
         </Card.Body>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
-        {officeReq.condition}
+        Status: {officeReq.condition}
+        <br />
+        <hr />
+        {officeReq.comment}
       </Card.Footer>
       <Button variant="outline-info">
         <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>
@@ -36,6 +45,8 @@ OfficeItem.propTypes = {
     condition: PropTypes.string,
     requestTo: PropTypes.string,
     picture: PropTypes.string,
+    comment: PropTypes.string,
+    time: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

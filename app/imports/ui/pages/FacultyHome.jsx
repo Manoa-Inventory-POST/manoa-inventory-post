@@ -16,8 +16,6 @@ const FacultyHome = () => {
     const subscription = FacultyProfiles.subscribeFaculty();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
-    console.log('rdy');
-    console.log(rdy);
     // Get the Faculty documents
     const facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     return {

@@ -123,7 +123,7 @@ const FullClubInfo = () => {
             </Row>
             <Row>
               <h6>{club.description}</h6>
-              <h6><a href={club.website}>Click here to access our website!</a></h6>
+              <h6> <a href={club.website} target="_blank" rel="noreferrer">Click here to access our website!</a></h6>
             </Row>
             <Row className="py-2">
               <h4>Club Interests</h4>

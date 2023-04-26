@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Container, Row, Form, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OfficeRequests } from '../../api/user/OfficeRequestCollection';
-import OfficeItemF from '../components/RequestItem';
+import OfficeItem from '../components/OfficeItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-/* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const ListRequest = () => {
   const [conditionFilter, setConditionFilter] = useState('');
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -52,7 +51,7 @@ const ListRequest = () => {
       </Form.Group>
       <br />
       <Row xs={1} md={2} lg={4} className="g-2">
-        {offices.map((officeReqF) => <OfficeItemF key={officeReqF._id} officeReqF={officeReqF} />)}
+        {offices.map((officeReq) => <OfficeItem key={officeReq._id} officeReq={officeReq} />)}
       </Row>
     </Container>
   ) : <LoadingSpinner message="Loading Requests" />);

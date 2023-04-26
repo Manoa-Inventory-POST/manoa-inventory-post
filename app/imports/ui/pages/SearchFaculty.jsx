@@ -165,8 +165,7 @@ const SearchFaculty = () => {
         <Row id="dashboard-screen">
           <Col className="mx-3">
             <Row id="dashboard-filter">{returnFilter()}</Row>
-            { ready ? <Row id="dashboard-list">{returnList()}</Row> : '' }
-            { ready ? '' : <LoadingSpinner /> }
+            { ready ? <Row id="dashboard-list">{returnList()}</Row> : <LoadingSpinner /> }
           </Col>
         </Row>
       </div>

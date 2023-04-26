@@ -1,8 +1,6 @@
-// import { Meteor } from 'meteor/meteor';
 import React, { useState, useEffect } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Row, Table, Container, Accordion } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
 import AccordionBody from 'react-bootstrap/AccordionBody';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -20,13 +18,15 @@ const SearchClubs = () => {
   const [filteredInterests, setFilteredInterests] = useState('');
   const [filteredAdmins, setFilteredAdmins] = useState('');
 
-  const { ready, clubProfiles } = useTracker(() => {
+  const { ready, clubProfiles, interests } = useTracker(() => {
     const sub1 = Clubs.subscribeClubs();
     const sub2 = ClubInterests.subscribeClubInterests();
     const sub3 = ClubAdvisor.subscribeClubAdvisor();
     const sub4 = Interests.subscribeInterests();
     const rdy = sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready();
     const clubItems = Clubs.find({}, {}).fetch();
+    let intItems = Interests.find({}).fetch();
+    intItems = intItems.map(int => int.interest);
 
     function buildClubInfo(club, ClubInterestsColl, ClubAdvisorColl) {
       const result = {};
@@ -60,6 +60,7 @@ const SearchClubs = () => {
 
     return {
       clubProfiles: clubInfoObjects,
+      interests: intItems,
       ready: rdy,
     };
   }, []);
@@ -112,11 +113,12 @@ const SearchClubs = () => {
                     <Col className="d-flex justify-content-center mb-1 small" style={{ color: '#313131' }}>
                       Interests
                     </Col>
-                    <input
-                      type="text"
-                      className="shadow-sm"
-                      onChange={e => setFilteredInterests(e.target.value)}
-                    />
+                    <select className="shadow-sm" onChange={e => setFilteredInterests(e.target.value)}>
+                      <option> </option>
+                      { interests.map((item) => (
+                        <option>{item}</option>
+                      ))}
+                    </select>
                   </label>
                 </Col>
                 <Col className="d-flex justify-content-center">

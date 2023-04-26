@@ -23,10 +23,10 @@ const ClubSearchResultsTable = () => {
   }, []);
 
   useEffect(() => {
-    if (clubs && ready) {
+    if (ready) {
       setFilteredClubs(clubs);
     }
-  }, [clubs, ready]);
+  }, [ready]);
 
   useEffect(() => {
     let filtered = clubs;

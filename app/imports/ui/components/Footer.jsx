@@ -28,11 +28,9 @@ const Footer = () => {
               <br />
               <a style={linkStyle} href="/clubs">Clubs</a>
               <br />
-              <a style={linkStyle} href="/signin">Room Availability</a>
+              <a style={linkStyle} href="/availability">Room Availability</a>
               <br />
-              <a style={linkStyle} href="/signin">Reserve Room</a>
-              <br />
-              <a style={linkStyle} href="/signin">Service Request</a>
+              <a style={linkStyle} href="/service">Service Request</a>
             </div>
             <div className="col-sm-4">
               <h5>Resources</h5>

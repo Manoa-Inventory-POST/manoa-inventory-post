@@ -35,8 +35,9 @@ const FacultyMySpaces = () => (
       </Card.Body>
     </Card>
     <Card.Footer>
-      <a href="/home" className="btn btn-primary">Go somewhere</a>
+      <a href="/service" className="btn" style={{ backgroundColor: '#75ABCF', color: 'white' }}>Service Request</a>
     </Card.Footer>
   </Card>
 );
+
 export default FacultyMySpaces;

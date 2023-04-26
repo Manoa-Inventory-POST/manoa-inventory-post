@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /* Component for layout out a Project Card. */
 const OfficeItemF = ({ officeReqF }) => (
@@ -9,14 +11,28 @@ const OfficeItemF = ({ officeReqF }) => (
       <Card.Img variant="top" src={officeReqF.picture} />
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReqF.title}</Card.Title>
-        <Card.Subtitle>{officeReqF.firstName} {officeReqF.lastName}</Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          From: {officeReqF.firstName} {officeReqF.lastName}
+        </Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          To: {officeReqF.requestTo}
+        </Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Date: {officeReqF.time}
+        </Card.Subtitle>
         <Card.Body>
           {officeReqF.description}
         </Card.Body>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
-        {officeReqF.condition}
+        Status: {officeReqF.condition}
+        <br />
+        <hr />
+        {officeReqF.comment}
       </Card.Footer>
+      <Button variant="outline-info">
+        <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editCom/${officeReqF._id}`}>Add Comment</Link>
+      </Button>
     </Card>
   </Col>
 );
@@ -31,6 +47,8 @@ OfficeItemF.propTypes = {
     description: PropTypes.string,
     condition: PropTypes.string,
     requestTo: PropTypes.string,
+    comment: PropTypes.string,
+    time: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
