@@ -177,6 +177,8 @@ const ProfileUpdate = () => {
     office: { type: String, label: 'Office(s)', defaultValue: 'N/A', optional: true },
     phones: { type: String, label: 'Phone Numbers', defaultValue: 'N/A', optional: true },
     officeHours: { type: String, defaultValue: 'N/A', optional: true },
+    emergencyPhone: { type: String, defaultValue: 'N/A', optional: true },
+    emergencyEmail: { type: String, defaultValue: 'N/A', optional: true },
     picture: { type: String, optional: true },
     position: { type: String, defaultValue: 'N/A', optional: true },
     TA: { type: Boolean, label: 'TA', defaultValue: false },
