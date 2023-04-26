@@ -35,7 +35,7 @@ const FullFacultyInfo = () => {
     } else {
       officeItem = officeItem.join(', ');
     }
-    let phoneItem = Phone.find({ email: `${facultyItem.email}`}).fetch();
+    let phoneItem = Phone.find({ email: `${facultyItem.email}` }).fetch();
     if (phoneItem.length === 1) {
       phoneItem = phoneItem[0];
     } else {
