@@ -56,7 +56,7 @@ const RoomSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="building"
+              placeholder="POST"
               onChange={e => setRoomBuilding(e.target.value)}
             />
           </Form.Group>
@@ -65,7 +65,6 @@ const RoomSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="room number"
               onChange={e => setRoomNumber(e.target.value)}
             />
           </Form.Group>
@@ -76,18 +75,17 @@ const RoomSearchResultsTable = () => {
             <Form.Control
               type="text"
               className="shadow-sm"
-              placeholder="description"
               onChange={e => setRoomDescription(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="col-lg-6">
             <Form.Label htmlFor="Search by room status">Status</Form.Label>
-            <Form.Control
-              type="text"
-              className="shadow-sm"
-              placeholder="Enter room status"
-              onChange={e => setRoomStatus(e.target.value)}
-            />
+            <select className="form-select shadow-sm" onChange={e => setRoomStatus(e.target.value)}>
+              <option selected> </option>
+              <option value="open">open</option>
+              <option value="occupied">occupied</option>
+              <option value="maintenance">maintenance</option>
+            </select>
           </Form.Group>
         </div>
       </Form>

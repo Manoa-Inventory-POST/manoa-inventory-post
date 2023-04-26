@@ -12,13 +12,13 @@ const OfficeItemF = ({ officeReqF }) => (
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{officeReqF.title}</Card.Title>
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
-          Form: {officeReqF.firstName} {officeReqF.lastName}
+          From: {officeReqF.firstName} {officeReqF.lastName}
         </Card.Subtitle>
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
           To: {officeReqF.requestTo}
         </Card.Subtitle>
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
-          Time: {officeReqF.time}
+          Date: {officeReqF.time}
         </Card.Subtitle>
         <Card.Body>
           {officeReqF.description}
