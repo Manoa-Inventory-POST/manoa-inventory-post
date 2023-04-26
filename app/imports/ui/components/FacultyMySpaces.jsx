@@ -1,42 +1,42 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
-const FacultyMySpaces = () => (
-  /** something to do with room collections here */
-
-  <Card className="rounded-0">
-    <Card.Header className="rounded-0 dashboard-header">
-      <Card.Title><h1>My Spaces</h1></Card.Title>
-    </Card.Header>
-    <Card>
+const FacultyMySpaces = ({ request }) => (
+  <Card style={{ width: '20rem' }}>
+    <Card.Img variant="top" src={request.picture} />
+    <Card.Body>
+      <Card.Title style={{ marginTop: '0px' }}>{request.title}</Card.Title>
+      <Card.Subtitle>To: {request.requestTo} </Card.Subtitle>
       <Card.Body>
-        <Card.Img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" className="shadow-4 float-start m-4" style={{ width: '150px' }} />
-        <Card.Title>POST 311</Card.Title>
-        <Card.Text>
-          Type: Office<br />
-          Phone Number: 808-123-4567<br />
-          Equipment:<br />
-          Capacity:<br />
-          My Occupancy Hours:<br />
-        </Card.Text>
+        {request.description}
       </Card.Body>
-    </Card>
-    <Card>
-      <Card.Body>
-        <Card.Img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" className="shadow-4 float-start m-4" style={{ width: '150px' }} />
-        <Card.Title>HOLMES 215</Card.Title>
-        <Card.Text>
-          Type: Classroom<br />
-          Phone Number: 808-234-5678<br />
-          Equipment:<br />
-          Capacity: 50 pax<br />
-          My Occupancy Hours: MW 9:30AM-10:30AM<br />
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    <Card.Footer>
-      <a href="/home" className="btn btn-primary">Go somewhere</a>
+    </Card.Body>
+    <Card.Footer style={{ textAlign: 'center' }}>
+      Status: {request.condition}
+      <br />
+      <hr />
+      {request.comment}
     </Card.Footer>
+    <Button variant="outline-info">
+      <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editCom/${request._id}`}>Add Comment</Link>
+    </Button>
   </Card>
 );
+
+FacultyMySpaces.propTypes = {
+  request: PropTypes.shape({
+    owner: PropTypes.string,
+    title: PropTypes.string,
+    picture: PropTypes.string,
+    requestTo: PropTypes.string,
+    description: PropTypes.string,
+    condition: PropTypes.string,
+    comment: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+};
+
 export default FacultyMySpaces;

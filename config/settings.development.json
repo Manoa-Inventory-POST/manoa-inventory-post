@@ -114,7 +114,6 @@
       "clubs": [
       ],
       "interests": [
-        "Mockup",
         "Testing",
         "Video Games"
       ],
@@ -205,7 +204,7 @@
       "interests": [
         "Professional Development",
         "Guest Speakers",
-        "Mentoring",
+        "Mentor",
         "Teaching"
       ],
       "securityQuestions": [
@@ -1878,6 +1877,7 @@
   ],
   "defaultRequest": [
     {
+      "owner": "faculty@foo.com",
       "title": "Chair",
       "picture": "/images/Chair.png",
       "firstName": "Will",
@@ -1888,6 +1888,7 @@
       "time": "4/24"
     },
     {
+      "owner": "student@foo.com",
       "title": "Moving",
       "picture": "/images/carry.png",
       "firstName": "John",
@@ -1898,6 +1899,7 @@
       "time": "4/24"
     },
     {
+      "owner": "office@foo.com",
       "title": "Broken access",
       "picture": "/images/ithelp.png",
       "firstName": "John",
@@ -1908,6 +1910,7 @@
       "time": "4/25"
     },
     {
+      "owner": "itsupport@foo.com",
       "title": "Room reserve",
       "picture": "/images/ithelp.png",
       "firstName": "Peter",

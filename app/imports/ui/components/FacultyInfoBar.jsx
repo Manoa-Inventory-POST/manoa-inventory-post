@@ -18,7 +18,6 @@ const FacultyInfoBar = () => {
     // Get the Faculty documents
     let facultyProfiles = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     facultyProfiles = facultyProfiles[0];
-    console.log(facultyProfiles);
     let officeItem = OccupantRoom.find({ email: `${facultyProfiles.email}` }).fetch();
     officeItem = officeItem.map(num => num.room);
     if (officeItem === 1) {
@@ -26,7 +25,6 @@ const FacultyInfoBar = () => {
     } else {
       officeItem = officeItem.join(', ');
     }
-    console.log(officeItem);
     let phoneItem = Phone.find({ email: `${facultyProfiles.email}` }).fetch();
     phoneItem = phoneItem.map(num => num.phoneNum);
     if (phoneItem.length === 1) {

@@ -14,6 +14,7 @@ export const officePublications = {
 class OfficeRequestCollection extends BaseCollection {
   constructor() {
     super('OfficeRequest', new SimpleSchema({
+      owner: String,
       title: String,
       firstName: String,
       lastName: String,
@@ -47,6 +48,7 @@ class OfficeRequestCollection extends BaseCollection {
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
+   * @param owner The email of the user making the request
    * @param title The title associated with this profile. Will be the username.
    * @param firstName The first name.
    * @param lastName The last name.
@@ -56,8 +58,9 @@ class OfficeRequestCollection extends BaseCollection {
    * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ title, firstName, lastName, condition, description, requestTo, picture, comment, time }) {
+  define({ owner, title, firstName, lastName, condition, description, requestTo, picture, comment, time }) {
     const docID = this._collection.insert({
+      owner,
       title,
       firstName,
       lastName,
@@ -169,6 +172,7 @@ class OfficeRequestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    const owner = doc.owner;
     const title = doc.title;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
@@ -178,7 +182,7 @@ class OfficeRequestCollection extends BaseCollection {
     const picture = doc.picture;
     const comment = doc.comment;
     const time = doc.comment;
-    return { title, firstName, lastName, condition, description, requestTo, picture, comment, time };
+    return { owner, title, firstName, lastName, condition, description, requestTo, picture, comment, time };
   }
 }
 
