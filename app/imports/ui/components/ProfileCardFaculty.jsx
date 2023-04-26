@@ -23,7 +23,7 @@ const ProfileCard = (props) => {
     console.log('data:');
     console.log(data);
 
-    const { _id, email, firstName, lastName, phones, officeHours, role, phoneIds, clubAdvisorIds, picture } = data;
+    const { _id, email, firstName, lastName, phones, officeHours, emergencyPhone, emergencyEmail, role, phoneIds, clubAdvisorIds, picture } = data;
 
     const phonesArray = phones.split(', ');
     let collectionName;
@@ -40,7 +40,7 @@ const ProfileCard = (props) => {
         });
       break;
     case 'FACULTY':
-      updateData = { id: _id, firstName, lastName, email, officeHours, phones: phonesArray, phoneIds, clubAdvisorIds, picture };
+      updateData = { id: _id, firstName, lastName, email, officeHours, emergencyPhone, emergencyEmail, phones: phonesArray, phoneIds, clubAdvisorIds, picture };
       collectionName = FacultyProfiles.getCollectionName();
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
@@ -133,11 +133,12 @@ const ProfileCard = (props) => {
                       <TextField className="col-md-6" name="officeHours" placeholder="Your office hours" />
                     </div>
                     <div className="row">
-                      <TextField className="col-md-6" name="role" placeholder="select role (required)" readOnly />
+                      <TextField className="col-md-6" name="picture" placeholder="Your pic" />
                       <TextField className="col" name="position" placeholder="Your position" readOnly />
                     </div>
                     <div className="row">
-                      <TextField className="col-md-6" name="picture" placeholder="Your pic" />
+                      <TextField className="col" name="emergencyPhone" placeholder="Emergency Phone Number" />
+                      <TextField className="col" name="emergencyEmail" placeholder="Emergency Email" />
                     </div>
                     <Col>
                       <BoolField className="col" name="clubAdvisor" readOnly />
@@ -171,6 +172,8 @@ ProfileCard.propTypes = {
     office: PropTypes.string,
     phones: PropTypes.string,
     officeHours: PropTypes.string,
+    emergencyPhone: PropTypes.string,
+    emergencyEmail: PropTypes.string,
     picture: PropTypes.string,
     position: PropTypes.string,
     TA: PropTypes.bool,

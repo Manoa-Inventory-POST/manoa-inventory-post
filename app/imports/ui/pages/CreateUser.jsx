@@ -67,6 +67,8 @@ const CreateUser = () => {
     'rooms.$': { type: String, allowedValues: roomValues },
     phoneNums: { type: String, label: 'Phone Numbers', optional: true },
     officeHours: { type: String, optional: true },
+    emergencyPhone: { type: String, optional: true },
+    emergencyEmail: { type: String, optional: true },
     picture: { type: String, optional: true },
     position: { type: String, optional: true },
     TA: { type: Boolean, label: 'TA', defaultValue: false },
@@ -83,7 +85,7 @@ const CreateUser = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, email, password, role, rooms, phoneNums, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests } = data;
+    const { firstName, lastName, email, password, role, rooms, phoneNums, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, emergencyPhone, emergencyEmail, position, picture, interests } = data;
     const phones = phoneNums.split(',');
     console.log(typeof phones);
     console.log(data);
@@ -102,7 +104,7 @@ const CreateUser = () => {
     case 'FACULTY':
       console.log('FACULTY SWITCH');
       collectionName = FacultyProfiles.getCollectionName();
-      definitionData = { email, firstName, lastName, officeHours, position, picture, password, rooms, phones };
+      definitionData = { email, firstName, lastName, officeHours, emergencyPhone, emergencyEmail, position, picture, password, rooms, phones };
       defineMethod.callPromise({ collectionName, definitionData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
@@ -208,6 +210,10 @@ const CreateUser = () => {
                 <div className="row">
                   <TextField className="col" name="picture" placeholder="picture url" />
                   <TextField className="col" name="position" placeholder="Your position" />
+                </div>
+                <div className="row">
+                  <TextField className="col" name="emergencyPhone" placeholder="Emergency Phone Number" />
+                  <TextField className="col" name="emergencyEmail" placeholder="Emergency Email" />
                 </div>
                 <div className="row">
                   <SelectField className="col-md-3" name="rooms" multiple inline />

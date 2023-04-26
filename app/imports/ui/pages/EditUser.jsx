@@ -181,6 +181,8 @@ const EditUser = () => {
     'rooms.$': { type: String, allowedValues: roomValues },
     phones: { type: String, label: 'Phone Numbers', optional: true },
     officeHours: { type: String, optional: true },
+    emergencyPhone: { type: String, optional: true },
+    emergencyEmail: { type: String, optional: true },
     picture: { type: String, optional: true },
     position: { type: String, optional: true },
     TA: { type: Boolean, label: 'TA', defaultValue: false },
@@ -203,7 +205,8 @@ const EditUser = () => {
   // On successful submit, insert the data.
   const submit = (data) => {
     console.log('submit');
-    const { firstName, lastName, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, position, picture, interests, clubAdvisorIds, clubIds, interestIds } = data;
+    // eslint-disable-next-line max-len
+    const { firstName, lastName, email, role, rooms, occupantRoomIds, phones, phoneIds, clubAdvisor, clubs, TA, RA, undergraduate, graduate, officeHours, emergencyPhone, emergencyEmail, position, picture, interests, clubAdvisorIds, clubIds, interestIds } = data;
     console.log(data);
     let phonesArray;
     let collectionName;
@@ -235,7 +238,7 @@ const EditUser = () => {
       console.log('FACULTY SWITCH');
       phonesArray = phones ? phones.split(', ') : null;
       collectionName = FacultyProfiles.getCollectionName();
-      updateData = { id: _id, email, firstName, lastName, officeHours, position, picture, rooms, occupantRoomIds, phones: phonesArray, phoneIds, clubs, clubIds, clubAdvisorIds, clubAdvisor };
+      updateData = { id: _id, email, firstName, lastName, officeHours, emergencyPhone, emergencyEmail, position, picture, rooms, occupantRoomIds, phones: phonesArray, phoneIds, clubs, clubIds, clubAdvisorIds, clubAdvisor };
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => {
@@ -304,6 +307,10 @@ const EditUser = () => {
                 <div className="row">
                   <TextField className="col" name="picture" placeholder="picture url" />
                   <TextField className="col" name="position" placeholder="Your position" />
+                </div>
+                <div className="row">
+                  <TextField className="col" name="emergencyPhone" placeholder="Emergency Phone Number" />
+                  <TextField className="col" name="emergencyEmail" placeholder="Emergency Email" />
                 </div>
                 <div className="row">
                   <SelectField className="col-md-3" name="rooms" multiple inline />
