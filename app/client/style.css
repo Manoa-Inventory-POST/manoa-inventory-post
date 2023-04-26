@@ -117,6 +117,11 @@ body {
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
 
+.ui.club-edit-button.button {
+  background-color: #75abcf !important;
+  color: white !important;
+}
+
 .my-button:hover {
   background-color: #28a745; /* Green shade */
   border-color: #28a745; /* Green shade */

@@ -142,8 +142,8 @@ class ClubAdvisorCollection extends BaseCollection {
    * @return true
    * @return false
    */
-  checkExists(advisor, club) {
-    const instances = this.find({ advisor, club }, {}).count();
+  checkExists(advisor) {
+    const instances = this.find({ advisor }, {}).count();
     if (instances === 0) {
       return false;
     }
