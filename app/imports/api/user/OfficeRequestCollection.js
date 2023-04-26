@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const officeRequestConditions = ['approve', 'disapprove', 'depending'];
+export const officeRequestConditions = ['approve', 'disapprove', 'pending'];
 export const requestToConditions = ['Office', 'IT Support'];
 export const imageOption = ['/images/carry.png', '/images/Chair.png', '/images/helpme.png', '/images/ithelp.png', '/images/table.png'];
 export const officePublications = {
@@ -32,7 +32,7 @@ class OfficeRequestCollection extends BaseCollection {
       condition: {
         type: String,
         allowedValues: officeRequestConditions,
-        defaultValue: 'depending',
+        defaultValue: 'pending',
       },
     }));
   }

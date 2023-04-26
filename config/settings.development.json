@@ -1884,7 +1884,7 @@
       "lastName": "Smith",
       "requestTo": "Office",
       "description": "Need 6 more chairs",
-      "condition": "depending"
+      "condition": "pending"
     },
     {
       "title": "Moving",
@@ -1893,7 +1893,7 @@
       "lastName": "Will",
       "requestTo": "Office",
       "description": "Moving out unused items",
-      "condition": "depending"
+      "condition": "pending"
     },
     {
       "title": "Broken access",
@@ -1902,7 +1902,7 @@
       "lastName": "Will",
       "requestTo": "IT Support",
       "description": "Moving out unused items",
-      "condition": "depending"
+      "condition": "pending"
     }
   ],
   "public": {
