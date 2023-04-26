@@ -7,10 +7,13 @@ import { Container, Image, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { FacultyProfiles } from '../../api/user/FacultyProfileCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { ROLE } from '../../api/role/Role';
+import { Phone } from '../../api/room/Phone';
+import { OccupantRoom } from '../../api/room/OccupantRoom';
 
 const FullFacultyInfo = () => {
   const { _id } = useParams();
@@ -18,15 +21,31 @@ const FullFacultyInfo = () => {
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
   const isOffice = Roles.userIsInRole(Meteor.userId(), [ROLE.OFFICE]);
 
-  const { ready, faculty } = useTracker(() => {
-    const subscription = FacultyProfiles.subscribeFaculty();
+  const { ready, faculty, office, phone } = useTracker(() => {
+    const sub1 = FacultyProfiles.subscribeFaculty();
+    const sub2 = OccupantRoom.subscribeOccupantRoom();
+    const sub3 = Phone.subscribePhone();
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready();
     // Get the document
     const facultyItem = FacultyProfiles.findOne(_id);
+    let officeItem = OccupantRoom.find({ email: `${facultyItem.email}` }).fetch();
+    if (officeItem.length === 1) {
+      officeItem = officeItem[0];
+    } else {
+      officeItem = officeItem.join(', ');
+    }
+    let phoneItem = Phone.find({ email: `${facultyItem.email}`}).fetch();
+    if (phoneItem.length === 1) {
+      phoneItem = phoneItem[0];
+    } else {
+      phoneItem = phoneItem.join(', ');
+    }
     return {
       ready: rdy,
       faculty: facultyItem,
+      office: officeItem,
+      phone: phoneItem,
     };
   }, []);
 
@@ -54,9 +73,8 @@ const FullFacultyInfo = () => {
           <Col>
             <Row>
               <h5>Email: {faculty.email}</h5>
-            </Row>
-            <Row>
-              <h5>Phone Number: {faculty.phone}</h5>
+              <h5>{ phone.length === 0 ? ('') : `Phone: ${phone.phoneNum}` }</h5>
+              <h5>Office: { office.length === 0 ? (<Link to="/signin" style={{ fontSize: '1.10rem' }}>Please sign in for more information.</Link>) : `POST ${office.room}` }</h5>
             </Row>
             <Row>
               <Col>

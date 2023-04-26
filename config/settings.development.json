@@ -1,4 +1,9 @@
 {
+  "monti": {
+    "appId": "rG4yN57woxYPqR2KY",
+    "appSecret": "2b9a40d4-fbbf-426d-b05e-df797000062a"
+  },
+
   "defaultAccounts": [
     {
       "email": "admin@foo.com",
@@ -742,9 +747,9 @@
       "position": "Associate Professor",
       "picture": "/images/KyungimB.jpeg",
       "email": "kyungim@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "T, R from 2PM - 3PM",
       "rooms": [
-        "POST 303F"
+        "303F"
       ],
       "phones": [
         "808-956-8560"
@@ -758,9 +763,9 @@
       "position": "Assistant Research Professor",
       "picture": "/images/mahdiB.png",
       "email": "mahdi@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 12PM - 1PM",
       "rooms": [
-        "POST 306B"
+        "306B"
       ],
       "phones": [
         "808-956-6049"
@@ -774,9 +779,9 @@
       "position": "Associate Professor",
       "picture": "/images/edoB.jpeg",
       "email": "esb@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 3PM - 4PM",
       "rooms": [
-        "POST 305F"
+        "305F"
       ],
       "phones": [
         "808-956-3891"
@@ -790,9 +795,9 @@
       "position": "Professor",
       "picture": "/images/kimB.jpeg",
       "email": "binsted@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 303D"
+        "303D"
       ],
       "phones": [
         "808-956-6107"
@@ -806,9 +811,9 @@
       "position": "Professor",
       "picture": "/images/henri-casanova.jpg",
       "email": "henric@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 2PM - 3PM",
       "rooms": [
-        "POST 310C"
+        "310C"
       ],
       "phones": [
         "808-956-2649"
@@ -822,9 +827,9 @@
       "position": "Professor",
       "picture": "/images/marthaC.jpeg",
       "email": "crosby@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 305D"
+        "305D"
       ],
       "phones": [
         "808-956-3493"
@@ -838,7 +843,7 @@
       "position": "Associate Professor",
       "picture": "/images/barbaraEP.jpeg",
       "email": "endicott@uw.edu",
-      "officeHours": "N/A",
+      "officeHours": "T, R from 1PM - 2PM",
       "rooms": [],
       "phones": [],
       "password": "changeme",
@@ -862,9 +867,9 @@
       "position": "Professor",
       "picture": "/images/johnsonP.jpeg",
       "email": "johnson@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 307A"
+        "307A"
       ],
       "phones": [
         "808-956-3489"
@@ -878,10 +883,8 @@
       "position": "Professor",
       "picture": "/images/jason-leigh.jpg",
       "email": "leighj@hawaii.edu",
-      "officeHours": "N/A",
-      "rooms": [
-        "Keller 102A"
-      ],
+      "officeHours": "M, W from 2PM - 3PM",
+      "rooms": [],
       "phones": [
         "808-956-9164"
       ],
@@ -894,9 +897,9 @@
       "position": "Associate Professor",
       "picture": "/images/DepengL.jpeg",
       "email": "depengli@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 314D"
+        "314D"
       ],
       "phones": [
         "808-956-3973"
@@ -910,9 +913,9 @@
       "position": "Assistant Professor",
       "picture": "/images/cam-moore.jpg",
       "email": "cmoore@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "T, R from 1PM - 2PM",
       "rooms": [
-        "POST 307B"
+        "307B"
       ],
       "phones": [
         "808-956-6920"
@@ -930,7 +933,7 @@
       "email": "rnarayan@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 314A"
+        "314A"
       ],
       "phones": [],
       "password": "changeme",
@@ -944,7 +947,7 @@
       "email": "ogawam@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 314B"
+        "314B"
       ],
       "phones": [
         "808-956-5069"
@@ -960,7 +963,7 @@
       "email": "dusko@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 311B"
+        "311B"
       ],
       "phones": [
         "808-956-9639"
@@ -974,9 +977,9 @@
       "position": "Assistant Professor",
       "picture": "/images/AnthonyP.jpeg",
       "email": "peruma@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 310B"
+        "310B"
       ],
       "phones": [],
       "password": "changeme",
@@ -988,9 +991,9 @@
       "position": "Professor",
       "picture": "/images/GuylaineP.jpeg",
       "email": "guylaine@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 303C"
+        "303C"
       ],
       "phones": [
         "808-956-3496"
@@ -1004,9 +1007,9 @@
       "position": "Professor",
       "picture": "/images/ScottR.jpeg",
       "email": "scottpr@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "T, R from 2PM - 3PM",
       "rooms": [
-        "POST 317"
+        "317"
       ],
       "phones": [
         "808-956-3500"
@@ -1020,9 +1023,9 @@
       "position": "Assistant Professor",
       "picture": "/images/PeterS.jpeg",
       "email": "psadow@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 306C"
+        "306C"
       ],
       "phones": [
         "808-956-2023"
@@ -1036,9 +1039,9 @@
       "position": "Associate Professor",
       "picture": "/images/PeterMS.jpeg",
       "email": "pseidel@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 2PM - 3PM",
       "rooms": [
-        "POST 311A"
+        "311A"
       ],
       "phones": [
         "808-956-6068"
@@ -1052,9 +1055,9 @@
       "position": "Associate Professor",
       "picture": "/images/NodariS.jpeg",
       "email": "nodari@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 309C"
+        "309C"
       ],
       "phones": [
         "808-956-3581"
@@ -1068,9 +1071,9 @@
       "position": "Professor",
       "picture": "/images/DanS.jpeg",
       "email": "suthers@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 1PM - 2PM",
       "rooms": [
-        "POST 309B"
+        "309B"
       ],
       "phones": [
         "808-956-3890"
@@ -1084,9 +1087,9 @@
       "position": "Assistant Professor",
       "picture": "/images/PeterW.png",
       "email": "pyw@hawaii.edu",
-      "officeHours": "N/A",
+      "officeHours": "M, W from 2PM - 3PM",
       "rooms": [
-        "POST 312B"
+        "312B"
       ],
       "phones": [],
       "password": "changeme",
@@ -1100,7 +1103,7 @@
       "email": "chin@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1114,7 +1117,7 @@
       "email": "itoga@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1128,7 +1131,7 @@
       "email": "N/A",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303G"
+        "303G"
       ],
       "phones": [],
       "password": "changeme",
@@ -1142,7 +1145,7 @@
       "email": "kennydq@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303A"
+        "303A"
       ],
       "phones": [
         "808-956-5428"
@@ -1158,7 +1161,7 @@
       "email": "wesleysu@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 303B"
+        "303B"
       ],
       "phones": [
         "808-956-8249"
@@ -1174,7 +1177,7 @@
       "email": "toddtt@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 327"
+        "327"
       ],
       "phones": [
         "808-956-7639"
@@ -1190,7 +1193,7 @@
       "email": "shackfor@hawaii.edu",
       "officeHours": "N/A",
       "rooms": [
-        "POST 327"
+        "327"
       ],
       "phones": [
         "808-956-4989"
@@ -1881,7 +1884,7 @@
       "lastName": "Smith",
       "requestTo": "Office",
       "description": "Need 6 more chairs",
-      "condition": "depending"
+      "condition": "pending"
     },
     {
       "title": "Moving",
@@ -1890,7 +1893,7 @@
       "lastName": "Will",
       "requestTo": "Office",
       "description": "Moving out unused items",
-      "condition": "depending"
+      "condition": "pending"
     },
     {
       "title": "Broken access",
@@ -1899,7 +1902,7 @@
       "lastName": "Will",
       "requestTo": "IT Support",
       "description": "Moving out unused items",
-      "condition": "depending"
+      "condition": "pending"
     }
   ],
   "public": {
