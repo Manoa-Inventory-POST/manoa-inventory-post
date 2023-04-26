@@ -30,12 +30,14 @@ const FullFacultyInfo = () => {
     // Get the document
     const facultyItem = FacultyProfiles.findOne(_id);
     let officeItem = OccupantRoom.find({ email: `${facultyItem.email}` }).fetch();
+    officeItem = officeItem.map(num => num.room);
     if (officeItem.length === 1) {
       officeItem = officeItem[0];
     } else {
       officeItem = officeItem.join(', ');
     }
     let phoneItem = Phone.find({ email: `${facultyItem.email}` }).fetch();
+    phoneItem = phoneItem.map(num => num.phoneNum);
     if (phoneItem.length === 1) {
       phoneItem = phoneItem[0];
     } else {
@@ -73,8 +75,8 @@ const FullFacultyInfo = () => {
           <Col>
             <Row>
               <h5>Email: {faculty.email}</h5>
-              <h5>{ phone.length === 0 ? ('') : `Phone: ${phone.phoneNum}` }</h5>
-              <h5>Office: { office.length === 0 ? (<Link to="/signin" style={{ fontSize: '1.10rem' }}>Please sign in for more information.</Link>) : `POST ${office.room}` }</h5>
+              <h5>{ phone.length === 0 ? ('') : `Phone: ${phone}` }</h5>
+              <h5>Office: { office.length === 0 ? (<Link to="/signin" style={{ fontSize: '1.10rem' }}>Please sign in for more information.</Link>) : `POST ${office}` }</h5>
             </Row>
             <Row>
               <Col>

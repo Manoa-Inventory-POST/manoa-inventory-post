@@ -22,7 +22,7 @@ class OfficeRequestCollection extends BaseCollection {
         type: String,
         optional: true,
       },
-      time: {
+      date: {
         type: String,
         optional: true,
       },
