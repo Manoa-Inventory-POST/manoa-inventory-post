@@ -36,7 +36,7 @@ import SearchClubs from '../pages/SearchClubs';
 import FullFacultyInfo from '../pages/FullFacultyInfo';
 import PortSearch from '../pages/SearchPorts';
 import StudentList from '../pages/StudentList';
-import OfficeRequestHome from '../pages/officeRequestHome';
+import OfficeRequestHome from '../pages/OfficeRequestHome';
 import EditRequest from '../pages/EditRequest';
 import EditClub from '../pages/EditClub';
 import RequestList from '../pages/RequestList';

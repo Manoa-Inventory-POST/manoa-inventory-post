@@ -1,6 +1,6 @@
 import React, {} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ErrorField, SubmitField, TextField, AutoField, SelectField, AutoForm } from 'uniforms-bootstrap5';
+import { ErrorField, SubmitField, TextField, AutoField, SelectField, AutoForm, LongTextField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import swal from 'sweetalert';
@@ -15,7 +15,7 @@ const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
   description: String,
-  time: String,
+  date: String,
   requestTo: {
     type: String,
     allowedValues: requestToConditions,
@@ -62,10 +62,10 @@ const ServiceRequest = () => {
         <ErrorField name="lastName">
           <span>You have to provide your last name!</span>
         </ErrorField>
-        <AutoField name="time" showInlineError type="date" />
-        <AutoField name="description" />
-        <SelectField name="picture" placeholder="choose an option" />
-        <SelectField name="requestTo" placeholder="Office or It support" />
+        <AutoField name="date" showInlineError type="date" />
+        <LongTextField name="description" placeholder="Time frame, room number, etc." />
+        <SelectField name="picture" placeholder="Choose an option" />
+        <SelectField name="requestTo" placeholder="Office or IT Support" />
         <SubmitField value="Submit" />
       </AutoForm>
     </Container>
