@@ -35,9 +35,9 @@ const EditRequest = () => {
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    const { condition, description } = data;
+    const { condition, description, comment } = data;
     const collectionName = OfficeRequests.getCollectionName();
-    const updateData = { id: _id, condition, description };
+    const updateData = { id: _id, condition, description, comment };
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Item updated successfully', 'success'));
@@ -45,7 +45,7 @@ const EditRequest = () => {
   };
 
   if (redirect) {
-    return (<Navigate to="/officeRequestHome" />);
+    return (<Navigate to="/office-request-home" />);
   }
 
   return ready ? (
@@ -57,6 +57,7 @@ const EditRequest = () => {
             <Card>
               <Card.Body>
                 <TextField name="description" />
+                <TextField name="comment" />
                 <SelectField name="condition" />
                 <SubmitField value="Submit" />
                 <ErrorsField />

@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const officeRequestConditions = ['approve', 'disapprove', 'pending'];
+export const officeRequestConditions = ['approved', 'denied', 'pending'];
 export const requestToConditions = ['Office', 'IT Support'];
 export const imageOption = ['/images/carry.png', '/images/Chair.png', '/images/helpme.png', '/images/ithelp.png', '/images/table.png'];
 export const officePublications = {
@@ -18,6 +18,10 @@ class OfficeRequestCollection extends BaseCollection {
       firstName: String,
       lastName: String,
       description: String,
+      comment: {
+        type: String,
+        optional: true,
+      },
       picture: {
         type: String,
         allowedValues: imageOption,
@@ -48,7 +52,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ title, firstName, lastName, condition, description, requestTo, picture }) {
+  define({ title, firstName, lastName, condition, description, requestTo, picture, comment }) {
     const docID = this._collection.insert({
       title,
       firstName,
@@ -57,6 +61,7 @@ class OfficeRequestCollection extends BaseCollection {
       description,
       requestTo,
       picture,
+      comment,
     });
     return docID;
   }
@@ -70,7 +75,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { title, firstName, lastName, condition, description, requestTo, picture }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo, picture, comment }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -92,6 +97,9 @@ class OfficeRequestCollection extends BaseCollection {
     }
     if (picture) {
       updateData.picture = picture;
+    }
+    if (comment) {
+      updateData.comment = comment;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -160,7 +168,8 @@ class OfficeRequestCollection extends BaseCollection {
     const requestTo = doc.requestTo;
     const description = doc.description;
     const picture = doc.picture;
-    return { title, firstName, lastName, condition, description, requestTo, picture };
+    const comment = doc.comment;
+    return { title, firstName, lastName, condition, description, requestTo, picture, comment };
   }
 }
 

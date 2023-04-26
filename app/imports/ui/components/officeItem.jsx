@@ -17,12 +17,16 @@ const OfficeItem = ({ officeReq }) => (
         </Card.Body>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
-        {officeReq.condition}
+        Status: {officeReq.condition}
+        <br />
+        <hr />
+        {officeReq.comment}
       </Card.Footer>
       <Button variant="outline-info">
         <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>
       </Button>
     </Card>
+    <p>  Request To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{officeReq.requestTo} </p>
   </Col>
 );
 
@@ -36,6 +40,7 @@ OfficeItem.propTypes = {
     condition: PropTypes.string,
     requestTo: PropTypes.string,
     picture: PropTypes.string,
+    comment: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
