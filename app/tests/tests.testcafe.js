@@ -14,6 +14,7 @@ import { clubSearchPage } from './clubsearch.page';
 import { studentSearchPage } from './studentsearch.page';
 import { facultyProfilePage } from './facultyprofile.page';
 import { itsupporthomePage } from './itsupporthome.page';
+import { officehomePage } from './officehome.page';
 import { serviceRequestPage } from './servicerequest.page';
 import { fullClubInfoPage } from './fullclubinfo.page';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
@@ -24,6 +25,7 @@ import { fullClubInfoPage } from './fullclubinfo.page';
 const studentCredentials = { username: 'student@foo.com', password: 'changeme' };
 const facultyCredentials = { username: 'faculty@foo.com', password: 'changeme' };
 const itSupportCredentials = { username: 'itsupport@foo.com', password: 'changeme' };
+const officeCredentials = { username: 'office@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 const profileInfo = { phone: '808-1680-0000' };
@@ -148,6 +150,13 @@ test('Test that the IT support home page shows up', async () => {
   await signInPage.signin(itSupportCredentials.username, itSupportCredentials.password);
   await navBar.isLoggedIn(itSupportCredentials.username);
   await itsupporthomePage.isDisplayed();
+});
+
+test('Test that the office worker home page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(officeCredentials.username, officeCredentials.password);
+  await navBar.isLoggedIn(officeCredentials.username);
+  await officehomePage.isDisplayed();
 });
 
 test('Test that the service request page shows up', async () => {
