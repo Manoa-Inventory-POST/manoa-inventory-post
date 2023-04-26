@@ -117,3 +117,13 @@ body {
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
 
+.map-area {
+  /* Default style */
+  outline: none;
+  border: 2px solid transparent;
+}
+
+.map-area:hover {
+  /* Hover style */
+  border-color: red;
+}
