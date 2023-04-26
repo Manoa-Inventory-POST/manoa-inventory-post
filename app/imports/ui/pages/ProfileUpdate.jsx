@@ -19,17 +19,21 @@ import { OccupantRoom } from '../../api/room/OccupantRoom';
 import ProfileCard from '../components/ProfileCard';
 import ProfileCardStudent from '../components/ProfileCardStudent';
 import ProfileCardFaculty from '../components/ProfileCardFaculty';
+import { UserInterests } from '../../api/clubs/UserInterests';
+import { UserClubs } from '../../api/clubs/UserClubs';
 
 /* Subscribe each collection and make a userToUpdate, and render the basic information. */
 const ProfileUpdate = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, roomValues, userToUpdate, interestNames, clubNames } = useTracker(() => {
+  const { ready, roomValues, userToUpdate, interestNames, clubNames, clubIDs } = useTracker(() => {
     // Get access to documents
     const subPhone = Phone.subscribePhone();
     const subClubs = Clubs.subscribeClubs();
     const subscriptionRooms = Room.subscribeRoom();
     const subClubAdvisor = ClubAdvisor.subscribeClubAdvisor();
     const subInterests = Interests.subscribeInterests();
+    const subUserInterests = UserInterests.subscribeUserInterests();
+    const subUserClubs = UserClubs.subscribeUserClubs();
     const subUser = UserProfiles.subscribe();
     const subAdmin = AdminProfiles.subscribe();
     const subFaculty = FacultyProfiles.subscribeFaculty();
@@ -39,8 +43,7 @@ const ProfileUpdate = () => {
     const subOccRoom = OccupantRoom.subscribeOccupantRoom();
     const rdy = subscriptionRooms.ready() && subClubAdvisor.ready() && subInterests.ready() && subClubs.ready()
         && subUser.ready() && subAdmin.ready() && subFaculty.ready() && subStudent.ready() && subOffice.ready()
-        && subIT.ready() && subOccRoom.ready() && subPhone.ready();
-
+        && subIT.ready() && subOccRoom.ready() && subPhone.ready() && subUserInterests.ready() && subUserClubs.ready();
     const docUser = UserProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docAdmin = AdminProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
     const docFaculty = FacultyProfiles.find({ userID: Meteor.user()._id }, {}).fetch();
@@ -91,6 +94,25 @@ const ProfileUpdate = () => {
       userProfile.occupantRoomIds = occRoomIdArr;
       // console.log(userProfile.office);
     };
+    const addInterest = () => {
+      let interestsArr = UserInterests.find({ email: userProfile.email }, {}).fetch();
+      // console.log(interestsArr);
+      const interestsIdArr = interestsArr.map(item => item._id);
+      interestsArr = interestsArr.map(item => item.interest);
+      // console.log(interestsArr);
+      userProfile.interests = interestsArr;
+      userProfile.interestIds = interestsIdArr;
+    };
+
+    const addClub = () => {
+      let clubsArr = UserClubs.find({ email: userProfile.email }, {}).fetch();
+      // console.log(clubsArr);
+      const clubsIdArr = clubsArr.map(item => item._id);
+      clubsArr = clubsArr.map(item => item.club);
+      // console.log(clubsArr);
+      userProfile.clubs = clubsArr;
+      userProfile.clubIds = clubsIdArr;
+    };
 
     if (docUser.length > 0) {
       userProfile = docUser[0];
@@ -107,6 +129,8 @@ const ProfileUpdate = () => {
       addAdvisor();
     } else if (docStudent.length > 0) {
       userProfile = docStudent[0];
+      addInterest();
+      addClub();
       addPhone();
       console.log('studentProfile:');
       console.log(userProfile);
@@ -125,16 +149,19 @@ const ProfileUpdate = () => {
     const interestEntries = Interests.find({}, {}).fetch();
     const clubEntries = Clubs.find({}, {}).fetch();
 
+    console.log(clubEntries);
     return {
       userToUpdate: userProfile,
       roomValues: roomEntries.map(Item => Item.room),
       interestNames: interestEntries.map(Item => Item.interest),
       clubNames: clubEntries.map(Item => Item.name),
+      clubIDs: clubEntries.map(Item => Item._id),
+
       ready: rdy,
     };
   }, []);
 
-  console.log(roomValues, interestNames, clubNames, ready);
+  console.log(roomValues, interestNames, clubNames, ready, clubIDs);
   const UserProfileSchema = new SimpleSchema({
     email: String,
     firstName: String,
@@ -159,8 +186,12 @@ const ProfileUpdate = () => {
     clubAdvisor: { type: Boolean, defaultValue: false },
     clubs: { type: Array, label: 'Clubs', optional: true },
     'clubs.$': { type: String, allowedValues: clubNames, optional: true },
+    clubIds: { type: Array, optional: true },
+    'clubIds.$': { type: String, optional: true },
     interests: { type: Array, label: 'Interests', optional: true },
     'interests.$': { type: String, allowedValues: interestNames, optional: true },
+    interestIds: { type: Array, optional: true },
+    'interestIds.$': { type: String, optional: true },
   });
 
   const bridge = new SimpleSchema2Bridge(UserProfileSchema);
@@ -177,7 +208,6 @@ const ProfileUpdate = () => {
   } else {
     return <LoadingSpinner />;
   }
-
 };
 
 export default ProfileUpdate;

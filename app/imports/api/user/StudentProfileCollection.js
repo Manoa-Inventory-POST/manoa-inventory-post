@@ -120,7 +120,7 @@ class StudentProfileCollection extends BaseProfileCollection {
     }
     if (interestIds) {
       interestIds.forEach(id => {
-        UserClubs.removeIt(id);
+        UserInterests.removeIt(id);
       });
     }
     if (interests) {

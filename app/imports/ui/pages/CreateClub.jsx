@@ -4,7 +4,6 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import {
   AutoForm,
   ErrorsField,
-  HiddenField,
   LongTextField,
   SelectField,
   SubmitField,
@@ -13,9 +12,8 @@ import {
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { useParams } from 'react-router';
 import { Clubs } from '../../api/clubs/Clubs';
-import {defineMethod, updateMethod} from '../../api/base/BaseCollection.methods';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ClubInterests } from '../../api/clubs/ClubInterests';
 import { Interests } from '../../api/clubs/Interests';
@@ -23,7 +21,7 @@ import { Interests } from '../../api/clubs/Interests';
 /* Renders the EditClub page for editing a single document. */
 const CreateClub = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { doc, ready, interestsValues } = useTracker(() => {
+  const { ready, interestsValues } = useTracker(() => {
     // Get access to Club documents.
     const subscription = Clubs.subscribeClubs();
     const subClubInterests = ClubInterests.subscribeClubInterests();
