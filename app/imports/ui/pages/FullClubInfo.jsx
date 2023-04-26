@@ -4,7 +4,7 @@ import { Container, Image, Row, Col, Button } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Clubs } from '../../api/clubs/Clubs';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -68,20 +68,27 @@ const FullClubInfo = () => {
     if (isAdmin) {
       console.log('IS ADMIN!!!');
       edit = true;
-    } else if (isFaculty && clubAdvisors.length() !== 0) {
+    } else if (isFaculty && clubAdvisors) {
       console.log('IS FACULTY!!!');
-      const email = FacultyProfiles.find({ userID: Meteor.userID }).fetch()[0].email;
-      if (clubAdvisors.includes(email)) {
-        edit = true;
+      const profile = FacultyProfiles.find({ userID: Meteor.userID }).fetch()[0];
+      if (profile) {
+        if (clubAdvisors.includes(profile.email)) {
+          console.log(6);
+          edit = true;
+        }
       }
-    } else if (isStudent && clubOfficers.length() !== 0) {
+    } else if (isStudent && clubOfficers) {
       console.log('IS STUDENT!!!');
-      const email = StudentProfiles.find({ userID: Meteor.userID }).fetch()[0].email;
-      if (clubOfficers.includes(email)) {
-        edit = true;
+      const profile = StudentProfiles.find({ userID: Meteor.userID }).fetch()[0];
+      console.log(5);
+      if (profile) {
+        if (clubOfficers.includes(profile.email)) {
+          console.log(6);
+          edit = true;
+        }
       }
     }
-    console.log(5);
+    console.log(7);
 
     return {
       ready: rdy,
