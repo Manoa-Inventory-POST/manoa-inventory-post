@@ -22,11 +22,7 @@ class OfficeRequestCollection extends BaseCollection {
         type: String,
         optional: true,
       },
-      timeByPoster: {
-        type: String,
-        optional: true,
-      },
-      timeByReviewer: {
+      time: {
         type: String,
         optional: true,
       },
@@ -60,7 +56,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param picture for the request
    * @return {String} the docID of the new document.
    */
-  define({ title, firstName, lastName, condition, description, requestTo, picture, comment, timeByPoster }) {
+  define({ title, firstName, lastName, condition, description, requestTo, picture, comment, time }) {
     const docID = this._collection.insert({
       title,
       firstName,
@@ -70,7 +66,7 @@ class OfficeRequestCollection extends BaseCollection {
       requestTo,
       picture,
       comment,
-      timeByPoster,
+      time,
     });
     return docID;
   }
@@ -84,7 +80,7 @@ class OfficeRequestCollection extends BaseCollection {
    * @param condition the condition.
    * @param description the description of the request.
    */
-  update(docID, { title, firstName, lastName, condition, description, requestTo, picture, timeByPoster, comment }) {
+  update(docID, { title, firstName, lastName, condition, description, requestTo, picture, time, comment }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -110,8 +106,8 @@ class OfficeRequestCollection extends BaseCollection {
     if (comment) {
       updateData.comment = comment;
     }
-    if (timeByPoster) {
-      updateData.timeByPoster = timeByPoster;
+    if (time) {
+      updateData.time = time;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -181,8 +177,8 @@ class OfficeRequestCollection extends BaseCollection {
     const description = doc.description;
     const picture = doc.picture;
     const comment = doc.comment;
-    const timeByPoster = doc.comment;
-    return { title, firstName, lastName, condition, description, requestTo, picture, comment, timeByPoster };
+    const time = doc.comment;
+    return { title, firstName, lastName, condition, description, requestTo, picture, comment, time };
   }
 }
 

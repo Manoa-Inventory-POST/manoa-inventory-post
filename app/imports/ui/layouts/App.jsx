@@ -48,6 +48,7 @@ import ForgotPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
 import RoomSearch from '../pages/RoomSearch';
 import CreateClub from '../pages/CreateClub';
+import AddComment from '../pages/AddComment';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -98,6 +99,7 @@ const App = () => {
           <Route path="/search-rooms" element={<ProtectedRoute><RoomSearch /></ProtectedRoute>} />
           <Route path="/office-home" element={<OfficeProtectedRoute><OfficeHome /></OfficeProtectedRoute>} />
           <Route path="/editReq/:_id" element={<ProtectedRoute><EditRequest /></ProtectedRoute>} />
+          <Route path="/editCom/:_id" element={<ProtectedRoute><AddComment /></ProtectedRoute>} />
           <Route path="/editClub/:_id" element={<ProtectedRoute><EditClub /></ProtectedRoute>} />
           <Route path="/office-request-home" element={<OfficeRequestHome />} />
           <Route path="*" element={<NotFound />} />

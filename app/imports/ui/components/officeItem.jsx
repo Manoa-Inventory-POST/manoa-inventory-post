@@ -14,18 +14,19 @@ const OfficeItem = ({ officeReq }) => (
         <Card.Subtitle style={{ paddingBottom: '10px' }}>
           Form: {officeReq.firstName} {officeReq.lastName}
         </Card.Subtitle>
+        <Card.Subtitle style={{ paddingBottom: '10px' }}>
+          Time: {officeReq.timeByPoster}
+        </Card.Subtitle>
         <Card.Subtitle>To: {officeReq.requestTo} </Card.Subtitle>
         <Card.Body>
           {officeReq.description}
         </Card.Body>
-        <p style={{ paddingLeft: '200px' }}>{officeReq.timeByPoster}</p>
       </Card.Body>
       <Card.Footer style={{ textAlign: 'center' }}>
         Status: {officeReq.condition}
         <br />
         <hr />
         {officeReq.comment}
-        <p style={{ paddingRight: '10px' }}>{officeReq.timeByReviwer}</p>
       </Card.Footer>
       <Button variant="outline-info">
         <Link className={COMPONENT_IDS.LIST_OFFICE_EDIT} to={`/editReq/${officeReq._id}`}>edit</Link>

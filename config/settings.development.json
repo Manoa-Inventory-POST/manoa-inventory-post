@@ -1885,8 +1885,7 @@
       "requestTo": "Office",
       "description": "Need 6 more chairs",
       "condition": "pending",
-      "timeByPoster": "4/24",
-      "timeByReviwer": "4/26"
+      "time": "4/24"
     },
     {
       "title": "Moving",
@@ -1896,8 +1895,7 @@
       "requestTo": "Office",
       "description": "Moving out unused items",
       "condition": "approved",
-      "timeByPoster": "4/24",
-      "timeByReviwer": "4/26"
+      "time": "4/24"
     },
     {
       "title": "Broken access",
@@ -1907,8 +1905,7 @@
       "requestTo": "IT Support",
       "description": "Moving out unused items",
       "condition": "approved",
-      "timeByPoster": "4/25",
-      "timeByReviwer": "4/26"
+      "time": "4/25"
     },
     {
       "title": "Room reserve",
@@ -1917,10 +1914,9 @@
       "lastName": "Lee",
       "requestTo": "Office",
       "description": "4/26 POST 319 at 11",
-      "timeByPoster": "4/26",
+      "time": "4/26",
       "condition": "denied",
-      "comment": "There is a class at that time. So the room can't reserve the room for you.",
-      "timeByReviwer": "4/26"
+      "comment": "There is a class at that time. So the room can't reserve the room for you."
     }
   ],
   "public": {

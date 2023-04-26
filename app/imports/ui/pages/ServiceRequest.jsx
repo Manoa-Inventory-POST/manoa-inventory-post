@@ -15,6 +15,7 @@ const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
   description: String,
+  time: String,
   requestTo: {
     type: String,
     allowedValues: requestToConditions,
@@ -31,10 +32,10 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const ServiceRequest = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { title, firstName, lastName, description, requestTo, picture } = data;
+    const { title, firstName, lastName, description, requestTo, picture, time } = data;
     const owner = Meteor.user().username;
     const collectionName = OfficeRequests.getCollectionName();
-    const definitionData = { owner, title, firstName, lastName, description, requestTo, picture };
+    const definitionData = { owner, title, firstName, lastName, description, requestTo, picture, time };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
@@ -61,6 +62,7 @@ const ServiceRequest = () => {
         <ErrorField name="lastName">
           <span>You have to provide your last name!</span>
         </ErrorField>
+        <AutoField name="time" showInlineError type="date" />
         <AutoField name="description" />
         <SelectField name="picture" placeholder="choose an option" />
         <SelectField name="requestTo" placeholder="Office or It support" />
