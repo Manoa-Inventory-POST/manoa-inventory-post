@@ -85,11 +85,6 @@ const NavBar = () => {
             {isFaculty ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_SERVICE_REQUEST_LIST} as={NavLink} to="/request-list" key="navbar-service-request-list">Request List</Nav.Link>,
             ]) : ''}
-            {isAdmin ? ([
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
-              </NavDropdown>,
-            ]) : ''}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (
